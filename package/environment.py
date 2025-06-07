@@ -756,7 +756,7 @@ def sample_simulated_env_trajectory(env, zs, state_dim, N, T, f_errors_states=f_
 
 
 
-def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, policy, sigma_a=1, seed=1):
+def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, policy, f_ua=f_ua, seed=1):
     N = actions.shape[0]
     T = actions.shape[1]
     state_dim = states.shape[2]
@@ -788,7 +788,8 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
                  + e.initial_model_mean[tuple(z_level.flatten())])
     
     # take the first step
-    ua0 = np.random.uniform(0, sigma_a, size=[N])
+    ua0 = f_ua([N])
+    #ua0 = np.random.uniform(0, sigma_a, size=[N])
     for z_level in z_eval_levels:
         p = trajectories[tuple(z_level.flatten())]['policy_z']
         trajectories[tuple(z_level.flatten())]['A'][:, 0] = p.act(
@@ -818,7 +819,8 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
 
     # take subsequent steps
     for t in range(1, T):
-        uat = np.random.uniform(0, sigma_a, size=[N])
+        uat = f_ua([N])
+        #uat = np.random.uniform(0, sigma_a, size=[N])
         for z_level in z_eval_levels:
             p = trajectories[tuple(z_level.flatten())]['policy_z']
             trajectories[tuple(z_level.flatten())]['A'][:, t] = p.act(
@@ -847,7 +849,8 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
                 ) = (states[idx, t + 1] - obs_mean + cf_mean)
     
     # take the final step
-    ua0 = np.random.uniform(0, sigma_a, size=[N])
+    uaT = f_ua([N])
+    #ua0 = np.random.uniform(0, sigma_a, size=[N])
     for z_level in z_eval_levels:
         p = trajectories[tuple(z_level.flatten())]['policy_z']
         trajectories[tuple(z_level.flatten())]['A'][:, T] = p.act(
@@ -855,7 +858,7 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
                 xt=trajectories[tuple(z_level.flatten())]['X'][:, T],
                 xtm1=trajectories[tuple(z_level.flatten())]['X'][:, T - 1],
                 atm1=actions[:, T - 1],
-                uat=ua0,
+                uat=uaT,
             )
     
     return trajectories

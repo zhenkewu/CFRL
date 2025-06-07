@@ -10,13 +10,24 @@ from environment import SimulatedEnvironment
 from environment import estimate_counterfactual_trajectories_from_data
 from fqe import FQE
 
+def f_ux(size):
+    return np.random.normal(0, 1, size)
+
+def f_ua(size):
+    return np.random.uniform(0, 1, size)
+
+def f_ur(size):
+    return np.random.normal(0, 1, size)
+
+
+
 def evaluate_reward_through_simulation(env, z_levels, state_dim, N, T, policy, 
-                                       sigma=1, seed=1, z_probs=None, gamma=0.9):
+                                       f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, 
+                                       seed=1, z_probs=None, gamma=0.9):
     z_levels = np.array(z_levels)
-    #discounted_cumulative_rewards = np.zeros(repeats)
-  
-    #for iter in range(repeats):
     np.random.seed(seed)
+
+    # generate the sensitive attribute for each simulated individual
     #Z = np.random.binomial(1, p=0.5, size=[N, 1])
     Z = np.zeros((N, z_levels.shape[1]))
     if z_probs is None:
@@ -25,35 +36,29 @@ def evaluate_reward_through_simulation(env, z_levels, state_dim, N, T, policy,
         Z_idx = np.random.choice(range(len(z_levels)), size=N, p=z_probs, replace=True)
     for i in range(N):
         Z[i] = z_levels[Z_idx[i]]
-    _, _, _, rewards = sample_trajectory(env, Z, state_dim, N, T, sigma, seed, policy)
 
+    # simulate a trajectory and compute the discounted cumulative reward
+    _, _, _, rewards = sample_trajectory(env=env, zs=Z, state_dim=state_dim, N=N, T=T, 
+                                         policy=policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=seed)
     discounted_factor = np.repeat(
         np.array([[gamma**i for i in range(T)]]), repeats=N, axis=0
     )
     discounted_cumulative_reward = np.mean(discounted_factor * rewards) * T
-    #discounted_cumulative_rewards[iter] = discounted_cumulative_reward
     
     return discounted_cumulative_reward
 
 
 
 # REQUIRES: z_eval_levels must be the one used to generate the counterfactual trajectories
-def _compute_cf_metric(trajectories, z_eval_levels, N, T):
+def _compute_cf_metric(trajectories, z_eval_levels):
     z_eval_levels = np.array(z_eval_levels)
 
     max_cf_metric = 0
     for i in range(len(z_eval_levels)):
         for j in range(i, len(z_eval_levels)):
-            #ai = trajectories[tuple([i])]['A']
-            #aj = trajectories[tuple([j])]['A']
             ai = trajectories[tuple(z_eval_levels[i].flatten())]['A']
             aj = trajectories[tuple(z_eval_levels[j].flatten())]['A']
-            #cf_metric = np.mean(np.mean(np.abs(ai - aj), axis=0))
             cf_metric = np.mean(np.mean(np.abs(ai != aj), axis=0))
-            #print('i =', i, 'j =', j, ':')
-            #print(ai)
-            #print(aj)
-            #print('CF metric:', cf_metric)
             if cf_metric > max_cf_metric:
                 max_cf_metric = cf_metric
 
@@ -61,29 +66,13 @@ def _compute_cf_metric(trajectories, z_eval_levels, N, T):
 
 
 
-'''def evaluate_fairness_through_simulation(env, z_eval_levels, state_dim, N, T, 
-                                         policy, sigma=1, seed=1):
-    z_eval_levels = np.array(z_eval_levels)
-    #cf_metrics = np.zeros(repeats)
-
-    #for iter in range(repeats):
-    # generate the simulated counterfactual trajectories
-    trajectories = sample_counterfactual_trajectories(env, z_eval_levels, state_dim, N, T, 
-                                                    policy, sigma, seed)
-    # compute the CF metric
-    cf_metric = _compute_cf_metric(trajectories, z_eval_levels, N, T)
-    #cf_metrics[iter] = cf_metric
-
-    return cf_metric'''
-
-
-
 def evaluate_fairness_through_simulation(env, z_eval_levels, state_dim, N, T, 
-                                         policy, sigma=1, z_probs=None, seed=1):
+                                         policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, 
+                                         z_probs=None, seed=1):
     z_eval_levels = np.array(z_eval_levels)
-    #cf_metrics = np.zeros(repeats)
     np.random.seed(seed)
 
+    # generate the sensitive sttribute for each simulated individual
     #zs = np.random.binomial(n=1, p=1/2, size=[N, z_eval_levels.shape[1]])
     zs = np.zeros((N, z_eval_levels.shape[1]))
     if z_probs is None:
@@ -92,35 +81,30 @@ def evaluate_fairness_through_simulation(env, z_eval_levels, state_dim, N, T,
         Z_idx = np.random.choice(range(len(z_eval_levels)), size=N, p=z_probs, replace=True)
     for i in range(N):
         zs[i] = z_eval_levels[Z_idx[i]]
-    #zs = np.array([[0], [0], [1], [1], [0]])
 
-    #for iter in range(repeats):
-    # generate the simulated counterfactual trajectories
-    trajectories = sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T, 
-                                                    policy, sigma, seed)
-    # compute the CF metric
-    cf_metric = _compute_cf_metric(trajectories, z_eval_levels, N, T)
-    #cf_metrics[iter] = cf_metric
+    # generate the simulated counterfactual trajectories and compute the CF metric
+    trajectories = sample_counterfactual_trajectories(env=env, zs=zs, z_eval_levels=z_eval_levels, 
+                                                      state_dim=state_dim, N=N, T=T, policy=policy, 
+                                                      f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=seed)
+    cf_metric = _compute_cf_metric(trajectories=trajectories, z_eval_levels=z_eval_levels)
 
     return cf_metric
 
 
 
 def evaluate_fairness_through_model(env, zs, states, actions, 
-                                    policy, sigma_a=1, seed=1):
+                                    policy, f_ua=f_ua, seed=1):
     z_eval_levels = np.unique(zs, axis=0)
     z_eval_levels = np.array(z_eval_levels)
-    #cf_metrics = np.zeros(repeats)
     np.random.seed(seed)
 
-    #for iter in range(repeats):
     # generate the simulated counterfactual trajectories
-    trajectories = estimate_counterfactual_trajectories_from_data(env, zs, states, 
-                                                                  actions, 
-                                                                  policy, sigma_a, seed)
+    trajectories = estimate_counterfactual_trajectories_from_data(env=env, zs=zs, states=states, 
+                                                                  actions=actions, policy=policy, 
+                                                                  f_ua=f_ua, seed=seed)
+
     # compute the CF metric
-    cf_metric = _compute_cf_metric(trajectories, z_eval_levels, states.shape[0], states.shape[1])
-    #cf_metrics[iter] = cf_metric
+    cf_metric = _compute_cf_metric(trajectories=trajectories, z_eval_levels=z_eval_levels)
 
     return cf_metric
 
@@ -131,7 +115,6 @@ def evaluate_reward_through_fqe(
     hidden_dims=[32], lr=0.1, epochs=500, gamma=0.9, max_iter=200, seed=1, **kwargs
 ):
     np.random.seed(seed)
-    N, T, xdim = states.shape
     action_size = len(np.unique(actions.flatten(), axis=0))
 
     fqe = FQE(model_type=model_type, action_size=action_size, policy=policy, 
