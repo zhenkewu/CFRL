@@ -138,9 +138,7 @@ class FQI:
                 q_values = self.model(torch.FloatTensor(states)).numpy()
         return np.argmax(q_values, axis=1)
     
-    def train(self, zs, xs, actions, rewards, max_iter, preprocess=True):
-        N, T = xs.shape[:2]
-        
+    def train(self, zs, xs, actions, rewards, max_iter, preprocess=True):       
         if self.preprocessor is not None and preprocess:
             states_p, rewards_p = self.preprocessor.preprocess_multiple_steps(
                     zs=zs, xs=xs, actions=actions, rewards=rewards
@@ -163,7 +161,7 @@ class FQI:
     def act(self, z, xt, xtm1=None, atm1=None, uat=None, preprocess=True, **kwargs):
         if self.preprocessor is not None and preprocess:
             states = self.preprocessor.preprocess_single_step(
-                xt=xt, xtm1=xtm1, z=z, atm1=atm1, rtm1=None
+                xt=xt, xtm1=xtm1, zs=z, atm1=atm1, rtm1=None
             )
         else:
             states = xt

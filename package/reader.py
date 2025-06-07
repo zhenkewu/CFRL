@@ -105,9 +105,11 @@ def convert_trajectory_to_dataframe(zs, states, actions, rewards, ids, z_labels=
     times_r = np.tile(np.arange(1, T+1), reps=N).reshape(-1, 1)
     zs_r = np.repeat(zs, repeats = T, axis=0)
     states_r = states.reshape(N*T, states.shape[-1])
-    actions_r = np.concatenate((actions, np.tile(np.array([[np.nan]]), reps=(N, 1))), axis=1)
+    #actions_r = np.concatenate((actions, np.tile(np.array([[np.nan]]), reps=(N, 1))), axis=1)
+    actions_r = np.concatenate((np.tile(np.array([[np.nan]]), reps=(N, 1)), actions), axis=1)
     actions_r = actions_r.reshape(N*T, 1)
-    rewards_r = np.concatenate((rewards, np.tile(np.array([[np.nan]]), reps=(N, 1))), axis=1)
+    #rewards_r = np.concatenate((rewards, np.tile(np.array([[np.nan]]), reps=(N, 1))), axis=1)
+    rewards_r = np.concatenate((np.tile(np.array([[np.nan]]), reps=(N, 1)), rewards), axis=1)
     rewards_r = rewards_r.reshape(N*T, 1)
     data_arr = np.concatenate((ids_r, times_r, zs_r, actions_r, rewards_r, states_r), axis=1)
 

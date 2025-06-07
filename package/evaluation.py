@@ -21,10 +21,10 @@ def f_ur(size):
 
 
 
-def evaluate_reward_through_simulation(env, z_levels, state_dim, N, T, policy, 
+def evaluate_reward_through_simulation(env, z_eval_levels, state_dim, N, T, policy, 
                                        f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, 
-                                       seed=1, z_probs=None, gamma=0.9):
-    z_levels = np.array(z_levels)
+                                       z_probs=None, gamma=0.9, seed=1):
+    z_levels = np.array(z_eval_levels)
     np.random.seed(seed)
 
     # generate the sensitive attribute for each simulated individual
@@ -96,6 +96,8 @@ def evaluate_fairness_through_model(env, zs, states, actions,
                                     policy, f_ua=f_ua, seed=1):
     z_eval_levels = np.unique(zs, axis=0)
     z_eval_levels = np.array(z_eval_levels)
+    states = np.array(states)
+    actions = np.array(actions)
     np.random.seed(seed)
 
     # generate the simulated counterfactual trajectories
@@ -115,6 +117,10 @@ def evaluate_reward_through_fqe(
     hidden_dims=[32], lr=0.1, epochs=500, gamma=0.9, max_iter=200, seed=1, **kwargs
 ):
     np.random.seed(seed)
+    zs = np.array(zs)
+    states = np.arrays(states)
+    actions = np.array(actions)
+    rewards = np.array(rewards)
     action_size = len(np.unique(actions.flatten(), axis=0))
 
     fqe = FQE(model_type=model_type, action_size=action_size, policy=policy, 

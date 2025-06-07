@@ -71,7 +71,8 @@ class SyntheticEnvironment(gym.Env):
     def set_z_coef(self, new_z_coef):
         self.z_coef = new_z_coef'''
     
-    def reset(self, zs, ux0):
+    def reset(self, z, ux0):
+        zs = z
         self.N = zs.shape[0] # number of samples/individuals
         self.zs = zs.reshape(self.N, -1)
         #np.random.seed(self.seed)
@@ -133,7 +134,7 @@ def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_
     ux0 = f_ux([N, 1])
     #ux0 = np.random.normal(0, sigma, [N, 1])
     #ux0 = np.ones((N, 1))
-    X[:, 0], _ = env.reset(zs=Z, ux0=ux0)
+    X[:, 0], _ = env.reset(z=Z, ux0=ux0)
     
     # take the first step
     ua0 = f_ua([N])
@@ -197,6 +198,7 @@ def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_
 
 
 
+# z_eval_levels should have shape (N, zdim)
 def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T, 
                                        policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=1):
     np.random.seed(seed)
@@ -219,7 +221,7 @@ def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T,
     #ux0 = np.random.normal(0, sigma, [N, 1])
     for z_level in z_eval_levels:
         e = trajectories[tuple(z_level.flatten())]['env_z']
-        trajectories[tuple(z_level.flatten())]['X'][:, 0], _ = e.reset(zs=np.tile(z_level, (N, 1)), ux0=ux0)
+        trajectories[tuple(z_level.flatten())]['X'][:, 0], _ = e.reset(z=np.tile(z_level, (N, 1)), ux0=ux0)
     
     # take the first step
     ua0 = f_ua([N])
@@ -314,7 +316,7 @@ class SimulatedEnvironment(gym.Env):
         self.batch_size = batch_size
         self.learning_rate = learning_rate
         self.is_early_stopping = is_early_stopping
-        self.test_size = test_size # IS THIS PARAMETER USED?
+        self.test_size = test_size
         self.early_stopping_patience = early_stopping_patience
         self.early_stopping_min_delta = early_stopping_min_delta
         self.enforce_min_max = enforce_min_max
@@ -434,7 +436,6 @@ class SimulatedEnvironment(gym.Env):
                 self.trans_models[tuple(z_)].var = var_mean * self.state_variance_factor
                 self.trans_models[tuple(z_)].mse = self.trans_models[tuple(z_)].var
 
-
         # reward model
         # input: x_t (weekly_pain_score, weekly_pain_interference), z (baseline characteristic), a_t
         # output: r_t
@@ -504,12 +505,13 @@ class SimulatedEnvironment(gym.Env):
     
     def reset(
         self, 
-        zs, 
+        z, 
         seed=1,
         errors_states=None, 
         enforce_min_max=False,
         #z_factor=0.0,
     ):
+        zs = z
         np.random.seed(seed)
         torch.manual_seed(seed)
         if not self.is_trained:
@@ -546,7 +548,8 @@ class SimulatedEnvironment(gym.Env):
         return observation, None
     
     # helper function
-    def _next_state_reward_mean(self, zs, xt, at):
+    def _next_state_reward_mean(self, z, xt, at):
+        zs = z
         N = xt.shape[0]
         states = xt.reshape(N, -1)
         actions = at.flatten()
@@ -628,7 +631,7 @@ class SimulatedEnvironment(gym.Env):
         at = action
         xt = self.xt
         next_states_mean, rewards_mean = self._next_state_reward_mean(
-            self.zs, xt, at
+            z=self.zs, xt=xt, at=at
         )
 
         if errors_states is None:
@@ -692,7 +695,7 @@ def sample_simulated_env_trajectory(env, zs, state_dim, N, T, f_errors_states=f_
 
     # generate the initial state
     errors_states = f_errors_states([N, state_dim])
-    X[:, 0], _ = env.reset(zs=Z, errors_states=errors_states)
+    X[:, 0], _ = env.reset(z=Z, errors_states=errors_states)
     
     # take the first step
     ua0 = np.random.uniform(0, 1, size=[N])
@@ -804,12 +807,12 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
         for z_obs in np.unique(zs, axis=0):
             idx = np.all(zs == z_obs, axis=1).flatten()
             obs_mean, _ = e._next_state_reward_mean(
-                        zs=zs[idx],
+                        z=zs[idx],
                         xt=states[idx, 0, :],
                         at=actions[idx, 0],
                         )
             cf_mean, _ = e._next_state_reward_mean(
-                        zs=trajectories[tuple(z_level.flatten())]['Z'][idx],
+                        z=trajectories[tuple(z_level.flatten())]['Z'][idx],
                         xt=trajectories[tuple(z_level.flatten())]['X'][idx, 0, :],
                         at=actions[idx, 0],
                         )
@@ -835,12 +838,12 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
             for z_obs in np.unique(zs, axis=0):
                 idx = np.all(zs == z_obs, axis=1).flatten()
                 obs_mean, _ = e._next_state_reward_mean(
-                        zs=zs[idx],
+                        z=zs[idx],
                         xt=states[idx, t, :],
                         at=actions[idx, t],
                         )
                 cf_mean, _ = e._next_state_reward_mean(
-                        zs=trajectories[tuple(z_level.flatten())]['Z'][idx],
+                        z=trajectories[tuple(z_level.flatten())]['Z'][idx],
                         xt=trajectories[tuple(z_level.flatten())]['X'][idx, t, :],
                         at=actions[idx, t],
                         )

@@ -283,7 +283,9 @@ class SequentialPreprocessor(Preprocessor):
             m = self.destandardize(m, self.next_states_mean, self.next_states_std)
         return m
 
-    def _process_initial_state(self, initial_model, xt, zs):
+    def _process_initial_state(self, initial_model, z, xt):
+        zs = z
+        del(z)
         N = xt.shape[0]
         epsilon_hat = xt - np.array([initial_model[tuple(z.flatten())] for z in zs])
         xt_c = {
@@ -294,11 +296,11 @@ class SequentialPreprocessor(Preprocessor):
         return xt_tilde, xt_c
 
     def _process_subsequent_states(
-        self, transition_model, xt, xtm1, zs, atm1, rtm1=None
+        self, transition_model, z, xt, xtm1, atm1, rtm1=None
     ):
         N = xt.shape[0]
         m = self._estimate_cf_next_state_reward_mean_tg1(
-            model=transition_model, z=zs, at=atm1, xt=xtm1
+            model=transition_model, z=z, at=atm1, xt=xtm1
         )
         xt_mean = m[:, :-1]
         epsilon_hat = xt - xt_mean
@@ -355,16 +357,16 @@ class SequentialPreprocessor(Preprocessor):
             for t in range(T):
                 if t == 0:
                     xt_tilde, xt_c = self._process_initial_state(
-                        self.model0[0], xs[:, 0, :], zs
+                        initial_model=self.model0[0], xt=xs[:, 0, :], z=zs
                     )
                 else:
                     xt_tilde, rtm1_tilde, xt_c = self._process_subsequent_states(
-                        self.model[0],
-                        xs[:, t, :],
-                        xs[:, t - 1, :],
-                        zs,
-                        actions[:, t - 1],
-                        rewards[:, t - 1],
+                        transition_model=self.model[0],
+                        xt=xs[:, t, :],
+                        xtm1=xs[:, t - 1, :],
+                        z=zs,
+                        atm1=actions[:, t - 1],
+                        rtm1=rewards[:, t - 1],
                     )
                     rs_tilde[:, t - 1] = rtm1_tilde
                 self.buffer = xt_c.copy()
@@ -374,7 +376,6 @@ class SequentialPreprocessor(Preprocessor):
             xs_tilde = np.zeros([N, T, xdim * len(self.marginal_dist_z.keys())])
             rs_tilde = np.zeros([N, T - 1])
             for i, (train_index, test_index) in enumerate(kf.split(xs)):
-
                 xs_train, xs_test = xs[train_index], xs[test_index]
                 zs_train, zs_test = zs[train_index], zs[test_index]
                 actions_train, actions_test = actions[train_index], actions[test_index]
@@ -390,17 +391,17 @@ class SequentialPreprocessor(Preprocessor):
                 for t in range(T):
                     if t == 0:
                         xt_tilde_test, xt_c_test = self._process_initial_state(
-                            self.model0[i], xs_test[:, 0, :], zs_test
+                            initial_model=self.model0[i], xt=xs_test[:, 0, :], z=zs_test
                         )
                     else:
                         xt_tilde_test, rtm1_tilde_test, xt_c_test = (
                             self._process_subsequent_states(
-                                self.model[i],
-                                xs_test[:, t, :],
-                                xs_test[:, t - 1, :],
-                                zs_test,
-                                actions_test[:, t - 1],
-                                rewards_test[:, t - 1],
+                                transition_model=self.model[i],
+                                xt=xs_test[:, t, :],
+                                xtm1=xs_test[:, t - 1, :],
+                                z=zs_test,
+                                actions=actions_test[:, t - 1],
+                                rewards=rewards_test[:, t - 1],
                             )
                         )
                         rs_tilde[test_index, t - 1] = rtm1_tilde_test
@@ -424,14 +425,14 @@ class SequentialPreprocessor(Preprocessor):
         if xtm1 is None and atm1 is None:
             self.reset_buffer(n=N)
             if self.cross_folds == 1:
-                xt_tilde, xt_c = self._process_initial_state(initial_model=self.model0[0], xt=xt, zs=z)
+                xt_tilde, xt_c = self._process_initial_state(initial_model=self.model0[0], xt=xt, z=z)
                 self.buffer = xt_c.copy()
             else:
                 buffer_tmp = {key: np.zeros_like(xt) for key in self.marginal_dist_z}
                 xt_tilde = np.zeros((N, self.xdim * len(self.marginal_dist_z.keys())))
                 for k in range(cross_folds):
                     xt_tilde_k, xt_c_k = self._process_initial_state(
-                        initial_model=self.model0[k], xt=xt, zs=z
+                        initial_model=self.model0[k], xt=xt, z=z
                     )
                     buffer_tmp = {
                         key: buffer_tmp[key] + xt_c_k[key] / cross_folds
@@ -442,7 +443,7 @@ class SequentialPreprocessor(Preprocessor):
         else:
             if cross_folds == 1:
                 xt_tilde, rtm1_tilde, xt_c = self._process_subsequent_states(
-                    transition_model=self.model[0], xt=xt, xtm1=xtm1, zs=z, atm1=atm1, rtm1=rtm1
+                    transition_model=self.model[0], xt=xt, xtm1=xtm1, z=z, atm1=atm1, rtm1=rtm1
                 )
                 self.buffer = xt_c.copy()
             else:
@@ -452,7 +453,7 @@ class SequentialPreprocessor(Preprocessor):
                     rtm1_tilde = np.zeros_like(rtm1)
                 for k in range(cross_folds):
                     xt_tilde_k, rtm1_tilde_k, xt_c_k = self._process_subsequent_states(
-                        transition_model=self.model[k], xt=xt, xtm1=xtm1, zs=z, atm1=atm1, rtm1=rtm1
+                        transition_model=self.model[k], xt=xt, xtm1=xtm1, z=z, atm1=atm1, rtm1=rtm1
                     )
                     buffer_tmp = {
                         key: buffer_tmp[key] + xt_c_k[key] / cross_folds

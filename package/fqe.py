@@ -31,17 +31,17 @@ class FQE:
         actions_taken = np.zeros([N, T])
         for t in range(T): # MIGHT NEED TO CHANGE TO T - 1
             if t == 0:
-                actions_taken[:, 0] = p.act(zs, 
-                                            xs[:, 0], 
-                                            None, 
-                                            None, 
-                                            uat)
+                actions_taken[:, 0] = p.act(z=zs, 
+                                            xt=xs[:, 0], 
+                                            xtm1=None, 
+                                            atm1=None, 
+                                            uat=uat)
             else:
-                actions_taken[:, t] = p.act(zs, 
-                                            xs[:, t], 
-                                            xs[:, t - 1], 
-                                            actions[:, t - 1], 
-                                            uat)
+                actions_taken[:, t] = p.act(z=zs, 
+                                            xt=xs[:, t], 
+                                            xtm1=xs[:, t - 1], 
+                                            atm1=actions[:, t - 1], 
+                                            uat=uat)
 
         return actions_taken[:, 1:].reshape(N *(T - 1), -1)
 
