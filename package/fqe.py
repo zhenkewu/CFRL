@@ -31,70 +31,6 @@ class FQE:
         xs = states
         del(states)
         N, T, _ = xs.shape  # xs + 1
-
-        '''if type(self.policy).__name__ == "RandomAgent": # TRY TO ADAPT TO NEW PREPRO. INTERFACE
-            actions_taken = self.policy.act(uat=np.random.uniform(size=N * (T - 1)))
-        elif (
-            type(self.policy.preprocessor).__name__
-            == "ModelFreePreprocessRegressionNewAugReward"
-        ):
-            states_p = np.zeros((N, T, self.policy.state_size))
-            for t in range(T):
-                xt = xs[:, t]
-                if t == 0:
-                    states_p[:, t] = self.policy.preprocessor.preprocess(
-                        xt=xt, xtm1=None, z=zs, atm1=None, rtm1=None
-                    )
-                else:
-                    xtm1 = xs[:, t - 1]
-                    atm1 = actions[:, t - 1]
-                    rtm1 = None
-                    states_p[:, t] = self.policy.preprocessor.preprocess(
-                        xt=xt, xtm1=xtm1, z=zs, atm1=atm1, rtm1=rtm1
-                    )
-            actions_taken = self.policy.act_wo_preprocess(
-                states_p[:, 1:].reshape(N * (T - 1), -1)
-            )
-        else:
-            states_p = np.zeros((N, T, self.policy.state_size))
-            actions_taken = np.zeros([N, (T - 1)])
-            for t in range(T):
-                xt = xs[:, t]
-                if t == 0:
-                    states_p[:, t] = self.policy.preprocessor.preprocess(
-                        xt=xt, xtm1=None, z=zs, atm1=None
-                    )
-                else:
-                    xtm1 = xs[:, t - 1]
-                    atm1 = actions[:, t - 1]
-                    states_p[:, t] = self.policy.preprocessor.preprocess(
-                        xt=xt, xtm1=xtm1, z=zs, atm1=atm1
-                    )
-                    # actions_taken[:, t - 1] = self.policy.act(states_p[:, t]).flatten()
-            actions_taken = self.policy.act_wo_preprocess(
-                states_p[:, 1:].reshape(N * (T - 1), -1)
-            )
-            # actions_taken = actions_taken.flatten()'''
-        
-        '''states_p = np.zeros((N, T, 2))
-        actions_taken = np.zeros([N, (T - 1)])
-        for t in range(T):
-            xt = xs[:, t]
-            if t == 0:
-                states_p[:, t] = self.policy.preprocessor.preprocess_single_step(
-                    xt=xt, xtm1=None, z=zs, atm1=None
-                )
-            else:
-                xtm1 = xs[:, t - 1]
-                atm1 = actions[:, t - 1]
-                states_p[:, t] = self.policy.preprocessor.preprocess_single_step(
-                    xt=xt, xtm1=xtm1, z=zs, atm1=atm1
-                )
-                # actions_taken[:, t - 1] = self.policy.act(states_p[:, t]).flatten()
-        actions_taken = self.policy.act(
-            zs, states_p[:, 1:].reshape(N * (T - 1), -1), preprocess=False
-        )
-        return actions_taken'''
         
         p = copy.deepcopy(self.policy) # use a deepcopy to preserve the info in original policy
         actions_taken = np.zeros([N, T])
@@ -128,7 +64,6 @@ class FQE:
         rewards_ = copy.deepcopy(rewards)
 
         # reshape data
-
         next_states = np.concatenate(
             [xs_[:, 1:, :], np.repeat(zs_.reshape(-1, 1, zs.shape[-1]), axis=1, repeats=T)], 
             axis=2
@@ -151,14 +86,13 @@ class FQE:
                     tmp = np.zeros([N * T, self.action_size])
                     for a in range(self.action_size):
                         tmp[:, a] = current_model[a].predict(next_states).flatten()
-
                     # selected_actions = self.policy.act(
                     #     uat=np.random.uniform(size=states.shape[0]), states=next_states
                     # ).flatten()
                     selected_actions = self.get_actions(zs_, xs_, actions_, uat).flatten()
                     Y = (
                         rewards + self.gamma * tmp[np.arange(tmp.shape[0]), selected_actions]
-                    ).reshape(-1, 1) # MOVE DISCOUNT FACTOR TO CONSTRUCTOR: COMPLETED!
+                    ).reshape(-1, 1)
 
                 # generate input
                 new_model = [
@@ -185,7 +119,7 @@ class FQE:
         elif self.model_type == "nn":
             np.random.seed(10) # NEWLY ADDED
             torch.manual_seed(10) # NEWLY ADDED
-            current_model = NeuralNet( # MOVE HIDDEN_DIM TO CONSTRUCTOR: COMPLETED!
+            current_model = NeuralNet(
                 in_dim=sdim, out_dim=self.action_size, hidden_dims=self.hidden_dims 
             )
 
@@ -203,7 +137,6 @@ class FQE:
                         .detach()
                         .numpy()
                     )
-                    # selected_actions = self.policy.act(next_states).reshape(-1, 1)
                     selected_actions = self.get_actions(zs_, xs_, actions_, uat).reshape(
                         -1, 1
                     )
@@ -211,7 +144,7 @@ class FQE:
                     Y = (
                         rewards.reshape(-1, 1)
                         + self.gamma * np.take_along_axis(tmp, selected_actions.astype(int), axis=1)
-                    ).reshape(-1, 1) # MOVE DISCOUNT FACTOR TO CONSTRUCTOR: COMPLETED!
+                    ).reshape(-1, 1)
 
                 # generate input
                 X = states
@@ -219,13 +152,13 @@ class FQE:
                 # train model
                 np.random.seed(10) # NEWLY ADDED
                 torch.manual_seed(10) # NEWLY ADDED
-                new_model = NeuralNet( # MOVE HIDDEN_DIMS RO CONSTRUCTOR: COMPLETED!
+                new_model = NeuralNet(
                     in_dim=sdim, out_dim=self.action_size, hidden_dims=self.hidden_dims
                 )
                 Y = torch.tensor(Y, dtype=torch.float32)
 
-                optimizer = torch.optim.Adam(new_model.parameters(), lr=self.lr) # MOVE LR TO CTOR: DONE!
-                for _ in range(self.epochs): # MOVE EPOCHS TO CONSTRUCTOR: COMPLETED!
+                optimizer = torch.optim.Adam(new_model.parameters(), lr=self.lr)
+                for _ in range(self.epochs):
                     new_model.train()
                     Y_pred = new_model.forward(
                         torch.tensor(X, dtype=torch.float32)
@@ -247,7 +180,7 @@ class FQE:
     def evaluate(self, zs, states, actions, uat=None):
         xs = states
         del(states)
-        sdim = xs.shape[-1] + zs.shape[-1] # CHANGE TO ACCOUNT FOR HIGH-DIM ZS: COMPLETED!
+        sdim = xs.shape[-1] + zs.shape[-1]
         T = actions.shape[1]
         actions_taken = self.get_actions(zs, xs, actions, uat)
         xs_ = copy.deepcopy(xs)
