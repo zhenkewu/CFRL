@@ -1,0 +1,12 @@
+1. merge files
+2. clean the code comments
+3. clean the code function interfaces
+4. write NN tests
+5. design simulation/data example
+6. (optional) write LM tests
+7. write documentation & paper
+8. Extend to heterogeneous T
+
+
+
+Before release, repeat the above again.
