@@ -75,7 +75,7 @@ class SequentialPreprocessor(Preprocessor):
         early_stopping_patience=10,
         early_stopping_min_delta=0.01,
         cross_folds=1,
-        mode="single",  # single, action, sensitive
+        mode="single",  # single, sensitive
     ) -> None:
         z_space = np.array(z_space)
         action_space = np.array(action_space)
@@ -101,9 +101,6 @@ class SequentialPreprocessor(Preprocessor):
         self.cross_folds = cross_folds
         self.mode = mode
 
-        # train
-        #_, _ = self.preprocess_training(xs, zs, actions, rewards)
-
     def encode_a(self, a):
         enc = OneHotEncoder(categories=[self.action_space.flatten()], drop=None)
         return enc.fit_transform(a.reshape(-1, 1)).toarray()
@@ -117,6 +114,7 @@ class SequentialPreprocessor(Preprocessor):
         return model0
 
     def _learn_transition_models(self, xs, zs, actions, rewards):
+        # learn model after time 0
         N, T, _ = xs.shape
         if self.is_normalized:
             states, self.states_mean, self.states_std = self.standardize(
@@ -239,126 +237,6 @@ class SequentialPreprocessor(Preprocessor):
         model0 = self._learn_initial_model(xs, zs)
         model = self._learn_transition_models(xs, zs, actions, rewards)
         return model0, model
-    
-    def learn_transition_models_jitao(self, xs, zs, actions, rewards):
-        N, T, xdim = xs.shape
-        zdim = zs.shape[-1]
-        zs = zs.reshape(-1, zdim)
-        # print(xs.shape, zs.shape, actions.shape)
-        # (N,T,xdim), (N,zdim), (N,T)
-        if self.is_action_onehot:
-            actions = self.encode_a(actions.reshape(-1, 1)).reshape(N, T - 1, -1)
-            dim_a = actions.shape[-1]
-        else:
-            dim_a = 1
-
-        # learn model at time 0
-        model0 = {}
-        for z in np.unique(zs, axis=0):
-            idx_z = np.all(zs == z, axis=1)
-            model0[tuple(z)] = np.mean(xs[idx_z, 0, :], axis=0)
-
-        # learn model for time > 0
-        ## x_{t+1} = f(z, x_t, a_t) ; E[x_{t+1}|z, x_t, a_t]
-        if self.is_normalized:
-            states, self.states_mean, self.states_std = self.standardize(
-                xs[:, : (T - 1), :].reshape(-1, xdim)
-            )
-
-            next_states, self.next_states_mean, self.next_states_std = self.standardize(
-                np.concatenate(
-                    [xs[:, 1:T, :].reshape(-1, xdim), rewards[:, :].reshape(-1, 1)],
-                    axis=1,
-                )
-            )  # contain reward
-        else:
-            states = xs[:, : (T - 1), :].reshape(-1, xdim)
-            next_states = np.concatenate(
-                [xs[:, 1:T, :].reshape(-1, xdim), rewards[:, :].reshape(-1, 1)],
-                axis=1,
-            )
-
-        # train model
-        if self.reg_model == "lm":
-            X = np.concatenate(
-                [
-                    np.repeat(zs.reshape(-1, 1, zdim), repeats=T - 1, axis=1).reshape(
-                        -1, zdim
-                    ),
-                    actions[:, : (T - 1), np.newaxis].reshape(-1, 1),
-                    states,
-                ],
-                axis=1,
-            )
-            Y = next_states
-            model = LinearRegression().fit(X, Y)
-        else:
-            # single model
-            if self.mode == "single":
-                X = np.concatenate(
-                    [
-                        np.repeat(
-                            zs.reshape(-1, 1, zdim), repeats=T - 1, axis=1
-                        ).reshape(-1, zdim),
-                        actions[:, : (T - 1)].reshape(-1, dim_a),
-                        states,
-                    ],
-                    axis=1,
-                )
-                Y = next_states
-
-                model = NeuralNetRegressor(
-                    in_dim=X.shape[1], out_dim=Y.shape[1], hidden_dims=[64, 64]
-                )
-
-                model.fit(
-                    X,
-                    Y,
-                    epochs=1000,
-                    learning_rate=0.001,
-                    batch_size=128,
-                    is_early_stopping=self.is_early_stopping,
-                    early_stopping_patience=self.early_stopping_patience,
-                    early_stopping_min_delta=self.early_stopping_min_delta,
-                    test_size=self.test_size,
-                )
-            elif self.mode == "sensitive":
-                # distinct model for different z
-                model = {}
-                zs = np.repeat(zs[:, np.newaxis, :], axis=1, repeats=T - 1).reshape(
-                    -1, zdim
-                )
-                for z in np.unique(zs, axis=0):
-                    idx_z = np.all(zs == z, axis=1)
-                    states_z = states[idx_z].reshape(-1, xdim)
-                    next_states_z = next_states[idx_z].reshape(
-                        -1, next_states.shape[-1]
-                    )
-                    actions_z = actions[:, : (T - 1)].reshape(-1, dim_a)[idx_z]
-                    X = np.concatenate(
-                        [
-                            actions_z,
-                            states_z,
-                        ],
-                        axis=1,
-                    )
-                    Y = next_states_z
-                    model[tuple(z)] = NeuralNetRegressor(
-                        in_dim=X.shape[1], out_dim=Y.shape[1], hidden_dims=[64, 64]
-                    )
-                    model[tuple(z)].train(
-                        X,
-                        Y,
-                        epochs=1000,
-                        learning_rate=0.001,
-                        batch_size=128,
-                        is_early_stopping=self.is_early_stopping,
-                        early_stopping_patience=self.early_stopping_patience,
-                        early_stopping_min_delta=self.early_stopping_min_delta,
-                        test_size=self.test_size,
-                    )
-
-        return model0, model
 
     def learn_marginal_dist_z(self, zs):
         marginal_dist_z = {}
@@ -404,62 +282,6 @@ class SequentialPreprocessor(Preprocessor):
         if self.is_normalized:
             m = self.destandardize(m, self.next_states_mean, self.next_states_std)
         return m
-    
-    def _estimate_cf_next_state_reward_mean_tg1_jitao(self, model, z, actions, states):
-        N = actions.shape[0]
-        if self.is_action_onehot:
-            actions = self.encode_a(actions).reshape(N, -1)
-            dim_a = actions.shape[-1]
-        else:
-            dim_a = 1
-        if self.is_normalized:
-            states_normalized = self.standardize(
-                states, self.states_mean, self.states_std
-            )
-            if self.mode == "single":
-                # single model
-                m = model.predict(
-                    np.concatenate(
-                        [
-                            z,
-                            actions.reshape(-1, dim_a),
-                            states_normalized,
-                        ],
-                        axis=1,
-                    )
-                )
-            elif self.mode == "sensitive":
-                # distinct model for different z
-                m = np.zeros((states.shape[0], self.xdim))
-                for z_ in self.z_space:
-                    idx_z = np.all(z == z_, axis=1)
-                    states_normalized_z_ = states_normalized[idx_z]
-                    actions_z_ = actions[idx_z].reshape(-1, dim_a)
-                    X = np.concatenate([actions_z_, states_normalized_z_], axis=1)
-                    m[idx_z] = model[tuple(z_)].predict(X)
-
-            m = self.destandardize(m, self.next_states_mean, self.next_states_std)
-        else:
-            if self.mode == "single":
-                m = model.predict(
-                    np.concatenate(
-                        [
-                            z,
-                            actions.reshape(-1, dim_a),
-                            states,
-                        ],
-                        axis=1,
-                    )
-                )
-            elif self.mode == "sensitive":
-                m = np.zeros((states.shape[0], self.xdim + 1))
-                for z_ in self.z_space:
-                    idx_z = np.all(z == z_, axis=1)
-                    states_z_ = states[idx_z]
-                    actions_z_ = actions[idx_z].reshape(-1, dim_a)
-                    X = np.concatenate([actions_z_, states_z_], axis=1)
-                    m[idx_z] = model[tuple(z_)].predict(X)
-        return m
 
     def _process_initial_state(self, initial_model, xt, zs):
         N = xt.shape[0]
@@ -476,7 +298,7 @@ class SequentialPreprocessor(Preprocessor):
     ):
         N = xt.shape[0]
         m = self._estimate_cf_next_state_reward_mean_tg1(
-            transition_model, zs, atm1, xtm1
+            model=transition_model, z=zs, at=atm1, xt=xtm1
         )
         xt_mean = m[:, :-1]
         epsilon_hat = xt - xt_mean
@@ -487,12 +309,10 @@ class SequentialPreprocessor(Preprocessor):
 
         xt_c = {}
         rtm1_c = {}
-        #print('marginal dist for debugging: ', self.marginal_dist_z.items())
         for key, prob in self.marginal_dist_z.items():
             key_vec = np.repeat(np.array(key).reshape(1, -1), repeats=N, axis=0)
-            #print('shapes for debugging: ', key_vec.shape, atm1.shape, self.buffer[key].shape)
             m = self._estimate_cf_next_state_reward_mean_tg1(
-                transition_model, key_vec, atm1, self.buffer[key]
+                model=transition_model, z=key_vec, at=atm1, xt=self.buffer[key]
             )
             xt_mean = m[:, :-1]
             xt_c[key] = xt_mean + epsilon_hat
@@ -513,12 +333,10 @@ class SequentialPreprocessor(Preprocessor):
 
         return xt_tilde, rtm1_tilde, xt_c
 
-    def train_preprocessor(self, zs, xs, actions, rewards, seed=None):
+    def train_preprocessor(self, zs, xs, actions, rewards):
         # some convenience variables
         N, T, xdim = xs.shape
         self.N, self.T, self.xdim = xs.shape
-        #if seed is not None:
-        #    torch.manual_seed(seed)
 
         # learn marginal distribution of z
         self.marginal_dist_z = self.learn_marginal_dist_z(zs)
@@ -590,7 +408,7 @@ class SequentialPreprocessor(Preprocessor):
                     self.buffer = xt_c_test.copy()
         return xs_tilde, rs_tilde
 
-    # SEEMS WE CANNOT PREPROCESS A SINGLE STEP THAT'S NOT CONSEQUENTIVE? CUZ THEN THE INFO IN THE 
+    # SEEMS WE CANNOT PREPROCESS A SINGLE STEP THAT'S NOT CONSECUTIVE? CUZ THEN THE INFO IN THE 
     # BUFFER WOULD BE INCORRECT? (BUFFER STORES THE COUNTERFACTUAL STATES FROM LAST FUNCTION CALL, 
     # IDEALLY IT IS THE COUNTERFACTUAL STATES FROM THE PREVIOUS STEP.)
     def preprocess_single_step(self, z, xt, xtm1=None, atm1=None, rtm1=None, **kwargs):
@@ -604,17 +422,16 @@ class SequentialPreprocessor(Preprocessor):
 
         # t = 0
         if xtm1 is None and atm1 is None:
-            self.reset_buffer(n=N) # decommented for debugging
-
+            self.reset_buffer(n=N)
             if self.cross_folds == 1:
-                xt_tilde, xt_c = self._process_initial_state(self.model0[0], xt, z)
+                xt_tilde, xt_c = self._process_initial_state(initial_model=self.model0[0], xt=xt, zs=z)
                 self.buffer = xt_c.copy()
             else:
                 buffer_tmp = {key: np.zeros_like(xt) for key in self.marginal_dist_z}
                 xt_tilde = np.zeros((N, self.xdim * len(self.marginal_dist_z.keys())))
                 for k in range(cross_folds):
                     xt_tilde_k, xt_c_k = self._process_initial_state(
-                        self.model0[k], xt, z
+                        initial_model=self.model0[k], xt=xt, zs=z
                     )
                     buffer_tmp = {
                         key: buffer_tmp[key] + xt_c_k[key] / cross_folds
@@ -623,11 +440,9 @@ class SequentialPreprocessor(Preprocessor):
                     xt_tilde += xt_tilde_k / cross_folds
                 self.buffer = buffer_tmp.copy()
         else:
-            #self.reset_buffer(n=N) # commented out for debugging
-
             if cross_folds == 1:
                 xt_tilde, rtm1_tilde, xt_c = self._process_subsequent_states(
-                    self.model[0], xt, xtm1, z, atm1, rtm1
+                    transition_model=self.model[0], xt=xt, xtm1=xtm1, zs=z, atm1=atm1, rtm1=rtm1
                 )
                 self.buffer = xt_c.copy()
             else:
@@ -637,7 +452,7 @@ class SequentialPreprocessor(Preprocessor):
                     rtm1_tilde = np.zeros_like(rtm1)
                 for k in range(cross_folds):
                     xt_tilde_k, rtm1_tilde_k, xt_c_k = self._process_subsequent_states(
-                        self.model[k], xt, xtm1, z, atm1, rtm1
+                        transition_model=self.model[k], xt=xt, xtm1=xtm1, zs=z, atm1=atm1, rtm1=rtm1
                     )
                     buffer_tmp = {
                         key: buffer_tmp[key] + xt_c_k[key] / cross_folds
@@ -662,25 +477,23 @@ class SequentialPreprocessor(Preprocessor):
         rs_tilde = np.zeros([N, T - 1])
 
         # preprocess the initial step
-        xs_tilde[:, 0, :] = self.preprocess_single_step(zs, xs[:, 0, :])
+        xs_tilde[:, 0, :] = self.preprocess_single_step(z=zs, xt=xs[:, 0, :])
 
         # preprocess subsequent steps
         if rewards is not None:
             for t in range (1, T):
-                xs_tilde[:, t, :], rs_tilde[:, t-1] = self.preprocess_single_step(zs, 
-                                                                                     xs[:, t, :], 
-                                                                                     xs[:, t-1, :], 
-                                                                                     #actions[:, t-1, :], 
-                                                                                     actions[:, t-1], 
-                                                                                     rewards[:, t-1]
-                                                                                     )
+                xs_tilde[:, t, :], rs_tilde[:, t-1] = self.preprocess_single_step(z=zs, 
+                                                                                  xt=xs[:, t, :], 
+                                                                                  xtm1=xs[:, t-1, :], 
+                                                                                  atm1=actions[:, t-1], 
+                                                                                  rtm1=rewards[:, t-1]
+                                                                                  )
             return xs_tilde, rs_tilde                
         else:
             for t in range (1, T):
-                xs_tilde[:, t, :] = self.preprocess_single_step(zs, 
-                                                                xs[:, t, :], 
-                                                                xs[:, t-1, :], 
-                                                                #actions[:, t-1, :]
-                                                                actions[:, t-1]
+                xs_tilde[:, t, :] = self.preprocess_single_step(z=zs, 
+                                                                xt=xs[:, t, :], 
+                                                                xtm1=xs[:, t-1, :], 
+                                                                atm1=actions[:, t-1]
                                                                 )
             return xs_tilde
