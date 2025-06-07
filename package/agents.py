@@ -1,7 +1,6 @@
 import numpy as np
 import torch
 import copy
-from scipy.special import expit
 
 #from utils.utils import glogger
 from utils.base_models import LinearRegressor, NeuralNet

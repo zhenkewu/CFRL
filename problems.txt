@@ -1,0 +1,6 @@
+1. Simulated/synthetic environment can never terminate (i.e. they are continuing). Should I also 
+include an episodic version of the environments?
+
+Can try to accomodate the episodic case after accomodating the heterogeneous T case.
+
+2. What does the z_factor do in fit() in SimulatedEnvironment?
