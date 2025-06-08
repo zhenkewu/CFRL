@@ -3,7 +3,7 @@ import numpy as np
 
 def _read_trajectory_helper(data, z_labels, state_labels, action_label, reward_label, id_label, T):
     # read some basic information
-    ids = data[id_label].unique()
+    ids = np.unique(data[id_label].to_numpy())
     N = ids.shape[0]
     T = T
 
@@ -38,6 +38,7 @@ def _read_trajectory_helper(data, z_labels, state_labels, action_label, reward_l
             for k in range(state_labels.shape[0]): # populate states
                 xs[i][t][k] = subdata[state_labels[k]].iat[t]
     
+    ids = np.unique(data[id_label].to_numpy()).reshape(-1, 1)
     return zs, xs, actions, rewards, ids
 
 
@@ -69,7 +70,7 @@ def convert_trajectory_to_dataframe(zs, states, actions, rewards, ids, z_labels=
     states = np.array(states)
     actions = np.array(actions)
     rewards = np.array(rewards)
-    ids = np.array(ids)
+    ids = np.array(ids).flatten()
 
     # define labels of the dataframe
     if z_labels is None:
