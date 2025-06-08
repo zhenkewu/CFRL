@@ -5,19 +5,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import copy
-from environment import sample_trajectory, sample_counterfactual_trajectories
-from environment import SimulatedEnvironment
-from environment import estimate_counterfactual_trajectories_from_data
-from fqe import FQE
+from .environment import sample_trajectory, sample_counterfactual_trajectories
+from .environment import SimulatedEnvironment
+from .environment import estimate_counterfactual_trajectories_from_data
+from .fqe import FQE
 
 def f_ux(size):
-    return np.random.normal(0, 1, size)
+    return np.random.normal(0, 1, size=size)
 
 def f_ua(size):
-    return np.random.uniform(0, 1, size)
+    return np.random.uniform(0, 1, size=size)
 
 def f_ur(size):
-    return np.random.normal(0, 1, size)
+    return np.random.normal(0, 1, size=size)
 
 
 
@@ -28,14 +28,14 @@ def evaluate_reward_through_simulation(env, z_eval_levels, state_dim, N, T, poli
     np.random.seed(seed)
 
     # generate the sensitive attribute for each simulated individual
-    #Z = np.random.binomial(1, p=0.5, size=[N, 1])
-    Z = np.zeros((N, z_levels.shape[1]))
+    Z = np.random.binomial(1, p=0.5, size=[N, 1])
+    '''Z = np.zeros((N, z_levels.shape[1]))
     if z_probs is None:
         Z_idx = np.random.choice(range(len(z_levels)), size=N, replace=True)
     else:
         Z_idx = np.random.choice(range(len(z_levels)), size=N, p=z_probs, replace=True)
     for i in range(N):
-        Z[i] = z_levels[Z_idx[i]]
+        Z[i] = z_levels[Z_idx[i]]'''
 
     # simulate a trajectory and compute the discounted cumulative reward
     _, _, _, rewards = sample_trajectory(env=env, zs=Z, state_dim=state_dim, N=N, T=T, 
@@ -73,14 +73,14 @@ def evaluate_fairness_through_simulation(env, z_eval_levels, state_dim, N, T,
     np.random.seed(seed)
 
     # generate the sensitive sttribute for each simulated individual
-    #zs = np.random.binomial(n=1, p=1/2, size=[N, z_eval_levels.shape[1]])
-    zs = np.zeros((N, z_eval_levels.shape[1]))
+    zs = np.random.binomial(n=1, p=1/2, size=[N, z_eval_levels.shape[1]])
+    '''zs = np.zeros((N, z_eval_levels.shape[1]))
     if z_probs is None:
         Z_idx = np.random.choice(range(len(z_eval_levels)), size=N, replace=True)
     else:
         Z_idx = np.random.choice(range(len(z_eval_levels)), size=N, p=z_probs, replace=True)
     for i in range(N):
-        zs[i] = z_eval_levels[Z_idx[i]]
+        zs[i] = z_eval_levels[Z_idx[i]]'''
 
     # generate the simulated counterfactual trajectories and compute the CF metric
     trajectories = sample_counterfactual_trajectories(env=env, zs=zs, z_eval_levels=z_eval_levels, 
@@ -94,8 +94,8 @@ def evaluate_fairness_through_simulation(env, z_eval_levels, state_dim, N, T,
 
 def evaluate_fairness_through_model(env, zs, states, actions, 
                                     policy, f_ua=f_ua, seed=1):
+    zs = np.array(zs)
     z_eval_levels = np.unique(zs, axis=0)
-    z_eval_levels = np.array(z_eval_levels)
     states = np.array(states)
     actions = np.array(actions)
     np.random.seed(seed)
@@ -118,9 +118,11 @@ def evaluate_reward_through_fqe(
 ):
     np.random.seed(seed)
     zs = np.array(zs)
-    states = np.arrays(states)
+    states = np.array(states)
     actions = np.array(actions)
     rewards = np.array(rewards)
+    if uat is not None:
+        uat = np.array(uat)
     action_size = len(np.unique(actions.flatten(), axis=0))
 
     fqe = FQE(model_type=model_type, action_size=action_size, policy=policy, 

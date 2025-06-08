@@ -3,7 +3,7 @@ import torch
 import copy
 
 #from utils.utils import glogger
-from utils.base_models import LinearRegressor, NeuralNet
+from .utils.base_models import LinearRegressor, NeuralNet
 
 class FQI:
     def __init__(
@@ -138,7 +138,12 @@ class FQI:
                 q_values = self.model(torch.FloatTensor(states)).numpy()
         return np.argmax(q_values, axis=1)
     
-    def train(self, zs, xs, actions, rewards, max_iter, preprocess=True):       
+    def train(self, zs, xs, actions, rewards, max_iter, preprocess=True):   
+        zs = np.array(zs)
+        xs = np.array(xs)
+        actions = np.array(actions)
+        rewards = np.array(rewards)
+
         if self.preprocessor is not None and preprocess:
             states_p, rewards_p = self.preprocessor.preprocess_multiple_steps(
                     zs=zs, xs=xs, actions=actions, rewards=rewards
@@ -159,9 +164,18 @@ class FQI:
     # IS WE CANNOT PREPROCESS AN ARBITRARY SINGLE STEP USIN THE PREPROCESSOR, AND WE MUST 
     # PREPROCESS A WHOLE TRAJECTORY IN ORDER?
     def act(self, z, xt, xtm1=None, atm1=None, uat=None, preprocess=True, **kwargs):
+        z = np.array(z)
+        xt = np.array(xt)
+        if xtm1 is not None:
+            xtm1 = np.array(xtm1)
+        if atm1 is not None:
+            atm1 = np.array(atm1)
+        if uat is not None:
+            uat = np.array(uat)
+
         if self.preprocessor is not None and preprocess:
             states = self.preprocessor.preprocess_single_step(
-                xt=xt, xtm1=xtm1, zs=z, atm1=atm1, rtm1=None
+                xt=xt, xtm1=xtm1, z=z, atm1=atm1, rtm1=None
             )
         else:
             states = xt

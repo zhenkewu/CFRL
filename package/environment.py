@@ -3,9 +3,11 @@ import numpy as np
 import copy
 import torch
 from sklearn.preprocessing import OneHotEncoder
-from utils.base_models import NeuralNetRegressor, LinearRegressor
+from .utils.base_models import NeuralNetRegressor, LinearRegressor
 
 def f_x0(zs, ux0, z_coef=1):
+    zs = np.array(zs)
+    ux0 = np.array(ux0)
     gamma0 = np.array([-0.3, 1 * z_coef, 1])
     n = zs.shape[0]
     M = np.concatenate(
@@ -21,6 +23,10 @@ def f_x0(zs, ux0, z_coef=1):
     return x0
 
 def f_xt(zs, xtm1, atm1, uxt, z_coef=1):
+    zs = np.array(zs)
+    xtm1 = np.array(xtm1)
+    atm1 = np.array(atm1)
+    uxt = np.array(uxt)
     gamma = np.array([-0.3, 1 * z_coef, 0.5, 0.4, 0.3, 0.3 * z_coef, 0.4 * z_coef, 1]) #-0.3
     n = xtm1.shape[0]
     M = np.concatenate(
@@ -41,6 +47,10 @@ def f_xt(zs, xtm1, atm1, uxt, z_coef=1):
     return xt
 
 def f_rt(zs, xt, at, urtm1, z_coef=1):
+    zs = np.array(zs)
+    xt = np.array(xt)
+    at = np.array(at)
+    urtm1 = np.array(urtm1)
     lmbda = np.array([-0.3, 0.3, 0.5 * z_coef, 0.5, 0.2 * z_coef, 0.7, -1.0 * z_coef])
     n = xt.shape[0]
     at = at.reshape(-1, 1)
@@ -72,7 +82,8 @@ class SyntheticEnvironment(gym.Env):
         self.z_coef = new_z_coef'''
     
     def reset(self, z, ux0):
-        zs = z
+        zs = np.array(z)
+        ux0 = np.array(ux0)
         self.N = zs.shape[0] # number of samples/individuals
         self.zs = zs.reshape(self.N, -1)
         #np.random.seed(self.seed)
@@ -86,6 +97,9 @@ class SyntheticEnvironment(gym.Env):
         return observation, None
     
     def step(self, action, uxt, urtm1):
+        action = np.array(action)
+        uxt = np.array(uxt)
+        urtm1 = np.array(urtm1)
         self.atm1 = action
         #np.random.seed(self.seed) # ALSO NEED SEED HERE OR NOT?
 
@@ -106,16 +120,18 @@ class SyntheticEnvironment(gym.Env):
 
 
 def f_ux(size):
-    return np.random.normal(0, 1, size)
+    return np.random.normal(0, 1, size=size)
 
 def f_ua(size):
-    return np.random.uniform(0, 1, size)
+    return np.random.uniform(0, 1, size=size)
 
 def f_ur(size):
-    return np.random.normal(0, 1, size)
+    return np.random.normal(0, 1, size=size)
 
 # REQUIRES: zs should be the same as the zs passed to the environment
 def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=1):
+    zs = np.array(zs)
+
     # initialize containers to store the trajectory
     Z = zs.reshape(N, -1)
     X = np.zeros([N, T + 1, state_dim], dtype=float)
@@ -202,6 +218,7 @@ def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_
 def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T, 
                                        policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=1):
     np.random.seed(seed)
+    zs = np.array(zs)
     z_eval_levels = np.array(z_eval_levels)
 
     # dictionary to contain the counterfactual trajectories; key = z and value = trajectory
@@ -340,10 +357,10 @@ class SimulatedEnvironment(gym.Env):
         return enc.fit_transform(a.reshape(-1, 1)).toarray()
 
     def fit(self, zs, states, actions, rewards):
-        z = zs
-        xt = states
-        at = actions
-        rt = rewards
+        z = np.array(zs)
+        xt = np.array(states)
+        at = np.array(actions)
+        rt = np.array(rewards)
         N, T, state_dim = xt.shape
         self.N = N
         self.T = T
@@ -511,7 +528,9 @@ class SimulatedEnvironment(gym.Env):
         enforce_min_max=False,
         #z_factor=0.0,
     ):
-        zs = z
+        zs = np.array(z)
+        if errors_states is not None:
+            errors_states = np.array(errors_states)
         np.random.seed(seed)
         torch.manual_seed(seed)
         if not self.is_trained:
@@ -549,7 +568,9 @@ class SimulatedEnvironment(gym.Env):
     
     # helper function
     def _next_state_reward_mean(self, z, xt, at):
-        zs = z
+        zs = np.array(z)
+        xt = np.array(xt)
+        at = np.array(at)
         N = xt.shape[0]
         states = xt.reshape(N, -1)
         actions = at.flatten()
@@ -628,12 +649,17 @@ class SimulatedEnvironment(gym.Env):
             print('Cannot make transitions because the environment is not yet trained.')
             exit(1)
 
-        at = action
+        at = np.array(action)
         xt = self.xt
         next_states_mean, rewards_mean = self._next_state_reward_mean(
             z=self.zs, xt=xt, at=at
         )
 
+        if errors_states is not None:
+            errors_states = np.array(errors_states)
+        if errors_rewards is not None:
+            errors_rewards = np.array(errors_rewards)
+        
         if errors_states is None:
             errors_states = np.random.multivariate_normal(
                 mean=np.zeros(xt.shape[-1]),
@@ -680,6 +706,7 @@ def f_errors_rewards(size):
 def sample_simulated_env_trajectory(env, zs, state_dim, N, T, f_errors_states=f_errors_states, 
                                     f_errors_rewards=f_errors_rewards, seed=1, policy=None):
     # initialize containers to store the trajectory
+    zs = np.array(zs)
     Z = zs.reshape(N, -1)
     X = np.zeros([N, T + 1, state_dim], dtype=float)
     A = np.zeros([N, T], dtype=int)
@@ -760,6 +787,7 @@ def sample_simulated_env_trajectory(env, zs, state_dim, N, T, f_errors_states=f_
 
 
 def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, policy, f_ua=f_ua, seed=1):
+    zs = np.array(zs)
     N = actions.shape[0]
     T = actions.shape[1]
     state_dim = states.shape[2]

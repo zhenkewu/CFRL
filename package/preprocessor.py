@@ -6,7 +6,7 @@ and its oracle version
 
 import numpy as np
 from sklearn.linear_model import LinearRegression
-from utils.base_models import NeuralNetRegressor
+from .utils.base_models import NeuralNetRegressor
 #from utils.utils import timer_func
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import OneHotEncoder
@@ -336,6 +336,11 @@ class SequentialPreprocessor(Preprocessor):
         return xt_tilde, rtm1_tilde, xt_c
 
     def train_preprocessor(self, zs, xs, actions, rewards):
+        zs = np.array(zs)
+        xs = np.array(xs)
+        actions = np.array(actions)
+        rewards = np.array(rewards)
+
         # some convenience variables
         N, T, xdim = xs.shape
         self.N, self.T, self.xdim = xs.shape
@@ -400,8 +405,8 @@ class SequentialPreprocessor(Preprocessor):
                                 xt=xs_test[:, t, :],
                                 xtm1=xs_test[:, t - 1, :],
                                 z=zs_test,
-                                actions=actions_test[:, t - 1],
-                                rewards=rewards_test[:, t - 1],
+                                atm1=actions_test[:, t - 1],
+                                rtm1=rewards_test[:, t - 1],
                             )
                         )
                         rs_tilde[test_index, t - 1] = rtm1_tilde_test
@@ -413,6 +418,15 @@ class SequentialPreprocessor(Preprocessor):
     # BUFFER WOULD BE INCORRECT? (BUFFER STORES THE COUNTERFACTUAL STATES FROM LAST FUNCTION CALL, 
     # IDEALLY IT IS THE COUNTERFACTUAL STATES FROM THE PREVIOUS STEP.)
     def preprocess_single_step(self, z, xt, xtm1=None, atm1=None, rtm1=None, **kwargs):
+        z = np.array(z)
+        xt = np.array(xt)
+        if xtm1 is not None:
+            xtm1 = np.array(xtm1)
+        if atm1 is not None:
+            atm1 = np.array(atm1)
+        if rtm1 is not None:
+            rtm1 = np.array(rtm1)
+
         # some convenience variables
         N, xdim = xt.shape
         cross_folds = len(self.model)
@@ -466,6 +480,12 @@ class SequentialPreprocessor(Preprocessor):
         return (xt_tilde, rtm1_tilde) if rtm1 is not None else xt_tilde
     
     def preprocess_multiple_steps(self, zs, xs, actions, rewards=None):
+        zs = np.array(zs)
+        xs = np.array(xs)
+        actions = np.array(actions)
+        if rewards is not None:
+            rewards = np.array(rewards)
+
         # some convenience variables
         N, T, xdim = xs.shape
 

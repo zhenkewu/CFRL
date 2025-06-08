@@ -3,8 +3,10 @@ import numpy as np
 from package.environment import SimulatedEnvironment, sample_simulated_env_trajectory
 from package.reader import read_trajectory_from_csv, read_trajectory_from_dataframe
 from sklearn.model_selection import train_test_split
-from package.preprocessor import SequentialPreprocessor, UnawarenessPreprocessor, ConcatenatePreprocessor
-from package.agents import FQI, BehaviorAgent, RandomAgent
+from package.preprocessor import SequentialPreprocessor
+from .baseline_preprocessors import UnawarenessPreprocessor, ConcatenatePreprocessor
+from package.agents import FQI
+from .baseline_agents import BehaviorAgent, RandomAgent
 #from policy_learning_add import RandomAgent
 from package.evaluation import evaluate_fairness_through_model, evaluate_reward_through_fqe
 import torch
@@ -12,7 +14,7 @@ import torch
 def run_exp_one(seed, z_label, methods):
     # Step 1
     # 1.2 read data
-    impute_data = pd.read_csv('./impute_data.csv')
+    impute_data = pd.read_csv('data/impute_data.csv')
     impute_data["rldecision"] = impute_data["rldecision"].replace(0, 1)
     impute_data["rldecision"] = impute_data["rldecision"].replace(1, 0)
     impute_data["rldecision"] = impute_data["rldecision"].replace(2, 1)
@@ -223,5 +225,5 @@ def run_exp(rep, z_labels, methods, print_res=True, export_res=False,
 '''run_exp(rep=10, methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=True, 
         export_path='./result_rda_real_data_analysis_after.csv')'''
-run_exp(rep=3, methods=['ours'], z_labels=['sex_b'], 
+run_exp(rep=3, methods=['random', 'full', 'unaware', 'ours'], z_labels=['sex_b'], 
         print_res=True, export_res=False)

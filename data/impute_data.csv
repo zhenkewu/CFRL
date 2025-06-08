@@ -1,0 +1,2485 @@
+pt_id,week,calendar_week,rldecision,reward,weekly_pain_score,weekly_pain_interference,ivr_cluster,num_substances,baseline_pain,age,sex,ethnicity,employed,pt1,depression,race,education,comm_score
+ASB00135,1,2,1,5.66666666666666,6.333333333333333,1,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00201,1,4,1,6,0,1,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00256,1,7,1,6,7,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00279,1,8,1,6,6.5,3,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00334,1,11,1,6,5.4,1,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00340,1,11,1,5,2.5,1,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00428,1,14,1,6,4.666666666666667,1.5,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00482,1,16,1,6,5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00488,1,17,1,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00495,1,16,1,6,4.25,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00532,1,18,1,6,3.3333333333333335,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00535,1,17,1,4.5,8.75,1.6666666666666667,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00595,1,21,1,5.66666666666666,8.666666666666666,3,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00621,1,22,1,3,9.8,2,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00631,1,24,1,3.6,3.8,2,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00708,1,28,1,6,7,1.3333333333333333,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00832,1,37,0,6,0,2.6666666666666665,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00844,1,37,0,3,2.5,1,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00887,1,39,1,4,10,1,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00928,1,40,1,4.8,10,2.6666666666666665,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00977,1,42,1,6,4.25,2.3333333333333335,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB00997,1,50,1,6,0.6666666666666666,2.3333333333333335,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01061,1,46,1,6,0.25,2,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01076,1,47,1,6,3.75,2,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01102,1,48,1,6,7.25,1.75,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01129,1,48,1,4.8,6.2,2.3333333333333335,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01135,1,49,1,6,2,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01192,1,51,1,5.66666666666666,10,1.3333333333333333,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01203,1,52,1,5.5,7,2.3333333333333335,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01219,1,53,1,3,7,3,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01222,1,52,1,6,2.75,3,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01273,1,54,1,6,4.6,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01345,1,62,1,3,7.25,2.3333333333333335,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01347,1,60,1,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01353,1,60,1,6,4,3,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01428,1,69,1,6,1,3,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01434,1,64,1,6,0,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01470,1,65,0,6,0,2,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01487,1,66,1,6,7.333333333333333,2,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01492,1,66,1,1.5,6,3,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01533,1,68,0,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01534,1,68,0,6,1,2,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB01551,1,72,1,6,3.8,1.6666666666666667,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01559,1,71,1,6,3.6666666666666665,2.75,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01563,1,80,1,6,0.25,3,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01587,1,74,1,6,3,2,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01599,1,77,1,6,3,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB001616,1,77,1,6,4.333333333333333,1.6666666666666667,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB01642,1,79,1,6,7,2,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB01653,1,77,1,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01696,1,86,1,6,2,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01714,1,86,1,6,4.5,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01745,1,84,1,6,2.5,3,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01752,1,90,1,6,2.5,1,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01875,1,96,1,5.75,7,1,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01911,1,100,1,6,1,1,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01949,1,104,1,6,0,1.5,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01989,1,108,1,6,7,3,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,1,108,1,6,3,2.3333333333333335,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02014,1,91,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02049,1,96,1,5.5,10,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02063,1,97,1,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02083,1,100,1,6,1.3333333333333333,2,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02090,1,101,1,6,7.333333333333333,3,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02094,1,102,1,6,7,2,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02109,1,105,1,6,0,2,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02162,1,117,1,6,3,3,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02170,1,119,1,6,4.333333333333333,3,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB03003,1,111,1,6,2,1,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03013,1,112,0,6,5,2,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03044,1,117,1,6,1,2.6666666666666665,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03051,1,116,1,6,7,2.4,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03070,1,119,1,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03099,1,122,1,6,3.3333333333333335,2.5,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03118,1,125,1,6,0,1,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB03133,1,126,1,6,3.8,3,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB05033,1,119,1,6,0.6666666666666666,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB06007,1,128,1,6,1,2.75,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06011,1,128,1,6,6.333333333333333,3,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10017,1,73,1,6,3.75,2.2,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10044,1,79,1,6,10,1,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB10060,1,81,1,6,4,2,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10080,1,83,1,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10092,1,86,1,6,10,2.3333333333333335,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10110,1,90,1,6,4.5,1,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10113,1,91,1,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10126,1,94,1,5.25,7.25,2,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10131,1,96,1,6,2,2.75,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10151,1,100,1,6,3,2.5,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10176,1,108,1,6,2.5,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10179,1,108,1,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10198,1,113,1,6,2,1,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10224,1,113,1,6,4.8,2,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10254,1,116,1,6,3,2,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10266,1,116,1,6,7.666666666666667,1.2,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10297,1,120,1,6,3,2,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10326,1,122,1,6,1.5,1.6666666666666667,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB10328,1,122,1,6,2,3,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB10342,1,125,1,6,1.5,2.5,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB00352,1,12,2,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00386,1,13,2,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00462,1,15,2,6,5,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00573,1,20,2,4.66666666666666,1.5,1,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00623,1,22,2,6,7,1,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00678,1,28,2,5.19999999999999,9.2,2.5,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00766,1,33,2,4,1,3,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00827,1,38,2,4,4,3,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00833,1,38,2,5.5,9.5,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00933,1,41,2,5,4.5,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00939,1,41,2,6,0,1,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00980,1,42,2,6,0,1,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB01099,1,49,2,4,8,2.5,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01195,1,52,2,6,7,1.25,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01235,1,54,2,6,6.75,1,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01320,1,59,2,6,8,3,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01369,1,62,2,6,0,3,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01374,1,61,2,6,0,1,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01399,1,62,2,6,1,1.25,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01427,1,63,2,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01469,1,66,2,6,6,3,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01501,1,67,2,6,0.6666666666666666,1,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01531,1,68,2,6,1,3,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01585,1,73,2,5.6,5.6,1,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB001610,1,77,2,3.66666666666666,5,3,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001624,1,77,2,4.66666666666666,6.75,3,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB01654,1,80,2,4.66666666666666,6.75,3,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01665,1,79,2,6,9.5,1.5,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01682,1,83,2,6,4,1,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,1,83,2,4.5,8.75,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01728,1,87,2,5,4,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01744,1,88,2,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01809,1,87,2,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01829,1,91,2,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01861,1,93,2,6,9,2.5,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01939,1,104,2,6,7.75,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01983,1,101,2,6,3,1,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB02001,1,88,2,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02010,1,90,2,5.66666666666666,3,2,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02024,1,92,2,6,9.2,1,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02030,1,93,2,4.5,9.2,3,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02055,1,96,2,6,5.75,1.3333333333333333,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02085,1,99,2,5,9.5,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02093,1,103,2,4,9.5,3,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02139,1,113,2,6,4.5,1.25,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02187,1,122,2,6,7.75,1,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB03059,1,120,2,6,0,3,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03082,1,121,2,6,3.3333333333333335,1.5,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB04003,1,116,2,6,1.6666666666666667,2,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB05032,1,119,2,4.66666666666666,5,2.75,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB06010,1,128,2,6,7,2,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB10014,1,73,2,4.66666666666666,4,3,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10094,1,86,2,6,8,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,1,86,2,6,4,1,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10120,1,93,2,6,3,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10127,1,95,2,6,6.666666666666667,3,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10178,1,108,2,6,3,3,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10195,1,112,2,6,8.75,1.25,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10235,1,114,2,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10257,1,117,2,6,5,2,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10265,1,116,2,6,4,2,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10269,1,117,2,6,1,1.6666666666666667,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10372,1,127,2,6,1.3333333333333333,2.5,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00080,1,1,3,3,3.25,3,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00136,1,2,3,6,2,2.6,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00188,1,4,3,3,6.666666666666667,1.5,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00519,1,18,3,5.75,5.25,2,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00640,1,24,3,6,2.75,2.6666666666666665,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00661,1,26,3,5.5,3.25,2.6,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00711,1,29,3,6,3,2.3333333333333335,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00780,1,33,3,3,6.666666666666667,3,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00850,1,38,3,3,9,2.6,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00937,1,40,3,6,7.5,1.6666666666666667,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB01045,1,46,3,5,8.75,3,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01046,1,45,3,6,9,1.5,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01121,1,48,3,6,8.75,1.25,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01123,1,48,3,6,2.6666666666666665,3,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01416,1,63,3,6,2,1.6666666666666667,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01507,1,67,3,5.33333333333333,2.75,1.2,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01593,1,74,3,5,2.6666666666666665,2.6,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB00104,1,76,3,6,2.6666666666666665,2,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001628,1,77,3,6,4.8,2.5,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB001645,1,77,3,6,0,1.6666666666666667,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01667,1,79,3,6,3,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01739,1,85,3,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01742,1,88,3,6,5,3,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01943,1,104,3,5,2.6666666666666665,3,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB02009,1,89,3,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02179,1,120,3,4,7.5,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02197,1,125,3,6,2,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02201,1,108,3,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB02203,1,113,3,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03026,1,114,3,6,4,2,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03037,1,115,3,5.75,8.5,2.5,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03113,1,125,3,4,4.333333333333333,2.5,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB04016,1,126,3,6,3.5,3,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05020,1,121,3,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB05045,1,121,3,6,5.75,1.6666666666666667,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB10012,1,72,3,6,2.4,2,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10039,1,75,3,5.5,3,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB010046,1,77,3,6,5,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10078,1,83,3,6,6,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10079,1,84,3,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10142,1,97,3,6,6.5,2.75,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10231,1,113,3,6,8,2.3333333333333335,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10238,1,118,3,6,5,3,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10262,1,118,3,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10277,1,117,3,6,8.333333333333334,1.25,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB00136,2,3,1,6,2,1,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00188,2,5,1,2,9.2,2,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00201,2,5,1,6,0,2,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00462,2,16,1,6,0,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00595,2,22,1,3,2.6666666666666665,2,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00661,2,27,1,6,2.6,2.6666666666666665,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00678,2,29,1,5.25,8.5,2.6666666666666665,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00708,2,29,1,6,8.333333333333334,2.5,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00780,2,34,1,3,8.5,3,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00832,2,38,0,6,0,2.6666666666666665,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00844,2,38,1,3,9.75,2.3333333333333335,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00850,2,39,1,2,8.333333333333334,2,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00933,2,42,1,6,4.5,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB01076,2,48,1,6,3.5,2,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01102,2,49,1,6,2,2,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01121,2,49,1,6,9.2,1.5,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01222,2,53,1,6,1,2.6666666666666665,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01320,2,60,1,3,8.5,3,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01345,2,64,0,6,8.5,2,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01428,2,70,1,6,1,3,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01434,2,65,1,6,2.6666666666666665,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01469,2,67,1,6,0,3,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01501,2,68,1,6,6.333333333333333,1,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01531,2,69,1,5.33333333333333,9.75,2,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01563,2,81,1,2,2.2,2.6666666666666665,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01587,2,75,1,5.25,4.5,1,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01599,2,78,1,6,3,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,2,77,1,5.33333333333333,0,1,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001610,2,78,1,5,8.5,3,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB01642,2,80,1,6,4.25,1.5,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB01654,2,81,1,2,9.2,3,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01714,2,87,1,5.6,4.6,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01728,2,88,1,6,1,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01739,2,86,1,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01744,2,89,1,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01745,2,85,1,4,4.5,2,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01809,2,88,1,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01861,2,94,1,3,3.5,3,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01943,2,105,1,5.33333333333333,2,3,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB02010,2,91,1,6,2.2,2,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02014,2,93,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02024,2,93,1,2.2,8.333333333333334,1.25,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02055,2,97,1,5.25,4.5,2,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02083,2,107,0,6,1.3333333333333333,2,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02085,2,100,1,2,3.3333333333333335,2.6666666666666665,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02090,2,102,1,2,7.8,3,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02109,2,106,1,5.33333333333333,1,2,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02139,2,114,1,6,1,1.25,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02170,2,120,1,6,4.333333333333333,2,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02201,2,109,1,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB02203,2,114,1,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03013,2,113,1,5.25,8.333333333333334,2.6666666666666665,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03044,2,118,1,6,1,2.2,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03051,2,117,1,6,5,2.5,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03070,2,120,1,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03082,2,122,1,6,1,2,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03113,2,126,1,4,9.2,3,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB05032,2,120,1,2.2,4.8,3,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05033,2,120,1,6,0.6666666666666666,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB05045,2,122,1,6,8.5,2,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB06007,2,129,1,6,8.5,3,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06010,2,129,1,6,7,2,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB06011,2,129,1,6,6,2,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10017,2,74,1,6,2.2,2.2,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10039,2,76,1,6,2.6666666666666665,2.5,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB010046,2,78,1,6,1.5,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10079,2,85,1,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10092,2,87,1,6,8.333333333333334,2.6666666666666665,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10113,2,93,1,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10142,2,98,1,6,6.5,2.75,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10178,2,109,1,6,0.6666666666666666,3,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10179,2,109,1,6,3.6,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10198,2,114,1,2,9.2,1,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10262,2,119,1,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10265,2,117,1,4,4.25,2.6,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10277,2,118,1,6,8.333333333333334,1.25,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10326,2,123,1,5.33333333333333,8.5,2.2,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB10342,2,126,1,6,1.5,2,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB00340,2,12,2,5,5.666666666666667,1,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00482,2,17,2,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00488,2,18,2,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00519,2,19,2,5,7.2,2.6666666666666665,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00535,2,18,2,4.6,8.4,1,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00621,2,23,2,3,8.5,1,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00623,2,23,2,6,7,1.25,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00640,2,25,2,6,1.5,3,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00711,2,31,2,6,3,2.3333333333333335,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00833,2,39,2,6,0.75,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00887,2,40,2,4,6.666666666666667,1.3333333333333333,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00928,2,41,2,5,8.5,1.5,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00977,2,43,2,6,1.25,3,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB00980,2,43,2,5.5,0.75,1.3333333333333333,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB01045,2,47,2,5,8,3,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01046,2,46,2,6,9,3,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01061,2,47,2,6,0.25,2,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01099,2,50,2,3.5,7.5,2,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01129,2,49,2,4.5,3.75,2,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01135,2,50,2,6,2,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01192,2,52,2,5.8,7.2,1.3333333333333333,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01195,2,53,2,6,7,1.25,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01203,2,53,2,6,7,1.25,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01273,2,56,2,6,4.6,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01347,2,61,2,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01353,2,61,2,3,8,2,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01374,2,62,2,4.75,2.2,1,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01416,2,64,2,6,2,2.25,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01487,2,67,2,6,3,3,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01492,2,67,2,6,0.75,2.6666666666666665,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01533,2,69,2,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01534,2,69,2,5.5,2,2.6666666666666665,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB001616,2,78,2,6,0.25,1.6666666666666667,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001624,2,78,2,4.5,8,1.3333333333333333,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB001628,2,78,2,6,3.4,3,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB001645,2,78,2,4.5,3.4,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01665,2,80,2,6,9.5,1.5,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01686,2,84,2,4.75,5,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01742,2,89,2,6,3.5,3,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01752,2,91,2,6,2,1.25,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01875,2,97,2,5.2,7.2,1,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01911,2,101,2,6,1.4,3,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01939,2,105,2,6,7.75,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01949,2,105,2,6,0.5,2,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01983,2,102,2,6,1.5,1.3333333333333333,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB01991,2,109,2,5,5,2,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02001,2,89,2,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02009,2,90,2,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02030,2,94,2,6,7,2.4,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02049,2,97,2,5.66666666666666,6.666666666666667,2.25,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02063,2,98,2,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02093,2,104,2,3,8,3,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02094,2,103,2,6,7.5,1,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02179,2,121,2,5,4,2,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02187,2,123,2,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB03003,2,112,2,6,2,1,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03059,2,121,2,6,3.75,1.6666666666666667,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB04003,2,117,2,6,1.5,2,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB04016,2,127,2,6,3.5,3,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05020,2,122,2,5,0.25,3,2,4,10,69,2,2,6,1,none,white,college,4
+ASB10014,2,74,2,6,0.25,2.6666666666666665,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10060,2,82,2,5,5,2,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10094,2,87,2,6,8,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,2,87,2,6,4,1,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10110,2,91,2,3,2.2,1.6666666666666667,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10127,2,96,2,6,6.666666666666667,1.75,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10151,2,101,2,6,3,2.6666666666666665,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10176,2,109,2,6,3.4,2,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10195,2,113,2,6,8.666666666666666,2.6666666666666665,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10224,2,114,2,6,4.8,2,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10238,2,119,2,6,5,3,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10257,2,118,2,6,8.5,2,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10266,2,117,2,6,5.5,1.2,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10297,2,121,2,6,3,2,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10328,2,123,2,6,7,2.5,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB10372,2,128,2,6,1.75,2.4,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00080,2,2,3,6,2,3,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00135,2,3,3,6,5.4,1,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00256,2,8,3,6,7,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00279,2,9,3,6,3,2.3333333333333335,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00334,2,12,3,6,1,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00352,2,13,3,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00386,2,14,3,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00428,2,15,3,4,8,3,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00495,2,17,3,6,4.25,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00532,2,19,3,4.5,2,3,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00573,2,21,3,4.33333333333333,1,3,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00631,2,25,3,4.66666666666666,4.333333333333333,3,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00766,2,34,3,6,1,3,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00827,2,39,3,6,2,1,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00937,2,41,3,6,7.5,3,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00939,2,42,3,4.33333333333333,0.75,3,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00997,2,51,3,6,2.4,1.75,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01123,2,49,3,6,2.6666666666666665,2.75,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01219,2,54,3,6,2,3,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01235,2,55,3,6,4,2.25,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01369,2,63,3,5.66666666666666,3,2.3333333333333335,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01399,2,63,3,4.5,2,2.25,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01427,2,64,3,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01470,2,66,3,4.5,1.5,3,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01507,2,68,3,5,4.8,1.2,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01551,2,73,3,4.5,3.6666666666666665,3,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01559,2,72,3,6,3.6666666666666665,2.75,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01585,2,74,3,6,5.5,3,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01593,2,75,3,6,0.75,1,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB01653,2,78,3,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01667,2,80,3,6,3,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01682,2,84,3,4,4.5,1.75,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01696,2,87,3,6,2,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01829,2,92,3,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01989,2,109,3,5.66666666666666,4,3,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB02162,2,118,3,6,3,3,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02197,2,126,3,6,2,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB03026,2,115,3,6,4,2.3333333333333335,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03037,2,116,3,5.4,7.6,2.3333333333333335,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03099,2,123,3,6,4.75,1.75,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03118,2,126,3,6,1.5,1,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB03133,2,127,3,6,6,3,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB10012,2,73,3,6,2,2.5,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10044,2,80,3,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB10078,2,84,3,6,5.5,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10080,2,84,3,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10120,2,94,3,6,6.25,1,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10126,2,95,3,5.25,6.25,1.75,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10131,2,97,3,6,2,2.75,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10231,2,114,3,5.5,8.5,2.3333333333333335,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10235,2,115,3,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10254,2,117,3,6,3,2,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10269,2,118,3,6,2.5,3,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB00080,3,3,1,6,1,1,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00201,3,6,1,6,0,3,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00256,3,9,1,6,7,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00279,3,10,1,6,6.5,3,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00352,3,14,1,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00386,3,15,1,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00535,3,19,1,4,8.4,1,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00621,3,24,1,6,8.75,1,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00623,3,24,1,6,7,1,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00631,3,26,1,5,5,1.8,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00678,3,30,0,3.5,9.8,1.6666666666666667,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00708,3,30,0,2,8.75,3,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00827,3,40,1,4.6,4.8,1,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00832,3,39,0,6,0,2.6666666666666665,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00939,3,43,1,6,2.6666666666666665,2.6666666666666665,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00977,3,44,1,6,2.4,3,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB00997,3,52,1,6,2.5,2,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01045,3,48,1,5.5,9,3,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01046,3,47,1,4,8.4,1,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01102,3,50,1,3.5,4.8,3,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01121,3,50,1,6,8.75,2,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01123,3,50,1,5,3.6666666666666665,2,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01129,3,50,1,6,4.25,2,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01219,3,55,1,3.5,7.5,3,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01273,3,57,1,6,4.6,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01320,3,61,1,4,10,3,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01345,3,65,0,5,6.5,2,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01353,3,62,1,6,6,1,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01374,3,63,1,5,4.25,1.5,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01416,3,65,1,4,3.5,3,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01428,3,71,1,6,1,3,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01470,3,67,1,6,1,1,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01487,3,68,1,6,2.5,3,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01531,3,70,1,6,10,2,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01551,3,74,1,6,2.6666666666666665,1.6666666666666667,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01559,3,73,0,6,3.6666666666666665,2.75,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01585,3,75,1,6,3,1.6666666666666667,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01599,3,80,1,6,3,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,3,78,1,2,7.333333333333333,1,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001616,3,79,1,6,0,1,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001624,3,79,1,5,7.333333333333333,1,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB01642,3,81,1,6,4.25,1,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB01667,3,81,1,3.5,7.75,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01696,3,88,1,6,1,2.6666666666666665,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01728,3,89,1,6,0,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01739,3,87,1,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01752,3,92,1,6,0,1,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01861,3,95,1,4.6,3.6666666666666665,3,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01875,3,98,1,6,7.75,1,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01911,3,102,1,6,0.2,3,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01939,3,106,1,6,6.5,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB02001,3,90,1,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02014,3,94,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02030,3,95,1,6,6,3,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02055,3,98,1,6,5.6,3,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02063,3,99,1,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02083,3,108,1,6,1.3333333333333333,2,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02085,3,101,1,2,9.8,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02090,3,103,1,6,7.333333333333333,1.75,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02094,3,104,1,6,7.75,1,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02139,3,115,1,6,2,1,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02170,3,121,1,6,4.333333333333333,1.6666666666666667,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02187,3,124,1,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB02197,3,127,1,6,2,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02201,3,110,1,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB02203,3,115,1,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03003,3,113,1,6,2,1,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03026,3,116,1,6,4,2.6,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03044,3,119,1,6,1,3,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03051,3,118,1,6,7,2.5,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03113,3,127,1,6,5.6,1,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB03133,3,128,1,6,6,3,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB04016,3,128,1,6,3.5,3,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05032,3,121,1,4,7.333333333333333,1,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05045,3,123,1,6,7.5,3,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB06011,3,130,1,6,6.6,3,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10039,3,77,1,6,2.6666666666666665,2,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB010046,3,79,1,6,0,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10060,3,83,1,6,6,2.6666666666666665,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10080,3,85,1,6,6.6,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10110,3,92,1,4.6,4.6,2,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10113,3,94,1,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10126,3,96,1,4.6,6,1.75,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10127,3,97,1,6,7,2,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10176,3,110,1,6,2.5,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10179,3,110,1,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10195,3,114,1,6,7.75,1,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10198,3,115,1,3.5,8.4,1,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10238,3,120,1,6,5,3,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10254,3,118,1,6,4.333333333333333,2.75,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10277,3,119,1,6,7.333333333333333,1,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10372,3,129,1,6,2,1,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00135,3,4,2,6,1.75,2,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00136,3,4,2,6,4,1,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00428,3,16,2,6,7,3,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00462,3,17,2,2.5,3,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00482,3,18,2,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00573,3,22,2,6,3,3,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00595,3,23,2,6,6,3,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00661,3,28,2,6,1.75,3,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00844,3,39,2,5.4,7.5,3,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00850,3,40,2,6,7.5,2.75,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00887,3,41,2,4,2,2,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00928,3,42,2,4,8.5,2.25,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00933,3,43,2,6,6.25,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00937,3,42,2,6,7.5,2.75,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00980,3,44,2,6,0.75,2,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB01076,3,49,2,6,2.6666666666666665,1.3333333333333333,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01099,3,51,2,2.5,3.25,2,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01135,3,51,2,6,2,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01195,3,54,2,6,7,1.25,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01203,3,54,2,6,6.25,2,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01222,3,54,2,6,3,3,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01235,3,56,2,6,4,2.25,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01399,3,64,2,6,0.75,2,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01469,3,68,2,6,6,2.25,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01507,3,69,2,6,6,1.5,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01533,3,70,2,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01563,3,82,2,2.5,1.75,3,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01587,3,76,2,2,8,1,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB001628,3,79,2,6,4,2.5,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB001645,3,79,2,5.5,1.5,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01654,3,82,2,6,2,3,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01665,3,81,2,6,9.5,1.5,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01682,3,85,2,6,4,3,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,3,85,2,5.4,3.8,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01714,3,88,2,6,4.25,1,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01809,3,89,2,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01829,3,93,2,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01949,3,106,2,6,0,1.5,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01983,3,103,2,6,4,2,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB01989,3,110,2,6,4.333333333333333,3,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,3,110,2,5.5,5,2,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02024,3,94,2,6,4.25,1.5,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02049,3,98,2,5,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02093,3,105,2,4,3.5,2.3333333333333335,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02109,3,107,2,5.4,0.75,2.75,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB03037,3,117,2,6,8.5,3,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03070,3,121,2,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03118,3,127,2,6,1.5,1.25,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB04003,3,118,2,6,1,3,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB05020,3,123,2,5.5,0,3,2,4,10,69,2,2,6,1,none,white,college,4
+ASB05033,3,121,2,6,0.6666666666666666,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB10017,3,75,2,6,1.5,3,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10079,3,86,2,4,3,3,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10094,3,88,2,4,7,1.25,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,3,88,2,6,4,1,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10131,3,98,2,6,2,2.75,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10142,3,99,2,6,5.6,3,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10151,3,102,2,6,2.4,2.75,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10178,3,110,2,6,3,3,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10224,3,115,2,6,4.8,2,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10231,3,115,2,6,8,2.5,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10235,3,116,2,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10265,3,118,2,6,1.3333333333333333,3,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10266,3,118,2,6,6.5,1.2,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10297,3,122,2,6,1,3,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10328,3,124,2,6,7,2.5,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB10342,3,127,2,6,1.5,1.25,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB00188,3,6,3,5,4.25,1,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00334,3,13,3,6,1,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00340,3,13,3,4,0.25,1,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00488,3,19,3,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00495,3,18,3,6,4.25,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00519,3,20,3,6,6,2.6666666666666665,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00532,3,20,3,6,3.3333333333333335,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00640,3,26,3,5.33333333333333,5.4,3,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00711,3,32,3,6,3,2.3333333333333335,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00766,3,35,3,2,0.25,1,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00780,3,35,3,6,10,1,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00833,3,40,3,4,3,1,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB01061,3,48,3,6,0.25,1,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01192,3,53,3,6,10,2,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01347,3,62,3,5,4.25,3,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01369,3,64,3,4,3,1,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01427,3,65,3,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01434,3,66,3,6,0,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01492,3,68,3,2,1,1,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01501,3,69,3,5.5,6.333333333333333,1,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01534,3,70,3,6,1,1,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB01593,3,76,3,6,1,1,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB001610,3,79,3,5,3,3,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB01653,3,79,3,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01742,3,90,3,6,5,3,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01744,3,90,3,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01745,3,86,3,6,2.5,1,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01943,3,106,3,6,3.8,1,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB02009,3,91,3,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02010,3,92,3,6,2,1.6,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02162,3,119,3,5.5,1,2.4,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02179,3,122,3,6,0.25,1,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB03013,3,114,3,6,6,1.6666666666666667,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03059,3,122,3,6,2.2,1,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03082,3,123,3,6,3,1.5,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03099,3,124,3,6,3,1.75,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB06007,3,130,3,6,1,1.25,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06010,3,130,3,4,1,1,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB10012,3,74,3,6,2.2,2.4,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10014,3,75,3,6,0.25,3,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10044,3,81,3,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB10078,3,85,3,5.33333333333333,7,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10092,3,88,3,6,0,3,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10120,3,95,3,6,3,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10257,3,119,3,6,8.5,2,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10262,3,120,3,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10269,3,119,3,6,1,1.6666666666666667,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10326,3,124,3,6,6,2,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB00256,4,10,1,6,7,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00279,4,11,1,6,6.666666666666667,2,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00340,4,14,1,3,2,1,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00352,4,15,1,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00386,4,16,1,6,2,1.5,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00535,4,20,1,5,8,1.5,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00573,4,23,1,5,3,3,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00621,4,25,1,6,8,2.6666666666666665,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00631,4,27,1,3.5,3.5,1.8,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00640,4,27,1,5,4.25,2.75,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00766,4,36,1,5,0,1,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00780,4,36,1,4.5,8.75,3,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00832,4,40,0,6,0,2.6666666666666665,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00833,4,41,1,6,0.75,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00937,4,43,1,6,7.5,3,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00939,4,44,1,5,2,1.8,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00997,4,53,1,6,4.5,1.5,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01045,4,49,1,6,8,2.5,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01076,4,50,1,6,3,2.75,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01121,4,51,1,6,8.75,1,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01123,4,51,1,6,5.25,2.25,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01135,4,52,1,5.4,0,2,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01195,4,55,1,5.4,5.25,1,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01235,4,57,1,6,4,2.25,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01345,4,66,1,5.4,6.2,1,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01369,4,65,1,5,0.75,1,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01374,4,64,1,5.4,3.5,2,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01416,4,66,1,6,2,1.5,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01427,4,66,1,5,0,2,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01428,4,72,1,6,1,3,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01434,4,67,1,6,0,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01469,4,69,1,5.75,7.333333333333333,2,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01501,4,70,1,6,1.25,3,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01507,4,70,1,4.5,6.2,1,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01533,4,71,1,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01559,4,74,1,6,3.6666666666666665,2.75,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01599,4,81,1,6,3,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,4,79,1,4.5,3,1,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001610,4,80,1,6,1,3,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001624,4,80,1,5.75,8,1.5,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB01642,4,82,1,6,4.25,1,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB01665,4,82,1,5,8,1,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01667,4,82,1,6,3,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01686,4,86,1,5.8,4,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01728,4,90,1,6,5,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01739,4,88,1,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01742,4,91,1,6,5,3,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01744,4,91,1,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01809,4,90,1,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01861,4,96,1,5,4.25,2,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01875,4,99,1,6,6.2,2.25,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01939,4,107,1,5.75,7,2,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01989,4,111,1,5,8.75,2,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,4,111,1,5.75,3.5,2,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02001,4,91,1,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02009,4,92,1,5.4,0,1.6666666666666667,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02014,4,95,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02024,4,95,1,6,2.5,2,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02083,4,109,1,6,1.3333333333333333,2,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02090,4,104,1,6,7.333333333333333,2.5,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02093,4,106,1,5.75,0,2.5,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02170,4,122,1,5.75,7.333333333333333,1,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02179,4,123,1,6,0,1,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02187,4,125,1,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB03026,4,117,1,6,3.5,1,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03044,4,120,0,6,0,3,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03070,4,122,1,6,8,1.5,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03113,4,128,1,6,6.2,1.8,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB05020,4,124,1,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB05032,4,122,1,5.4,4.8,1.8,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB06007,4,131,1,5,0,2.75,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB010046,4,80,1,6,1,2.6666666666666665,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10079,4,87,1,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10094,4,89,1,4.5,4.6,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,4,89,1,5,7,1.6666666666666667,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10110,4,93,1,6,4.5,1,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10113,4,95,0,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10126,4,97,1,4.5,5.25,1.8,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10127,4,98,1,6,8,2,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10131,4,99,1,6,2,2.75,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10178,4,111,1,6,4,2.75,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10195,4,115,1,5,8,1,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10224,4,116,1,6,4.8,2,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10262,4,121,1,5,4.25,1.8,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10277,4,120,1,6,8,1,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10342,4,128,1,5,0,1,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB00532,4,21,2,6,3.3333333333333335,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00595,4,24,2,6,5,2.3333333333333335,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00711,4,33,2,4.66666666666666,5,3,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00850,4,41,2,6,4.6,3,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00933,4,44,2,6,6.25,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00980,4,45,2,4.66666666666666,3,3,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB01046,4,48,2,6,9,3,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01061,4,49,2,6,0.25,3,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01099,4,52,2,6,8.333333333333334,3,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01129,4,51,2,4.66666666666666,3.3333333333333335,1,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01192,4,54,2,6,10,2,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01222,4,55,2,6,3,3,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01273,4,58,2,6,4.6,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01320,4,62,2,6,10,3,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01353,4,63,2,6,4,3,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01399,4,65,2,6,2,3,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01470,4,68,2,6,3,2.75,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01487,4,69,2,6,2,1.75,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01492,4,69,2,3,6.666666666666667,1.3333333333333333,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01531,4,71,2,6,7.5,2,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01534,4,71,2,6,4.5,3,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB01563,4,83,2,4.66666666666666,5,1,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01585,4,76,2,5,8,3,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01587,4,77,2,6,5,2.25,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB001628,4,80,2,6,4.75,2.75,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB001645,4,80,2,6,0,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01654,4,83,2,6,1,3,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01682,4,86,2,6,4,3,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01696,4,89,2,6,2,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01745,4,87,2,6,2.5,3,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01752,4,93,2,6,0,1.5,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01829,4,94,2,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01911,4,103,2,6,1,1.5,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01949,4,107,2,6,0,1.5,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB02010,4,93,2,6,2.4,2,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02049,4,99,2,5.66666666666666,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02055,4,99,2,6,5.6,2,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02063,4,100,2,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02094,4,105,2,6,7.5,3,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02109,4,108,2,6,0,3,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02139,4,116,2,6,4.5,3,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02162,4,120,2,6,3,2,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02197,4,128,2,6,2,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02201,4,111,2,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB03003,4,114,2,6,2,1,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03013,4,115,2,6,5,3,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03059,4,123,2,6,4.5,1.3333333333333333,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03082,4,124,2,6,3,1.5,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03099,4,125,2,6,4.75,1.75,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03118,4,128,2,6,1.5,3,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB03133,4,129,2,6,2,1.5,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB04003,4,119,2,6,0,3,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB04016,4,129,2,6,5,2,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05033,4,122,2,6,1,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB05045,4,124,2,6,5.75,1.6666666666666667,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB06011,4,131,2,6,6,2,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10012,4,75,2,6,2,2.75,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10014,4,76,2,4.66666666666666,2,1.5,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10039,4,78,2,6,2.6666666666666665,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10060,4,84,2,6,1,2,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10092,4,89,2,6,0.75,1,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10120,4,96,2,6,3,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10142,4,100,2,6,6.5,2.75,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10151,4,103,2,6,2.2,2,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10176,4,111,2,6,5,2.6666666666666665,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10179,4,111,2,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10198,4,116,2,6,10,3,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10231,4,116,2,6,7,1.5,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10235,4,117,2,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10238,4,121,2,6,5,2,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10254,4,119,2,6,3,2,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10266,4,119,2,6,6,1.5,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10269,4,120,2,4,5.75,1.5,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10297,4,123,2,6,2.4,2.6,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10326,4,125,2,6,6,2,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB10328,4,125,2,6,7,2.5,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB00080,4,4,3,3,6,1.75,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00135,4,5,3,6,0,3,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00136,4,5,3,6,4,1,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00188,4,7,3,3,5.25,1.75,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00201,4,7,3,6,0,3,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00334,4,14,3,6,1,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00428,4,17,3,6,4,3,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00462,4,18,3,6,6,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00482,4,19,3,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00488,4,20,3,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00495,4,19,3,6,4.25,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00519,4,21,3,6,6,2.6666666666666665,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00623,4,25,3,6,0.5,3,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00661,4,29,3,6,2.8,1.75,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00678,4,31,3,6,6,2,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00708,4,31,3,6,8.333333333333334,2.5,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00827,4,41,3,3.66666666666666,6.75,2,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00844,4,40,3,6,7,3,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00887,4,42,3,4,10,3,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00928,4,43,3,5.19999999999999,5.6,3,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00977,4,45,3,6,2.3333333333333335,2,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB01102,4,51,3,5,7,2,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01203,4,55,3,4,5.75,2,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01219,4,56,3,4.5,8,3,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01347,4,63,3,6,4,3,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01551,4,75,3,5,3.25,2,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01593,4,77,3,5,6,2,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB001616,4,80,3,5,0,1,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB01653,4,80,3,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01714,4,89,3,5.6,5,1,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01943,4,107,3,6,3.25,1,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01983,4,104,3,6,6,2,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB02030,4,96,3,6,7,2.4,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02085,4,102,3,3.66666666666666,8.666666666666666,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02203,4,116,3,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03037,4,118,3,6,7,3,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03051,4,119,3,6,7,2,1,2,8,59,1,2,5,1,none,black,college,1
+ASB06010,4,131,3,5,6,1.75,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB10017,4,76,3,6,3.4,2,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10044,4,82,3,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB10078,4,86,3,6,6,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10080,4,86,3,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10257,4,120,3,6,1,2,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10265,4,119,3,6,4,2,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10372,4,130,3,6,0.5,1.75,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00080,5,5,1,3,6,1.75,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00136,5,6,1,6,0,1.3333333333333333,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00201,5,8,1,6,0,2,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00256,5,11,1,6,7.75,3,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00352,5,16,1,6,4,1.75,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00386,5,17,1,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00462,5,19,1,6,10,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00482,5,20,1,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00488,5,21,1,6,6.75,2.6666666666666665,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00621,5,26,1,6,7.75,3,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00631,5,28,1,3.75,4.75,1.8,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00661,5,30,0,6,1,1,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00678,5,32,1,6,7.2,2.5,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00711,5,34,1,5.5,4.25,2.5,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00827,5,42,1,5.5,8.333333333333334,1.5,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00832,5,41,0,6,0,2.6666666666666665,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00844,5,41,1,6,8.5,3,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00928,5,44,1,4.25,7.75,3,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00977,5,46,1,6,3,2,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB01046,5,49,1,6,8.5,1,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01061,5,50,1,6,0.25,2.6666666666666665,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01076,5,51,1,6,2.3333333333333335,3,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01099,5,53,1,6,8.333333333333334,2.6666666666666665,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01135,5,53,1,6,1,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01192,5,55,1,6,10,2,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01195,5,56,1,6,7,1.25,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01203,5,56,1,6,6.25,2,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01235,5,58,1,6,4,2.25,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01273,5,59,1,6,9.25,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01345,5,67,1,5,6.75,2,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01347,5,64,1,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01353,5,64,1,6,8.333333333333334,3,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01399,5,66,1,6,5.75,2,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01416,5,67,1,6,1.3333333333333333,1,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01501,5,71,1,6,5,2.5,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01507,5,71,1,5.5,4,2,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01531,5,72,1,6,8.333333333333334,1.8,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01533,5,72,1,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01559,5,75,1,5,6.25,3,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01563,5,84,1,6,4,1,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01587,5,78,1,5.5,4,2.6666666666666665,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01593,5,78,1,6,6.25,2,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB01599,5,82,1,6,3,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,5,80,1,6,2.75,3,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001616,5,81,1,6,1,2,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB01654,5,84,1,6,3,2,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01665,5,83,1,5.33333333333333,6.75,2,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01752,5,94,1,6,0,2,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01861,5,97,1,6,4,2.5,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01939,5,108,1,6,7.75,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01949,5,108,1,6,1,2.25,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01983,5,105,1,6,6,1.75,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB01991,5,112,1,6,0,2,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02001,5,92,1,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02014,5,96,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02055,5,100,1,6,5.75,1.3333333333333333,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02083,5,110,1,6,1.3333333333333333,2,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02090,5,107,1,6,7.333333333333333,2.5,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02162,5,121,1,6,0,3,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02170,5,123,1,6,6,2,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02179,5,124,1,6,3,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02187,5,126,1,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB02197,5,129,1,6,2,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB03003,5,115,1,6,2,1,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03044,5,121,1,6,1,2.6666666666666665,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03051,5,120,1,6,7,2.6666666666666665,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03082,5,125,1,6,3,1.5,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03099,5,126,1,6,2.75,1.6666666666666667,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03113,5,129,1,6,4,2,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB05020,5,125,1,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB05032,5,123,1,4,3,2.6666666666666665,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05033,5,123,1,6,0,2.5,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB10012,5,76,1,6,2.3333333333333335,1.5,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10017,5,77,1,6,2.6,2,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB010046,5,81,1,6,3,2,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10060,5,85,1,6,1,2,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10079,5,88,1,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10080,5,87,1,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10094,5,90,1,6,3,1.3333333333333333,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10113,5,96,1,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10120,5,97,1,6,1.5,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10126,5,98,1,5.33333333333333,4,2,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10131,5,100,1,5.33333333333333,2.3333333333333335,2.5,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10151,5,104,1,6,2.2,2,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10224,5,117,1,6,4.8,2,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10235,5,118,1,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10238,5,122,1,6,4,1.6666666666666667,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10265,5,120,1,6,2.3333333333333335,1.5,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10266,5,120,1,6,6,1.5,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10297,5,124,1,6,1.5,2,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10328,5,126,1,4,4.25,2,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB10342,5,129,1,6,0,2,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB10372,5,131,1,6,0,3,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00340,5,15,2,4.5,5.5,3,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00495,5,20,2,6,4.25,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00623,5,26,2,6,0,1.6666666666666667,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00640,5,28,2,6,8.25,3,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00708,5,32,2,6,8.333333333333334,2.5,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00766,5,37,2,5,1,3,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00850,5,42,2,5.5,1,3,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00937,5,44,2,6,7.5,3,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00980,5,46,2,4.5,8.25,3,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB00997,5,54,2,6,6.666666666666667,3,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01102,5,52,2,6,0.6,1.6666666666666667,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01219,5,57,2,3.5,8.25,3,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01222,5,56,2,6,3,3,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01320,5,63,2,6,7.5,3,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01374,5,65,2,6,4.25,3,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01427,5,67,2,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01469,5,70,2,6,7,3,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01470,5,69,2,6,4,3,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01487,5,70,2,6,4,3,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01492,5,70,2,4.5,8.2,3,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01534,5,72,2,6,1,3,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB001610,5,81,2,6,2.6666666666666665,3,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001628,5,81,2,6,5.75,3,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB01642,5,83,2,6,4.25,3,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB001645,5,81,2,6,2.5,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01653,5,81,2,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01667,5,83,2,6,3,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01696,5,90,2,6,5.5,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01742,5,92,2,6,5,3,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01744,5,92,2,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01809,5,91,2,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01829,5,95,2,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01911,5,104,2,6,1,3,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01943,5,108,2,6,5.75,3,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01989,5,112,2,6,3,3,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB02009,5,93,2,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02030,5,97,2,6,7,2.4,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02049,5,100,2,6,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02063,5,101,2,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02085,5,103,2,5.5,8.2,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02093,5,107,2,4.5,4.333333333333333,1.75,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02201,5,112,2,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB03026,5,118,2,6,4,3,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03070,5,123,2,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03118,5,129,2,4.5,4,3,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB04016,5,130,2,6,5.4,3,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05045,5,125,2,6,5.75,1.6666666666666667,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB10039,5,79,2,6,2.6666666666666665,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10044,5,83,2,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB10078,5,87,2,6,5.5,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10096,5,90,2,6,4,1,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10110,5,94,2,6,0.6,3,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10176,5,112,2,6,5.5,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10178,5,112,2,6,5.5,3,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10195,5,116,2,5,9,1.6666666666666667,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10198,5,117,2,6,8.2,3,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10231,5,117,2,4.5,10,2,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10257,5,121,2,6,1,3,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10262,5,122,2,6,6.666666666666667,3,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB00135,5,6,3,5.5,6.333333333333333,1,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00188,5,8,3,5,0,3,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00279,5,12,3,6,2.5,3,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00334,5,15,3,6,1,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00428,5,18,3,6,8.5,1.4,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00519,5,22,3,6,6,2.6666666666666665,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00532,5,22,3,6,3.3333333333333335,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00535,5,21,3,5,8,1.5,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00573,5,24,3,6,1,3,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00595,5,25,3,6,5.333333333333333,2.3333333333333335,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00780,5,37,3,4,7.333333333333333,1,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00833,5,42,3,6,3,1.6666666666666667,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00887,5,43,3,4,10,1.25,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00933,5,45,3,6,7.333333333333333,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00939,5,45,3,6,2.2,2,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB01045,5,50,3,6,8.75,1,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01121,5,52,3,6,8.75,3,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01123,5,52,3,5,4.75,1,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01129,5,52,3,5,2,1,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01369,5,66,3,5,0,1,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01428,5,74,3,6,2,1,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01434,5,68,3,6,0,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01551,5,76,3,4,4,1.25,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01585,5,77,3,3.5,8.5,1.25,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB001624,5,81,3,5.5,7.333333333333333,2.6666666666666665,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB01682,5,87,3,6,4,1.4,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,5,87,3,6,3.4,1.5,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01714,5,90,3,6,3.6,2.75,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01728,5,91,3,5,8,1.25,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01739,5,89,3,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01745,5,88,3,6,2.5,3,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01875,5,100,3,4,8.75,1,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB02010,5,94,3,6,3,1.4,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02024,5,96,3,3.5,8,1.4,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02094,5,106,3,6,8,1.4,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02109,5,109,3,6,9.5,1,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02139,5,117,3,6,4.5,3,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02203,5,117,3,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03013,5,116,3,6,5,1.25,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03037,5,119,3,6,9.5,3,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03059,5,124,3,5,8,1,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03133,5,130,3,6,4,2,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB04003,5,120,3,6,0,3,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB06007,5,132,3,6,1,1.25,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06010,5,132,3,6,6.5,1.75,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB06011,5,132,3,5,4.666666666666667,1,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10014,5,77,3,6,0,1,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10092,5,90,3,6,0,1.25,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10127,5,99,3,5,8,3,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10142,5,101,3,6,5,3,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10179,5,112,3,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10254,5,120,3,6,3,2,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10269,5,121,3,6,1,1.6666666666666667,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10277,5,121,3,5,4.666666666666667,3,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10326,5,126,3,6,6.333333333333333,1.4,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB00080,6,6,1,4,6.333333333333333,3,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00136,6,7,1,6,0,1.4,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00201,6,9,1,6,0,2.6666666666666665,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00334,6,16,1,5,1,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00340,6,16,1,6,5,3,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00386,6,18,1,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00462,6,20,1,6,3,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00482,6,21,1,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00519,6,23,1,6,4.6,2.6666666666666665,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00535,6,22,1,5,7.5,1,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00661,6,31,1,6,1,1.75,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00780,6,38,1,4.4,8,2,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00832,6,42,0,6,0,2.6666666666666665,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00833,6,43,1,4,3,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00850,6,43,1,5.25,1,2,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00928,6,45,1,5.25,5.75,3,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00980,6,47,1,6,7.5,3,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB00997,6,55,1,6,0,3,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01076,6,52,1,6,4.25,3,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01099,6,54,1,5.66666666666666,5,3,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01123,6,53,1,5.66666666666666,4.25,1.25,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01195,6,57,1,6,7,1.25,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01219,6,58,1,3.5,8,2.4,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01222,6,57,1,6,3,3,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01273,6,60,1,6,7.5,2,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01320,6,64,1,6,5.4,1.4,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01345,6,68,0,6,7.5,2,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01347,6,65,1,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01428,6,75,1,5,1,2.5,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01507,6,72,1,6,6,1.5,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01534,6,73,1,6,1,1,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB01559,6,76,1,6,8,2.4,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01563,6,85,1,6,0,1.25,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01599,6,83,1,6,3,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,6,81,1,5.25,0,3,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001628,6,82,1,6,5,3,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB001645,6,82,1,3.5,1,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01654,6,85,1,6,3,2.6666666666666665,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01686,6,88,1,6,2,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01696,6,91,1,6,4.333333333333333,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01714,6,91,1,6,3,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01739,6,90,1,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01742,6,93,1,6,6.75,2,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01744,6,93,1,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01745,6,89,1,6,4,2,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01809,6,92,1,6,5,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01875,6,101,1,5,8,2,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01939,6,109,1,6,7.75,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01943,6,109,1,6,3.75,1.6666666666666667,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01949,6,109,1,5.25,2,3,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01983,6,106,1,6,6,2,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB01989,6,113,1,6,3,1.25,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,6,113,1,6,0,2.4,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02009,6,94,1,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02010,6,95,1,6,3,1.4,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02014,6,97,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02024,6,97,1,5,7.5,1.4,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02063,6,102,1,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02083,6,65,1,6,0,2,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02085,6,104,1,3.5,8,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02090,6,108,1,4,6.333333333333333,3,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02162,6,122,1,6,0,3,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02170,6,124,1,6,4.333333333333333,2,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02187,6,127,1,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB02197,6,130,1,6,3,2.6666666666666665,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB03003,6,116,1,5.66666666666666,0,2,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03044,6,125,1,6,1,3,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03113,6,130,1,6,4.333333333333333,2,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB03118,6,130,1,5,5,3,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB04003,6,121,1,6,0,3,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB05020,6,126,1,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB05032,6,124,1,4.4,6,3,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05033,6,124,1,3.5,3,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB05045,6,126,1,6,6.666666666666667,1.5,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB06007,6,133,1,4,4.333333333333333,1,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06010,6,133,1,5.66666666666666,6.666666666666667,1.75,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB10012,6,77,1,6,1,2,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10039,6,80,1,6,2.6666666666666665,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10079,6,89,1,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10096,6,91,1,5.25,6,1,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10110,6,95,1,6,0.6,3,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10113,6,97,1,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10126,6,99,1,5.25,4,2,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10142,6,102,1,6,5,3,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10224,6,120,0,6,4.8,2,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10235,6,119,1,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10257,6,80,1,6,0,2.6666666666666665,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10265,6,121,1,6,4,2,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10266,6,121,1,6,5.5,1.5,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10277,6,122,1,6,7.5,2,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10342,6,130,1,6,0,2,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB10372,6,132,1,5,2.75,3,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00188,6,9,2,6,1,1,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00352,6,17,2,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00428,6,19,2,6,0,1,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00495,6,21,2,6,0.75,2,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00573,6,25,2,6,2.5,1,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00595,6,26,2,6,4.5,1,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00631,6,29,2,3.66666666666666,4.666666666666667,1,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00640,6,29,2,6,7.333333333333333,1.75,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00678,6,33,2,6,5,2.3333333333333335,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00711,6,35,2,6,3,2.3333333333333335,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00766,6,38,2,6,4.666666666666667,3,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00827,6,43,2,6,5,2.3333333333333335,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00887,6,44,2,4,10,3,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00933,6,46,2,6,6,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00937,6,45,2,6,7.5,1.5,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00939,6,46,2,6,3.8,2,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00977,6,47,2,6,3,2,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB01045,6,51,2,6,3,1,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01046,6,50,2,6,9,1,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01061,6,51,2,6,0.25,2.3333333333333335,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01102,6,53,2,6,0,1,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01129,6,53,2,6,1,1,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01135,6,54,2,6,2,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01192,6,56,2,6,10,2,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01353,6,65,2,6,7.5,3,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01369,6,67,2,5,0,2.3333333333333335,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01399,6,67,2,6,7.333333333333333,2,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01416,6,68,2,6,1.3333333333333333,1,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01427,6,68,2,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01434,6,69,2,6,0,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01470,6,70,2,6,4.666666666666667,2,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01501,6,72,2,6,5.25,1,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01531,6,73,2,6,10,2,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01551,6,77,2,5.5,6.5,2.5,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01585,6,78,2,5.5,10,3,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01587,6,79,2,6,5,2.25,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01593,6,79,2,6,6,1.8,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB001610,6,82,2,5.33333333333333,6,2.6,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001616,6,82,2,6,3,3,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001624,6,82,2,5.8,10,3,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB01682,6,88,2,6,4,2,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01728,6,92,2,5.33333333333333,7.2,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01752,6,95,2,6,0,1,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01829,6,96,2,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01861,6,98,2,6,5,3,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01911,6,105,2,6,1,3,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB02030,6,98,2,6,7,2.4,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02093,6,108,2,5,3,1.75,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02094,6,107,2,6,7,2,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02139,6,118,2,6,4.5,2,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02179,6,125,2,6,3,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02201,6,113,2,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB03026,6,119,2,6,4,2,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03051,6,121,2,6,7,2,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03059,6,125,2,6,0,3,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03070,6,124,2,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03099,6,127,2,6,3,3,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03133,6,131,2,6,0,2,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB06011,6,133,2,6,0.75,3,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10014,6,78,2,6,0.25,1,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10017,6,78,2,6,2.6666666666666665,3,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10044,6,84,2,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB10060,6,86,2,6,1,2,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10078,6,88,2,6,7.333333333333333,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10080,6,88,2,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10094,6,91,2,6,3,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10120,6,98,2,6,3,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10127,6,100,2,5,8.5,3,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10178,6,113,2,4,5.5,3,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10179,6,113,2,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10195,6,117,2,6,7.333333333333333,1.5,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10198,6,118,2,6,5,1.8,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10231,6,118,2,4,9,3,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10269,6,122,2,6,0.75,2.5,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10297,6,125,2,6,3,3,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10326,6,127,2,6,6,2,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB00135,6,7,3,6,7,2.75,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00256,6,12,3,6,7.5,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00279,6,13,3,6,6.5,3,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00488,6,22,3,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00532,6,23,3,6,3.3333333333333335,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00621,6,27,3,6,7,3,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00623,6,27,3,6,0.5,3,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00708,6,33,3,6,7,1.5,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00844,6,42,3,3,7,1.3333333333333333,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB01121,6,53,3,6,7,1.3333333333333333,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01203,6,57,3,6,6.5,1.3333333333333333,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01235,6,59,3,6,4,2.25,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01374,6,66,3,6,7,1.3333333333333333,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01469,6,71,3,6,7,1.5,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01487,6,71,3,6,7,1.3333333333333333,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01492,6,71,3,6,9.2,1.3333333333333333,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01533,6,73,3,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01642,6,84,3,6,4.25,3,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB01653,6,82,3,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01665,6,84,3,6,7,1.5,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01667,6,84,3,6,3,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB02001,6,93,3,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02049,6,101,3,6,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02055,6,101,3,6,5.75,1.3333333333333333,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02109,6,110,3,6,9.2,1.5,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02203,6,118,3,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03013,6,119,3,6,5,3,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03037,6,120,3,6,9.2,2,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03082,6,126,3,6,7,2,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB04016,6,131,3,6,3.5,3,1,2,10,39,1,2,1,1,none,white,college,1
+ASB010046,6,82,3,6,7,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10092,6,91,3,6,7,1,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10131,6,101,3,6,2,2.75,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10151,6,105,3,6,2,3,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10176,6,113,3,6,2.5,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10238,6,123,3,6,7,1.3333333333333333,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10254,6,121,3,6,3,2,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10262,6,123,3,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10328,6,127,3,6,7,2.5,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB00188,7,10,1,5,1.6666666666666667,2.6666666666666665,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00334,7,17,1,5,9.25,2.6,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00340,7,17,1,6,7.75,3,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00428,7,20,1,6,6.5,1,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00535,7,23,1,4,7.2,2.5,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00595,7,27,1,4.33333333333333,10,2,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00631,7,30,0,5,0,3,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00640,7,31,1,5.2,7.2,1.5,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00661,7,32,1,6,3,2.75,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00678,7,34,0,6,0.6666666666666666,3,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00827,7,44,1,6,1.6666666666666667,3,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00832,7,114,1,5,0.75,3,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00844,7,43,1,5,6,1.5,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00850,7,44,1,4,9,2,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00933,7,47,1,5.5,6.25,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00937,7,46,1,6,7.5,3,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00980,7,48,1,5.2,7.75,2.6,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB01045,7,52,1,5.5,6.25,1,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01121,7,54,1,6,4,2,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01203,7,58,1,6,7.8,2,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01219,7,59,1,5,3,3,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01273,7,61,1,5.2,10,2,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01320,7,65,1,6,9.25,1,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01345,7,69,0,5.2,6.6,2,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01347,7,66,1,6,7.5,3,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01353,7,66,1,5,9.25,2.75,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01374,7,67,1,6,6.75,1,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01416,7,69,1,6,1.3333333333333333,1,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01428,7,76,1,6,3.6666666666666665,3,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01487,7,72,1,6,4,2,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01501,7,73,1,6,0.6666666666666666,1,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01507,7,73,1,6,6,1.5,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01531,7,74,1,6,10,2,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01533,7,74,1,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01593,7,80,1,6,5,1.5,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB01599,7,84,1,6,3,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB001610,7,83,1,5,6.25,1.5,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001624,7,83,1,6,7.8,3,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB001645,7,83,1,4,0,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01654,7,86,1,6,6.75,3,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01665,7,85,1,6,10,1,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01667,7,85,1,6,7.5,1,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01696,7,92,1,5,9,2,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01714,7,92,1,6,6,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01742,7,94,1,6,7,1.6666666666666667,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01745,7,90,1,6,2.5,3,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01829,7,97,1,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01861,7,99,1,5,4,3,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01939,7,110,1,6,7.75,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01949,7,110,1,6,0.6,3,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01991,7,114,1,6,3.6666666666666665,2,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02001,7,94,1,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02014,7,98,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02030,7,99,1,6,0.6666666666666666,2.75,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02049,7,102,1,6,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02055,7,102,1,6,5.6,3,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02083,7,126,1,6,0.6,1,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02085,7,105,1,4.33333333333333,9.25,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02090,7,109,1,4,7.8,3,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02201,7,114,1,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB03003,7,119,1,6,2,1,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03013,7,120,0,6,5,3,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03044,7,126,1,6,1,2.6666666666666665,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03059,7,126,1,6,0,2.5,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03118,7,131,1,5.2,6.6,1.5,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB03133,7,132,1,6,4,2,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB04003,7,124,1,6,0.75,2,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB05020,7,127,1,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB05032,7,125,1,4,6,2.75,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB10012,7,78,1,6,2.2,2.4,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB010046,7,83,1,6,7.5,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10079,7,90,1,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10080,7,89,1,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10094,7,92,1,6,9,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,7,92,1,5,10,1,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10110,7,96,1,6,0.6,3,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10113,7,99,0,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10120,7,99,1,6,0,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10142,7,103,1,6,6.5,2.75,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10176,7,114,1,6,2.5,2.6,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10178,7,114,1,4,2.5,1.5,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10224,7,124,1,6,4.8,2,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10235,7,120,0,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10262,7,124,1,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10265,7,124,1,6,4,2,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10266,7,124,1,6,5.5,1.5,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10269,7,123,1,6,0.75,3,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10277,7,123,1,6,10,2,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10297,7,126,1,6,3,2,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10328,7,128,1,5,1.6666666666666667,3,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB00080,7,7,2,4.5,5.5,3,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00256,7,13,2,6,8.2,3,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00279,7,14,2,6,6,3,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00386,7,19,2,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00462,7,21,2,6,2.4,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00482,7,22,2,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00495,7,22,2,6,0.6666666666666666,1,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00532,7,24,2,5,5,3,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00623,7,28,2,6,0.5,3,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00711,7,36,2,6,3,1,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00780,7,39,2,5,8.4,3,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00939,7,47,2,4.5,3.25,2.3333333333333335,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00997,7,56,2,4.5,1.8,3,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01046,7,51,2,6,8.4,1,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01099,7,55,2,5,5.4,3,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01102,7,54,2,6,4.333333333333333,3,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01135,7,55,2,6,2,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01192,7,57,2,6,10,2,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01235,7,60,2,6,4,2.25,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01369,7,68,2,6,0,2.5,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01399,7,68,2,6,6,1,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01469,7,72,2,6,8.2,3,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01492,7,72,2,4.5,7.4,1,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01534,7,74,2,6,1,1,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB01551,7,78,2,5,5,2.75,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01559,7,77,2,6,3.6666666666666665,2.75,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01563,7,86,2,5,4,3,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01642,7,85,2,6,4.25,3,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB01653,7,83,2,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01682,7,89,2,6,4,1,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,7,89,2,5.6,2,2.5,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01739,7,91,2,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01752,7,96,2,6,0,1,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01875,7,102,2,5,8,3,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01911,7,106,2,6,1,3,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01943,7,110,2,6,4.5,1.4,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01983,7,107,2,6,5.4,1,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB01989,7,114,2,6,3,3,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB02010,7,96,2,6,2.4,2,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02024,7,98,2,6,8.2,3,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02063,7,103,2,6,0.6666666666666666,1.25,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02093,7,109,2,5,4.333333333333333,2.5,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02094,7,108,2,6,5.4,1,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02109,7,111,2,4.5,8,3,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02139,7,119,2,6,4.5,1.8,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02179,7,126,2,6,3,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02187,7,128,2,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB03026,7,120,2,6,4,1,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03051,7,124,2,6,7,1,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03070,7,125,2,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03082,7,127,2,5,8.2,1,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB04016,7,132,2,5,5.4,1,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05033,7,125,2,6,0.6666666666666666,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB05045,7,127,2,6,7,1.6,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB06007,7,134,2,6,1,1.25,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06011,7,134,2,6,3,3,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10014,7,79,2,5,2.4,1.25,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10017,7,79,2,6,1.8,1.25,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10039,7,81,2,6,2.6666666666666665,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10044,7,85,2,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB10092,7,92,2,3,7.4,1,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10126,7,100,2,3,4.25,1.8,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10179,7,114,2,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10195,7,118,2,6,7.4,2,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10198,7,119,2,6,5,1.8,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10231,7,120,2,6,7,3,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10238,7,124,2,3,8.4,1,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10257,7,57,2,5,1,1.25,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10326,7,128,2,6,6,2,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB10342,7,131,2,6,1.5,1,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB10372,7,133,2,6,2,3,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00135,7,8,3,5,2.4,3,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00136,7,8,3,6,7.75,1,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00201,7,10,3,6,0,3,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00352,7,18,3,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00488,7,23,3,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00519,7,24,3,5.75,6.5,2.6666666666666665,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00573,7,26,3,6,9.5,2,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00621,7,28,3,5.5,1,2,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00708,7,34,3,6,6.75,2,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00766,7,39,3,6,0,3,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00833,7,44,3,5,4,2.3333333333333335,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00887,7,45,3,4,10,1,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00928,7,46,3,5.5,3.75,2,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00977,7,48,3,6,1,2,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB01061,7,52,3,6,4.5,3,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01076,7,53,3,6,2,2.8,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01123,7,54,3,6,5.333333333333333,2,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01129,7,54,3,6,6.5,1,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01195,7,58,3,6,5,1,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01222,7,58,3,6,3,3,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01427,7,69,3,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01434,7,70,3,6,10,2,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01470,7,71,3,5,5.333333333333333,3,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01585,7,79,3,6,2.4,2.3333333333333335,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01587,7,80,3,6,5,2.25,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB00104,7,82,3,5.75,7.75,3,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001616,7,83,3,6,0,3,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001628,7,83,3,6,0,3,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB01728,7,93,3,6,0,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01744,7,94,3,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01809,7,93,3,6,5,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB02009,7,95,3,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02162,7,123,3,6,2.5,3,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02170,7,125,3,6,4.333333333333333,1,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02197,7,131,3,6,10,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02203,7,119,3,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03037,7,121,3,4,9.5,1,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03099,7,128,3,6,2.5,2.6666666666666665,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03113,7,131,3,6,5,3,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB06010,7,134,3,6,6.75,1,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB10060,7,87,3,6,1,2,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10078,7,89,3,5.75,7.75,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10127,7,101,3,6,5,3,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10131,7,102,3,6,2,2.75,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10151,7,106,3,6,2.2,2,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10254,7,124,3,6,3,2,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB00080,8,8,1,4.8,4.2,1.5,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00256,8,14,1,6,7,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00386,8,20,1,6,0,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00462,8,22,1,6,7.2,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00573,8,27,1,4,5.5,1,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00661,8,33,1,6,4.2,1.5,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00678,8,34,1,6,5.5,1.5,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00708,8,35,1,6,4.6,3,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00780,8,40,1,6,7,1.5,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00928,8,47,1,5.4,5.6,1,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00937,8,47,1,6,7.5,1,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB01045,8,53,1,6,7.6,2,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01046,8,52,1,6,9,1,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01135,8,56,1,6,0.6666666666666666,2,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01219,8,60,1,5.5,5.5,2,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01222,8,59,1,6,4.2,2.6,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01345,8,70,1,6,7.6,2,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01353,8,67,1,5.5,6.75,1.5,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01369,8,69,1,6,0,2,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01399,8,69,1,6,4.2,3,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01428,8,77,1,6,5.6,3,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01469,8,73,1,6,6.75,3,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01470,8,72,1,6,9,3,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01487,8,73,1,6,4,3,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01533,8,75,1,6,0.6666666666666666,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01551,8,83,1,5.5,2.2,2.5,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01563,8,87,1,5.4,7.5,3,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01593,8,81,1,6,6,3,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB01599,8,85,1,6,3,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,8,83,1,4.2,7.2,2,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001610,8,84,1,6,7.6,3,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001616,8,84,1,6,0,1,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001624,8,84,1,4.8,2,1,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB001628,8,84,1,6,0,3,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB001645,8,84,1,6,7.5,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01653,8,84,1,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01665,8,86,1,6,9.5,1.5,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01739,8,92,1,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01742,8,95,1,6,6,3,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01861,8,100,1,6,6,1.6666666666666667,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01939,8,111,1,6,7,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01943,8,111,1,6,4.5,1.4,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01949,8,111,1,6,0,3,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01989,8,115,1,6,3,1,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,8,115,1,5.5,2,2,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02009,8,96,1,6,0,3,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02010,8,97,1,6,2.4,2,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02014,8,99,0,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02024,8,99,1,6,7,3,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02063,8,104,1,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02083,8,83,1,6,6,3,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02090,8,110,1,4,5.5,3,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02094,8,109,1,6,4.6,1,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02170,8,126,1,6,4.333333333333333,1.5,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02179,8,127,1,6,3,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02187,8,129,1,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB03003,8,120,0,6,2,1,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03037,8,123,0,6,9.2,2,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03044,8,127,1,6,1,2.4,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03051,8,125,0,6,7,1,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03059,8,127,1,6,0,3,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB04003,8,125,0,6,0,3,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB05032,8,126,1,4.2,6.8,2,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05033,8,126,1,6,0.6666666666666666,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB06011,8,135,1,6,0.3333333333333333,2,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10012,8,79,1,6,2.2,2.4,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB010046,8,84,1,5.5,5,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10060,8,88,1,6,1,3,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10080,8,90,1,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10094,8,93,1,5.5,6.8,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10113,8,100,1,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10127,8,102,1,6,5.6,3,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10131,8,103,1,6,3,3,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10224,8,85,1,6,6.75,3,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10235,8,121,1,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10254,8,125,0,6,3,2,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10262,8,125,0,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10265,8,125,0,6,4,2,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10266,8,125,0,6,5.5,1.5,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10269,8,124,1,6,1,1.6666666666666667,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10328,8,129,1,6,7,2.5,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB00136,8,9,2,6,4,1.25,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00279,8,15,2,6,8,2.6,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00334,8,18,2,4.75,9,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00340,8,18,2,5,6.5,3,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00482,8,23,2,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00495,8,23,2,6,4.25,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00532,8,25,2,6,3.3333333333333335,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00535,8,24,2,5,8,3,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00595,8,28,2,6,9,2,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00623,8,29,2,6,0.5,3,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00640,8,32,2,6,4.6,1.75,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00711,8,37,2,6,2.6666666666666665,1.25,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00827,8,45,2,6,5,2.3333333333333335,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00832,8,132,2,5,0,1.25,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00939,8,48,2,6,2.2,1.25,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00977,8,49,2,6,1,2,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB00997,8,54,2,5,0,1.75,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01061,8,53,2,6,0.25,2.5,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01076,8,54,2,6,5.75,3,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01099,8,56,2,5,6.666666666666667,1.25,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01102,8,55,2,6,5.25,3,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01121,8,55,2,6,4.5,3,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01123,8,55,2,5.75,6.5,2.4,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01129,8,55,2,5,4.6,2,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01192,8,58,2,6,10,1.2,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01195,8,59,2,6,7,1.25,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01203,8,59,2,6,6.25,2,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01235,8,61,2,6,9,1.6666666666666667,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01273,8,62,2,6,4.6,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01320,8,66,2,6,6.666666666666667,1.25,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01374,8,68,2,6,7,1.25,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01427,8,70,2,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01434,8,71,2,6,0,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01492,8,73,2,6,6.5,1,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01501,8,74,2,6,5.25,1.25,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01531,8,75,2,5,6.666666666666667,1.25,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01587,8,81,2,6,5,2.25,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01654,8,87,2,6,8.2,3,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01682,8,90,2,6,4,1.3333333333333333,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,8,90,2,5.8,2,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01728,8,94,2,6,6,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01744,8,95,2,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01745,8,91,2,6,2.5,2.25,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01752,8,97,2,6,5.75,1.25,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01809,8,94,2,6,5.333333333333333,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01829,8,98,2,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01875,8,103,2,4.75,8,3,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB02001,8,95,2,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02030,8,100,2,6,7,2.4,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02049,8,103,2,5.66666666666666,6.666666666666667,3,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02055,8,103,2,6,5.75,1.3333333333333333,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02093,8,110,2,5,3,2,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02109,8,112,2,5,9,1.25,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02139,8,29,2,5,5.25,3,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02201,8,115,2,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB03026,8,124,2,4.25,5.8,3,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03082,8,128,2,5,2.5,2,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03099,8,129,2,6,2.5,2.6666666666666665,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03113,8,132,2,6,2.6,3,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB05020,8,128,2,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB06007,8,135,2,6,1,1.25,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06010,8,135,2,6,6.5,2.2,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB10017,8,80,2,6,1.75,3,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10039,8,82,2,6,2.6666666666666665,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10044,8,86,2,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB10110,8,97,2,6,0.6,3,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10120,8,100,2,6,3,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10126,8,101,2,4.75,0,1,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10142,8,104,2,6,6.666666666666667,3,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10151,8,107,2,6,2.2,2,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10176,8,115,2,6,2.5,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10178,8,115,2,5,3,1.75,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10179,8,115,2,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10195,8,119,2,6,8.2,1.75,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10198,8,120,2,6,5,1.8,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10231,8,115,2,6,5.75,3,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10238,8,125,2,6,5,1,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10257,8,115,2,5,4,1,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10277,8,124,2,6,6.666666666666667,3,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10326,8,129,2,6,8.2,1,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB10342,8,132,2,6,3.3333333333333335,3,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB10372,8,134,2,6,2,3,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00135,8,9,3,6,8.666666666666666,3,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00188,8,11,3,5,4.5,3,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00201,8,11,3,4.66666666666666,8,3,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00352,8,19,3,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00428,8,21,3,6,8,3,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00488,8,24,3,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00519,8,25,3,5.75,7.25,3,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00621,8,29,3,6,5.4,3,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00631,8,31,3,4.66666666666666,2,3,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00766,8,40,3,4.66666666666666,2.4,2.4,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00833,8,45,3,6,0.75,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00844,8,44,3,6,8.666666666666666,3,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00850,8,45,3,6,3.5,2.6666666666666665,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00887,8,46,3,4,10,1,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00933,8,48,3,6,6,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00980,8,49,3,6,6,3,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB01347,8,67,3,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01416,8,70,3,6,1.3333333333333333,1,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01507,8,74,3,6,3.5,1,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01534,8,75,3,3.33333333333333,10,3,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB01559,8,78,3,6,3.6666666666666665,2.75,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01585,8,80,3,3.33333333333333,8,1.6666666666666667,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01642,8,86,3,6,4.25,1,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB01667,8,86,3,6,3,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01696,8,80,3,6,8.666666666666666,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01714,8,93,3,6,2.6,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01911,8,107,3,6,1,3,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01983,8,108,3,6,0.75,1,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB02085,8,106,3,5,8.666666666666666,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02162,8,124,3,5,1,1.6666666666666667,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02197,8,132,3,6,2,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02203,8,120,3,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03013,8,121,3,6,5,1.5,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03070,8,126,3,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03118,8,132,3,6,0,3,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB03133,8,133,3,6,2,3,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB04016,8,133,3,6,3.5,3,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05045,8,128,3,6,5.75,1.6666666666666667,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB10014,8,80,3,6,3,3,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10078,8,90,3,6,5.6,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10079,8,91,3,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10092,8,93,3,6,8,3,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10096,8,93,3,6,8.666666666666666,3,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10297,8,127,3,4,6,3,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB00136,9,10,1,6,6.75,1.75,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00201,9,12,1,6,6,1.75,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00256,9,15,1,6,7,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00279,9,16,1,6,8,3,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00340,9,19,1,4.75,6.75,2,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00386,9,21,1,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00428,9,22,1,6,7,2.5,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00495,9,24,1,4.75,4.8,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00535,9,25,1,4,9,3,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00573,9,28,1,0,9,1.75,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00621,9,31,1,6,7.5,3,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00623,9,30,0,6,0.5,3,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00631,9,32,1,4,5.4,3,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00640,9,33,1,6,6.75,2,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00711,9,38,1,5,4.6,1,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00766,9,41,1,6,2.2,2.5,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00832,9,134,1,6,0,1.5,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00833,9,46,1,6,0.75,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00850,9,46,1,4,4.25,3,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00887,9,47,1,4,10,2.3333333333333335,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00939,9,49,1,6,2.2,1.25,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00980,9,50,1,6,7,3,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB00997,9,126,1,4,3,1.5,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01099,9,57,1,5,6.75,1,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01102,9,56,1,6,5.25,2,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01192,9,59,1,6,10,1,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01195,9,60,1,6,7,1.25,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01219,9,61,1,6,7,3,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01235,9,62,1,6,7,2.3333333333333335,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01345,9,71,1,6,8,2,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01347,9,68,1,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01399,9,70,1,6,5.4,3,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01428,9,101,1,6,6,3,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01434,9,72,1,5.8,2,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01469,9,74,1,6,6,3,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01487,9,74,1,6,4.8,3,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01501,9,75,1,5,7.2,2,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01507,9,75,1,6,4.6,1,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01531,9,76,1,4.75,7.2,1.25,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01533,9,76,1,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01551,9,84,1,6,3,2.4,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01563,9,88,1,6,7,3,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01585,9,82,0,6,5.5,1.5,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01587,9,82,1,5.8,6.75,3,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01593,9,82,1,6,3,2.5,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB01599,9,10,1,6,4.8,1,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,9,84,1,4,7,3,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001624,9,85,1,5.8,2,1.25,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB01642,9,87,1,6,4.25,2.3333333333333335,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB001645,9,85,1,6,9,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01653,9,85,1,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01667,9,87,1,6,4.6,1,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01728,9,95,1,6,6,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01739,9,93,1,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01911,9,108,1,6,1,2.4,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01943,9,112,1,6,4.8,2,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01949,9,112,1,6,0,1.5,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01983,9,109,1,6,1,1.25,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB01989,9,116,0,6,3,2.4,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,9,116,0,5,2.2,2,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02010,9,98,1,6,2.6,2.4,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02014,9,100,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02024,9,100,1,6,7,3,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02063,9,105,1,6,0,2.3333333333333335,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02090,9,111,1,6,7.333333333333333,3,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02093,9,111,1,6,4,2,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02094,9,110,1,6,5.4,3,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02109,9,113,1,6,9,2.5,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02179,9,128,1,6,3,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02197,9,133,1,6,1,1,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02201,9,116,0,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB02203,9,121,0,6,4.8,2.3333333333333335,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03003,9,82,1,4,5,1.25,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03013,9,19,1,6,5.4,2,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03044,9,59,1,6,2,2.6,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03059,9,82,1,6,0.5,2.6,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03133,9,134,1,5.8,3,2,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB04003,9,126,0,6,0,3,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB05032,9,127,1,4.75,5.25,2.75,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05033,9,127,1,6,0.6666666666666666,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB06007,9,136,1,6,1,1.25,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB10012,9,80,1,6,2.2,2.4,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10014,9,83,1,6,2,1.75,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10039,9,83,1,6,7.5,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10044,9,87,1,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB010046,9,85,1,6,5,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10060,9,89,1,6,1,2.3333333333333335,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10080,9,91,1,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10113,9,101,1,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10120,9,101,1,6,5,2.5,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10127,9,103,1,6,5,3,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10131,9,104,1,6,2.2,3,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10151,9,108,1,6,2.2,2,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10178,9,19,1,4.75,4.8,1.5,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10235,9,124,1,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10238,9,16,1,5.8,5.5,1,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10262,9,126,1,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10265,9,126,1,6,4,2,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10266,9,61,1,5.8,5.4,1.6666666666666667,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10269,9,126,1,6,1,1.6666666666666667,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10297,9,128,1,4,4.25,1.5,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10326,9,130,1,6,10,3,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB00080,9,9,2,6,2.4,1,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00135,9,10,2,6,6.25,3,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00188,9,12,2,5,4.5,3,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00334,9,19,2,6,8.5,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00519,9,26,2,5,8.5,1,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00661,9,34,2,6,7.5,3,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00708,9,36,2,6,0.8,1,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00844,9,45,2,6,9.6,3,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00928,9,48,2,4.75,7.5,1,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00937,9,48,2,6,7.5,1,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00977,9,50,2,6,1,2,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB01045,9,54,2,5,7.5,1,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01061,9,54,2,6,0.25,2,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01076,9,55,2,6,3.75,2,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01121,9,56,2,6,8.75,3,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01123,9,56,2,6,2.6666666666666665,1,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01129,9,56,2,4.66666666666666,7.5,3,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01135,9,57,2,6,2,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01203,9,60,2,6,6.25,2,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01273,9,63,2,6,4.6,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01369,9,70,2,5,4.333333333333333,3,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01374,9,69,2,6,8.5,3,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01416,9,71,2,6,1.3333333333333333,1,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01427,9,71,2,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01492,9,74,2,6,7.5,3,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01534,9,76,2,6,1,3,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB001610,9,85,2,6,2.5,1,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001616,9,85,2,6,4.333333333333333,1,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001628,9,85,2,6,3,3,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB01682,9,91,2,6,4,1,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,9,91,2,6,2,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01696,9,48,2,6,7.5,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01714,9,94,2,6,3.25,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01742,9,96,2,6,0,1,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01744,9,96,2,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01745,9,92,2,6,2.5,3,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01752,9,98,2,6,3.75,1,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01809,9,95,2,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01829,9,99,2,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01861,9,101,2,6,7,2,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01875,9,104,2,5,8.5,3,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB02001,9,96,2,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02009,9,97,2,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02030,9,101,2,6,7,1.75,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02083,9,26,2,6,2.4,1,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02085,9,107,2,6,7.5,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02139,9,69,2,6,2.5,2,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02170,9,127,2,6,4.333333333333333,1,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02187,9,130,2,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB03026,9,125,2,4.66666666666666,5,3,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03051,9,127,2,6,7,1,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03082,9,129,2,6,3,1.5,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03118,9,133,2,6,0,3,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB05020,9,129,2,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB06010,9,136,2,6,8.5,3,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB06011,9,136,2,6,2,3,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10017,9,81,2,6,0.8,3,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10094,9,94,2,6,8,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,9,94,2,6,7.5,3,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10126,9,102,2,2,4.333333333333333,2,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10142,9,105,2,6,6.25,3,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10176,9,116,2,6,2.5,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10179,9,116,2,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10195,9,120,2,5,9.6,2,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10198,9,124,2,6,5,1.8,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10257,9,54,2,5,0,1,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10277,9,45,2,6,7,3,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10328,9,130,2,6,7,2.5,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB10372,9,135,2,6,2,3,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00352,9,20,3,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00462,9,23,3,6,5.75,2,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00482,9,24,3,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00488,9,25,3,6,3.3333333333333335,1,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00532,9,26,3,6,3.3333333333333335,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00595,9,29,3,3,3.6666666666666665,1.5,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00678,9,35,3,6,7,1.6666666666666667,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00780,9,41,3,5.33333333333333,7,2,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00827,9,46,3,6,3,2.6666666666666665,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00933,9,49,3,6,6.25,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB01046,9,53,3,6,10,1,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01222,9,60,3,6,4,1.5,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01320,9,67,3,6,3.6666666666666665,1.6666666666666667,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01353,9,68,3,6,7.75,1,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01470,9,73,3,6,10,2.6666666666666665,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01559,9,79,3,6,3.6666666666666665,2.75,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01654,9,88,3,6,5.25,2,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01665,9,87,3,6,10,2.6666666666666665,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01939,9,112,3,6,7.75,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB02049,9,104,3,6,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02055,9,104,3,6,5.75,2.25,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02162,9,125,3,6,3,1,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB03037,9,125,3,6,9.2,2,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03070,9,127,3,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03099,9,130,3,5.33333333333333,3.6666666666666665,2.6666666666666665,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03113,9,133,3,6,3,2.5,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB04016,9,134,3,6,3.5,3,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05045,9,129,3,6,5.75,1.6666666666666667,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB10078,9,91,3,6,5.25,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10079,9,92,3,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10092,9,94,3,6,10,2.3333333333333335,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10110,9,98,3,6,0.6,3,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10224,9,73,3,6,5.75,3,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10231,9,79,3,6,3.6666666666666665,2,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10254,9,126,3,6,3,2,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10342,9,133,3,6,1.5,2,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB00188,10,13,1,5,2,2.5,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00256,10,16,1,5.8,7.75,1.6666666666666667,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00352,10,21,1,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00386,10,22,1,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00428,10,23,1,6,0.6666666666666666,3,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00488,10,26,1,6,6.4,1,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00495,10,25,1,6,2.3333333333333335,1,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00532,10,27,1,6,5,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00573,10,29,1,5,0,1,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00595,10,30,0,6,1.5,1,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00621,10,32,1,6,2.4,3,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00623,10,31,1,6,0,3,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00780,10,42,1,6,7.75,1,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00827,10,47,1,6,0.75,3,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00832,10,110,1,6,5.4,1,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00833,10,47,1,6,0.75,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00850,10,47,1,6,3.8,1,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00887,10,48,1,6,3.8,2,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00937,10,49,1,6,1.5,3,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00997,10,48,1,5,2.4,1,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01121,10,57,1,6,3.5,3,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01135,10,58,1,6,2.3333333333333335,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01192,10,60,1,6,8,1,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01195,10,61,1,6,6.4,1,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01345,10,72,1,5.8,7.8,2.3333333333333335,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01353,10,69,1,6,6.4,1,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01369,10,71,1,6,3.5,1,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01374,10,70,1,5,2.2,3,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01428,10,110,1,6,6.4,3,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01469,10,75,1,6,2.2,3,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01487,10,75,1,6,2,3,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01492,10,75,1,6,2.3333333333333335,3,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01531,10,77,1,6,6.5,2,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01533,10,77,1,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01563,10,89,1,6,1,3,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01585,10,83,1,5.8,3.8,1.5,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01587,10,83,1,6,5.4,3,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01593,10,83,1,6,3,2.5,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB01599,10,109,1,5.25,4.6,2,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,10,85,1,0,6.4,3,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001610,10,86,1,5.5,3,1,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001616,10,86,1,6,6.75,1,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001624,10,86,1,5.25,2.4,1,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB01642,10,88,1,6,4.25,3,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB001645,10,86,1,6,7.8,3,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01653,10,86,1,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01654,10,89,1,6,8,2,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01665,10,88,1,6,7.75,3,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01667,10,88,1,6,1.5,3,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01696,10,21,1,6,1.5,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01728,10,96,1,6,0,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01739,10,94,1,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01752,10,99,1,6,0,1.3333333333333333,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01911,10,109,1,6,0,2.3333333333333335,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01939,10,113,1,6,7.75,3,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01943,10,113,1,6,3.4,1.3333333333333333,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01983,10,110,1,6,3.5,1,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB01989,10,118,1,5,2.4,3,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,10,137,1,5,0,1,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02014,10,101,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02024,10,101,1,6,7.8,3,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02090,10,89,1,6,5,3,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02179,10,129,1,6,3,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB03013,10,86,1,6,6.4,2,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03044,10,128,1,6,0,2.5,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03059,10,113,1,5,0,3,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03082,10,130,1,6,0,1.3333333333333333,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03099,10,131,1,6,6.5,1,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03113,10,134,1,6,4,2,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB03118,10,134,1,5.8,1.5,3,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB04003,10,127,1,6,0,3,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB04016,10,135,1,6,3.5,3,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05032,10,128,1,4.4,6.4,2.5,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05033,10,128,1,6,0.6666666666666666,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB06007,10,137,1,0,6.4,3,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06011,10,137,1,6,3,3,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10012,10,81,0,6,2.2,2.4,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10014,10,84,1,6,0,1.3333333333333333,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10039,10,84,1,6,2.6666666666666665,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10044,10,88,1,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB010046,10,86,1,6,2.4,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10060,10,94,1,6,3,2,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10080,10,92,1,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10110,10,99,1,6,0.6,3,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10113,10,102,1,6,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10126,10,103,1,4.4,0,1,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10151,10,109,1,6,2.2,2,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10224,10,47,1,6,2.2,3,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10235,10,125,1,6,6.75,2,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10238,10,99,1,6,2.6666666666666665,1,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10262,10,127,1,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10269,10,127,1,6,1,1.6666666666666667,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10372,10,136,1,6,2,3,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00080,10,10,2,5.25,3.5,3,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00136,10,11,2,6,6.333333333333333,3,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00340,10,20,2,6,9.333333333333334,1,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00519,10,27,2,5.33333333333333,8.666666666666666,1,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00535,10,26,2,6,9.333333333333334,1,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00631,10,33,2,4.5,4.333333333333333,3,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00928,10,49,2,5.4,7.6,1,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00933,10,50,2,6,6.333333333333333,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00939,10,50,2,6,2.2,1.6666666666666667,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00977,10,51,2,6,5,3,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB00980,10,51,2,6,7,3,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB01045,10,55,2,6,8,1,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01046,10,54,2,5.33333333333333,8.5,1,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01061,10,55,2,6,0.25,3,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01102,10,57,2,6,2.6666666666666665,1.5,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01123,10,57,2,6,2.6666666666666665,3,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01129,10,57,2,6,8,1,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01219,10,62,2,4,9.333333333333334,2.5,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01222,10,61,2,6,4,1.5,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01235,10,63,2,6,4,2.25,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01273,10,64,2,6,4.6,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01347,10,69,2,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01399,10,71,2,4,6,1,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01427,10,72,2,6,5,2,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01434,10,73,2,6,0,1,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01470,10,74,2,5.25,8.5,1,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01501,10,76,2,6,3.3333333333333335,1.5,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01507,10,76,2,5.33333333333333,5,2,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01534,10,77,2,6,1,3,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB001628,10,57,2,6,2.5,3,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB01682,10,92,2,6,4,1.6666666666666667,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,10,93,2,5.8,2,3,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01714,10,95,2,6,3.4,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01742,10,97,2,5,5,3,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01744,10,97,2,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01745,10,93,2,6,2.5,3,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01809,10,96,2,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01829,10,100,2,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01861,10,102,2,6,9,2.5,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01875,10,105,2,5,8.5,1,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01949,10,113,2,6,0,2,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB02001,10,97,2,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02009,10,98,2,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02010,10,99,2,6,3,1.4,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02030,10,102,2,6,7,2.4,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02055,10,105,2,6,5.75,1.3333333333333333,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02094,10,111,2,5.25,5,3,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02170,10,128,2,6,4.333333333333333,1,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02187,10,131,2,6,2,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB02197,10,134,2,6,2,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02201,10,118,2,6,1,2.6,2,6,9,63,2,2,6,0,none,white,college,2
+ASB03003,10,11,2,6,6.666666666666667,1,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03051,10,54,2,6,5,2,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03133,10,135,2,6,3.5,1,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB05045,10,130,2,6,5.75,1.6666666666666667,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB06010,10,137,2,6,6.5,2.2,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB10017,10,82,2,6,0.8,3,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10094,10,97,2,6,8,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,10,95,2,6,4,1,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10120,10,102,2,6,3,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10127,10,104,2,6,5,3,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10142,10,106,2,5,2,1,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10176,10,118,2,6,2.25,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10178,10,20,2,6,4.6,1,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10179,10,118,2,6,4.666666666666667,2,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10231,10,51,2,6,5,3,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10265,10,105,2,6,4,1,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10266,10,102,2,6,2,2,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10326,10,131,2,6,6,2,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB10328,10,131,2,4,3,1,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB00135,10,11,3,4,7,2,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00201,10,13,3,6,5.333333333333333,3,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00279,10,17,3,6,7,2.75,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00334,10,20,3,3,5.333333333333333,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00462,10,24,3,6,5.333333333333333,2.75,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00482,10,25,3,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00640,10,34,3,6,5.5,3,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00661,10,35,3,6,1.75,3,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00678,10,36,3,6,3,2.6666666666666665,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00708,10,37,3,6,5.333333333333333,2,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00711,10,39,3,6,9,2,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00766,10,42,3,3,7,2.75,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00844,10,46,3,6,0.3333333333333333,3,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB01076,10,56,3,6,7,2.6666666666666665,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01099,10,58,3,6,9,2,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01203,10,61,3,6,5.333333333333333,3,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01320,10,68,3,4.5,9,1,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01416,10,72,3,6,1.3333333333333333,1,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01551,10,114,3,6,7,3,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01559,10,81,3,6,3.6666666666666665,2.75,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB02049,10,105,3,6,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02063,10,106,3,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02083,10,134,3,6,5.333333333333333,2,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02085,10,108,3,4,9,2.6666666666666665,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02093,10,112,3,4.5,6.75,2,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02109,10,114,3,6,5.5,3,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02139,10,129,3,6,6.75,3,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02162,10,126,3,6,3,2,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02203,10,124,3,6,6.75,2.6666666666666665,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03026,10,93,3,6,5.333333333333333,3,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03037,10,13,3,6,5.5,2,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03070,10,128,3,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB05020,10,130,3,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB10078,10,92,3,6,6.75,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10079,10,93,3,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10092,10,46,3,6,7,2,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10131,10,105,3,6,2,2.75,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10195,10,129,3,3,9,2,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10198,10,92,3,3,5.5,2,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10254,10,58,3,6,6.75,1,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10257,10,129,3,6,6.75,2,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10277,10,11,3,6,6.75,2,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10297,10,129,3,6,3,2,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10342,10,134,3,6,9,3,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB00080,11,11,1,5.5,3.5,2.6666666666666665,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00136,11,12,1,5,7.5,1.5,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00279,11,18,1,6,6.5,3,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00428,11,24,1,6,0.75,1,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00488,11,27,1,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00631,11,34,1,5,6.5,1,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00766,11,43,1,4.75,3.25,3,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00833,11,48,1,6,0.75,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00850,11,48,1,6,6.5,1,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00928,11,50,1,4.75,7.25,1,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00937,11,50,1,6,7.5,1,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00939,11,51,1,3,1.3333333333333333,2,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00977,11,52,1,6,1,2,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB01045,11,56,1,5.75,1,1.5,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01046,11,55,1,6,7.25,1,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01076,11,57,1,6,3.5,2,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01102,11,58,1,6,5.5,1,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01135,11,59,1,6,2,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01219,11,63,1,4.66666666666666,9,2.25,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01222,11,62,1,6,5.5,1.5,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01273,11,65,1,6,3,1,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01320,11,50,1,6,4.6,1.6666666666666667,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01345,11,73,1,6,7.5,2,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01347,11,70,1,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01416,11,73,1,6,1.3333333333333333,1,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01427,11,73,1,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01470,11,75,1,6,2.2,1.6666666666666667,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01487,11,76,1,6,0,2.5,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01501,11,63,1,6,2,1,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01531,11,12,1,5.75,3.5,1.5,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01533,11,80,1,6,2,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01551,11,138,1,6,0.6,3,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01559,11,83,1,6,0.75,3,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01585,11,84,1,6,3,2.2,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01587,11,84,1,5.75,1.3333333333333333,2,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01593,11,84,1,6,3,2.5,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB01599,11,51,1,5.75,4.6,2.4,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB00104,11,86,1,0,3,3,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001610,11,87,1,5,7.2,1.5,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001616,11,87,1,5,4.6,3,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001624,11,87,1,5.75,6,2.2,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB01642,11,89,1,6,3.6,2,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB001645,11,87,1,6,2,1,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01653,11,87,1,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01665,11,89,1,6,3,1.6666666666666667,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01667,11,89,1,6,3,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01728,11,98,1,4,6,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01739,11,95,0,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01829,11,101,1,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01875,11,106,1,6,6.5,2,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01943,11,114,1,6,3.75,1.6666666666666667,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01989,11,119,1,6,3,3,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,11,76,1,5.75,6.5,2,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02014,11,102,1,6,4.6,1.5,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02063,11,107,1,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02090,11,27,1,6,1,1.5,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02094,11,112,1,6,2.2,3,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02179,11,131,1,6,3,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02197,11,135,1,5,2,2.5,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02203,11,62,1,6,1.3333333333333333,3,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03013,11,87,1,6,3,2.6666666666666665,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03026,11,58,1,6,1.3333333333333333,3,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03044,11,87,1,6,0,2,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03059,11,129,1,5.75,3,3,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03082,11,131,1,5,5.4,2.2,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03099,11,132,1,5.75,3.25,2.5,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB05032,11,129,1,4.5,6,3,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05033,11,129,1,6,0.6666666666666666,3,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB06010,11,138,1,6,6.5,2.2,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB10012,11,82,1,6,2.2,2.4,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10014,11,85,1,6,3.5,1,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10017,11,83,1,6,0.6,2,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10039,11,85,1,6,1.3333333333333333,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10044,11,89,1,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB010046,11,87,1,6,0.3333333333333333,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10080,11,93,1,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10094,11,12,1,6,9,1,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,11,87,1,6,0.75,1.5,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10110,11,100,1,6,0.6,3,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10113,11,62,1,5,0,2.5,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10120,11,103,1,3,0.6,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10126,11,104,1,6,3,1,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10131,11,106,1,6,2,2.75,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10179,11,65,1,5.75,0,1.5,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10195,11,62,1,4.66666666666666,7.25,3,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10198,11,56,1,5,5.4,3,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10224,11,138,1,6,0.6,3,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10238,11,48,1,3,0.6,1.5,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10257,11,34,1,5.75,3,1.5,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10262,11,128,1,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10269,11,129,1,6,1,1.6666666666666667,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10277,11,89,1,6,0.75,3,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB00135,11,12,2,6,2.5,1.3333333333333333,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00188,11,14,2,5,4,3,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00201,11,14,2,6,0,1,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00256,11,17,2,6,7,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00340,11,21,2,6,7,1.3333333333333333,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00352,11,22,2,6,2.4,1,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00519,11,28,2,6,8,1,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00535,11,27,2,5,8,3,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00573,11,31,2,6,0,3,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00595,11,31,2,3,7,3,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00623,11,32,2,6,0.5,3,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00661,11,36,2,6,0,3,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00678,11,37,2,6,0,3,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00711,11,40,2,6,3.25,1,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00827,11,48,2,6,1,3,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00832,11,61,2,5,7,1.4,3,2,8,49,2,2,1,0,none,black,college,6
+ASB00887,11,49,2,4,8,2,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00980,11,52,2,6,7,2.5,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB00997,11,37,2,5,4.333333333333333,1,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01099,11,59,2,6,2,1.4,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01123,11,58,2,6,2.6666666666666665,3,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01192,11,61,2,6,10,2,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01195,11,62,2,5,7,1,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01203,11,62,2,6,1,3,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01235,11,64,2,6,4,2.25,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01353,11,70,2,3,7,3,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01369,11,72,2,6,4,1.4,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01374,11,71,2,6,2.5,1,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01399,11,72,2,5,8,1.3333333333333333,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01428,11,12,2,5,8,1,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01434,11,37,2,6,1,1.4,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01492,11,76,2,6,3,2.3333333333333335,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01507,11,107,2,6,7,2.25,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01534,11,78,2,6,1,2.3333333333333335,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB01563,11,40,2,6,1,3,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01682,11,93,2,6,4,3,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,11,95,2,6,2,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01696,11,22,2,6,2.4,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01714,11,96,2,6,3.25,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01742,11,100,2,3,10,3,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01744,11,98,2,6,1,3,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01745,11,94,2,6,2.5,3,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01752,11,17,2,4,6,3,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01809,11,97,2,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01911,11,110,2,6,1,3,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01939,11,105,2,6,8,1,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB01949,11,114,2,6,0,1.5,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB01983,11,111,2,6,6.666666666666667,1,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB02001,11,98,2,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02009,11,99,2,6,0,2,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02010,11,100,2,6,3,1.4,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02024,11,102,2,6,7,1,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02055,11,106,2,6,5.75,1.3333333333333333,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02083,11,72,2,6,1,1.4,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02139,11,72,2,6,4,3,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02170,11,129,2,6,4.333333333333333,1,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02201,11,138,2,6,0,2.5,2,6,9,63,2,2,6,0,none,white,college,2
+ASB03003,11,31,2,4,8,1.3333333333333333,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03051,11,94,2,6,7,3,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03113,11,135,2,6,4,2,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB03133,11,136,2,3,10,3,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB04003,11,138,2,4,8,3,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB05045,11,131,2,6,6.666666666666667,1.3333333333333333,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB06007,11,138,2,3,8,1,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB06011,11,138,2,5,7,3,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10127,11,105,2,6,4,3,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10142,11,107,2,6,4,2.25,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10151,11,110,2,6,2.2,2,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10176,11,119,2,6,2.5,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10178,11,14,2,6,5.75,2,1,4,8,29,2,2,1,1,none,black,high school,1
+ASB10231,11,58,2,6,7,3,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10235,11,96,2,6,8,1,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10265,11,32,2,6,4,1,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10326,11,132,2,6,6,2,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB10328,11,132,2,6,7,2.5,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB10342,11,135,2,6,7,1,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB10372,11,137,2,6,2,3,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00334,11,21,3,6,1,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00386,11,23,3,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00462,11,25,3,6,0,3,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00482,11,26,3,6,0.5,3,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00495,11,26,3,6,4.25,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00532,11,28,3,6,3.3333333333333335,1,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00621,11,33,3,6,5.5,1,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00640,11,35,3,6,4.25,3,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00708,11,38,3,6,3,3,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00780,11,43,3,4,5.5,3,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00844,11,47,3,6,2.5,2.4,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00933,11,51,3,6,6,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB01061,11,56,3,6,0.25,3,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01121,11,58,3,6,8.75,2.4,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01129,11,58,3,6,0.25,3,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01469,11,135,3,6,5.5,1,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB001628,11,131,3,6,0,2.6666666666666665,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB01654,11,129,3,6,3,3,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01861,11,103,3,6,0,3,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB02030,11,103,3,6,2,2.4,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02049,11,106,3,6,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02085,11,109,3,6,2.5,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02093,11,21,3,6,8.75,3,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02109,11,43,3,6,1,3,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02162,11,127,3,6,3,3,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB02187,11,132,3,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB03037,11,33,3,6,2.5,2.6666666666666665,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03070,11,129,3,6,5.5,3,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03118,11,135,3,6,1.5,2.4,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB04016,11,136,3,6,5.5,1,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05020,11,131,3,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB10060,11,23,3,6,1.5,2,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10078,11,93,3,6,5.5,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10079,11,94,3,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10092,11,35,3,6,1,2,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10254,11,26,3,6,0,3,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10266,11,106,3,6,0,3,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10297,11,130,3,6,6,3,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB00080,12,12,1,6,2.3333333333333335,3,3,3,7,42,1,2,5,1,mod/severe,Native American,high school,9
+ASB00135,12,88,1,6,5.4,2,2,10,10,36,1,4,5,1,mod/severe,black,less than high school,2
+ASB00386,12,24,1,6,1.5,1,2,3,9,42,2,2,4,1,mod/severe,white,college,2
+ASB00535,12,28,1,6,9.5,3,3,6,8,42,2,2,3,1,mild,white,high school,6
+ASB00595,12,32,1,6,8.5,2.2,3,0,10,33,2,2,3,1,mod/severe,black,high school,10
+ASB00621,12,57,1,6,7,1,1,5,10,39,1,2,5,1,mod/severe,white,college,1
+ASB00623,12,33,1,6,0.5,3,1,6,6,48,1,4,1,1,none,white,college,1
+ASB00661,12,37,1,6,0.5,3,1,2,10,50,2,2,6,1,none,white,college,1
+ASB00678,12,38,1,6,0,3,2,0,8,19,1,2,2,1,none,black,high school,2
+ASB00711,12,41,1,6,2.8,1,1,0,8,44,1,1,5,0,mod/severe,More than 1,high school,1
+ASB00766,12,44,1,6,2.3333333333333335,3,3,4,10,38,2,2,4,1,mod/severe,black,college,8
+ASB00833,12,57,1,6,1,3,3,9,9,65,2,2,6,1,mod/severe,white,high school,7
+ASB00844,12,48,1,6,0.6,2.4,2,3,6,23,2,2,2,1,mod/severe,white,high school,3
+ASB00850,12,12,1,6,7,2.5,3,4,10,47,1,2,3,1,mild,black,high school,8
+ASB00937,12,51,1,6,10,2,3,9,10,54,1,4,5,1,mod/severe,white,college,10
+ASB00939,12,52,1,6,2.2,1,3,5,7,58,2,2,1,1,mild,black,college,10
+ASB00997,12,105,1,6,0.6,1,2,7,7,30,2,2,2,0,none,black,high school,5
+ASB01045,12,57,1,6,2,1.5,2,1,8,23,2,2,7,0,mod/severe,black,high school,2
+ASB01061,12,57,1,6,0.25,2.4,1,1,7,31,1,1,1,0,none,other,college,1
+ASB01076,12,58,1,6,3.3333333333333335,2.2,1,3,10,27,1,2,5,1,mild,white,college,1
+ASB01099,12,60,1,6,0.25,3,3,8,10,41,2,2,5,0,mild,black,less than high school,8
+ASB01102,12,59,1,6,7,1,1,3,10,27,2,2,3,1,none,black,high school,1
+ASB01121,12,59,1,6,7,2.4,2,0,8,56,2,2,1,1,mod/severe,white,college,2
+ASB01135,12,60,1,6,2,1,1,0,7,24,2,2,1,0,mild,white,high school,1
+ASB01235,12,65,1,6,9.5,2,1,2,6,52,1,4,6,1,none,white,high school,1
+ASB01416,12,74,1,6,1.3333333333333333,1,1,1,7,30,1,2,1,1,none,white,high school,1
+ASB01427,12,74,1,6,2.5,1,1,0,9,34,2,2,1,0,none,white,college,1
+ASB01428,12,84,1,6,9.5,1,1,0,10,37,2,2,5,0,none,Native American,high school,1
+ASB01434,12,107,1,6,1,1.6666666666666667,1,3,8,49,2,2,2,1,mod/severe,white,college,1
+ASB01470,12,51,1,5.66666666666666,2.3333333333333335,1.5,2,0,5,25,1,2,2,1,mod/severe,black,high school,3
+ASB01487,12,86,1,6,1,2.5,2,3,9,36,2,2,1,1,mod/severe,Native American,college,4
+ASB01501,12,44,1,6,2.5,1,2,3,9,52,1,2,5,1,mild,white,high school,5
+ASB01531,12,48,1,6,0.75,1,2,3,10,46,2,4,2,0,mod/severe,white,high school,3
+ASB01533,12,84,1,6,2.3333333333333335,2,1,0,7,29,2,2,1,1,none,white,college,1
+ASB01551,12,112,1,6,3.3333333333333335,3,2,7,4,37,2,2,5,1,mild,black,college,4
+ASB01559,12,84,1,6,3.3333333333333335,3,2,9,3,42,1,2,1,1,mod/severe,Native American,high school,2
+ASB01585,12,85,1,6,5.4,3,3,5,9,35,2,2,5,1,mod/severe,More than 1,high school,6
+ASB01587,12,85,1,6,0,3,3,4,10,24,2,2,2,1,mild,white,high school,9
+ASB01593,12,85,1,6,3,2.5,2,3,9,62,1,2,5,1,mod/severe,white,high school,3
+ASB00104,12,87,1,4,10,1,3,8,7,42,1,2,3,1,mod/severe,black,high school,13
+ASB001610,12,88,1,6,7.2,1,2,10,9,60,2,2,5,1,mod/severe,white,college,5
+ASB001616,12,88,1,6,5.4,3,3,6,6,66,2,2,6,1,mild,white,high school,6
+ASB001624,12,88,1,5.66666666666666,9.5,3,3,8,8,52,2,2,5,1,mod/severe,white,high school,7
+ASB001628,12,111,1,5,3,2.5,1,0,8,24,2,2,1,1,mod/severe,white,high school,1
+ASB01642,12,90,1,6,4.25,3,3,1,8,36,1,2,2,1,mod/severe,white,college,6
+ASB001645,12,88,1,5,1.3333333333333333,1,3,6,9,34,2,1,5,0,mild,white,less than high school,14
+ASB01653,12,88,1,6,5.4,1,2,1,10,23,2,2,7,1,mod/severe,white,high school,2
+ASB01654,12,87,1,6,4.25,3,2,5,9,25,2,2,1,0,none,black,high school,2
+ASB01665,12,90,1,6,9.5,1.5,2,2,10,55,1,4,1,1,mild,white,college,2
+ASB01667,12,90,1,6,3,1.5,2,8,10,52,2,4,5,1,mild,white,college,3
+ASB01714,12,59,1,6,3,3,2,3,7,41,2,2,4,1,mod/severe,white,college,4
+ASB01728,12,99,1,6,7,3,3,9,10,23,2,2,1,1,mod/severe,black,college,7
+ASB01739,12,96,1,6,0,3,1,4,9,39,1,2,1,0,none,white,college,1
+ASB01742,12,102,1,6,7.2,1,2,3,6,56,1,2,5,1,mild,white,high school,2
+ASB01829,12,102,1,6,0.75,3,2,2,8,22,2,2,2,1,mild,More than 1,high school,2
+ASB01875,12,107,1,5,8.5,2,2,5,9,39,2,2,5,1,mild,black,college,5
+ASB01911,12,111,1,6,1,3,2,10,9,58,1,2,1,1,mild,white,college,5
+ASB01943,12,115,1,6,2.8,2.2,3,8,8,46,2,1,5,1,mod/severe,Native American,high school,11
+ASB01983,12,112,1,6,7,1.6666666666666667,1,1,7,52,2,2,1,1,mild,white,high school,1
+ASB01989,12,32,1,6,8.5,3,3,7,7,51,1,2,3,1,mild,white,college,6
+ASB01991,12,132,1,5,8.5,1.5,2,3,10,32,2,2,7,1,mod/severe,white,high school,2
+ASB02009,12,88,1,6,0.5,2.5,2,2,8,58,2,2,1,1,none,white,college,2
+ASB02024,12,103,1,6,10,1,2,2,8,47,1,4,5,1,mod/severe,white,high school,3
+ASB02030,12,104,1,5,2.2,2.5,1,6,10,44,2,2,5,1,mild,white,college,1
+ASB02049,12,107,1,6,7,2,1,5,10,58,2,2,5,1,none,black,college,1
+ASB02063,12,108,1,6,0.3333333333333333,3,2,1,8,36,2,2,1,0,none,white,college,2
+ASB02083,12,65,1,6,2,1.5,2,3,4,68,1,2,6,0,none,white,college,4
+ASB02090,12,32,1,5,0.5,2.2,3,4,10,32,2,2,5,1,none,white,high school,12
+ASB02094,12,32,1,6,7,3,3,2,8,29,1,2,5,1,mild,black,high school,7
+ASB02139,12,108,1,6,5,3,1,0,4,63,1,2,1,1,mod/severe,white,college,1
+ASB02170,12,58,1,6,1,3,3,5,10,55,2,2,5,1,mild,white,college,7
+ASB02179,12,111,1,6,0.5,3,2,4,10,47,2,2,2,1,mild,white,high school,2
+ASB02201,12,111,1,6,0,3,2,6,9,63,2,2,6,0,none,white,college,2
+ASB03026,12,88,1,6,3,3,2,2,8,55,2,2,4,1,mild,white,high school,3
+ASB03044,12,133,1,6,2.8,1.5,1,1,9,20,2,2,7,1,mod/severe,white,high school,1
+ASB03059,12,136,1,6,7,3,2,8,10,23,1,2,1,1,mod/severe,asian,college,3
+ASB03070,12,84,1,5,9.5,2.4,1,2,8,66,1,2,6,1,mod/severe,white,college,1
+ASB03099,12,133,1,6,5.75,2.5,2,3,10,54,1,2,5,1,mild,white,high school,2
+ASB03113,12,136,1,6,3,3,2,6,8,55,2,2,6,1,mod/severe,white,college,2
+ASB04003,12,133,1,6,9.5,1.6666666666666667,2,2,10,55,1,2,5,1,mild,white,high school,3
+ASB05032,12,12,1,6,7.2,2.4,3,7,9,36,1,2,3,1,mod/severe,white,high school,12
+ASB05033,12,88,1,6,0,2,1,0,5,36,2,1,2,0,mod/severe,white,college,1
+ASB05045,12,132,1,6,5.75,1.6666666666666667,2,0,10,39,2,2,1,1,none,white,high school,3
+ASB06007,12,139,1,6,8.5,1,2,4,8,33,1,1,4,0,mod/severe,black,high school,2
+ASB10012,12,83,1,6,2.2,2.4,1,3,3,41,2,2,1,0,mod/severe,white,college,1
+ASB10014,12,129,1,6,7,1,2,4,8,52,2,2,1,1,mod/severe,black,high school,4
+ASB10017,12,84,1,6,2,2,2,3,8,31,2,2,1,1,mod/severe,white,college,3
+ASB10039,12,86,1,6,2.6666666666666665,3,2,4,9,41,2,2,5,1,none,black,high school,3
+ASB10044,12,90,1,6,0,2.5,2,4,10,54,2,2,4,1,mild,white,college,2
+ASB010046,12,88,1,6,2.2,3,2,4,6,38,2,2,1,0,mod/severe,white,college,2
+ASB10080,12,94,1,6,7.2,3,1,3,9,54,2,2,3,0,mild,white,high school,1
+ASB10094,12,52,1,6,7,2.2,3,5,10,51,1,4,5,1,mild,Native American,high school,6
+ASB10096,12,48,1,6,3,1.5,2,1,9,21,2,2,3,1,mod/severe,white,college,2
+ASB10110,12,101,1,6,0.6,3,2,0,9,62,2,2,1,1,none,white,college,2
+ASB10113,12,24,1,6,5.4,2,1,0,0,53,1,2,1,0,none,white,college,1
+ASB10126,12,105,1,6,3,1,2,6,9,35,2,1,1,0,mod/severe,white,college,5
+ASB10151,12,111,1,6,2.2,2,2,2,10,45,1,2,5,1,mod/severe,white,college,5
+ASB10179,12,133,1,6,0.5,1,2,1,10,34,2,1,2,0,mild,black,college,4
+ASB10195,12,59,1,6,8.5,2,1,6,10,60,2,4,5,1,mod/severe,white,college,1
+ASB10224,12,48,1,5.66666666666666,2.3333333333333335,3,2,2,5,43,1,2,5,1,mild,white,high school,3
+ASB10235,12,132,1,6,7,1.5,1,4,0,36,2,2,1,0,none,black,college,1
+ASB10238,12,107,1,6,0,1,1,4,10,30,2,2,1,1,mod/severe,white,high school,1
+ASB10257,12,115,1,6,9.5,1,2,5,9,20,1,2,7,0,mod/severe,white,high school,4
+ASB10262,12,129,1,6,5,2.5,2,3,8,61,2,2,1,1,mod/severe,white,high school,3
+ASB10266,12,33,1,6,0.25,2.5,1,3,9,31,1,2,1,1,mod/severe,white,high school,1
+ASB10297,12,131,1,6,7.2,3,2,6,6,30,2,2,1,0,mild,white,college,3
+ASB10326,12,133,1,6,5.75,3,3,3,8,21,2,2,7,1,none,white,high school,12
+ASB00188,12,15,2,5,2,3,3,10,10,39,1,2,3,1,mod/severe,white,less than high school,14
+ASB00201,12,15,2,6,2,3,1,2,6,34,2,2,1,0,none,white,college,1
+ASB00256,12,18,2,6,7,1,1,4,10,26,2,2,2,1,mod/severe,white,high school,1
+ASB00279,12,19,2,6,6,3,1,0,9,52,1,2,5,1,mod/severe,white,high school,1
+ASB00334,12,22,2,6,2.6666666666666665,3,1,2,8,35,1,2,3,0,none,white,college,1
+ASB00340,12,22,2,6,8.6,3,2,5,8,24,2,2,1,0,mod/severe,white,college,2
+ASB00428,12,25,2,6,1,3,2,4,8,31,1,4,1,1,mild,black,high school,2
+ASB00462,12,26,2,4,8.6,1.5,2,0,7,26,2,2,2,0,none,black,high school,4
+ASB00488,12,28,2,6,6.75,2.4,1,0,8,45,2,2,3,0,none,black,college,1
+ASB00532,12,26,2,6,1,1.4,2,3,7,32,1,2,2,1,mod/severe,white,high school,4
+ASB00573,12,71,2,4,7,3,3,8,9,31,1,2,3,1,mod/severe,black,high school,12
+ASB00708,12,39,2,6,2.6666666666666665,1,2,7,8,29,2,2,1,1,mild,white,high school,5
+ASB00780,12,44,2,6,2,2.4,3,8,10,32,2,2,5,1,mod/severe,other,high school,7
+ASB00827,12,107,2,6,1,3,2,3,9,31,1,2,1,1,mod/severe,white,high school,5
+ASB00887,12,50,2,4,10,3,3,5,10,47,2,4,2,1,mod/severe,white,less than high school,6
+ASB00928,12,51,2,4,10,3,3,10,9,36,1,2,2,1,mod/severe,black,high school,9
+ASB00933,12,52,2,6,6,3,2,9,7,50,1,2,1,1,mod/severe,white,high school,3
+ASB00977,12,53,2,6,1,2,2,3,9,41,2,2,1,0,mild,white,college,3
+ASB00980,12,53,2,6,7,1.6666666666666667,2,3,1,28,2,2,1,1,mod/severe,black,high school,5
+ASB01123,12,59,2,6,2.6666666666666665,3,2,5,9,29,1,2,5,1,mod/severe,black,high school,5
+ASB01129,12,59,2,4,8.6,1.6666666666666667,2,0,9,44,2,2,2,0,mod/severe,black,high school,3
+ASB01192,12,62,2,6,10,3,1,4,10,57,1,2,5,1,mild,black,college,1
+ASB01195,12,63,2,6,7,1.4,2,0,8,50,2,2,1,0,mild,black,college,2
+ASB01219,12,64,2,4.4,8.6,2.25,3,3,8,49,2,4,5,1,mild,black,high school,12
+ASB01222,12,63,2,6,4.666666666666667,2.25,1,3,7,64,2,2,6,1,none,white,high school,1
+ASB01273,12,66,2,5,8.6,1.75,2,6,7,28,2,2,1,1,mod/severe,More than 1,high school,4
+ASB01345,12,74,2,6,8.6,1.5,2,1,9,55,2,2,5,1,mild,Native American,less than high school,2
+ASB01353,12,71,2,6,1.5,1.75,2,4,9,25,2,2,3,1,mild,white,less than high school,2
+ASB01374,12,73,2,6,7,3,2,4,10,35,2,1,1,1,mod/severe,black,college,4
+ASB01469,12,62,2,6,7,3,1,0,10,22,1,2,1,1,none,white,less than high school,1
+ASB01492,12,28,2,6,2,1.5,3,2,8,26,2,2,5,1,mod/severe,white,less than high school,9
+ASB01507,12,64,2,6,7,1.4,2,2,8,41,1,2,5,1,none,black,high school,4
+ASB01599,12,15,2,6,4.666666666666667,2.25,1,2,10,34,2,2,4,1,mod/severe,white,college,1
+ASB01682,12,94,2,6,4,3,1,4,7,55,2,2,1,1,none,white,college,1
+ASB01686,12,96,2,6,2,2,2,2,10,53,2,2,5,1,mod/severe,white,high school,3
+ASB01696,12,138,2,6,3,3,1,0,10,22,2,2,1,1,mild,black,high school,1
+ASB01745,12,95,2,6,2.5,3,3,4,9,45,1,2,1,1,mod/severe,white,high school,6
+ASB01809,12,98,2,6,6.666666666666667,3,2,6,10,59,2,2,5,1,mod/severe,white,college,3
+ASB01949,12,136,2,6,4.666666666666667,3,1,2,10,24,2,2,1,0,mod/severe,white,less than high school,1
+ASB02001,12,99,2,6,0,1.6666666666666667,2,2,9,30,2,2,1,1,mild,other,college,4
+ASB02010,12,101,2,6,3,1.4,2,4,6,68,2,2,6,1,mild,white,high school,3
+ASB02014,12,59,2,6,6,1.6666666666666667,1,0,6,39,1,2,1,1,mild,asian,college,1
+ASB02055,12,107,2,6,6.75,3,3,7,7,31,2,2,4,1,mod/severe,white,college,6
+ASB02093,12,19,2,6,10,1.5,2,8,5,40,2,4,5,1,mild,white,less than high school,2
+ASB02187,12,133,2,6,0,3,1,1,2,40,2,2,3,0,mod/severe,white,high school,1
+ASB02197,12,136,2,6,2,3,2,10,8,49,2,1,1,1,mild,white,high school,5
+ASB02203,12,71,2,6,1.5,1.75,2,1,10,28,2,2,2,0,mod/severe,white,college,2
+ASB03003,12,18,2,6,2,2,1,1,9,34,2,2,2,0,mild,white,college,1
+ASB03013,12,136,2,6,3,1.6666666666666667,3,2,10,36,2,2,5,1,mod/severe,white,high school,6
+ASB03051,12,101,2,6,10,3,1,2,8,59,1,2,5,1,none,black,college,1
+ASB03082,12,132,2,6,3,1.5,1,5,5,57,2,2,1,1,mild,black,college,1
+ASB03118,12,136,2,6,0,3,1,1,10,20,2,2,7,0,none,white,high school,1
+ASB06010,12,139,2,6,6.5,1.75,3,7,10,50,2,2,5,1,mild,white,high school,7
+ASB06011,12,139,2,6,6.666666666666667,1.75,2,6,10,27,2,2,3,1,none,white,college,2
+ASB10060,12,15,2,6,3,1.5,2,1,8,40,2,2,1,0,mild,black,college,3
+ASB10131,12,107,2,6,2,1,2,4,7,41,1,2,1,1,mod/severe,white,college,4
+ASB10142,12,108,2,6,6.5,2.75,2,0,10,31,1,2,1,1,none,black,less than high school,2
+ASB10176,12,136,2,6,6.5,3,1,1,8,25,2,2,1,0,mild,white,college,1
+ASB10198,12,71,2,6,2,3,2,2,7,49,2,4,1,0,none,black,college,2
+ASB10231,12,136,2,6,10,3,1,5,10,39,2,2,1,1,mild,black,high school,1
+ASB10254,12,139,2,6,2,1.4,2,3,10,50,2,2,1,1,mild,white,high school,2
+ASB10265,12,98,2,6,6.666666666666667,1.6666666666666667,2,0,10,18,2,2,1,1,mod/severe,white,high school,2
+ASB10269,12,107,2,6,0,1,3,2,10,38,2,2,1,1,mod/severe,black,high school,7
+ASB10277,12,133,2,6,2.5,1.4,2,0,10,45,1,2,5,1,mod/severe,white,high school,2
+ASB10328,12,133,2,6,4,3,3,6,8,33,2,2,1,1,mod/severe,white,high school,9
+ASB10342,12,136,2,6,1.5,1.75,1,0,2,25,2,2,7,1,mod/severe,black,college,1
+ASB10372,12,138,2,6,2,3,2,6,10,40,1,2,3,1,mild,white,college,3
+ASB00136,12,13,3,6,5.4,2,1,2,10,63,2,4,5,1,mod/severe,Native American,high school,1
+ASB00352,12,23,3,6,9,2.6666666666666665,2,0,9,52,1,2,1,1,mild,white,college,2
+ASB00482,12,27,3,6,6.25,2,3,6,10,38,2,2,1,1,mod/severe,black,college,7
+ASB00495,12,27,3,6,9,3,2,1,7,39,1,2,1,1,mild,white,college,3
+ASB00519,12,29,3,6,9,2.6666666666666665,2,9,9,47,1,2,5,1,mild,white,college,4
+ASB00631,12,35,3,5.33333333333333,5.4,2.6666666666666665,3,10,6,27,2,2,1,1,mod/severe,white,high school,24
+ASB00640,12,36,3,6,5.25,2.5,1,0,7,22,2,2,1,1,mild,white,high school,1
+ASB00832,12,128,3,6,5.4,2.6666666666666665,3,2,8,49,2,2,1,0,none,black,college,6
+ASB01046,12,56,3,6,9,2.6666666666666665,2,4,10,47,2,4,5,1,mod/severe,More than 1,college,3
+ASB01203,12,63,3,6,6.25,2,1,8,10,38,2,2,1,1,mod/severe,white,high school,1
+ASB01320,12,137,3,6,6.25,2,2,2,10,25,1,4,1,0,mod/severe,asian,college,2
+ASB01347,12,71,3,6,5.4,2.6666666666666665,2,2,8,25,2,2,7,1,none,white,high school,2
+ASB01369,12,29,3,6,5.25,2.5,2,2,10,35,2,2,1,1,none,black,high school,2
+ASB01399,12,137,3,6,9,2,2,1,8,23,2,2,5,1,mod/severe,black,less than high school,3
+ASB01534,12,13,3,6,5.4,2.6666666666666665,2,0,10,66,1,4,1,1,mod/severe,white,high school,2
+ASB01563,12,27,3,6,6.25,2.6666666666666665,3,7,7,30,1,4,1,1,mod/severe,other,less than high school,19
+ASB01744,12,27,3,6,5.25,2,2,2,9,20,2,2,4,1,mild,asian,high school,3
+ASB01752,12,23,3,6,9,2,2,0,10,27,2,2,4,1,none,Native American,high school,4
+ASB01861,12,104,3,6,9,2.5,3,7,10,27,2,2,1,0,mod/severe,white,college,8
+ASB01939,12,23,3,6,9,2,2,4,10,54,2,2,1,0,mod/severe,black,high school,2
+ASB02085,12,110,3,6,2.5,3,3,9,10,34,1,2,3,1,mild,black,high school,6
+ASB02109,12,137,3,6,9,2,3,1,7,37,2,2,1,0,mod/severe,black,high school,9
+ASB02162,12,128,3,6,3,3,3,9,10,31,2,2,5,1,mild,black,high school,10
+ASB03037,12,95,3,6,0,2.5,2,5,10,52,2,2,1,1,mild,black,college,2
+ASB03133,12,137,3,6,4,2,2,4,10,37,2,2,3,0,mild,white,college,3
+ASB04016,12,137,3,6,6.25,2,1,2,10,39,1,2,1,1,none,white,college,1
+ASB05020,12,132,3,6,2.5,2,2,4,10,69,2,2,6,1,none,white,college,4
+ASB10078,12,94,3,6,5.25,3,2,2,6,43,2,2,5,1,mod/severe,white,high school,3
+ASB10079,12,95,3,6,0,2.6666666666666665,1,5,10,52,1,2,1,0,none,white,college,1
+ASB10092,12,13,3,6,3,2.5,2,4,10,32,2,2,2,1,mild,white,high school,4
+ASB10120,12,104,3,6,3,2,1,2,8,42,2,2,1,1,mild,white,college,1
+ASB10127,12,106,3,6,5.4,2,2,3,10,37,1,2,1,1,mild,black,high school,2
+ASB10178,12,27,3,6,9,2.6666666666666665,1,4,8,29,2,2,1,1,none,black,high school,1

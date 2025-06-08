@@ -11,3 +11,4 @@
 
 
 Before release, repeat the above again.
+Remember to change back the generating mechanism for zs in reward and CF evaluation!

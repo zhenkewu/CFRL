@@ -1,8 +1,8 @@
 from package.preprocessor import SequentialPreprocessor
-from baseline_preprocessors import SequentialPreprocessorOracle, UnawarenessPreprocessor
-from baseline_preprocessors import ConcatenatePreprocessor
+from .baseline_preprocessors import SequentialPreprocessorOracle, UnawarenessPreprocessor
+from .baseline_preprocessors import ConcatenatePreprocessor
 from package.agents import FQI
-from baseline_agents import RandomAgent, BehaviorAgent
+from .baseline_agents import RandomAgent, BehaviorAgent
 from package.environment import SyntheticEnvironment, sample_trajectory
 from package.evaluation import evaluate_reward_through_simulation
 from package.evaluation import evaluate_fairness_through_simulation
@@ -95,7 +95,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 actions=copy.deepcopy(actions),
                 rewards=copy.deepcopy(rewards),
                 max_iter=max_iters,
-                seed=seed,
+                #seed=seed,
             )
             policies.append(agent)
         elif method == "unaware":
@@ -115,7 +115,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 actions=copy.deepcopy(actions),
                 rewards=copy.deepcopy(rewards),
                 max_iter=max_iters,
-                seed=seed,
+                #seed=seed,
             )
             policies.append(agent)
         elif method == "ours":
@@ -129,7 +129,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                                             zs=copy.deepcopy(zs),
                                             actions=copy.deepcopy(actions),
                                             rewards=copy.deepcopy(rewards), 
-                                            seed=seed)
+                                           )
             agent = learning_algorithm(
                 preprocessor=preprocessor,
                 model_type=fqi_model,
@@ -142,7 +142,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 actions=copy.deepcopy(actions),
                 rewards=copy.deepcopy(rewards),
                 max_iter=max_iters,
-                seed=seed,
+                #seed=seed,
             )
             policies.append(agent)
         elif method == "ours_cf2":
@@ -157,7 +157,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                                             zs=copy.deepcopy(zs),
                                             actions=copy.deepcopy(actions),
                                             rewards=copy.deepcopy(rewards),
-                                            seed=seed)
+                                           )
             agent = learning_algorithm(
                 preprocessor=preprocessor,
                 model_type=fqi_model,
@@ -170,7 +170,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 actions=copy.deepcopy(actions),
                 rewards=copy.deepcopy(rewards),
                 max_iter=max_iters,
-                seed=seed,
+                #seed=seed,
             )
             policies.append(agent)
         elif method == "oracle":
@@ -183,7 +183,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                                             zs=copy.deepcopy(zs),
                                             actions=copy.deepcopy(actions),
                                             rewards=copy.deepcopy(rewards),
-                                            seed=seed)
+                                           )
             agent = learning_algorithm(
                 preprocessor=preprocessor,
                 model_type=fqi_model,
@@ -196,7 +196,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 actions=copy.deepcopy(actions),
                 rewards=copy.deepcopy(rewards),
                 max_iter=max_iters,
-                seed=seed,
+                #seed=seed,
             )
             policies.append(agent)
         elif method == "sdp_nostate_yesreward":
@@ -311,7 +311,8 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
     
     for i, policy in enumerate(policies):
         discounted_cumulative_reward = evaluate_reward_through_simulation(
-            env=env, z_levels=np.array([[0], [1]]), state_dim=1, N=N_eval, T=T_eval, policy=policy, seed=eval_seed
+            env=env, z_eval_levels=np.array([[0], [1]]), state_dim=1, N=N_eval, T=T_eval, 
+            policy=policy, seed=eval_seed
         ) # STATE_DIM IS CHANGED
         '''cf_outs_given_observed_actions = (
             evaluate_fairness_through_simulation_given_observed_actions(
@@ -361,7 +362,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
 
 def run_exp(export=False):
     #set_env()
-    NREP = 20
+    NREP = 5
     #CORES = 20
     #Ns = [100, 200, 500, 1000, 2000]
     Ns = [100]
@@ -376,16 +377,16 @@ def run_exp(export=False):
     method_policy = "FQI_NN"
 
     methods = [
-        #"random",
-        #"behavior",
+        "random",
+        "behavior",
         # "sdp_nostate_yesreward",
         # "sdp_yesstate_noreward",
         # "sdp_yesstate_noreward_Oracle",
         # "sdp_nostate_yesreward_Oracle",
-        #"full",
-        #"unaware",
+        "full",
+        "unaware",
         "ours",
-        #"oracle",
+        "oracle",
     ]
 
     mp.set_start_method("spawn")
@@ -491,3 +492,12 @@ def run_exp(export=False):
         position_float="centering",
         hrules=True,
     )'''
+
+
+
+# run the experiments
+'''s = int(input('Enter the seed that is to be used: '))
+df_n = run_exp1_one(methods=['ours'], 
+                          method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)'''
+df_n = run_exp(export=False)
+#print(df_n)

@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import copy
-from utils.base_models import LinearRegressor, NeuralNet
+from .utils.base_models import LinearRegressor, NeuralNet
 #from my_utils import glogger
 
 
@@ -23,8 +23,12 @@ class FQE:
         assert self.model_type in ["lm", "nn"], "Invalid model type"
 
     def get_actions(self, zs, states, actions, uat=None):
-        xs = states
+        xs = np.array(states)
         del(states)
+        zs = np.array(zs)
+        actions = np.array(actions)
+        if uat is not None:
+            uat = np.array(uat)
         N, T, _ = xs.shape  # xs + 1
         
         p = copy.deepcopy(self.policy) # use a deepcopy to preserve the info in original policy
@@ -48,8 +52,13 @@ class FQE:
     def fit(self, zs, states, actions, rewards, max_iter, uat=None):
         torch.set_num_threads(1)
         # convenience variables
-        xs = states
+        xs = np.array(states)
         del(states)
+        zs = np.array(zs)
+        actions = np.array(actions)
+        rewards = np.array(rewards)
+        if uat is not None:
+            uat = np.array(uat)
         N, T = actions.shape
         sdim = xs.shape[-1] + zs.shape[-1]
 
@@ -173,8 +182,12 @@ class FQE:
         self.model = copy.deepcopy(new_model)
 
     def evaluate(self, zs, states, actions, uat=None):
-        xs = states
+        xs = np.array(states)
         del(states)
+        zs = np.array(zs)
+        actions = np.array(actions)
+        if uat is not None:
+            uat = np.array(uat)
         sdim = xs.shape[-1] + zs.shape[-1]
         T = actions.shape[1]
         actions_taken = self.get_actions(zs, xs, actions, uat)
