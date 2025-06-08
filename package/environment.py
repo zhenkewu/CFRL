@@ -81,6 +81,7 @@ class SyntheticEnvironment(gym.Env):
     def set_z_coef(self, new_z_coef):
         self.z_coef = new_z_coef'''
     
+    # ux0 needs to be 2D
     def reset(self, z, ux0):
         zs = np.array(z)
         ux0 = np.array(ux0)
@@ -96,6 +97,7 @@ class SyntheticEnvironment(gym.Env):
 
         return observation, None
     
+    # urtm1 needs to be 2D
     def step(self, action, uxt, urtm1):
         action = np.array(action)
         uxt = np.array(uxt)
@@ -119,18 +121,19 @@ class SyntheticEnvironment(gym.Env):
 
 
 
-def f_ux(size):
-    return np.random.normal(0, 1, size=size)
+def f_ux(N, state_dim):
+    return np.random.normal(0, 1, size=[N, state_dim])
 
-def f_ua(size):
-    return np.random.uniform(0, 1, size=size)
+def f_ua(N):
+    return np.random.uniform(0, 1, size=[N])
 
-def f_ur(size):
-    return np.random.normal(0, 1, size=size)
+def f_ur(N):
+    return np.random.normal(0, 1, size=[N, 1])
 
 # REQUIRES: zs should be the same as the zs passed to the environment
-def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=1):
+def sample_trajectory(env, zs, state_dim, T, policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=1):
     zs = np.array(zs)
+    N = zs.shape[0]
 
     # initialize containers to store the trajectory
     Z = zs.reshape(N, -1)
@@ -147,13 +150,13 @@ def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_
     L_c = np.zeros([N, T, 2], dtype=float)
 
     # generate the initial state
-    ux0 = f_ux([N, 1])
+    ux0 = f_ux(N=N, state_dim=state_dim)
     #ux0 = np.random.normal(0, sigma, [N, 1])
     #ux0 = np.ones((N, 1))
     X[:, 0], _ = env.reset(z=Z, ux0=ux0)
     
     # take the first step
-    ua0 = f_ua([N])
+    ua0 = f_ua(N=N)
     #ua0 = np.random.uniform(0, 1, size=[N])
     #ua0 = np.zeros(N)
     A[:, 0] = policy.act(
@@ -173,15 +176,15 @@ def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_
             uat=ua0,
             is_return_prob=False,
         ) # SHOULD DELETE LATER
-    ur0 = f_ur([N, 1])
-    ux1 = f_ux([N, 1])
+    ur0 = f_ur(N=N)
+    ux1 = f_ux(N=N, state_dim=state_dim)
     #ur0 = np.random.normal(0, sigma, [N, 1])
     #ux1 = np.random.normal(0, sigma, [N, 1])
     X[:, 1], R[:, 0], _, _ = env.step(action=A[:, 0], uxt=ux1, urtm1=ur0)
 
     # take subsequent steps
     for t in range(1, T):
-        uat = f_ua([N])
+        uat = f_ua(N=N)
         #uat = f_ua([N])
         #uat = np.random.uniform(0, 1, size=[N])
         #uat = np.ones(N)
@@ -202,8 +205,8 @@ def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_
                 uat=uat,
                 is_return_prob=False,
             ) # SHOULD DELETE LATER
-        urtm1 = f_ur([N, 1])
-        uxt = f_ux([N, 1])
+        urtm1 = f_ur(N=N)
+        uxt = f_ux(N=N, state_dim=state_dim)
         #urtm1 = np.random.normal(0, sigma, [N, 1])
         #uxt = np.random.normal(0, sigma, [N, 1])
         X[:, t + 1], R[:, t], _, _ = env.step(action=A[:, t], uxt=uxt, urtm1=urtm1)
@@ -215,11 +218,12 @@ def sample_trajectory(env, zs, state_dim, N, T, policy, f_ux=f_ux, f_ua=f_ua, f_
 
 
 # z_eval_levels should have shape (N, zdim)
-def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T, 
+def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, T, 
                                        policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=1):
     np.random.seed(seed)
     zs = np.array(zs)
     z_eval_levels = np.array(z_eval_levels)
+    N = zs.shape[0]
 
     # dictionary to contain the counterfactual trajectories; key = z and value = trajectory
     trajectories = {}
@@ -234,14 +238,14 @@ def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T,
                                         'env_z': env_z, 'policy_z': policy_z}
 
     # generate the initial state
-    ux0 = f_ux([N, state_dim])
+    ux0 = f_ux(N=N, state_dim=state_dim)
     #ux0 = np.random.normal(0, sigma, [N, 1])
     for z_level in z_eval_levels:
         e = trajectories[tuple(z_level.flatten())]['env_z']
         trajectories[tuple(z_level.flatten())]['X'][:, 0], _ = e.reset(z=np.tile(z_level, (N, 1)), ux0=ux0)
     
     # take the first step
-    ua0 = f_ua([N])
+    ua0 = f_ua(N=N)
     #ua0 = np.random.uniform(0, 1, size=[N])
     for z_level in z_eval_levels:
         p = trajectories[tuple(z_level.flatten())]['policy_z']
@@ -252,8 +256,8 @@ def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T,
                 atm1=None,
                 uat=ua0,
             )
-    ur0 = f_ur([N, 1])
-    ux1 = f_ux([N, state_dim])
+    ur0 = f_ur(N=N)
+    ux1 = f_ux(N=N, state_dim=state_dim)
     #ur0 = np.random.normal(0, sigma, [N, 1])
     #ux1 = np.random.normal(0, sigma, [N, 1])
     for z_level in z_eval_levels:
@@ -268,7 +272,7 @@ def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T,
 
     # take subsequent steps
     for t in range(1, T):
-        uat = f_ua([N])
+        uat = f_ua(N=N)
         #uat = np.random.uniform(0, 1, size=[N])
         for z_level in z_eval_levels:
             p = trajectories[tuple(z_level.flatten())]['policy_z']
@@ -280,8 +284,8 @@ def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, N, T,
                     atm1=actions,
                     uat=uat,
                 )
-        urtm1 = f_ur([N, 1])
-        uxt = f_ux([N, state_dim])
+        urtm1 = f_ur(N=N)
+        uxt = f_ux(N=N, state_dim=state_dim)
         #urtm1 = np.random.normal(0, sigma, [N, 1])
         #uxt = np.random.normal(0, sigma, [N, 1])
         for z_level in z_eval_levels:

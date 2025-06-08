@@ -53,7 +53,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
         actions,
         rewards,
     ) = sample_trajectory(
-        env, Z, 1, N, T, seed=seed, policy=working_policy 
+        env, Z, 1, T, seed=seed, policy=working_policy 
     ) # STATE_DIM CHANGED
 
     '''env = SimpleEnv(env_name='lm4', z_coef=z_coef, seed=seed)
@@ -496,8 +496,8 @@ def run_exp(export=False):
 
 
 # run the experiments
-'''s = int(input('Enter the seed that is to be used: '))
+s = int(input('Enter the seed that is to be used: '))
 df_n = run_exp1_one(methods=['ours'], 
-                          method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)'''
-df_n = run_exp(export=False)
-#print(df_n)
+                          method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)
+#df_n = run_exp(export=False)
+print(df_n)

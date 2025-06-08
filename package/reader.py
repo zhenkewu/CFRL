@@ -3,9 +3,9 @@ import numpy as np
 
 def _read_trajectory_helper(data, z_labels, state_labels, action_label, reward_label, id_label, T):
     # read some basic information
-    ids = np.unique(data[id_label].to_numpy())
+    ids = pd.unique(data[id_label])
     N = ids.shape[0]
-    T = T
+    T = T + 1
 
     # read trajectory data
     z_labels = np.array(z_labels)
@@ -38,11 +38,12 @@ def _read_trajectory_helper(data, z_labels, state_labels, action_label, reward_l
             for k in range(state_labels.shape[0]): # populate states
                 xs[i][t][k] = subdata[state_labels[k]].iat[t]
     
-    ids = np.unique(data[id_label].to_numpy()).reshape(-1, 1)
+    ids = pd.unique(data[id_label]).reshape(-1, 1)
     return zs, xs, actions, rewards, ids
 
 
 
+# T is the number of action steps
 def read_trajectory_from_csv(path, z_labels, state_labels, action_label, reward_label, id_label, T):
     # import trajectory data
     data = pd.read_csv(path)
@@ -53,6 +54,7 @@ def read_trajectory_from_csv(path, z_labels, state_labels, action_label, reward_
 
 
 
+# T is the number of action steps
 def read_trajectory_from_dataframe(data, z_labels, state_labels, action_label, 
                                    reward_label, id_label, T):
     # read trajectory data

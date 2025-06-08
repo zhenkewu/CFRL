@@ -138,7 +138,7 @@ class FQI:
                 q_values = self.model(torch.FloatTensor(states)).numpy()
         return np.argmax(q_values, axis=1)
     
-    def train(self, zs, xs, actions, rewards, max_iter, preprocess=True):   
+    def train(self, zs, xs, actions, rewards, max_iter=1000, preprocess=True):  
         zs = np.array(zs)
         xs = np.array(xs)
         actions = np.array(actions)

@@ -10,14 +10,14 @@ from .environment import SimulatedEnvironment
 from .environment import estimate_counterfactual_trajectories_from_data
 from .fqe import FQE
 
-def f_ux(size):
-    return np.random.normal(0, 1, size=size)
+def f_ux(N, state_dim):
+    return np.random.normal(0, 1, size=[N, state_dim])
 
-def f_ua(size):
-    return np.random.uniform(0, 1, size=size)
+def f_ua(N):
+    return np.random.uniform(0, 1, size=[N])
 
-def f_ur(size):
-    return np.random.normal(0, 1, size=size)
+def f_ur(N):
+    return np.random.normal(0, 1, size=[N, 1])
 
 
 
@@ -38,7 +38,7 @@ def evaluate_reward_through_simulation(env, z_eval_levels, state_dim, N, T, poli
         Z[i] = z_levels[Z_idx[i]]'''
 
     # simulate a trajectory and compute the discounted cumulative reward
-    _, _, _, rewards = sample_trajectory(env=env, zs=Z, state_dim=state_dim, N=N, T=T, 
+    _, _, _, rewards = sample_trajectory(env=env, zs=Z, state_dim=state_dim, T=T, 
                                          policy=policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=seed)
     discounted_factor = np.repeat(
         np.array([[gamma**i for i in range(T)]]), repeats=N, axis=0
@@ -84,7 +84,7 @@ def evaluate_fairness_through_simulation(env, z_eval_levels, state_dim, N, T,
 
     # generate the simulated counterfactual trajectories and compute the CF metric
     trajectories = sample_counterfactual_trajectories(env=env, zs=zs, z_eval_levels=z_eval_levels, 
-                                                      state_dim=state_dim, N=N, T=T, policy=policy, 
+                                                      state_dim=state_dim, T=T, policy=policy, 
                                                       f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=seed)
     cf_metric = _compute_cf_metric(trajectories=trajectories, z_eval_levels=z_eval_levels)
 
