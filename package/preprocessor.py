@@ -62,7 +62,7 @@ class SequentialPreprocessor(Preprocessor):
     def __init__(
         self,
         z_space,
-        action_space,
+        action_space=None,
         reg_model="nn",
         hidden_dims=[64, 64], 
         epochs=1000,
@@ -79,6 +79,8 @@ class SequentialPreprocessor(Preprocessor):
     ) -> None:
         z_space = np.array(z_space)
         action_space = np.array(action_space)
+        if (is_action_onehot) and (action_space is None):
+            raise ValueError('One hot encoding of actions requires action_space to be not None.')
 
         self.reg_model = reg_model
         self.hidden_dims = hidden_dims
@@ -87,7 +89,6 @@ class SequentialPreprocessor(Preprocessor):
         self.batch_size = batch_size
         self.is_action_onehot = is_action_onehot
         self.is_normalized = is_normalized
-        self.n_actions = len(np.unique(action_space.flatten()))
         self.action_space = action_space
         self.z_space = z_space
         self.zdim = z_space.shape[-1]

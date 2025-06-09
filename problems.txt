@@ -4,3 +4,5 @@ include an episodic version of the environments?
 Can try to accomodate the episodic case after accomodating the heterogeneous T case.
 
 2. What does the z_factor do in fit() in SimulatedEnvironment?
+
+3. It seems the FQI can only apply to cases with discrete actions?
