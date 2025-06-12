@@ -28,14 +28,14 @@ def evaluate_reward_through_simulation(env, z_eval_levels, state_dim, N, T, poli
     np.random.seed(seed)
 
     # generate the sensitive attribute for each simulated individual
-    Z = np.random.binomial(1, p=0.5, size=[N, 1])
-    '''Z = np.zeros((N, z_levels.shape[1]))
+    #Z = np.random.binomial(1, p=0.5, size=[N, 1])
+    Z = np.zeros((N, z_levels.shape[1]))
     if z_probs is None:
         Z_idx = np.random.choice(range(len(z_levels)), size=N, replace=True)
     else:
         Z_idx = np.random.choice(range(len(z_levels)), size=N, p=z_probs, replace=True)
     for i in range(N):
-        Z[i] = z_levels[Z_idx[i]]'''
+        Z[i] = z_levels[Z_idx[i]]
 
     # simulate a trajectory and compute the discounted cumulative reward
     _, _, _, rewards = sample_trajectory(env=env, zs=Z, state_dim=state_dim, T=T, 
@@ -113,7 +113,7 @@ def evaluate_fairness_through_model(env, zs, states, actions,
 
 
 def evaluate_reward_through_fqe(
-    zs, states, actions, rewards, model_type, policy, uat=None, 
+    zs, states, actions, rewards, model_type, policy, f_ua=f_ua, 
     hidden_dims=[32], lr=0.1, epochs=500, gamma=0.9, max_iter=200, seed=1, **kwargs
 ):
     np.random.seed(seed)
@@ -121,15 +121,13 @@ def evaluate_reward_through_fqe(
     states = np.array(states)
     actions = np.array(actions)
     rewards = np.array(rewards)
-    if uat is not None:
-        uat = np.array(uat)
     action_size = len(np.unique(actions.flatten(), axis=0))
 
     fqe = FQE(model_type=model_type, action_size=action_size, policy=policy, 
               hidden_dims=hidden_dims, lr=lr, epochs=epochs, gamma=gamma)
     fqe.fit(
         states=states, zs=zs, actions=actions, rewards=rewards, 
-        max_iter=max_iter, uat=uat
+        max_iter=max_iter, f_ua=f_ua
     )
 
-    return np.mean(fqe.evaluate(zs=zs, states=states, actions=actions, uat=uat))
+    return np.mean(fqe.evaluate(zs=zs, states=states, actions=actions, f_ua=f_ua))

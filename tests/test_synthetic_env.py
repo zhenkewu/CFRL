@@ -337,7 +337,7 @@ def test_sample_counterfactual_trajectory_multivariate_zs_states():
         states = trajectories[tuple(z)]['X']
         actions = trajectories[tuple(z)]['A']
         rewards = trajectories[tuple(z)]['R']
-        zs_correct = np.repeat(np.array(z), repeats=8).reshape(-1, 2)
+        zs_correct = np.repeat(np.array([z]), repeats=8, axis=0)
         assert(np.array_equal(zs, zs_correct))
         assert(states.shape == (8, 11, 3))
         assert(np.issubdtype(states.dtype, np.floating))

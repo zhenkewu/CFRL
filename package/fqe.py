@@ -5,6 +5,12 @@ from .utils.base_models import LinearRegressor, NeuralNet
 #from my_utils import glogger
 
 
+
+def f_ua(N):
+    return np.random.uniform(0, 1, size=[N])
+
+
+
 class FQE:
     def __init__(self, model_type, action_size, policy, 
                  hidden_dims=[32], lr=0.1, epochs=500, gamma=0.9) -> None:
@@ -49,7 +55,7 @@ class FQE:
 
         return actions_taken[:, 1:].reshape(N *(T - 1), -1)
 
-    def fit(self, zs, states, actions, rewards, max_iter, uat=None):
+    def fit(self, zs, states, actions, rewards, max_iter, f_ua=f_ua):
         torch.set_num_threads(1)
         # convenience variables
         xs = np.array(states)
@@ -57,8 +63,6 @@ class FQE:
         zs = np.array(zs)
         actions = np.array(actions)
         rewards = np.array(rewards)
-        if uat is not None:
-            uat = np.array(uat)
         N, T = actions.shape
         sdim = xs.shape[-1] + zs.shape[-1]
 
@@ -93,6 +97,7 @@ class FQE:
                     # selected_actions = self.policy.act(
                     #     uat=np.random.uniform(size=states.shape[0]), states=next_states
                     # ).flatten()
+                    uat = f_ua(N=N)
                     selected_actions = self.get_actions(zs_, xs_, actions_, uat).flatten()
                     Y = (
                         rewards + self.gamma * tmp[np.arange(tmp.shape[0]), selected_actions]
@@ -141,6 +146,7 @@ class FQE:
                         .detach()
                         .numpy()
                     )
+                    uat = f_ua(N=N)
                     selected_actions = self.get_actions(zs_, xs_, actions_, uat).reshape(
                         -1, 1
                     )
@@ -181,15 +187,14 @@ class FQE:
 
         self.model = copy.deepcopy(new_model)
 
-    def evaluate(self, zs, states, actions, uat=None):
+    def evaluate(self, zs, states, actions, f_ua=f_ua):
         xs = np.array(states)
         del(states)
         zs = np.array(zs)
         actions = np.array(actions)
-        if uat is not None:
-            uat = np.array(uat)
         sdim = xs.shape[-1] + zs.shape[-1]
         T = actions.shape[1]
+        uat = f_ua(N=zs.shape[0])
         actions_taken = self.get_actions(zs, xs, actions, uat)
         xs_ = copy.deepcopy(xs)
         zs_ = copy.deepcopy(zs)

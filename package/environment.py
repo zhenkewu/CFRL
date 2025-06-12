@@ -230,7 +230,7 @@ def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, T,
     for z_level in z_eval_levels:
         env_z = copy.deepcopy(env)
         policy_z = copy.deepcopy(policy)
-        Z = np.repeat(z_level, repeats=N, axis=0).reshape(N, -1) # RECENTLY CHANGED
+        Z = np.repeat(np.array([z_level]), repeats=N, axis=0) # RECENTLY CHANGED
         X = np.zeros([N, T + 1, state_dim], dtype=float)
         A = np.zeros([N, T], dtype=int)
         R = np.zeros([N, T], dtype=float)
@@ -324,7 +324,7 @@ class SimulatedEnvironment(gym.Env):
         early_stopping_min_delta=0.01,
         enforce_min_max=False,
         ):
-        self.action_space = action_space
+        self.action_space = np.array(action_space)
         self.reward_multiplication_factor = reward_multiplication_factor
         self.state_variance_factor = state_variance_factor
         self.z_factor = z_factor
@@ -707,10 +707,11 @@ def f_errors_rewards(size):
             )
 
 # REQUIRES: zs should be the same as the zs passed to the environment
-def sample_simulated_env_trajectory(env, zs, state_dim, N, T, f_errors_states=f_errors_states, 
-                                    f_errors_rewards=f_errors_rewards, seed=1, policy=None):
+def sample_simulated_env_trajectory(env, zs, state_dim, T, policy, f_errors_states=f_errors_states, 
+                                    f_errors_rewards=f_errors_rewards, seed=1):
     # initialize containers to store the trajectory
     zs = np.array(zs)
+    N = zs.shape[0]
     Z = zs.reshape(N, -1)
     X = np.zeros([N, T + 1, state_dim], dtype=float)
     A = np.zeros([N, T], dtype=int)
@@ -804,7 +805,7 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
     for z_level in z_eval_levels:
         env_z = copy.deepcopy(env)
         policy_z = copy.deepcopy(policy)
-        Z = np.repeat(z_level, repeats=N, axis=0) .reshape(N, -1)
+        Z = np.repeat(np.array([z_level]), repeats=N, axis=0)
         X = np.zeros([N, T + 1, state_dim], dtype=float)
         A = np.zeros([N, T + 1], dtype=int)
         R = np.zeros([N, T], dtype=float)
@@ -823,7 +824,7 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
                  + e.initial_model_mean[tuple(z_level.flatten())])
     
     # take the first step
-    ua0 = f_ua([N])
+    ua0 = f_ua(N=N)
     #ua0 = np.random.uniform(0, sigma_a, size=[N])
     for z_level in z_eval_levels:
         p = trajectories[tuple(z_level.flatten())]['policy_z']
@@ -854,7 +855,7 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
 
     # take subsequent steps
     for t in range(1, T):
-        uat = f_ua([N])
+        uat = f_ua(N=N)
         #uat = np.random.uniform(0, sigma_a, size=[N])
         for z_level in z_eval_levels:
             p = trajectories[tuple(z_level.flatten())]['policy_z']
@@ -884,7 +885,7 @@ def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, pol
                 ) = (states[idx, t + 1] - obs_mean + cf_mean)
     
     # take the final step
-    uaT = f_ua([N])
+    uaT = f_ua(N=N)
     #ua0 = np.random.uniform(0, sigma_a, size=[N])
     for z_level in z_eval_levels:
         p = trajectories[tuple(z_level.flatten())]['policy_z']
