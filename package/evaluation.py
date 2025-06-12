@@ -74,13 +74,13 @@ def evaluate_fairness_through_simulation(env, z_eval_levels, state_dim, N, T,
 
     # generate the sensitive sttribute for each simulated individual
     zs = np.random.binomial(n=1, p=1/2, size=[N, z_eval_levels.shape[1]])
-    '''zs = np.zeros((N, z_eval_levels.shape[1]))
+    zs = np.zeros((N, z_eval_levels.shape[1]))
     if z_probs is None:
         Z_idx = np.random.choice(range(len(z_eval_levels)), size=N, replace=True)
     else:
         Z_idx = np.random.choice(range(len(z_eval_levels)), size=N, p=z_probs, replace=True)
     for i in range(N):
-        zs[i] = z_eval_levels[Z_idx[i]]'''
+        zs[i] = z_eval_levels[Z_idx[i]]
 
     # generate the simulated counterfactual trajectories and compute the CF metric
     trajectories = sample_counterfactual_trajectories(env=env, zs=zs, z_eval_levels=z_eval_levels, 
