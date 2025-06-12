@@ -7,6 +7,7 @@
 7. write documentation & paper
 8. Extend to heterogeneous T
 9. add input error checks, and test catching input errors
+10. add tqdm progress bars
 
 
 

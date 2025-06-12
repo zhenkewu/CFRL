@@ -1,0 +1,11 @@
+.vscode/
+dist/
+build/
+examples/__pycache__/
+CFRL/__pycache__/
+tests/__pycache__/
+problems.txt
+to_clarify.txt
+to_do.txt
+scratch_paper.ipynb
+data/
