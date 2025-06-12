@@ -1,2 +1,0 @@
-1. When some z group has a small size, they might not be included in some cross_fold. 
-This might cause problem during training.
