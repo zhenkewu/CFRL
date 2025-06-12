@@ -3,6 +3,7 @@ dist/
 build/
 examples/__pycache__/
 CFRL/__pycache__/
+CFRL/utils/__pycache__
 tests/__pycache__/
 problems.txt
 to_clarify.txt
