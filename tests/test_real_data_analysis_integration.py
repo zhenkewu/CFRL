@@ -274,3 +274,4 @@ def test_real_data_analysis_multivariate_zs_states_nn():
 # run the tests
 test_real_data_analysis_univariate_zs_states_nn()
 test_real_data_analysis_multivariate_zs_states_nn()
+print('All real data analysis integration tests passed!')
