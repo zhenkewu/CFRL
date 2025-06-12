@@ -1,15 +1,15 @@
 import pandas as pd
 import numpy as np
-from package.environment import SyntheticEnvironment, sample_trajectory
-from package.environment import SimulatedEnvironment, sample_simulated_env_trajectory
-from package.reader import read_trajectory_from_csv, read_trajectory_from_dataframe
+from CFRL.environment import SyntheticEnvironment, sample_trajectory
+from CFRL.environment import SimulatedEnvironment, sample_simulated_env_trajectory
+from CFRL.reader import read_trajectory_from_csv, read_trajectory_from_dataframe
 from sklearn.model_selection import train_test_split
-from package.preprocessor import SequentialPreprocessor
+from CFRL.preprocessor import SequentialPreprocessor
 from examples.baseline_preprocessors import UnawarenessPreprocessor, ConcatenatePreprocessor
-from package.agents import FQI
+from CFRL.agents import FQI
 from examples.baseline_agents import BehaviorAgent, RandomAgent
 #from policy_learning_add import RandomAgent
-from package.evaluation import evaluate_fairness_through_model, evaluate_reward_through_fqe
+from CFRL.evaluation import evaluate_fairness_through_model, evaluate_reward_through_fqe
 import torch
 
 # an environment with univariate zs and states

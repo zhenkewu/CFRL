@@ -1,7 +1,7 @@
-from package.environment import SimulatedEnvironment, SyntheticEnvironment
-from package.environment import sample_simulated_env_trajectory, sample_trajectory
-from package.environment import estimate_counterfactual_trajectories_from_data
-from package.environment import sample_counterfactual_trajectories
+from CFRL.environment import SimulatedEnvironment, SyntheticEnvironment
+from CFRL.environment import sample_simulated_env_trajectory, sample_trajectory
+from CFRL.environment import estimate_counterfactual_trajectories_from_data
+from CFRL.environment import sample_counterfactual_trajectories
 from examples.baseline_agents import RandomAgent
 import numpy as np
 

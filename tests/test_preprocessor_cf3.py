@@ -1,5 +1,5 @@
-from package.preprocessor import SequentialPreprocessor
-from package.environment import SyntheticEnvironment, sample_trajectory
+from CFRL.preprocessor import SequentialPreprocessor
+from CFRL.environment import SyntheticEnvironment, sample_trajectory
 from examples.baseline_agents import RandomAgent
 import numpy as np
 
