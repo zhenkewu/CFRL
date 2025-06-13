@@ -120,7 +120,7 @@ def run_exp_one(seed, z_label, methods):
     # 3.2 train transition kernel
     np.random.seed(seed+3)
     torch.manual_seed(seed+3) # NEWLY ADDED
-    env = SimulatedEnvironment(trans_model_type='nn', 
+    env = SimulatedEnvironment(state_model_type='nn', 
                             reward_model_type='nn', 
                             z_factor=0, 
                             action_space=np.array([[0], [1], [2]]), 

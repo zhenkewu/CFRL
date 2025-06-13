@@ -200,7 +200,7 @@ def test_real_data_analysis_univariate_zs_states_nn():
     agent.train(zs=zs_train, xs=xs_tilde, actions=actions_train, rewards=rs_tilde, 
                 max_iter=10, preprocess=False)
 
-    env = SimulatedEnvironment(trans_model_type='nn', 
+    env = SimulatedEnvironment(state_model_type='nn', 
                                reward_model_type='nn', 
                                z_factor=0, 
                                num_actions=2)
@@ -277,7 +277,7 @@ def test_real_data_analysis_multivariate_zs_states_nn():
     agent.train(zs=zs_train, xs=xs_tilde, actions=actions_train, rewards=rs_tilde, 
                 max_iter=10, preprocess=False)
 
-    env = SimulatedEnvironment(trans_model_type='nn', 
+    env = SimulatedEnvironment(state_model_type='nn', 
                                reward_model_type='nn', 
                                z_factor=0, 
                                num_actions=2)

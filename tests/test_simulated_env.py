@@ -143,22 +143,22 @@ def f_rt_multi(
 
 # custom errors for states
 f_counter_states = 0
-def f_errors_states(size: int) -> np.ndarray:
+def f_errors_states(N: int, state_dim: int) -> np.ndarray:
     global f_counter_states 
     f_counter_states += 1
     return np.random.multivariate_normal(
-                mean=np.ones(size[1]),
-                cov=np.diag(np.ones(size[1])), 
-                size=size[0],
+                mean=np.ones(state_dim),
+                cov=np.diag(np.ones(state_dim)), 
+                size=N,
             )
 
 # custom errors for rewards
 f_counter_rewards = 0
-def f_errors_rewards(size: int) -> np.ndarray:
+def f_errors_rewards(N: int) -> np.ndarray:
     global f_counter_rewards
     f_counter_rewards += 1
     return np.random.normal(
-                loc=1, scale=1, size=size[0]
+                loc=1, scale=1, size=N
             )
 
 # custom exogenous U for actions

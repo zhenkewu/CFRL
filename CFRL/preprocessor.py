@@ -123,18 +123,18 @@ class SequentialPreprocessor(Preprocessor):
     preprocessor calculates 
 
     ..math::
-        \hat{s}_{i1}^z = s_{i1} - \hat{\mathbf{E}}(S_1|Z=z_i) + \hat{\mathbf{E}}(S_1|Z=z)
+        \hat{x}_{i1}^z = x_{i1} - \hat{\mathbf{E}}(X_1|Z=z_i) + \hat{\mathbf{E}}(X_1|Z=z)
 
-    and forms :math:`\tilde{s}_{i1} = [\hat{s}_{i1}^{z^{(1)}}, \dots, \hat{s}_{i1}^{z^{(K)}}]`.
+    and forms :math:`\tilde{x}_{i1} = [\hat{x}_{i1}^{z^{(1)}}, \dots, \hat{x}_{i1}^{z^{(K)}}]`.
 
     At t>0, for each individual :math:`i` and sensitive attribute level :math:`z`, the 
     preprocessor calculates
 
     ..math::
-        [\hat{s}_{it}^z, \hat{r}_{i,t-1}^z] = s_{i1} - \hat{\mu}(s_{i,t-1}, a_{i,t-1}, z_i) 
-            + \hat{\mu}(\hat{s}_{i,t-1}^z, a_{i,t-1}, z)
+        [\hat{x}_{it}^z, \hat{r}_{i,t-1}^z] = x_{i1} - \hat{\mu}(x_{i,t-1}, a_{i,t-1}, z_i) 
+            + \hat{\mu}(\hat{x}_{i,t-1}^z, a_{i,t-1}, z)
 
-    and forms :math:`\tilde{s}_{it} = [\hat{s}_{it}^{z^{(1)}}, \dots, \hat{s}_{it}^{z^{(K)}}]` 
+    and forms :math:`\tilde{x}_{it} = [\hat{x}_{it}^{z^{(1)}}, \dots, \hat{x}_{it}^{z^{(K)}}]` 
     and :math:`\tilde{r}_{i,t-1} = \Sigma_{k=1}^K\hat{\mathbb{P}}(Z=z^{(k)})\hat{r}_{i,t-1}^{z^{(K)}}`.
 
     Refrences: 
@@ -186,7 +186,7 @@ class SequentialPreprocessor(Preprocessor):
                 argument is not used if `reg_model="lm"`.
             epochs (int, optional): The number of training epochs for the neural network. This 
                 argument is not used if `reg_model="lm"`. 
-            learning_rate (int or float, optional): The learning rate of the neural netowrk. This 
+            learning_rate (int or float, optional): The learning rate of the neural network. This 
                 argument is not used if `reg_model="lm"`. 
             batch_size (int, optional): The batch size of the neural network. This argument is 
                 not used if `reg_model="lm"`.
@@ -197,8 +197,8 @@ class SequentialPreprocessor(Preprocessor):
             is_early_stopping (bool, optional): When set to `True`, will enforce early stopping 
                 during neural network training. This argument is not used if `reg_model="lm"`.
             test_size (int or float, optional): An int or float between 0 and 1 (inclusive) that 
-                specifies size of the test set used for early stopping. This argument is not used 
-                if `reg_model="lm"` or `is_early_stopping=False`.
+                specifies the proportion of the full data that is used as the test set for early 
+                stopping. This argument is not used if `reg_model="lm"` or `is_early_stopping=False`.
             early_stopping_patience (int, optional): The number of consequentive epochs with 
                 barely-decreasing loss needed for training to be early stopped. This argument is 
                 not used if `reg_model="lm"` or `is_early_stopping=False`.
