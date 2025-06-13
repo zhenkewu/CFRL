@@ -7,11 +7,17 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.kernel_approximation import RBFSampler
 from sklearn.linear_model import LinearRegression
 import numpy as np
+from typing import Literal
 #from utils.utils import glogger
 
 
 class EarlyStopping:
-    def __init__(self, patience=5, min_delta=0.001, mode="min"):
+    def __init__(
+            self, 
+            patience: int = 5, 
+            min_delta: int | float = 0.001, 
+            mode: str = "min"
+        ) -> None:
         self.patience = patience
         self.min_delta = min_delta
         self.mode = mode
@@ -19,7 +25,7 @@ class EarlyStopping:
         self.best_score = None
         self.early_stop = False
 
-    def __call__(self, val_loss):
+    def __call__(self, val_loss: int | float) -> bool:
         if self.best_score is None:
             self.best_score = val_loss
             return False
@@ -80,7 +86,11 @@ class NeuralNetRegressor(nn.Module):
         #self.model = NeuralNet(in_dim, out_dim, hidden_dims)
 
     @staticmethod
-    def standardize(x, mean=None, std=None):
+    def standardize(
+            x: np.ndarray, 
+            mean: np.ndarray | None = None, 
+            std: np.ndarray | None = None
+        ) -> np.ndarray:
         if mean is None and std is None:
             mean = np.mean(x, axis=0)
             std = np.std(x, axis=0)
@@ -89,22 +99,26 @@ class NeuralNetRegressor(nn.Module):
             return (x - mean) / std
 
     @staticmethod
-    def destandardize(x, mean, std):
+    def destandardize(
+            x: np.ndarray, 
+            mean: np.ndarray, 
+            std: np.ndarray
+        ) -> np.ndarray:
         return x * std + mean
 
     def fit(
         self,
-        X,
-        y,
-        epochs,
-        learning_rate,
-        batch_size,
-        is_early_stopping=False,
-        test_size=0.2,
-        early_stopping_patience=10,
-        early_stopping_min_delta=0.005,
-        log_interval=10,
-    ):
+        X: np.ndarray,
+        y: np.ndarray,
+        epochs: int,
+        learning_rate: int | float,
+        batch_size: int,
+        is_early_stopping: bool = False,
+        test_size: int | float = 0.2,
+        early_stopping_patience: int = 10,
+        early_stopping_min_delta: int | float = 0.005,
+        log_interval: int = 10,
+    ) -> None:
         torch.set_num_threads(1)
         if self.is_standarized:
             X, self.x_mean, self.x_std = self.standardize(X)
@@ -186,7 +200,7 @@ class NeuralNetRegressor(nn.Module):
             self.mse = np.mean((y_pred - y) ** 2, axis=0)
             self.var = self.mse
 
-    def predict(self, X):
+    def predict(self, X: np.ndarray) -> np.ndarray:
         self.model.eval()
         with torch.no_grad():
             if self.is_standarized:
@@ -197,7 +211,7 @@ class NeuralNetRegressor(nn.Module):
                 y = self.model(torch.tensor(X, dtype=torch.float32)).numpy()
         return y
 
-    def sample(self, X):
+    def sample(self, X: np.ndarray) -> np.ndarray:
         self.model.eval()
         epsilons = np.random.multivariate_normal(
             mean=np.zeros(self.out_dim), cov=np.diag(self.mse), size=X.shape[0]
@@ -215,11 +229,11 @@ class NeuralNetRegressor(nn.Module):
 class LinearRegressor:
     def __init__(
         self,
-        featurize_method=None,
-        degree=1,
-        interaction_only=False,
-        is_standarized=False,
-    ):
+        featurize_method: Literal["polynomial", "rbf"] | None = None,
+        degree: int = 1,
+        interaction_only: bool = False,
+        is_standarized: bool = False,
+    ) -> None:
         super(LinearRegressor, self).__init__()
         self.featurize_method = featurize_method
         self.degree = degree
@@ -227,7 +241,11 @@ class LinearRegressor:
         self.is_standarized = is_standarized
 
     @staticmethod
-    def standardize(x, mean=None, std=None):
+    def standardize(
+            x: np.ndarray, 
+            mean: np.ndarray | None = None, 
+            std: np.ndarray | None = None
+        ) -> np.ndarray:
         if mean is None and std is None:
             mean = np.mean(x, axis=0)
             std = np.std(x, axis=0)
@@ -236,10 +254,14 @@ class LinearRegressor:
             return (x - mean) / std
 
     @staticmethod
-    def destandardize(x, mean, std):
+    def destandardize(
+            x: np.ndarray, 
+            mean: np.ndarray, 
+            std: np.ndarray
+        ) -> np.ndarray:
         return x * std + mean
 
-    def featurize(self, X):
+    def featurize(self, X: np.ndarray) -> np.ndarray:
         if self.featurize_method is None:
             return PolynomialFeatures(
                 degree=1, include_bias=False, interaction_only=self.interaction_only
@@ -253,7 +275,7 @@ class LinearRegressor:
         elif self.featurize_method == "rbf":
             return RBFSampler(gamma=1, random_state=2, n_components=20).fit_transform(X)
 
-    def fit(self, X, Y, **kwargs):
+    def fit(self, X: np.ndarray, Y: np.ndarray, **kwargs) -> np.ndarray:
         if self.is_standarized:
             X, self.x_mean, self.x_std = self.standardize(X)
             Y, self.y_mean, self.y_std = self.standardize(Y)
@@ -263,7 +285,7 @@ class LinearRegressor:
         Y_pred = self.model.predict(self.featurize(X))
         self.mse = np.mean((Y_pred - Y) ** 2, axis=0)
 
-    def predict(self, X):
+    def predict(self, X: np.ndarray) -> np.ndarray:
         if self.is_standarized:
             X = self.standardize(X, self.x_mean, self.x_std)
             Y = self.model.predict(self.featurize(X))
@@ -272,7 +294,7 @@ class LinearRegressor:
             Y = self.model.predict(self.featurize(X))
         return Y
 
-    def sample(self, X):
+    def sample(self, X: np.ndarray) -> np.ndarray:
         epsilons = np.random.multivariate_normal(
             mean=np.zeros(self.model.coef_.shape[0]),
             cov=np.diag(self.mse),

@@ -2,18 +2,28 @@ import numpy as np
 import torch
 import copy
 from .utils.base_models import LinearRegressor, NeuralNet
+from .agents import Agent
 #from my_utils import glogger
+from typing import Literal, Callable
 
 
 
-def f_ua(N):
+def f_ua(N: int) -> np.ndarray:
     return np.random.uniform(0, 1, size=[N])
 
 
 
 class FQE:
-    def __init__(self, model_type, action_size, policy, 
-                 hidden_dims=[32], lr=0.1, epochs=500, gamma=0.9) -> None:
+    def __init__(
+            self, 
+            model_type: Literal["lm", "nn"], 
+            action_size: int, 
+            policy: Agent, 
+            hidden_dims: list[int] = [32], 
+            lr: int | float = 0.1, 
+            epochs: int = 500, 
+            gamma: int | float = 0.9
+        ) -> None:
         self.model_type = model_type
         self.action_size = action_size
         self.policy = policy
@@ -25,10 +35,16 @@ class FQE:
         # sanity check
         self._sanity_check()
 
-    def _sanity_check(self):
+    def _sanity_check(self) -> None:
         assert self.model_type in ["lm", "nn"], "Invalid model type"
 
-    def get_actions(self, zs, states, actions, uat=None):
+    def get_actions(
+            self, 
+            zs: np.ndarray, 
+            states: np.ndarray, 
+            actions: np.ndarray, 
+            uat: np.ndarray | None = None
+        ) -> np.ndarray:
         xs = np.array(states)
         del(states)
         zs = np.array(zs)
@@ -55,7 +71,15 @@ class FQE:
 
         return actions_taken[:, 1:].reshape(N *(T - 1), -1)
 
-    def fit(self, zs, states, actions, rewards, max_iter, f_ua=f_ua):
+    def fit(
+            self, 
+            zs: list | np.ndarray, 
+            states: list | np.ndarray, 
+            actions: list | np.ndarray, 
+            rewards: list | np.ndarray, 
+            max_iter: int, 
+            f_ua: Callable[[int], int] = f_ua
+        ) -> None:
         torch.set_num_threads(1)
         # convenience variables
         xs = np.array(states)
@@ -187,7 +211,13 @@ class FQE:
 
         self.model = copy.deepcopy(new_model)
 
-    def evaluate(self, zs, states, actions, f_ua=f_ua):
+    def evaluate(
+            self, 
+            zs: list | np.ndarray, 
+            states: list | np.ndarray, 
+            actions: list | np.ndarray, 
+            f_ua: Callable[[int], int] = f_ua
+        ) -> np.ndarray:
         xs = np.array(states)
         del(states)
         zs = np.array(zs)

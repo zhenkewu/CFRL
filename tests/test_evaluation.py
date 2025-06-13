@@ -7,7 +7,11 @@ import numpy as np
 
 # an environment with univariate zs and states
 # x0 = 0.5 + zs + ux0 (assuming z_coef=1)
-def f_x0_uni(zs, ux0, z_coef=1):
+def f_x0_uni(
+        zs: np.ndarray, 
+        ux0: np.ndarray, 
+        z_coef: int = 1
+    ) -> np.ndarray:
     gamma0 = np.array([0.5, 1 * z_coef, 1])
     n = zs.shape[0]
     M = np.concatenate(
@@ -23,7 +27,13 @@ def f_x0_uni(zs, ux0, z_coef=1):
     return x0
 
 # xt = -0.5 + zs + 3 * xtm1 + 2 * atm1 + uxt (assuming z_coef=1)
-def f_xt_uni(zs, xtm1, atm1, uxt, z_coef=1):
+def f_xt_uni(
+        zs: np.ndarray, 
+        xtm1: np.ndarray, 
+        atm1: np.ndarray, 
+        uxt: np.ndarray, 
+        z_coef: int = 1
+    ) -> np.ndarray:
     gamma = np.array([-0.5, 1 * z_coef, 3, 2, 1])
     n = xtm1.shape[0]
     M = np.concatenate(
@@ -41,7 +51,13 @@ def f_xt_uni(zs, xtm1, atm1, uxt, z_coef=1):
     return xt
 
 # xt = -0.5 + zs + xt + at + urt (assuming z_coef=1)
-def f_rt_uni(zs, xt, at, urtm1, z_coef=1):
+def f_rt_uni(
+        zs: np.ndarray, 
+        xt: np.ndarray, 
+        at: np.ndarray, 
+        urtm1: np.ndarray, 
+        z_coef: int = 1
+    ) -> np.ndarray:
     lmbda = np.array([-0.5, 1, 1 * z_coef, 1, 1])
     n = xt.shape[0]
     at = at.reshape(-1, 1)
@@ -55,7 +71,11 @@ def f_rt_uni(zs, xt, at, urtm1, z_coef=1):
 
 # an environment with bivariate zs and trivariate states
 # x0_i = 0.5 + zs_1 + zs_2 + ux0_i (assuming z_coef=1)
-def f_x0_multi(zs, ux0, z_coef=1):
+def f_x0_multi(
+        zs: np.ndarray, 
+        ux0: np.ndarray, 
+        z_coef: int = 1
+    ) -> np.ndarray:
     gamma0 = np.array([np.repeat(np.array([0.5]), repeats=3), 
                        np.repeat(np.array(1 * z_coef), repeats=3), 
                        np.repeat(np.array(1 * z_coef), repeats=3)])
@@ -73,7 +93,13 @@ def f_x0_multi(zs, ux0, z_coef=1):
     return x0
 
 # xt_i = -0.5 + zs_1 + zs_2 + 3 * (xtm1_1 + xtm1_2 + xtm1_3) + 2 * atm1 + uxt (assuming z_coef=1)
-def f_xt_multi(zs, xtm1, atm1, uxt, z_coef=1):
+def f_xt_multi(
+        zs: np.ndarray, 
+        xtm1: np.ndarray, 
+        atm1: np.ndarray, 
+        uxt: np.ndarray, 
+        z_coef: int = 1
+    ) -> np.ndarray:
     gamma = np.array([np.repeat(np.array([-0.5]), repeats=3), 
                       np.repeat(np.array(1 * z_coef), repeats=3), 
                       np.repeat(np.array(1 * z_coef), repeats=3), 
@@ -97,7 +123,13 @@ def f_xt_multi(zs, xtm1, atm1, uxt, z_coef=1):
     return xt
 
 # xt = -0.5 + zs_1 + zs_2 + xt_1 + xt_2 + xt_3 + at + urt (assuming z_coef=1)
-def f_rt_multi(zs, xt, at, urtm1, z_coef=1):
+def f_rt_multi(
+        zs: np.ndarray, 
+        xt: np.ndarray, 
+        at: np.ndarray, 
+        urtm1: np.ndarray, 
+        z_coef: int = 1
+    ) -> np.ndarray:
     lmbda = np.array([-0.5, 1, 1, 1, 1 * z_coef, 1 * z_coef, 1, 1])
     n = xt.shape[0]
     at = at.reshape(-1, 1)
@@ -106,6 +138,8 @@ def f_rt_multi(zs, xt, at, urtm1, z_coef=1):
     )
     rt = M @ lmbda
     return rt
+
+
 
 def test_evaluate_reward_through_simulation_univariate_zs_states():
     env = SyntheticEnvironment(state_dim=1, 

@@ -10,6 +10,7 @@ from .utils.base_models import NeuralNetRegressor
 #from utils.utils import timer_func
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import OneHotEncoder
+from typing import Union, Literal
 
 
 class Preprocessor:
@@ -20,7 +21,11 @@ class Preprocessor:
         raise NotImplementedError
 
     @staticmethod
-    def standardize(x, mean=None, std=None):
+    def standardize(
+            x: np.ndarray, 
+            mean: np.ndarray | None = None, 
+            std: np.ndarray | None = None
+        ) -> np.ndarray:
         if mean is None and std is None:
             mean = np.mean(x, axis=0)
             std = np.std(x, axis=0)
@@ -29,15 +34,19 @@ class Preprocessor:
             return (x - mean) / std
 
     @staticmethod
-    def destandardize(x, mean, std):
+    def destandardize(
+            x: np.ndarray, 
+            mean: np.ndarray, 
+            std: np.ndarray
+        ) -> np.ndarray:
         return x * std + mean
 
-    def reset_buffer(self, n):
+    def reset_buffer(self, n: int) -> None:
         self.buffer = {}
         for key, prob in self.marginal_dist_z.items():
             self.buffer[key] = np.zeros((n, self.xdim))
 
-    def _hash_tuples(self, tuples):
+    '''def _hash_tuples(self, tuples):
         if tuples.ndim == 1:
             hashing_tuples = "_".join(np.array(tuples).astype("str"))
         else:
@@ -55,30 +64,31 @@ class Preprocessor:
                 axis=0,
                 arr=hashing_tuples,
             )
-        return tuples
+        return tuples'''
 
 
 class SequentialPreprocessor(Preprocessor):
     def __init__(
         self,
-        z_space,
-        action_space=None,
-        reg_model="nn",
-        hidden_dims=[64, 64], 
-        epochs=1000,
-        learning_rate=0.005,
-        batch_size=512,
-        is_action_onehot=True,
-        is_normalized=False,
-        is_early_stopping=False,
-        test_size=0.2,
-        early_stopping_patience=10,
-        early_stopping_min_delta=0.01,
-        cross_folds=1,
-        mode="single",  # single, sensitive
+        z_space: list | np.ndarray,
+        action_space: list | np.ndarray | None = None,
+        reg_model: Literal["lm", "nn"] = "nn",
+        hidden_dims: list[int] = [64, 64], 
+        epochs: int = 1000,
+        learning_rate: int | float = 0.005,
+        batch_size: int = 512,
+        is_action_onehot: bool = True,
+        is_normalized: bool = False,
+        is_early_stopping: bool = False,
+        test_size: int | float = 0.2,
+        early_stopping_patience: int = 10,
+        early_stopping_min_delta: int | float = 0.01,
+        cross_folds: int = 1,
+        mode: Literal["single", "sensitive"] = "single",  # single, sensitive
     ) -> None:
         z_space = np.array(z_space)
-        action_space = np.array(action_space)
+        if action_space is not None:
+            action_space = np.array(action_space)
         if (is_action_onehot) and (action_space is None):
             raise ValueError('One hot encoding of actions requires action_space to be not None.')
 
@@ -102,11 +112,15 @@ class SequentialPreprocessor(Preprocessor):
         self.cross_folds = cross_folds
         self.mode = mode
 
-    def encode_a(self, a):
+    def encode_a(self, a: np.ndarray) -> np.ndarray:
         enc = OneHotEncoder(categories=[self.action_space.flatten()], drop=None)
         return enc.fit_transform(a.reshape(-1, 1)).toarray()
 
-    def _learn_initial_model(self, xs, zs):
+    def _learn_initial_model(
+            self, 
+            xs: np.ndarray, 
+            zs: np.ndarray
+        ) -> dict[tuple[Union[int, float], ...], np.ndarray]:
         # learn model at time 0
         model0 = {}
         for z in np.unique(zs, axis=0):
@@ -114,7 +128,13 @@ class SequentialPreprocessor(Preprocessor):
             model0[tuple(z)] = np.mean(xs[idx_z, 0, :], axis=0)
         return model0
 
-    def _learn_transition_models(self, xs, zs, actions, rewards):
+    def _learn_transition_models(
+            self, 
+            xs: np.ndarray, 
+            zs: np.ndarray, 
+            actions: np.ndarray, 
+            rewards: np.ndarray
+        ) -> LinearRegression | NeuralNetRegressor:
         # learn model after time 0
         N, T, _ = xs.shape
         if self.is_normalized:
@@ -151,7 +171,14 @@ class SequentialPreprocessor(Preprocessor):
             print("Model type is undefined. Please specify either \"lm\" or \"nn\".")
             exit(1)
 
-    def _learn_linear_model(self, states, next_states, zs, actions, T):
+    def _learn_linear_model(
+            self, 
+            states: np.ndarray, 
+            next_states: np.ndarray, 
+            zs: np.ndarray, 
+            actions: np.ndarray, 
+            T: int
+        ) -> LinearRegression:
         X = np.concatenate(
             [
                 np.repeat(zs.reshape(-1, 1, self.zdim), repeats=T - 1, axis=1).reshape(
@@ -165,7 +192,14 @@ class SequentialPreprocessor(Preprocessor):
         Y = next_states
         return LinearRegression().fit(X, Y)
 
-    def _learn_neural_model(self, states, next_states, zs, actions, T):
+    def _learn_neural_model(
+            self, 
+            states: np.ndarray, 
+            next_states: np.ndarray, 
+            zs: np.ndarray, 
+            actions: np.ndarray, 
+            T: int
+        ) -> NeuralNetRegressor:
         if self.mode == "single":
             return self._learn_single_neural_model(states, next_states, zs, actions, T)
         elif self.mode == "sensitive":
@@ -177,7 +211,14 @@ class SequentialPreprocessor(Preprocessor):
             exit(1)
 
 
-    def _learn_single_neural_model(self, states, next_states, zs, actions, T):
+    def _learn_single_neural_model(
+            self, 
+            states: np.ndarray, 
+            next_states: np.ndarray, 
+            zs: np.ndarray, 
+            actions: np.ndarray, 
+            T: int
+        ) -> NeuralNetRegressor:
         X = np.concatenate(
             [
                 np.repeat(zs.reshape(-1, 1, self.zdim), repeats=T - 1, axis=1).reshape(
@@ -205,7 +246,14 @@ class SequentialPreprocessor(Preprocessor):
         )
         return model
 
-    def _learn_sensitive_neural_model(self, states, next_states, zs, actions, T):
+    def _learn_sensitive_neural_model(
+            self, 
+            states: np.ndarray, 
+            next_states: np.ndarray, 
+            zs: np.ndarray, 
+            actions: np.ndarray, 
+            T: int
+        ) -> NeuralNetRegressor:
         model = {}
         zs = np.repeat(zs[:, np.newaxis, :], axis=1, repeats=T - 1).reshape(
             -1, self.zdim
@@ -234,12 +282,22 @@ class SequentialPreprocessor(Preprocessor):
             )
         return model
 
-    def learn_transition_models(self, xs, zs, actions, rewards):
+    def learn_transition_models(
+            self, 
+            xs: np.ndarray, 
+            zs: np.ndarray, 
+            actions: np.ndarray, 
+            rewards: np.ndarray
+        ) -> tuple[dict[tuple[Union[int, float], ...], np.ndarray], 
+                        Union[LinearRegression, NeuralNetRegressor]]:
         model0 = self._learn_initial_model(xs, zs)
         model = self._learn_transition_models(xs, zs, actions, rewards)
         return model0, model
 
-    def learn_marginal_dist_z(self, zs):
+    def learn_marginal_dist_z(
+            self, 
+            zs: np.ndarray
+        ) -> dict[tuple[Union[int, float], ...], Union[int, float]]:
         marginal_dist_z = {}
         self.z_space = np.unique(zs, axis=0)
         for z in np.unique(zs, axis=0):
@@ -247,7 +305,13 @@ class SequentialPreprocessor(Preprocessor):
             marginal_dist_z[tuple(z)] = sum(z_idx) / len(z_idx)
         return marginal_dist_z
 
-    def _estimate_cf_next_state_reward_mean_tg1(self, model, z, at, xt):
+    def _estimate_cf_next_state_reward_mean_tg1(
+            self, 
+            model: LinearRegression | NeuralNetRegressor, 
+            z: np.ndarray, 
+            at: np.ndarray, 
+            xt: np.ndarray
+        ) -> np.ndarray:
         N = xt.shape[0]
         if self.is_normalized:
             state = self.standardize(xt, self.states_mean, self.states_std)
@@ -284,7 +348,12 @@ class SequentialPreprocessor(Preprocessor):
             m = self.destandardize(m, self.next_states_mean, self.next_states_std)
         return m
 
-    def _process_initial_state(self, initial_model, z, xt):
+    def _process_initial_state(
+            self, 
+            initial_model: dict[tuple[Union[int, float], ...], np.ndarray], 
+            z: np.ndarray, 
+            xt: np.ndarray
+        ) -> tuple[np.ndarray, dict[tuple[Union[int, float], ...], np.ndarray]]:
         zs = z
         del(z)
         N = xt.shape[0]
@@ -297,8 +366,14 @@ class SequentialPreprocessor(Preprocessor):
         return xt_tilde, xt_c
 
     def _process_subsequent_states(
-        self, transition_model, z, xt, xtm1, atm1, rtm1=None
-    ):
+        self, 
+        transition_model: LinearRegression | NeuralNetRegressor, 
+        z: np.ndarray, 
+        xt: np.ndarray, 
+        xtm1: np.ndarray, 
+        atm1: np.ndarray, 
+        rtm1: np.ndarray | None = None
+    ) -> tuple[np.ndarray, np.ndarray, dict[tuple[Union[int, float], ...], np.ndarray]]:
         N = xt.shape[0]
         m = self._estimate_cf_next_state_reward_mean_tg1(
             model=transition_model, z=z, at=atm1, xt=xtm1
@@ -336,7 +411,13 @@ class SequentialPreprocessor(Preprocessor):
 
         return xt_tilde, rtm1_tilde, xt_c
 
-    def train_preprocessor(self, zs, xs, actions, rewards):
+    def train_preprocessor(
+            self, 
+            zs: list | np.ndarray, 
+            xs: list | np.ndarray, 
+            actions: list | np.ndarray, 
+            rewards: list | np.ndarray
+        ) -> tuple[np.ndarray, np.ndarray]:
         zs = np.array(zs)
         xs = np.array(xs)
         actions = np.array(actions)
@@ -418,7 +499,15 @@ class SequentialPreprocessor(Preprocessor):
     # SEEMS WE CANNOT PREPROCESS A SINGLE STEP THAT'S NOT CONSECUTIVE? CUZ THEN THE INFO IN THE 
     # BUFFER WOULD BE INCORRECT? (BUFFER STORES THE COUNTERFACTUAL STATES FROM LAST FUNCTION CALL, 
     # IDEALLY IT IS THE COUNTERFACTUAL STATES FROM THE PREVIOUS STEP.)
-    def preprocess_single_step(self, z, xt, xtm1=None, atm1=None, rtm1=None, **kwargs):
+    def preprocess_single_step(
+            self, 
+            z: list | np.ndarray, 
+            xt: list | np.ndarray, 
+            xtm1: list | np.ndarray | None = None, 
+            atm1: list | np.ndarray | None = None, 
+            rtm1: list | np.ndarray | None = None, 
+            **kwargs
+        ) -> tuple[np.ndarray, np.ndarray] | np.ndarray:
         z = np.array(z)
         xt = np.array(xt)
         if xtm1 is not None:
@@ -480,7 +569,13 @@ class SequentialPreprocessor(Preprocessor):
                 self.buffer = buffer_tmp.copy()
         return (xt_tilde, rtm1_tilde) if rtm1 is not None else xt_tilde
     
-    def preprocess_multiple_steps(self, zs, xs, actions, rewards=None):
+    def preprocess_multiple_steps(
+            self, 
+            zs: list | np.ndarray, 
+            xs: list | np.ndarray, 
+            actions: list | np.ndarray, 
+            rewards: list | np.ndarray | None = None
+        ) -> tuple[np.ndarray, np.ndarray] | np.ndarray:
         zs = np.array(zs)
         xs = np.array(xs)
         actions = np.array(actions)

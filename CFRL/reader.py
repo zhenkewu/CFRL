@@ -1,7 +1,15 @@
 import pandas as pd
 import numpy as np
 
-def _read_trajectory_helper(data, z_labels, state_labels, action_label, reward_label, id_label, T):
+def _read_trajectory_helper(
+        data: pd.DataFrame, 
+        z_labels: list[str], 
+        state_labels: list[str], 
+        action_label: str, 
+        reward_label: str, 
+        id_label: str, 
+        T: int
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     # read some basic information
     ids = pd.unique(data[id_label])
     N = ids.shape[0]
@@ -44,7 +52,15 @@ def _read_trajectory_helper(data, z_labels, state_labels, action_label, reward_l
 
 
 # T is the number of action steps
-def read_trajectory_from_csv(path, z_labels, state_labels, action_label, reward_label, id_label, T):
+def read_trajectory_from_csv(
+        path: str, 
+        z_labels: list[str], 
+        state_labels: list[str], 
+        action_label: str, 
+        reward_label: str, 
+        id_label: str, 
+        T: int
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     # import trajectory data
     data = pd.read_csv(path)
 
@@ -55,17 +71,34 @@ def read_trajectory_from_csv(path, z_labels, state_labels, action_label, reward_
 
 
 # T is the number of action steps
-def read_trajectory_from_dataframe(data, z_labels, state_labels, action_label, 
-                                   reward_label, id_label, T):
+def read_trajectory_from_dataframe(
+        data: pd.DataFrame, 
+        z_labels: list[str], 
+        state_labels: list[str], 
+        action_label: str, 
+        reward_label: str, 
+        id_label: str, 
+        T: int
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     # read trajectory data
     return _read_trajectory_helper(data, z_labels, state_labels, action_label, reward_label, 
                                         id_label, T)
 
 
 
-def convert_trajectory_to_dataframe(zs, states, actions, rewards, ids, z_labels=None, 
-                                    state_labels=None, action_label=None, reward_label=None, 
-                                    id_label=None, T_label=None):
+def convert_trajectory_to_dataframe(
+        zs: list | np.ndarray, 
+        states: list | np.ndarray, 
+        actions: list | np.ndarray, 
+        rewards: list | np.ndarray, 
+        ids: list | np.ndarray, 
+        z_labels: list[str] | None = None, 
+        state_labels: list[str] | None = None, 
+        action_label: str | None = None, 
+        reward_label: str | None = None, 
+        id_label: str | None = None, 
+        T_label: str | None = None
+    ) -> pd.DataFrame:
     N = states.shape[0]
     T = states.shape[1]
     zs = np.array(zs)
@@ -130,9 +163,21 @@ def convert_trajectory_to_dataframe(zs, states, actions, rewards, ids, z_labels=
 
 
 
-def export_trajectory_to_csv(path, zs, states, actions, rewards, ids, z_labels=None, 
-                             state_labels=None, action_label=None, reward_label=None, 
-                             id_label=None, T_label=None, **to_csv_kwargs):
+def export_trajectory_to_csv(
+        path: str, 
+        zs: list | np.ndarray, 
+        states: list | np.ndarray, 
+        actions: list | np.ndarray, 
+        rewards: list | np.ndarray, 
+        ids: list | np.ndarray, 
+        z_labels: list[str] | None = None, 
+        state_labels: list[str] | None = None, 
+        action_label: str | None = None, 
+        reward_label: str | None = None, 
+        id_label: str | None = None, 
+        T_label: str | None = None, 
+        **to_csv_kwargs
+    ) -> None:
     data = convert_trajectory_to_dataframe(zs, states, actions, rewards, ids, z_labels, state_labels, 
                                            action_label, reward_label, id_label, T_label)
     data.to_csv(path, **to_csv_kwargs)

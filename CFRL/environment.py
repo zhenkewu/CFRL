@@ -4,8 +4,14 @@ import copy
 import torch
 from sklearn.preprocessing import OneHotEncoder
 from .utils.base_models import NeuralNetRegressor, LinearRegressor
+from typing import Union, Callable, Literal, Dict
+from .agents import Agent
 
-def f_x0(zs, ux0, z_coef=1):
+def f_x0(
+        zs: list | np.ndarray, 
+        ux0: list | np.ndarray, 
+        z_coef: int | float = 1
+    ) -> np.ndarray:
     zs = np.array(zs)
     ux0 = np.array(ux0)
     gamma0 = np.array([-0.3, 1 * z_coef, 1])
@@ -22,7 +28,13 @@ def f_x0(zs, ux0, z_coef=1):
     x0 = x0.reshape(-1, 1)
     return x0
 
-def f_xt(zs, xtm1, atm1, uxt, z_coef=1):
+def f_xt(
+        zs: list | np.ndarray, 
+        xtm1: list | np.ndarray, 
+        atm1: list | np.ndarray, 
+        uxt: list | np.ndarray, 
+        z_coef: int | float = list | np.ndarray
+    ) -> np.ndarray:
     zs = np.array(zs)
     xtm1 = np.array(xtm1)
     atm1 = np.array(atm1)
@@ -46,7 +58,13 @@ def f_xt(zs, xtm1, atm1, uxt, z_coef=1):
     xt = xt.reshape(-1, 1)
     return xt
 
-def f_rt(zs, xt, at, urtm1, z_coef=1):
+def f_rt(
+        zs: list | np.ndarray, 
+        xt: list | np.ndarray, 
+        at: list | np.ndarray, 
+        urtm1: list | np.ndarray, 
+        z_coef: int | float =1
+    ) -> np.ndarray:
     zs = np.array(zs)
     xt = np.array(xt)
     at = np.array(at)
@@ -63,7 +81,14 @@ def f_rt(zs, xt, at, urtm1, z_coef=1):
 
 
 class SyntheticEnvironment(gym.Env):
-    def __init__(self, state_dim=1, z_coef=1, f_x0=f_x0, f_xt=f_xt, f_rt=f_rt):
+    def __init__(
+            self, 
+            state_dim: int = 1, 
+            z_coef: int | float = 1, 
+            f_x0: Callable[[np.ndarray, np.ndarray, np.ndarray], np.ndarray] = f_x0, 
+            f_xt: Callable[[np.ndarray, np.ndarray, np.ndarray, np.ndarray], np.ndarray] = f_xt, 
+            f_rt: Callable[[np.ndarray, np.ndarray, np.ndarray, np.ndarray], np.ndarray] = f_rt
+        ) -> None:
         self.state_dim = state_dim
         self.z_coef = z_coef
         self.f_x0 = f_x0
@@ -82,7 +107,11 @@ class SyntheticEnvironment(gym.Env):
         self.z_coef = new_z_coef'''
     
     # ux0 needs to be 2D
-    def reset(self, z, ux0):
+    def reset(
+            self, 
+            z: list | np.ndarray, 
+            ux0: list | np.ndarray
+        ) -> tuple[np.ndarray, None]:
         zs = np.array(z)
         ux0 = np.array(ux0)
         self.N = zs.shape[0] # number of samples/individuals
@@ -98,7 +127,12 @@ class SyntheticEnvironment(gym.Env):
         return observation, None
     
     # urtm1 needs to be 2D
-    def step(self, action, uxt, urtm1):
+    def step(
+            self, 
+            action: list | np.ndarray, 
+            uxt: list | np.ndarray, 
+            urtm1: list | np.ndarray
+        ) -> tuple[np.ndarray, np.ndarray, Literal[False], Literal[False]]:
         action = np.array(action)
         uxt = np.array(uxt)
         urtm1 = np.array(urtm1)
@@ -121,17 +155,27 @@ class SyntheticEnvironment(gym.Env):
 
 
 
-def f_ux(N, state_dim):
+def f_ux(N: int, state_dim: int) -> np.ndarray:
     return np.random.normal(0, 1, size=[N, state_dim])
 
-def f_ua(N):
+def f_ua(N: int) -> np.ndarray:
     return np.random.uniform(0, 1, size=[N])
 
-def f_ur(N):
+def f_ur(N: int) -> np.ndarray:
     return np.random.normal(0, 1, size=[N, 1])
 
 # REQUIRES: zs should be the same as the zs passed to the environment
-def sample_trajectory(env, zs, state_dim, T, policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=1):
+def sample_trajectory(
+        env: SyntheticEnvironment, 
+        zs: list | np.ndarray, 
+        state_dim: int, 
+        T: int, 
+        policy: Agent, 
+        f_ux: Callable[[int, int], np.ndarray] = f_ux, 
+        f_ua: Callable[[int], np.ndarray] = f_ua, 
+        f_ur: Callable[[int], np.ndarray] = f_ur, 
+        seed: int = 1
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     zs = np.array(zs)
     N = zs.shape[0]
 
@@ -212,14 +256,24 @@ def sample_trajectory(env, zs, state_dim, T, policy, f_ux=f_ux, f_ua=f_ua, f_ur=
         X[:, t + 1], R[:, t], _, _ = env.step(action=A[:, t], uxt=uxt, urtm1=urtm1)
 
     # prepare and return the output
-    out = [Z, X, A, R]
-    return out
+    #out = [Z, X, A, R]
+    return Z, X, A, R
 
 
 
 # z_eval_levels should have shape (N, zdim)
-def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, T, 
-                                       policy, f_ux=f_ux, f_ua=f_ua, f_ur=f_ur, seed=1):
+def sample_counterfactual_trajectories(
+        env: SyntheticEnvironment, 
+        zs: list | np.ndarray, 
+        z_eval_levels: list | np.ndarray, 
+        state_dim: int, 
+        T: int, 
+        policy: Agent, 
+        f_ux: Callable[[int, int], np.ndarray] = f_ux, 
+        f_ua: Callable[[int], np.ndarray] = f_ua, 
+        f_ur: Callable[[int], np.ndarray] = f_ur, 
+        seed: int = 1
+    ) -> dict[tuple[Union[int, float], ...], dict[str, Union[np.ndarray, SyntheticEnvironment, Agent]]]:
     np.random.seed(seed)
     zs = np.array(zs)
     z_eval_levels = np.array(z_eval_levels)
@@ -306,26 +360,26 @@ def sample_counterfactual_trajectories(env, zs, z_eval_levels, state_dim, T,
 class SimulatedEnvironment(gym.Env):
     def __init__(
         self,
-        action_space, 
-        reward_multiplication_factor=[1.0, 1.0, 1.0],
-        state_variance_factor=1.0,
-        z_factor=0.0,
-        trans_model_type="nn",
-        trans_model_hidden_dims=[32, 32],
-        reward_model_type="nn",
-        reward_model_hidden_dims=[32, 32], 
-        is_action_onehot=True, 
-        epochs=1000,
-        batch_size=128,
-        learning_rate=0.001,
-        is_early_stopping=True,
-        test_size=0.2,
-        early_stopping_patience=10,
-        early_stopping_min_delta=0.01,
-        enforce_min_max=False,
-        ):
+        action_space: list | np.ndarray, 
+        #reward_multiplication_factor: list | np.ndarray = [1.0, 1.0, 1.0],
+        state_variance_factor: int | float = 1.0,
+        z_factor: int | float = 0.0,
+        trans_model_type: Literal["lm", "nn"] = "nn",
+        trans_model_hidden_dims: list[int] = [32, 32],
+        reward_model_type: Literal["lm", "nn"] = "nn",
+        reward_model_hidden_dims: list[int] = [32, 32], 
+        is_action_onehot: bool = True, 
+        epochs: int = 1000,
+        batch_size: int = 128,
+        learning_rate: int | float = 0.001,
+        is_early_stopping: bool = True,
+        test_size: int | float = 0.2,
+        early_stopping_patience: int = 10,
+        early_stopping_min_delta: int | float = 0.01,
+        enforce_min_max: bool = False,
+    ) -> None:
         self.action_space = np.array(action_space)
-        self.reward_multiplication_factor = reward_multiplication_factor
+        #self.reward_multiplication_factor = reward_multiplication_factor
         self.state_variance_factor = state_variance_factor
         self.z_factor = z_factor
         self.trans_model_type = trans_model_type
@@ -344,7 +398,11 @@ class SimulatedEnvironment(gym.Env):
         self.is_trained = False
     
     @staticmethod
-    def standardize(x, mean=None, std=None):
+    def standardize(
+            x: np.ndarray, 
+            mean: np.ndarray | None = None, 
+            std: np.ndarray |  None = None
+        ) -> np.ndarray:
         if mean is None and std is None:
             mean = np.mean(x, axis=0)
             std = np.std(x, axis=0)
@@ -353,14 +411,24 @@ class SimulatedEnvironment(gym.Env):
             return (x - mean) / std
 
     @staticmethod
-    def destandardize(x, mean, std):
+    def destandardize(
+            x: np.ndarray, 
+            mean: np.ndarray, 
+            std: np.ndarray
+        ) -> np.ndarray:
         return x * std + mean
     
-    def encode_a(self, a):
+    def encode_a(self, a: np.ndarray) -> np.ndarray:
         enc = OneHotEncoder(categories=[self.action_space.flatten()], drop=None)
         return enc.fit_transform(a.reshape(-1, 1)).toarray()
 
-    def fit(self, zs, states, actions, rewards):
+    def fit(
+            self, 
+            zs: list | np.ndarray, 
+            states: list | np.ndarray, 
+            actions: list | np.ndarray, 
+            rewards: list | np.ndarray
+        ) -> None:
         z = np.array(zs)
         xt = np.array(states)
         at = np.array(actions)
@@ -526,12 +594,12 @@ class SimulatedEnvironment(gym.Env):
     
     def reset(
         self, 
-        z, 
-        seed=1,
-        errors_states=None, 
-        enforce_min_max=False,
+        z: list | np.ndarray, 
+        seed: int = 1,
+        errors_states: np.ndarray | None = None, 
+        enforce_min_max: bool = False,
         #z_factor=0.0,
-    ):
+    ) -> tuple[np.ndarray, None]:
         zs = np.array(z)
         if errors_states is not None:
             errors_states = np.array(errors_states)
@@ -571,7 +639,12 @@ class SimulatedEnvironment(gym.Env):
         return observation, None
     
     # helper function
-    def _next_state_reward_mean(self, z, xt, at):
+    def _next_state_reward_mean(
+            self, 
+            z: list | np.ndarray, 
+            xt: list | np.ndarray, 
+            at: list | np.ndarray
+        ) -> tuple[np.ndarray, np.ndarray]:
         zs = np.array(z)
         xt = np.array(xt)
         at = np.array(at)
@@ -646,7 +719,13 @@ class SimulatedEnvironment(gym.Env):
 
         return next_states, rewards
     
-    def step(self, action, errors_states=None, errors_rewards=None, seed=1):
+    def step(
+            self, 
+            action: list | np.ndarray, 
+            errors_states: np.ndarray | None = None, 
+            errors_rewards: np.ndarray | None = None, 
+            seed: int = 1
+        ) -> tuple[np.ndarray, np.ndarray, Literal[False], Literal[False]]:
         np.random.seed(seed)
         torch.manual_seed(seed)
         if not self.is_trained:
@@ -694,21 +773,29 @@ class SimulatedEnvironment(gym.Env):
     
 
 
-def f_errors_states(size):
+def f_errors_states(size: int) -> np.ndarray:
     return np.random.multivariate_normal(
                 mean=np.zeros(size[1]),
                 cov=np.diag(np.ones(size[1])), 
                 size=size[0],
             )
 
-def f_errors_rewards(size):
+def f_errors_rewards(size: int) -> np.ndarray:
     return np.random.normal(
                 loc=0, scale=1, size=size[0]
             )
 
 # REQUIRES: zs should be the same as the zs passed to the environment
-def sample_simulated_env_trajectory(env, zs, state_dim, T, policy, f_errors_states=f_errors_states, 
-                                    f_errors_rewards=f_errors_rewards, seed=1):
+def sample_simulated_env_trajectory(
+        env: SimulatedEnvironment, 
+        zs: list | np.ndarray, 
+        state_dim: int, 
+        T: int, 
+        policy: Agent, 
+        f_errors_states: Callable[[int], np.ndarray] = f_errors_states, 
+        f_errors_rewards: Callable[[int], np.ndarray] = f_errors_rewards, 
+        seed: int = 1
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     # initialize containers to store the trajectory
     zs = np.array(zs)
     N = zs.shape[0]
@@ -786,12 +873,20 @@ def sample_simulated_env_trajectory(env, zs, state_dim, T, policy, f_errors_stat
                                               errors_rewards=errors_rewards)
 
     # prepare and return the output
-    out = [Z, X, A, R]
-    return out
+    #out = [Z, X, A, R]
+    return Z, X, A, R
 
 
 
-def estimate_counterfactual_trajectories_from_data(env, zs, states, actions, policy, f_ua=f_ua, seed=1):
+def estimate_counterfactual_trajectories_from_data(
+        env: SimulatedEnvironment, 
+        zs: list | np.ndarray, 
+        states: list | np.ndarray, 
+        actions: list | np.ndarray, 
+        policy: Agent, 
+        f_ua: Callable[[int], np.ndarray] = f_ua, 
+        seed: int = 1
+    ) -> dict[tuple[Union[int, float], ...], dict[str, Union[np.ndarray, SyntheticEnvironment, Agent]]]:
     zs = np.array(zs)
     N = actions.shape[0]
     T = actions.shape[1]

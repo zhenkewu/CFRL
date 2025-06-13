@@ -1,21 +1,39 @@
 import numpy as np
 import torch
 import copy
-
 #from utils.utils import glogger
 from .utils.base_models import LinearRegressor, NeuralNet
+from .preprocessor import SequentialPreprocessor
+from typing import Union, Literal
 
-class FQI:
+class Agent:
+    def __init__(self) -> None:
+        pass
+
+    def act(
+            self, 
+            z: list | np.ndarray, 
+            xt: list | np.ndarray, 
+            xtm1: list | np.ndarray | None = None, 
+            atm1: list | np.ndarray | None = None, 
+            uat: list | np.ndarray | None = None
+        ) -> np.ndarray:
+        z = np.array(z)
+        return np.zeros(z.shape[0])
+
+
+
+class FQI(Agent):
     def __init__(
         self,
-        model_type,
-        action_space,
-        hidden_dims=[32],
-        preprocessor=None,
-        gamma=0.9,
-        learning_rate=0.1,
-        epochs=500,
-    ):
+        model_type: Literal["nn", "lm"],
+        action_space: list | np.ndarray,
+        hidden_dims: list[int] = [32],
+        preprocessor: SequentialPreprocessor | None = None,
+        gamma: int | float = 0.9,
+        learning_rate: int | float = 0.1,
+        epochs: int = 500,
+    ) -> None:
         self.model_type = model_type
         self.action_space = action_space
         self.action_size = len(action_space)
@@ -27,10 +45,10 @@ class FQI:
         self.__name__ = 'FQI'
         self._sanity_check()
 
-    def _sanity_check(self):
+    def _sanity_check(self) -> None:
         assert self.model_type in ["lm", "nn"], "Invalid model type"
 
-    def _init_model(self, state_dim):
+    def _init_model(self, state_dim: int) -> None:
         if self.model_type == "lm":
             self.model = [
                 LinearRegressor(
@@ -48,7 +66,15 @@ class FQI:
                 hidden_dims=self.hidden_dims,
             )
 
-    def _fit_helper(self, states, actions, rewards, next_states, state_dim, max_iter):
+    def _fit_helper(
+            self, 
+            states: np.ndarray, 
+            actions: np.ndarray, 
+            rewards: np.ndarray, 
+            next_states: np.ndarray, 
+            state_dim: int, 
+            max_iter: int
+        ) -> None:
         torch.set_num_threads(1)
         states = states.reshape(-1, state_dim)
         next_states = next_states.reshape(-1, state_dim)
@@ -61,7 +87,15 @@ class FQI:
             elif self.model_type == "nn":
                 self._fit_nn(states, actions, rewards, next_states, iteration, state_dim)
 
-    def _fit_nn(self, states, actions, rewards, next_states, iteration, state_dim):
+    def _fit_nn(
+            self, 
+            states: np.ndarray, 
+            actions: np.ndarray, 
+            rewards: np.ndarray, 
+            next_states: np.ndarray, 
+            iteration: int, 
+            state_dim: int
+        ) -> None:
 
         if iteration == 0:
             Y = rewards
@@ -98,7 +132,14 @@ class FQI:
         )'''
         self.model = copy.deepcopy(new_model)
 
-    def _fit_lm(self, states, actions, rewards, next_states, iteration):
+    def _fit_lm(
+            self, 
+            states: np.ndarray, 
+            actions: np.ndarray, 
+            rewards: np.ndarray, 
+            next_states: np.ndarray, 
+            iteration: int
+        ) -> None:
         if iteration == 0:
             Y = rewards
         else:
@@ -127,7 +168,7 @@ class FQI:
         #glogger.info(f"{iteration}, fqi_lm mse:{mse}, mean_target:{np.mean(Y)}")
         self.model = copy.deepcopy(new_model)
 
-    def _act_helper(self, states):
+    def _act_helper(self, states: np.ndarray) -> np.ndarray:
         if self.model_type == "lm":
             q_values = np.array(
                 [model.predict(states) for model in self.model]
@@ -138,7 +179,15 @@ class FQI:
                 q_values = self.model(torch.FloatTensor(states)).numpy()
         return np.argmax(q_values, axis=1)
     
-    def train(self, zs, xs, actions, rewards, max_iter=1000, preprocess=True):  
+    def train(
+            self, 
+            zs: list | np.ndarray, 
+            xs: list | np.ndarray, 
+            actions: list | np.ndarray, 
+            rewards: list | np.ndarray, 
+            max_iter: int = 1000, 
+            preprocess: bool = True
+        ) -> None:  
         zs = np.array(zs)
         xs = np.array(xs)
         actions = np.array(actions)
@@ -163,7 +212,16 @@ class FQI:
     # TO THE END, AND WE CANNOT SKIP ANY STEP? OTHERWISE INFO IN BUFFER IS MESSED UP. SO TAKEAWAY
     # IS WE CANNOT PREPROCESS AN ARBITRARY SINGLE STEP USIN THE PREPROCESSOR, AND WE MUST 
     # PREPROCESS A WHOLE TRAJECTORY IN ORDER?
-    def act(self, z, xt, xtm1=None, atm1=None, uat=None, preprocess=True, **kwargs):
+    def act(
+            self, 
+            z: list | np.ndarray, 
+            xt: list | np.ndarray, 
+            xtm1: list | np.ndarray | None = None, 
+            atm1: list | np.ndarray | None = None, 
+            uat: list | np.ndarray | None = None, 
+            preprocess: bool = True, 
+            **kwargs
+        ) -> np.ndarray:
         z = np.array(z)
         xt = np.array(xt)
         if xtm1 is not None:
