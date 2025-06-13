@@ -1,7 +1,13 @@
 """
-(TO BE UPDATED!) this file contains Preprocess super class and the 
-implementation of sequential data preprocesing (SDP)
-and its oracle version
+This module implements the sequential data preprocessing method proposed by Wang et al. (2025).
+
+Classes: 
+-Preprocessor: A base class for preprocessors.
+-SequentialPreprocessor: An implementation of the sequential data preprocessing method proposed 
+by Wang et al. (2025).
+
+Usage: 
+from CFRL import preprocessor
 """
 
 from abc import abstractmethod
@@ -16,7 +22,7 @@ from typing import Union, Literal
 
 class Preprocessor:
     """
-    Abstract base class for preprocessors.
+    Base class for preprocessors.
 
     Subclasses must implement the `preprocess_single_step` and `preprocess_multiple_steps` 
     methods.
