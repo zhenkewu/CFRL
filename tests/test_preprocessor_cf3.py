@@ -154,7 +154,7 @@ def test_train_preprocessor_univariate_zs_states_single_nn():
                                                      policy=agent)
     
     preprocessor = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                          action_space=[[0], [1]], 
+                                          num_actions=2, 
                                           reg_model='nn', 
                                           epochs=10, 
                                           cross_folds=3, 
@@ -184,7 +184,7 @@ def test_train_preprocessor_multivariate_zs_states_single_nn():
                                                      policy=agent)
     
     preprocessor = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                          action_space=[[0], [1]], 
+                                          num_actions=2, 
                                           reg_model='nn', 
                                           epochs=10, 
                                           cross_folds=3, 
@@ -214,7 +214,7 @@ def test_train_preprocessor_univariate_zs_states_sensitive_nn():
                                                      policy=agent)
     
     preprocessor = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                          action_space=[[0], [1]], 
+                                          num_actions=2, 
                                           reg_model='nn', 
                                           epochs=10, 
                                           cross_folds=3, 
@@ -244,7 +244,7 @@ def test_train_preprocessor_multivariate_zs_states_sensitive_nn():
                                                      policy=agent)
     
     preprocessor = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                          action_space=[[0], [1]], 
+                                          num_actions=2, 
                                           reg_model='nn', 
                                           epochs=10, 
                                           cross_folds=3, 
@@ -275,14 +275,14 @@ def test_preprocess_single_step_univariate_zs_states_single_nn():
                                                      policy=agent)
     
     p1 = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
                                 cross_folds=3, 
                                 mode='single')
     p2 = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
@@ -386,14 +386,14 @@ def test_preprocess_single_step_multivariate_zs_states_single_nn():
                                                      policy=agent)
     
     p1 = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
                                 cross_folds=3, 
                                 mode='single')
     p2 = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
@@ -499,14 +499,14 @@ def test_preprocess_single_step_univariate_zs_states_sensitive_nn():
                                                      policy=agent)
     
     p1 = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
                                 cross_folds=3, 
                                 mode='sensitive')
     p2 = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
@@ -610,14 +610,14 @@ def test_preprocess_single_step_multivariate_zs_states_sensitive_nn():
                                                      policy=agent)
     
     p1 = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
                                 cross_folds=3, 
                                 mode='sensitive')
     p2 = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
@@ -722,14 +722,14 @@ def test_preprocess_multiple_steps_univariate_zs_states_single_nn():
                                                      policy=agent)
     
     p1 = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
                                 cross_folds=3, 
                                 mode='single')
     p2 = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
@@ -780,14 +780,14 @@ def test_preprocess_multiple_steps_multivariate_zs_states_single_nn():
                                                      policy=agent)
     
     p1 = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
                                 cross_folds=3, 
                                 mode='single')
     p2 = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
@@ -837,14 +837,14 @@ def test_preprocess_multiple_steps_univariate_zs_states_sensitive_nn():
                                                      policy=agent)
     
     p1 = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
                                 cross_folds=1, 
                                 mode='sensitive')
     p2 = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
@@ -894,14 +894,14 @@ def test_preprocess_multiple_steps_multivariate_zs_states_sensitive_nn():
                                                      policy=agent)
     
     p1 = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 
                                 cross_folds=3, 
                                 mode='sensitive')
     p2 = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                action_space=[[0], [1]], 
+                                num_actions=2, 
                                 reg_model='nn', 
                                 epochs=10, 
                                 is_action_onehot=False, 

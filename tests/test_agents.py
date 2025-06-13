@@ -159,7 +159,7 @@ def test_agents_with_preprocessor_univariate_zs_states_nn():
     preprocessor = ConcatenatePreprocessor(z_space=np.array([[0], [1]]), 
                                            action_space=np.array([[0], [1]]))
     fqi = FQI(model_type='nn', 
-              action_space=np.array([[0], [1]]), 
+              num_actions=2, 
               preprocessor=preprocessor)
     
     # test training FQI
@@ -228,7 +228,7 @@ def test_agents_with_preprocessor_multivariate_zs_states_nn():
     preprocessor = ConcatenatePreprocessor(z_space=np.array([[0], [1]]), 
                                            action_space=np.array([[0], [1]]))
     fqi = FQI(model_type='nn', 
-              action_space=np.array([[0], [1]]), 
+              num_actions=2, 
               preprocessor=preprocessor)
     
     # test training FQI
@@ -296,7 +296,7 @@ def test_agents_no_preprocessor_univariate_zs_states_nn():
     # initialize a FQI object with preprocessor
     preprocessor = None
     fqi = FQI(model_type='nn', 
-              action_space=np.array([[0], [1]]), 
+              num_actions=2, 
               preprocessor=preprocessor)
     
     # test training FQI
@@ -364,7 +364,7 @@ def test_agents_no_preprocessor_multivariate_zs_states_nn():
     # initialize a FQI object with preprocessor
     preprocessor = None
     fqi = FQI(model_type='nn', 
-              action_space=np.array([[0], [1]]), 
+              num_actions=2, 
               preprocessor=preprocessor)
     
     # test training FQI

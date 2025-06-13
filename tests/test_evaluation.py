@@ -267,7 +267,7 @@ def test_evaluate_fairness_through_model_univariate_zs_states():
                                                                  state_dim=1, 
                                                                  T=10, 
                                                                  policy=agent)
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
     zs_test = np.array([[0], [0], [1], [1], [2], [2]])
     zs, states, actions, rewards = sample_simulated_env_trajectory(env=env, 
@@ -296,7 +296,7 @@ def test_evaluate_fairness_through_model_multivariate_zs_states():
                                                                  state_dim=3, 
                                                                  T=10, 
                                                                  policy=agent)
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
     zs_test = np.array([[0, 1], [0, 1], [1, 0], [1, 0], [0, 0], [1, 1]])
     zs, states, actions, rewards = sample_simulated_env_trajectory(env=env, 

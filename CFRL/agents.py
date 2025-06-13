@@ -1,3 +1,4 @@
+from abc import abstractmethod
 import numpy as np
 import torch
 import copy
@@ -11,16 +12,17 @@ class Agent:
     def __init__(self) -> None:
         pass
 
+    @abstractmethod
     def act(
             self, 
             z: list | np.ndarray, 
             xt: list | np.ndarray, 
             xtm1: list | np.ndarray | None = None, 
             atm1: list | np.ndarray | None = None, 
-            uat: list | np.ndarray | None = None
-        ) -> np.ndarray:
-        z = np.array(z)
-        return np.zeros(z.shape[0])
+            uat: list | np.ndarray | None = None, 
+            **kwargs
+    ) -> np.ndarray:
+        pass
 
 
 
@@ -28,7 +30,7 @@ class FQI(Agent):
     def __init__(
         self,
         model_type: Literal["nn", "lm"],
-        action_space: list | np.ndarray,
+        num_actions: int,
         hidden_dims: list[int] = [32],
         preprocessor: Preprocessor | None = None,
         gamma: int | float = 0.9,
@@ -36,8 +38,8 @@ class FQI(Agent):
         epochs: int = 500,
     ) -> None:
         self.model_type = model_type
-        self.action_space = action_space
-        self.action_size = len(action_space)
+        self.action_space = np.array([a for a in range(num_actions)]).reshape(-1, 1)
+        self.action_size = num_actions
         self.hidden_dims = hidden_dims
         self.preprocessor = preprocessor
         self.gamma = gamma

@@ -186,7 +186,7 @@ def test_simulated_env_univariate_zs_states_nn():
                                                      policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs, states=states, actions=actions, rewards=rewards)
     
     # test taking the first step
@@ -244,7 +244,7 @@ def test_simulated_env_multivariate_zs_states_nn():
                                                      policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs, states=states, actions=actions, rewards=rewards)
     
     # test taking the first step
@@ -302,7 +302,7 @@ def test_sample_simulated_trajectory_univariate_zs_states_default_errors_nn():
                                                                  policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
 
     # test sample_simulated_env_trajectory()
@@ -336,7 +336,7 @@ def test_sample_simulated_trajectory_multivariate_zs_states_default_errors_nn():
                                                                  policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
 
     # test sample_simulated_env_trajectory()
@@ -373,7 +373,7 @@ def test_sample_simulated_trajectory_univariate_zs_states_custom_errors_nn():
     global f_counter_states, f_counter_rewards
     f_counter_states = 0
     f_counter_rewards = 0
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
 
     # test sample_simulated_env_trajectory()
@@ -411,7 +411,7 @@ def test_sample_simulated_trajectory_multivariate_zs_states_custom_errors_nn():
                                                                  policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
 
     # test sample_simulated_env_trajectory()
@@ -452,7 +452,7 @@ def test_estimate_counterfactual_trajectory_univariate_zs_states_default_ua_nn()
                                                                  policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
 
     # test estimate_counterfactual_trajectories_from_data()
@@ -497,7 +497,7 @@ def test_estimated_counterfactual_trajectory_multivariate_zs_states_default_ua_n
                                                                  policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
 
     # test estimate_counterfactual_trajectories_from_data()
@@ -542,7 +542,7 @@ def test_estimate_counterfactual_trajectory_univariate_zs_states_custom_ua_nn():
                                                                  policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
 
     # test estimate_counterfactual_trajectories_from_data()
@@ -591,7 +591,7 @@ def test_estimated_counterfactual_trajectory_multivariate_zs_states_custom_ua_nn
                                                                  policy=agent)
     
     # initialize and train the simulated environment
-    env = SimulatedEnvironment(action_space=[[0], [1]], epochs=10)
+    env = SimulatedEnvironment(num_actions=2, epochs=10)
     env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
 
     # test estimate_counterfactual_trajectories_from_data()

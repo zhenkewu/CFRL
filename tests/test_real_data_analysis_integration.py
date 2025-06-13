@@ -179,7 +179,7 @@ def test_real_data_analysis_univariate_zs_states_nn():
 
     # train the preprocessor and FQI
     preprocessor = SequentialPreprocessor(z_space=np.unique(zs_train, axis=0), 
-                                          action_space=[[0], [1]], 
+                                          num_actions=2, 
                                           cross_folds=3, 
                                           reg_model='nn', 
                                           batch_size=128, 
@@ -196,14 +196,14 @@ def test_real_data_analysis_univariate_zs_states_nn():
     assert(np.issubdtype(xs_tilde.dtype, np.floating))
     assert(rs_tilde.shape == (24, 10))
     assert(np.issubdtype(rs_tilde.dtype, np.floating))
-    agent = FQI(model_type='nn', action_space=[[0], [1]], preprocessor=preprocessor, epochs=10)
+    agent = FQI(model_type='nn', num_actions=2, preprocessor=preprocessor, epochs=10)
     agent.train(zs=zs_train, xs=xs_tilde, actions=actions_train, rewards=rs_tilde, 
                 max_iter=10, preprocess=False)
 
     env = SimulatedEnvironment(trans_model_type='nn', 
                                reward_model_type='nn', 
                                z_factor=0, 
-                               action_space=[[0], [1]])
+                               num_actions=2)
     env.fit(zs=zs_train, states=xs_train, actions=actions_train, rewards=rewards_train)
 
     # evaluate the value and CF metric
@@ -256,7 +256,7 @@ def test_real_data_analysis_multivariate_zs_states_nn():
 
     # train the preprocessor and FQI
     preprocessor = SequentialPreprocessor(z_space=np.unique(zs_train, axis=0), 
-                                          action_space=[[0], [1]], 
+                                          num_actions=2, 
                                           cross_folds=3, 
                                           reg_model='nn', 
                                           batch_size=128, 
@@ -273,14 +273,14 @@ def test_real_data_analysis_multivariate_zs_states_nn():
     assert(np.issubdtype(xs_tilde.dtype, np.floating))
     assert(rs_tilde.shape == (18, 10))
     assert(np.issubdtype(rs_tilde.dtype, np.floating))
-    agent = FQI(model_type='nn', action_space=[[0], [1]], preprocessor=preprocessor, epochs=10)
+    agent = FQI(model_type='nn', num_actions=2, preprocessor=preprocessor, epochs=10)
     agent.train(zs=zs_train, xs=xs_tilde, actions=actions_train, rewards=rs_tilde, 
                 max_iter=10, preprocess=False)
 
     env = SimulatedEnvironment(trans_model_type='nn', 
                                reward_model_type='nn', 
                                z_factor=0, 
-                               action_space=[[0], [1]])
+                               num_actions=2)
     env.fit(zs=zs_train, states=xs_train, actions=actions_train, rewards=rewards_train)
 
     # evaluate the value and CF metric

@@ -4,6 +4,7 @@ implementation of sequential data preprocesing (SDP)
 and its oracle version
 """
 
+from abc import abstractmethod
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from .utils.base_models import NeuralNetRegressor
@@ -14,18 +15,53 @@ from typing import Union, Literal
 
 
 class Preprocessor:
+    """
+    Abstract base class for preprocessors.
+
+    Subclasses must implement the `preprocess_single_step` and `preprocess_multiple_steps` 
+    methods.
+    """
+
     def __init__(self) -> None:
         pass
+    
+    @abstractmethod
+    def preprocess_single_step(
+            self, 
+            z: list | np.ndarray, 
+            xt: list | np.ndarray, 
+            xtm1: list | np.ndarray | None = None, 
+            atm1: list | np.ndarray | None = None, 
+            rtm1: list | np.ndarray | None = None, 
+            **kwargs
+        ) -> tuple[np.ndarray, np.ndarray] | np.ndarray:
+        """
+        An abstract prototype of methods that preprocess the states at a single time step.
+        """
+        
+        pass
 
-    def preprocess(self):
-        raise NotImplementedError
+    @abstractmethod
+    def preprocess_multiple_steps(
+            self, 
+            zs: list | np.ndarray, 
+            xs: list | np.ndarray, 
+            actions: list | np.ndarray, 
+            rewards: list | np.ndarray | None = None, 
+            **kwargs
+        ) -> tuple[np.ndarray, np.ndarray] | np.ndarray:
+        """
+        An abstract prototype of methods that preprocess a whole trajectory.
+        """
+
+        pass
 
     @staticmethod
     def standardize(
             x: np.ndarray, 
             mean: np.ndarray | None = None, 
             std: np.ndarray | None = None
-        ) -> np.ndarray:
+        ) -> tuple[np.ndarray, np.ndarray, np.ndarray] | np.ndarray:
         if mean is None and std is None:
             mean = np.mean(x, axis=0)
             std = np.std(x, axis=0)
@@ -68,10 +104,46 @@ class Preprocessor:
 
 
 class SequentialPreprocessor(Preprocessor):
+    r"""
+    Implementation of the sequential data preprocessing method proposed by Wang et al. (2025).
+
+    The preprocessor first learns a model :math:`\mu(s, a, z)` of the transition dynamics of 
+    the MDP underlying the input trajectory. Then, at each time step, it uses :math:`\mu` to 
+    reconstruct the counterfactual states and concatenates the reconstructed counterfactual 
+    states into a new augmented state vector.
+
+    That is, let :math:`z_i` be the observed sensitive attribute. At t=0 (i.e. the initial 
+    time step), for each individual :math:`i` and sensitive attribute level :math:`z`, the 
+    preprocessor calculates 
+
+    ..math::
+        \hat{s}_{i1}^z = s_{i1} - \hat{\mathbf{E}}(S_1|Z=z_i) + \hat{\mathbf{E}}(S_1|Z=z)
+
+    and forms :math:`\tilde{s}_{i1} = [\hat{s}_{i1}^{z^{(1)}}, \dots, \hat{s}_{i1}^{z^{(K)}}]`.
+
+    At t>0, for each individual :math:`i` and sensitive attribute level :math:`z`, the 
+    preprocessor calculates
+
+    ..math::
+        [\hat{s}_{it}^z, \hat{r}_{i,t-1}^z] = s_{i1} - \hat{\mu}(s_{i,t-1}, a_{i,t-1}, z_i) 
+            + \hat{\mu}(\hat{s}_{i,t-1}^z, a_{i,t-1}, z)
+
+    and forms :math:`\tilde{s}_{it} = [\hat{s}_{it}^{z^{(1)}}, \dots, \hat{s}_{it}^{z^{(K)}}]` 
+    and :math:`\tilde{r}_{i,t-1} = \Sigma_{k=1}^K\hat{\mathbb{P}}(Z=z^{(k)})\hat{r}_{i,t-1}^{z^{(K)}}`.
+
+    Refrences: 
+        .. [1] Wang, J., Shi, C., Piette, J.D., Loftus, J.R., Zeng, D. and Wu, Z., 2025. 
+               Counterfactually Fair Reinforcement Learning via Sequential Data 
+               Preprocessing. arXiv preprint arXiv:2501.06366.
+    """
+
     def __init__(
         self,
         z_space: list | np.ndarray,
-        action_space: list | np.ndarray | None = None,
+        #action_space: list | np.ndarray | None = None,
+        num_actions: int, 
+        cross_folds: int = 1,
+        mode: Literal["single", "sensitive"] = "single", 
         reg_model: Literal["lm", "nn"] = "nn",
         hidden_dims: list[int] = [64, 64], 
         epochs: int = 1000,
@@ -83,14 +155,58 @@ class SequentialPreprocessor(Preprocessor):
         test_size: int | float = 0.2,
         early_stopping_patience: int = 10,
         early_stopping_min_delta: int | float = 0.01,
-        cross_folds: int = 1,
-        mode: Literal["single", "sensitive"] = "single",  # single, sensitive
     ) -> None:
+        """
+        Args: 
+            z_space (list or np.ndarray): A 2D list or array of shape (K, zdim) where K is the 
+                total number of legit values of the sensitive attribute and zdim is the dimension  
+                of the sensitive attribute variable. It contains all legit values of the sensitive 
+                attribute. Each legit value should occupy a separate row.
+            num_actions (int): The total number of legit actions. 
+            cross_folds (int, optional): The number of cross folds used during training. When 
+                `cross_folds=k`, the preprocessor will learn `k` models using different subset of 
+                the training data, and the final output of `preprocess_single_step` and 
+                `preprocess_multiple_steps` will be generally the average of the outputs from each 
+                of the `k` models.
+            mode (str, optional): Can either be "single" or "sensitive". When `mode="single"`, 
+                the preprocessor will learn a single model of the transition dynamics where the 
+                sensitive attribute is an input to the model. When `mode="sensitive"`, the preprocessor 
+                will learn one transition dynamics model for each level of the sensitive 
+                attribute, and transitions under each sensitive attribute :math:`z` will 
+                be estimated using the model corresponding to :math:`z`.
+            reg_model (str, optional): The type of the model used for learning the transition  
+                dynamics. Can be "lm" (polynomial regression) or "nn" (neural network).
+            hidden_dims (list[int], optional): The hidden dimensions of the neural network. This 
+                argument is not used if `reg_model="lm"`.
+            epochs (int, optional): The number of training epochs for the neural network. This 
+                argument is not used if `reg_model="lm"`. 
+            learning_rate (int or float, optional): The learning rate of the neural netowrk. This 
+                argument is not used if `reg_model="lm"`. 
+            batch_size (int, optional): The batch size of the neural network. This argument is 
+                not used if `reg_model="lm"`.
+            is_action_onehot (bool, optional): When set to `True`, the actions will be one-hot 
+                encoded. 
+            is_normalized (bool, optional): When set to `True`, the states will be normalized 
+                following the formula `x_normalized = (x - mean(x)) / std(x)`.
+            is_early_stopping (bool, optional): When set to `True`, will enforce early stopping 
+                during neural network training. This argument is not used if `reg_model="lm"`.
+            test_size (int or float, optional): An int or float between 0 and 1 (inclusive) that 
+                specifies size of the test set used for early stopping. This argument is not used 
+                if `reg_model="lm"` or `is_early_stopping=False`.
+            early_stopping_patience (int, optional): The number of consequentive epochs with 
+                barely-decreasing loss needed for training to be early stopped. This argument is 
+                not used if `reg_model="lm"` or `is_early_stopping=False`.
+            early_stopping_min_delta (int for float, optional): The minimum amount of decrease 
+                in the loss so that the rounded is not considered barely-decreasing by the early 
+                stopping mechanism. This argument is not used if `reg_model="lm"` or 
+                `is_early_stopping=False`.
+        """
+
         z_space = np.array(z_space)
-        if action_space is not None:
+        '''if action_space is not None:
             action_space = np.array(action_space)
         if (is_action_onehot) and (action_space is None):
-            raise ValueError('One hot encoding of actions requires action_space to be not None.')
+            raise ValueError('One hot encoding of actions requires action_space to be not None.')'''
 
         self.reg_model = reg_model
         self.hidden_dims = hidden_dims
@@ -99,7 +215,9 @@ class SequentialPreprocessor(Preprocessor):
         self.batch_size = batch_size
         self.is_action_onehot = is_action_onehot
         self.is_normalized = is_normalized
-        self.action_space = action_space
+        #self.action_space = action_space
+        self.action_space = np.array([a for a in range(num_actions)]).reshape(-1, 1)
+        self.num_actions = num_actions
         self.z_space = z_space
         self.zdim = z_space.shape[-1]
         self.__name__ = 'SequentialPreprocessor'
@@ -418,6 +536,55 @@ class SequentialPreprocessor(Preprocessor):
             actions: list | np.ndarray, 
             rewards: list | np.ndarray
         ) -> tuple[np.ndarray, np.ndarray]:
+        r"""
+        Train the sequential preprocessor and preprocess the training trajectory.
+
+        When more than 1 cross folds are specified, then the training trajectory will be 
+        preprocessed in `train_preprocessor` following the idea of double machine learning. 
+        The detailed preprocessing procedure is outlined in the real data analysis workflow 
+        in the "Example Workflows" section.
+
+        Args: 
+            zs (list or np.ndarray): A 2D list or array of shape (N, zdim) where N is the 
+                number of individuals in the training set and zdim is the dimension 
+                of the sensitive attribute variable. It contains the observed sensitive 
+                attribute for each individual in the training set. The observed sensitive 
+                attribute for each individual should occupy a separate row in the list or 
+                array.
+            xs (list or np.array): A 3D list or array of shape (N, T+1, xdim) where N is the 
+                 number of individuals in the training set, T is the total number of 
+                 environment transitions, and xdim is the dimension of the state variable. 
+                 It contains the full state trajectory of each individual in the training set. 
+                 Specifically, `xs[i, j]` should be the state vector of the i-th individual 
+                 at the j-th time step (i.e. :math:`s_{ij}`).
+            actions (list or np.array): A 2D list or array of shape (N, T) where N is the 
+                number of individuals in the training set and T is the total number of 
+                environment transitions. It contains the full action trajectory of each 
+                individual in the training set. Specifically, `actions[i, j]` should be the 
+                action of the i-th individual at the j-th time step (i.e. :math:`a_{ij}`).
+            rewards (list or np.array): A 2D list or array of shape (N, T) where N is the 
+                number of individuals in the training set and T is the total number of 
+                environment transitions. It contains the full reward trajectory of each 
+                individual in the training set. Specifically, `rewards[i, j]` should be the 
+                reward of the i-th individual at the j-th time step (i.e. :math:`r_{ij}`).
+
+        Returns:
+            xs_tilde (np.ndarray): A 3D array of shape (N, T+1, xdim*K) where N is the 
+                number of individuals in the training set, T is the total number of 
+                environment transitions, xdim is the dimension of the state variable, and 
+                K is the total number of legit values of the sensitive attribute. It 
+                contains the preprocessed state trajectory of each individual in the 
+                training set. Specifically, `xs_tilde[i, j]` should be the preprocessed 
+                state vector of the i-th individual at the j-th time step (i.e. 
+                :math:`\tilde{s}_{ij}`).
+            rs_tilde (np.ndarray): A 2D array of shape (N, T) where N is the 
+                number of individuals in the training set and T is the total number of 
+                environment transitions. It contains the preprocessed reward trajectory of 
+                each individual in the training set. Specifically, `rs_tilde[i, j]` should 
+                be the preprocessed reward of the i-th individual at the j-th time step 
+                (i.e. :math:`\tilde{r}_{ij}`).  
+        """
+
         zs = np.array(zs)
         xs = np.array(xs)
         actions = np.array(actions)
@@ -508,6 +675,64 @@ class SequentialPreprocessor(Preprocessor):
             rtm1: list | np.ndarray | None = None, 
             **kwargs
         ) -> tuple[np.ndarray, np.ndarray] | np.ndarray:
+        r"""
+        Preprocess one single time step of the trajectory.
+
+        Important Note: A `SequentialPreprocessor` object internally tracks the preprocessed 
+        counterfactual states from the previous time step using a states buffer. In this case, 
+        suppose `preprocess_single_step()` is called on a set of transitions at time :math:`t` 
+        in some trajectory. Then, at the next call of `preprocess_single_step()` for this 
+        instance of `SequentialPreprocessor`, the transitions passed to the function must be 
+        from time :math:`t+1` of the same trajectory. To preprocess another trajectory, either 
+        use another instance of `SequentialPreprocessor`, or pass the initial step of the trajectory 
+        to `preprocess_single_step()` with `xtm1=None` and `atm1=None`.
+
+        In general, unless step-wise preprocessing is necessary, we recommend using 
+        `preprocess_multiple_steps` to preprocess a whole trajectory to avoid unintended bugs.
+
+        Args: 
+            zs (list or np.ndarray): A 2D list or array of shape (N, zdim) where N is the 
+                number of individuals in the trajectory to be processed and zdim is the dimension 
+                of the sensitive attribute variable. It contains the observed sensitive 
+                attribute for each individual in the trajectory to be processed. The observed sensitive 
+                attribute for each individual should occupy a separate row in the list or 
+                array.
+            xt (list or np.array): A 2D list or array of shape (N, xdim) where N is the 
+                 number of individuals in the trajectory to be processed and xdim is the dimension 
+                 of the state variable. It contains the state vector of each individual 
+                 in the trajectory at the time step that is to be processed. Specifically, `xt[i]` 
+                 should be the state vector of the i-th individual.
+            xtm1 (list or np.array or None): A 3D list or array of shape (N, xdim) where N is the 
+                 number of individuals in the trajectory to be processed and xdim is the dimension 
+                 of the state variable. It contains the state vector of each individual 
+                 in the trajectory at the previous timestep (i.e. :math:`s_{t-1}`). Specifically, 
+                 `xtm1[i]` should be the state vector of the i-th individual.
+            atm1 (list or np.array or None): A 2D list or array of shape (N, 1) where N is the 
+                number of individuals in the trajectory to be processed. It contains the action of each 
+                individual in the trajectory at the previous time step (i.e. :math:`a_{t-1}`). 
+                Specifically, `atm1[i]` should be the action of the i-th individual. When both `xtm1` 
+                and `atm1` are set to `None`, the preprocessor will consider the input to be from the 
+                initial time step of a new trajectory, and the buffer of previous counterfactual states 
+                will be reset.
+            rtm1 (list or np.array or None): A 2D list or array of shape (N, 1) where N is the 
+                number of individuals in the trajectory to be processed. It contains the reward of each 
+                individual in the trajectory at the previous time step (i.e. :math:`r_{t-1}`). 
+                Specifically, `rtm1[i]` should be the action of the i-th individual.
+
+        Returns:
+            xt_tilde (np.ndarray): A 2D array of shape (N, xdim*K) where N is the 
+                number of individuals in the trajectory to be processed, xdim is the dimension of the 
+                state variable, and K is the total number of legit values of the sensitive 
+                attribute. It contains the preprocessed state trajectory of each individual 
+                in the trajectory. Specifically, `xt_tilde[i]` should be the preprocessed 
+                state vector of the i-th individual.
+            rt_tilde (np.ndarray, optional): A 2D array of shape (N, 1) where N is the 
+                number of individuals in the trajectory to be processed. It contains the preprocessed 
+                reward of each individual in the trajectory. Specifically, `rs_tilde[i]` should 
+                be the preprocessed reward of the i-th individual. `rt_tilde` is not returned 
+                if `rtm1=None` in the function input.  
+        """
+
         z = np.array(z)
         xt = np.array(xt)
         if xtm1 is not None:
@@ -576,6 +801,51 @@ class SequentialPreprocessor(Preprocessor):
             actions: list | np.ndarray, 
             rewards: list | np.ndarray | None = None
         ) -> tuple[np.ndarray, np.ndarray] | np.ndarray:
+        r"""
+        Preprocess a whole trajectory.
+
+        Args: 
+            zs (list or np.ndarray): A 2D list or array of shape (N, zdim) where N is the 
+                number of individuals in the trajectory and zdim is the dimension 
+                of the sensitive attribute variable. It contains the observed sensitive 
+                attribute for each individual in the trajectory. The observed sensitive 
+                attribute for each individual should occupy a separate row in the list or 
+                array.
+            xs (list or np.array): A 3D list or array of shape (N, T+1, xdim) where N is the 
+                 number of individuals in the trajectory, T is the total number of 
+                 environment transitions, and xdim is the dimension of the state variable. 
+                 It contains the full state trajectory of each individual. 
+                 Specifically, `xs[i, j]` should be the state vector of the i-th individual 
+                 at the j-th time step (i.e. :math:`s_{ij}`).
+            actions (list or np.array): A 2D list or array of shape (N, T) where N is the 
+                number of individuals in the trajectory and T is the total number of 
+                environment transitions. It contains the full action trajectory of each 
+                individual. Specifically, `actions[i, j]` should be the 
+                action of the i-th individual at the j-th time step (i.e. :math:`a_{ij}`).
+            rewards (list or np.array or None): A 2D list or array of shape (N, T) where N is the 
+                number of individuals in the trajectory and T is the total number of 
+                environment transitions. It contains the full reward trajectory of each 
+                individual. Specifically, `rewards[i, j]` should be the 
+                reward of the i-th individual at the j-th time step (i.e. :math:`r_{ij}`).
+
+        Returns:
+            xs_tilde (np.ndarray): A 3D array of shape (N, T+1, xdim*K) where N is the 
+                number of individuals in the trajectory, T is the total number of 
+                environment transitions, xdim is the dimension of the state variable, and 
+                K is the total number of legit values of the sensitive attribute. It 
+                contains the preprocessed state trajectory of each individual. 
+                Specifically, `xs_tilde[i, j]` should be the preprocessed 
+                state vector of the i-th individual at the j-th time step (i.e. 
+                :math:`\tilde{s}_{ij}`).
+            rs_tilde (np.ndarray): A 2D array of shape (N, T) where N is the 
+                number of individuals in the trajectory and T is the total number of 
+                environment transitions. It contains the preprocessed reward trajectory of 
+                each individual. Specifically, `rs_tilde[i, j]` should 
+                be the preprocessed reward of the i-th individual at the j-th time step 
+                (i.e. :math:`\tilde{r}_{ij}`). `rs_tilde` is not returned if `rtm1=None` in 
+                the function input. 
+        """
+
         zs = np.array(zs)
         xs = np.array(xs)
         actions = np.array(actions)

@@ -175,13 +175,13 @@ def test_simulation_univariate_zs_states_nn():
     
     # train preprocessor and FQI
     preprocessor = SequentialPreprocessor(z_space=[[0], [1], [2]], 
-                                          action_space=[[0], [1]], 
+                                          num_actions=2, 
                                           reg_model='nn', 
                                           is_normalized=False)
     preprocessor.train_preprocessor(xs=states, zs=zs, actions=actions, rewards=rewards)
     agent = FQI(preprocessor=preprocessor, 
                 model_type='nn', 
-                action_space=[[0], [1]], 
+                num_actions=2, 
                 epochs=10)
     agent.train(xs=states, zs=zs, actions=actions, rewards=rewards, max_iter=10)
     
@@ -228,13 +228,13 @@ def test_simulation_multivariate_zs_states_nn():
     
     # train preprocessor and FQI
     preprocessor = SequentialPreprocessor(z_space=[[0, 1], [1, 0]], 
-                                          action_space=[[0], [1]], 
+                                          num_actions=2, 
                                           reg_model='nn', 
                                           is_normalized=False)
     preprocessor.train_preprocessor(xs=states, zs=zs, actions=actions, rewards=rewards)
     agent = FQI(preprocessor=preprocessor, 
                 model_type='nn', 
-                action_space=[[0], [1]], 
+                num_actions=2, 
                 epochs=10)
     agent.train(xs=states, zs=zs, actions=actions, rewards=rewards, max_iter=10)
     
