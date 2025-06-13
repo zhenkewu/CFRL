@@ -5,6 +5,7 @@ from .utils.base_models import LinearRegressor, NeuralNet
 from .agents import Agent
 #from my_utils import glogger
 from typing import Literal, Callable
+from tqdm import tqdm
 
 
 
@@ -110,7 +111,7 @@ class FQE:
         # init model
         if self.model_type == "lm":
             current_model = [None for _ in range(self.action_size)]
-            for i in range(max_iter):
+            for i in tqdm(range(max_iter)):
                 # generate target
                 if i == 0:
                     Y = rewards.reshape(-1, 1)
@@ -157,7 +158,7 @@ class FQE:
             )
 
             # training loop
-            for i in range(max_iter):
+            for i in tqdm(range(max_iter)):
                 # generate target
                 if i == 0:
                     Y = rewards.reshape(-1, 1)

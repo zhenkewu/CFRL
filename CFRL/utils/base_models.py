@@ -9,6 +9,7 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 from typing import Literal
 #from utils.utils import glogger
+from tqdm import tqdm
 
 
 class EarlyStopping:
@@ -156,7 +157,7 @@ class NeuralNetRegressor(nn.Module):
         val_losses = []
 
         # self.model.train() # ORGINAL, LIKELY CAUSING BUGS
-        for epoch in range(epochs):
+        for epoch in tqdm(range(epochs)):
             self.model.train() # NEWLY ADDED
             for inputs, labels in train_loader:
                 optimizer.zero_grad()

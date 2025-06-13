@@ -184,7 +184,7 @@ def test_real_data_analysis_univariate_zs_states_nn():
                                           reg_model='nn', 
                                           batch_size=128, 
                                           learning_rate=0.001, 
-                                          epochs=10,  
+                                          epochs=100,  
                                           is_early_stopping=True, 
                                           early_stopping_patience=10, 
                                           early_stopping_min_delta=0.001)

@@ -497,7 +497,7 @@ def run_exp(export=False):
 
 # run the experiments
 s = int(input('Enter the seed that is to be used: '))
-df_n = run_exp1_one(methods=['ours'], 
+df_n = run_exp1_one(methods=['behavior', 'random', 'full', 'unaware', 'oracle', 'ours'], 
                           method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)
 #df_n = run_exp(export=False)
 print(df_n)

@@ -31,7 +31,7 @@ def run_exp_one(seed, z_label, methods):
                                                         action_label='rldecision', 
                                                         reward_label='reward', 
                                                         id_label='pt_id', 
-                                                        T=12, 
+                                                        T=11, 
                                                         #T=3
                                                         )
 
@@ -225,5 +225,5 @@ def run_exp(rep, z_labels, methods, print_res=True, export_res=False,
 '''run_exp(rep=10, methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=True, 
         export_path='./result_rda_real_data_analysis_after.csv')'''
-run_exp(rep=3, methods=['random', 'full', 'unaware', 'ours'], z_labels=['sex_b'], 
+run_exp(rep=1, methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=False)

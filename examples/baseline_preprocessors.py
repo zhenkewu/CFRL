@@ -7,7 +7,7 @@ from sklearn.model_selection import KFold
 from sklearn.preprocessing import OneHotEncoder
 
 # Preprocessor for the baseline "unaware"
-class UnawarenessPreprocessor:
+class UnawarenessPreprocessor(Preprocessor):
     def __init__(self, z_space, action_space) -> None:
         self.action_space = action_space
         self.z_space = z_space
@@ -39,7 +39,7 @@ class UnawarenessPreprocessor:
     
 
 # Preprocessor for the baseline "full"
-class ConcatenatePreprocessor:
+class ConcatenatePreprocessor(Preprocessor):
     def __init__(self, z_space, action_space) -> None:
         self.action_space = action_space
         self.z_space = z_space

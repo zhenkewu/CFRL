@@ -3,8 +3,9 @@ import torch
 import copy
 #from utils.utils import glogger
 from .utils.base_models import LinearRegressor, NeuralNet
-from .preprocessor import SequentialPreprocessor
-from typing import Union, Literal
+from .preprocessor import Preprocessor, SequentialPreprocessor
+from typing import Literal
+from tqdm import tqdm
 
 class Agent:
     def __init__(self) -> None:
@@ -29,7 +30,7 @@ class FQI(Agent):
         model_type: Literal["nn", "lm"],
         action_space: list | np.ndarray,
         hidden_dims: list[int] = [32],
-        preprocessor: SequentialPreprocessor | None = None,
+        preprocessor: Preprocessor | None = None,
         gamma: int | float = 0.9,
         learning_rate: int | float = 0.1,
         epochs: int = 500,
@@ -81,7 +82,7 @@ class FQI(Agent):
         actions = actions.reshape(-1, 1)
         rewards = rewards.reshape(-1, 1)
 
-        for iteration in range(max_iter):
+        for iteration in tqdm(range(max_iter)):
             if self.model_type == "lm":
                 self._fit_lm(states, actions, rewards, next_states, iteration)
             elif self.model_type == "nn":

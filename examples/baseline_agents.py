@@ -2,9 +2,10 @@ import numpy as np
 import torch
 import copy
 from scipy.special import expit
+from CFRL.agents import Agent
 
 # A random policy
-class RandomAgent:
+class RandomAgent(Agent):
     def __init__(self, num_action_levels):
         self.num_action_levels = num_action_levels
         self.p1 = 0.5
@@ -29,7 +30,7 @@ class RandomAgent:
 
 
 # A binary behavioral policy
-class BehaviorAgent:
+class BehaviorAgent(Agent):
     def __init__(self, seed=1) -> None:
         super().__init__()
         np.random.seed(seed)
