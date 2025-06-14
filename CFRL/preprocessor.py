@@ -110,15 +110,17 @@ class SequentialPreprocessor(Preprocessor):
     time step), for each individual :math:`i` and sensitive attribute level :math:`z`, the 
     preprocessor calculates 
 
-    ..math::
-        \hat{x}_{i1}^z = x_{i1} - \hat{\mathbf{E}}(X_1|Z=z_i) + \hat{\mathbf{E}}(X_1|Z=z)
+    .. math::
+        
+        \hat{x}_{i1}^z = x_{i1} - \hat{\mathbb{E}}(X_1|Z=z_i) + \hat{\mathbb{E}}(X_1|Z=z)
 
     and forms :math:`\tilde{x}_{i1} = [\hat{x}_{i1}^{z^{(1)}}, \dots, \hat{x}_{i1}^{z^{(K)}}]`.
 
     At t>0, for each individual :math:`i` and sensitive attribute level :math:`z`, the 
     preprocessor calculates
 
-    ..math::
+    .. math::
+        
         [\hat{x}_{it}^z, \hat{r}_{i,t-1}^z] = x_{i1} - \hat{\mu}(x_{i,t-1}, a_{i,t-1}, z_i) 
             + \hat{\mu}(\hat{x}_{i,t-1}^z, a_{i,t-1}, z)
 
