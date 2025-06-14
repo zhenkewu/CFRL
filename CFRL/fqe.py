@@ -299,7 +299,7 @@ class FQE:
             states (list or np.ndarray): The state trajectory used for evaluation. It should be 
                 a list or array following the Full-trajectory States Format.
             actions (list or np.ndarray): The action trajectory used for evaluation. It should be 
-                a list or array following the Full-trajectory Actions Format.
+                a list or array following the Full-trajectory Actions Format. 
             f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
                 actions during evaluation. It should be a function whose argument list, argument 
                 names, and return type exactly match those of `f_ua_default`. 
