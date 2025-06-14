@@ -1409,8 +1409,8 @@ def estimate_counterfactual_trajectories_from_data(
     preprocessing method proposed by Wang et al. (2025), which is referenced below. `policy` is then 
     used to generate the counterfactual action trajectories using the estimated counterfactual states.
 
-    Refrences: 
-        .. [1] Wang, J., Shi, C., Piette, J.D., Loftus, J.R., Zeng, D. and Wu, Z., 2025. 
+    References: 
+        .. [2] Wang, J., Shi, C., Piette, J.D., Loftus, J.R., Zeng, D. and Wu, Z. (2025). 
                Counterfactually Fair Reinforcement Learning via Sequential Data 
                Preprocessing. arXiv preprint arXiv:2501.06366.
 

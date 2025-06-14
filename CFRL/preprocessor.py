@@ -137,8 +137,8 @@ class SequentialPreprocessor(Preprocessor):
     and forms :math:`\tilde{x}_{it} = [\hat{x}_{it}^{z^{(1)}}, \dots, \hat{x}_{it}^{z^{(K)}}]` 
     and :math:`\tilde{r}_{i,t-1} = \Sigma_{k=1}^K\hat{\mathbb{P}}(Z=z^{(k)})\hat{r}_{i,t-1}^{z^{(K)}}`.
 
-    Refrences: 
-        .. [1] Wang, J., Shi, C., Piette, J.D., Loftus, J.R., Zeng, D. and Wu, Z., 2025. 
+    References: 
+        .. [2] Wang, J., Shi, C., Piette, J.D., Loftus, J.R., Zeng, D. and Wu, Z. (2025). 
                Counterfactually Fair Reinforcement Learning via Sequential Data 
                Preprocessing. arXiv preprint arXiv:2501.06366.
     """
