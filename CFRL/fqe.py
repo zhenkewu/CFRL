@@ -1,3 +1,17 @@
+"""
+This module implements the fitted Q evaluation algorithm for offline policy evaluation.
+
+Functions:
+-f_ua_default(...): A function that generates exogenous variables for the actions from a uniform 
+distribution between 0 and 1.
+
+Classes:
+-FQE: An implementation of the fitted Q evaluation algorithm.
+
+Usage: 
+from CFRL import fqe
+"""
+
 import numpy as np
 import torch
 import copy
@@ -9,27 +23,61 @@ from tqdm import tqdm
 
 
 
-def f_ua(N: int) -> np.ndarray:
+def f_ua_default(N: int) -> np.ndarray:
+    """
+    Generate exogenous variables for the actions from a uniform distribution between 0 and 1.
+
+    Args: 
+        N (int): The total number of individuals for whom the exogenous variables will 
+            be generated.
+    
+    Returns: 
+        ua (np.ndarray): The generated exogenous variables. It is a (N, 1) array 
+            where each entry is sample from a uniform distribution between 0 and 1.
+    """
+
     return np.random.uniform(0, 1, size=[N])
 
 
 
 class FQE:
+    """
+    Implementation of the fitted Q evaluation (FQE) algorithm. 
+
+    FQE can be used to estimate the value of a policy using offline data.
+    """
+    
     def __init__(
             self, 
-            model_type: Literal["lm", "nn"], 
-            action_size: int, 
+            num_actions: int, 
             policy: Agent, 
+            model_type: Literal["lm", "nn"], 
             hidden_dims: list[int] = [32], 
-            lr: int | float = 0.1, 
+            learning_rate: int | float = 0.1, 
             epochs: int = 500, 
             gamma: int | float = 0.9
         ) -> None:
+        """
+        Args: 
+            num_actions (int): The total number of legit actions. 
+            policy (Agent): The policy to be evaluated. 
+            model_type (str): The type of the model used for learning the Q function. Can 
+                be "lm" (polynomial regression) or "nn" (neural network). 
+            hidden_dims (list[int], optional): The hidden dimensions of the neural network. This 
+                argument is not used if `model_type="lm"`. 
+            learning_rate (int or float, optional): The learning rate of the neural network. This 
+                argument is not used if `model_type="lm"`. 
+            epochs (int, optional): The number of training epochs for the neural network. This 
+                argument is not used if `model_type="lm"`. 
+            gamma (int or float, optional): The discount factor for the cumulative discounted reward 
+                in the objective function. 
+        """
+        
         self.model_type = model_type
-        self.action_size = action_size
+        self.action_size = num_actions
         self.policy = policy
         self.hidden_dims = hidden_dims
-        self.lr = lr
+        self.lr = learning_rate
         self.epochs = epochs
         self.gamma = gamma
 
@@ -39,7 +87,7 @@ class FQE:
     def _sanity_check(self) -> None:
         assert self.model_type in ["lm", "nn"], "Invalid model type"
 
-    def get_actions(
+    def _get_actions(
             self, 
             zs: np.ndarray, 
             states: np.ndarray, 
@@ -78,9 +126,28 @@ class FQE:
             states: list | np.ndarray, 
             actions: list | np.ndarray, 
             rewards: list | np.ndarray, 
-            max_iter: int, 
-            f_ua: Callable[[int], int] = f_ua
+            max_iter: int = 1000, 
+            f_ua: Callable[[int], int] = f_ua_default
         ) -> None:
+        """
+        Fit the FQE. 
+        
+        Args:
+            zs (list or np.ndarray): The observed sensitive attributes of each individual 
+                in the training data. It should be a list or array following the Sensitive 
+                Attributes Format.
+            states (list or np.ndarray): The state trajectory used for training. It should be 
+                a list or array following the Full-trajectory States Format.
+            actions (list or np.ndarray): The action trajectory used for training. It should be 
+                a list or array following the Full-trajectory Actions Format.
+            rewards (list or np.ndarray): The reward trajectory used for training. It should be 
+                a list or array following the Full-trajectory Rewards Format.
+            max_iter (int, optional): The number of iterations for learning the Q function. 
+            f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
+                actions during training. It should be a function whose argument list, argument names, 
+                and return type exactly match those of `f_ua_default`. 
+        """
+        
         torch.set_num_threads(1)
         # convenience variables
         xs = np.array(states)
@@ -123,7 +190,7 @@ class FQE:
                     #     uat=np.random.uniform(size=states.shape[0]), states=next_states
                     # ).flatten()
                     uat = f_ua(N=N)
-                    selected_actions = self.get_actions(zs_, xs_, actions_, uat).flatten()
+                    selected_actions = self._get_actions(zs_, xs_, actions_, uat).flatten()
                     Y = (
                         rewards + self.gamma * tmp[np.arange(tmp.shape[0]), selected_actions]
                     ).reshape(-1, 1)
@@ -172,7 +239,7 @@ class FQE:
                         .numpy()
                     )
                     uat = f_ua(N=N)
-                    selected_actions = self.get_actions(zs_, xs_, actions_, uat).reshape(
+                    selected_actions = self._get_actions(zs_, xs_, actions_, uat).reshape(
                         -1, 1
                     )
 
@@ -217,8 +284,33 @@ class FQE:
             zs: list | np.ndarray, 
             states: list | np.ndarray, 
             actions: list | np.ndarray, 
-            f_ua: Callable[[int], int] = f_ua
+            f_ua: Callable[[int], int] = f_ua_default
         ) -> np.ndarray:
+        """
+        Estimate the value of the policy. 
+
+        It uses the FQE algorithm and the input offline trajectory to evaluate the policy of 
+        interest.
+
+        Args:
+            zs (list or np.ndarray): The observed sensitive attributes of each individual 
+                in the offline trajectory used for evaluation. It should be a list or array 
+                following the Sensitive Attributes Format.
+            states (list or np.ndarray): The state trajectory used for evaluation. It should be 
+                a list or array following the Full-trajectory States Format.
+            actions (list or np.ndarray): The action trajectory used for evaluation. It should be 
+                a list or array following the Full-trajectory Actions Format.
+            f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
+                actions during evaluation. It should be a function whose argument list, argument 
+                names, and return type exactly match those of `f_ua_default`. 
+        
+        Returns: 
+            Y (np.ndarray): A vector containing multiple estimates of the value of the policy of 
+                interest. It is an array with shape (N*T, ) where N is the number of individuals in 
+                the input offline trajectory and T is the total number of transitions in the input 
+                offline trajectory.
+        """
+        
         xs = np.array(states)
         del(states)
         zs = np.array(zs)
@@ -226,7 +318,7 @@ class FQE:
         sdim = xs.shape[-1] + zs.shape[-1]
         T = actions.shape[1]
         uat = f_ua(N=zs.shape[0])
-        actions_taken = self.get_actions(zs, xs, actions, uat)
+        actions_taken = self._get_actions(zs, xs, actions, uat)
         xs_ = copy.deepcopy(xs)
         zs_ = copy.deepcopy(zs)
 
@@ -234,7 +326,7 @@ class FQE:
             [xs_[:, 1:, :], np.repeat(zs_.reshape(-1, 1, zs.shape[-1]), axis=1, repeats=T)], axis=2
         ).reshape(
             -1, sdim
-        )  # use 1: instead of 0: since get_actions is implemented using next_state
+        )  # use 1: instead of 0: since _get_actions is implemented using next_state
 
         #np.random.seed(10) # NEWLY ADDED
         #torch.manual_seed(10) # NEWLY ADDED

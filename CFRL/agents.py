@@ -311,7 +311,10 @@ class FQI(Agent):
         for this instance of `FQI`, the transitions passed to the function must be from time 
         :math:`t+1` of the same trajectory. To preprocess another trajectory, either use another 
         instance of `FQI`, or pass the initial step of the trajectory to `act()` with `xtm1=None` and 
-        `atm1=None`.
+        `atm1=None`. 
+
+        Similar issues might also arise when the internal preprocessor is some custom preprocessor 
+        that relies on buffers. 
 
         Args: 
             zs (list or np.ndarray): The observed sensitive attributes of each individual 
@@ -331,6 +334,10 @@ class FQI(Agent):
             uxt (list or np.ndarray, optional): The exogenous variables for each 
                 individual's action. It should be a 2D list or array with shape (N, 1) 
                 where N is the total number of individuals.
+
+        Returns: 
+            actions (np.ndarray): The decisions made for the individuals. It is a 1D array following the 
+                Single-time Actions Format.
         """
         
         z = np.array(z)

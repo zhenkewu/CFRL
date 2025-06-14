@@ -230,13 +230,13 @@ class SyntheticEnvironment(gym.Env):
                 rule.
             f_x0 (Callable, optional): Transition rule for generating the state at time :math:`t = 0`. It 
                 should be a function whose argument list, argument names, and return type exactly 
-                matches that of `f_x0_default`.
+                match those of `f_x0_default`.
             f_xt (Callable, optional): Transition rule for generating the state at time :math:`t > 0`. It 
                 should be a function whose argument list, argument names, and return type exactly 
-                matches that of `f_xt_default`.
+                match those of `f_xt_default`.
             f_rt (Callable, optional): Transition rule for generating the state at time :math:`t > 0`. It 
                 should be a function whose argument list, argument names, and return type exactly 
-                matches that of `f_rt_default`.
+                match those of `f_rt_default`.
         """
 
         self.state_dim = state_dim
@@ -423,13 +423,13 @@ def sample_trajectory(
         policy (Agent): The policy used to generate the trajectory.
         f_ux (Callable, optional): A rule to generate exogenous variables for each individual's 
             states. It should be a function whose argument list, argument names, and return 
-            type exactly matches that of `f_ux_default`.
+            type exactly match those of `f_ux_default`.
         f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
-            type exactly matches that of `f_ua_default`. 
+            type exactly match those of `f_ua_default`. 
         f_ur (Callable, optional): A rule to generate exogenous variables for each individual's 
             rewards. It should be a function whose argument list, argument names, and return 
-            type exactly matches that of `f_ur_default`.
+            type exactly match those of `f_ur_default`.
     
     Returns: 
         Z (np.ndarray): The observed sensitive attributes of each individual in the sampled 
@@ -567,13 +567,13 @@ def sample_counterfactual_trajectories(
         policy (Agent): The policy used to generate the trajectory.
         f_ux (Callable, optional): A rule to generate exogenous variables for each individual's 
             states. It should be a function whose argument list, argument names, and return 
-            type exactly matches that of `f_ux_default`.
+            type exactly match those of `f_ux_default`.
         f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
-            type exactly matches that of `f_ua_default`. 
+            type exactly match those of `f_ua_default`. 
         f_ur (Callable, optional): A rule to generate exogenous variables for each individual's 
             rewards. It should be a function whose argument list, argument names, and return 
-            type exactly matches that of `f_ur_default`.
+            type exactly match those of `f_ur_default`.
         seed (int, optional): The random seed used to generate the trajectories.
     
     Returns: 
@@ -1287,13 +1287,13 @@ def sample_simulated_env_trajectory(
         policy (Agent): The policy used to generate the trajectory.
         f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
-            type exactly matches that of `f_ua_default`. 
+            type exactly match those of `f_ua_default`. 
         f_errors_states (Callable, optional): A rule to generate exogenous variables for each 
             individual's states. It should be a function whose argument list, argument names, 
-            and return type exactly matches that of `f_errors_states_default`.
+            and return type exactly match those of `f_errors_states_default`.
         f_errors_rewards (Callable, optional): A rule to generate exogenous variables for each 
             individual's rewards. It should be a function whose argument list, argument names, 
-            and return type exactly matches that of `f_errors_rewards_default`.
+            and return type exactly match those of `f_errors_rewards_default`.
         seed (int, optional): The random seed used to sample the trajectory. 
     
     Returns: 
@@ -1430,7 +1430,7 @@ def estimate_counterfactual_trajectories_from_data(
         policy (Agent): The policy used to estimate the counterfactual action trajectories. 
         f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
-            type exactly matches that of `f_ua_default`. 
+            type exactly match those of `f_ua_default`. 
         seed (int, optional): The seed used to estimate the counterfactual trajectories. 
     
     Returns: 

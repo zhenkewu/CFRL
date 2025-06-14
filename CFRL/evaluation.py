@@ -158,7 +158,7 @@ def evaluate_reward_through_fqe(
         policy: Agent, 
         f_ua: Callable[[int], int] = f_ua, 
         hidden_dims: list[int] = [32], 
-        lr: int | float = 0.1, 
+        learning_rate: int | float = 0.1, 
         epochs: int = 500, 
         gamma: int | float = 0.9, 
         max_iter: int = 200, 
@@ -172,8 +172,8 @@ def evaluate_reward_through_fqe(
     rewards = np.array(rewards)
     action_size = len(np.unique(actions.flatten(), axis=0))
 
-    fqe = FQE(model_type=model_type, action_size=action_size, policy=policy, 
-              hidden_dims=hidden_dims, lr=lr, epochs=epochs, gamma=gamma)
+    fqe = FQE(model_type=model_type, num_actions=action_size, policy=policy, 
+              hidden_dims=hidden_dims, learning_rate=learning_rate, epochs=epochs, gamma=gamma)
     fqe.fit(
         states=states, zs=zs, actions=actions, rewards=rewards, 
         max_iter=max_iter, f_ua=f_ua

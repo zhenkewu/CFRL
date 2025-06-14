@@ -153,7 +153,7 @@ def test_fqe_univariate_zs_states_nn():
                                                                  T=10, 
                                                                  policy=agent)
     
-    f = FQE(model_type='nn', action_size=2, policy=agent, epochs=10)
+    f = FQE(model_type='nn', num_actions=2, policy=agent, epochs=10)
     f.fit(zs=zs_in, 
           states=states_in, 
           actions=actions_in, 
@@ -182,7 +182,7 @@ def test_fqe_multivariate_zs_states_nn():
                                                                  policy=agent, 
                                                                  f_ux=f_ux_multi)
     
-    f = FQE(model_type='nn', action_size=2, policy=agent, epochs=10)
+    f = FQE(model_type='nn', num_actions=2, policy=agent, epochs=10)
     f.fit(zs=zs_in, 
           states=states_in, 
           actions=actions_in, 
