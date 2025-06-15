@@ -76,8 +76,12 @@ To be updated.
 We provide unit tests as well as integration tests for the main functions of the CFRL. The tests can be 
 found in the `tests` folder of the `CFRL` repository. To run the test, first install `pytest`: 
 
-<pre> ```bash $ pip install pytest``` </pre>
+```bash 
+$ pip install pytest
+```
 
 Then run 
 
-<pre> ```bash $ python -m pytest``` </pre>
+```bash 
+$ python -m pytest
+```
