@@ -50,7 +50,7 @@ counterfactual fairness metric.
 | `fqe`          | Implements a fitted Q-evaluation (FQE) algorithm, which can be used to evaluate the value of a trained policy.                                                                                                                                                                                                 |
 | `evaluation`   | Implements functions that evaluate the value and fairness of a trained policy. Depending on the user's needs, the evaluation can be done either in a synthetic environment or in a simulated environment.                                                                                                      |
 
-![Workflow Chart](./supp/workflow%20chart%20cropped.PNG)
+![Workflow Chart](./supps/workflow%20chart%20cropped.PNG)
 
 A general package workflow is as follows: First, simulate a trajectory using `environment` or read in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` to remove the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to evaluate the value and fairness of the trained policy. See ... for more detailed workflow examples.
 
@@ -60,9 +60,15 @@ This section provide a few short examples showcasing some use cases of CFRL.
 
 ### Data Preprocessing
 
+To be updated. 
+
 ### Assessing Algorithms using Simulation
 
+To be updated. 
+
 ### Assessing Policies using Real Data
+
+To be updated. 
 
 ## Testing
 We provide unit tests as well as integration tests for the main functions of the CFRL. The tests can be 
