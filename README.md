@@ -1,7 +1,8 @@
 # CFRL: A Python Library for Counterfactually Fair Reinforcement Learning
 
-Documentation: 
-Paper: 
+Documentation: To be updated.
+
+Paper: To be updated. 
 
 ## Installation
 
@@ -19,8 +20,8 @@ and rewards, where the bias is associated (?) with the sensitive attribute. Thus
 counterfactual fairness, we want the policy to be based on the true underlying states and rewards 
 rather than their biased proxies. 
 
-We refer interested readers to [Kusner et al. (2017)]<https://arxiv.org/abs/1703.06856> for a detailed discussion of counterfactual fairness in the single-stage prediction setting, and to 
-[Wang et al. (2025)]<https://arxiv.org/abs/2501.06366> for a detailed discussion of counterfactual 
+We refer interested readers to [Kusner et al. (2017)](https://arxiv.org/abs/1703.06856) for a detailed discussion of counterfactual fairness in the single-stage prediction setting, and to 
+[Wang et al. (2025)](https://arxiv.org/abs/2501.06366) for a detailed discussion of counterfactual 
 fairness in the reinforcement learning setting.
 
 ## Key Functionalities
@@ -29,7 +30,7 @@ CFRL is designed with two main functionalities:
 
 1. Provide algorithms that enforce counterfactual fairness for reinforcement learning policies. 
 The current version of CFRL implements the sequential data preprocessing algorithm proposed by
-[Wang et al. (2025)]<https://arxiv.org/abs/2501.06366> for offline reinforcement learning. The 
+[Wang et al. (2025)](https://arxiv.org/abs/2501.06366) for offline reinforcement learning. The 
 algorithm takes in an offline RL trajectory and outputs a preprocessed, bias-free trajectory. The 
 preprocessed trajectory can then be passed to any existing offline reinforcement learning algorithms 
 for training, and the learned policy should be approximately counterfactually fair. 
