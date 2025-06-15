@@ -1,3 +1,5 @@
+.. _trajectory_arrays:
+
 Trajectory Arrays
 ===============================
 

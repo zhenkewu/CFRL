@@ -1,3 +1,5 @@
+.. _preprocessor:
+
 Preprocessor
 =============================
 This module implements the sequential data preprocessing method proposed by Wang et al. (2025).
