@@ -132,3 +132,6 @@ We can also convert the Trajectory Arrays back to the tabular format by running
 The output :code:`tabular_trajectory` is 
 
 .. image:: ../supps/sample_tabular_output.png
+
+Note that the output tabular trajectory also includes a column recording the time step. The time 
+steps in the column start from 1.
