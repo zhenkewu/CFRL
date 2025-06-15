@@ -15,10 +15,11 @@ levels (e.g. 0="Race A", 1="Race B") or one-hot encoded manually.
 the state vector must be numerical because CFRL involves taking means and standard deviations of the 
 state variable.
 
-3. **Action:** The action must be univariate. It should be either categorical or discrete numerical. In 
-general, the action does not need to be manually one-hot encoded. However, the constructors of the 
-:code:`SequentialPreprocessor` and :code:`SimulatedEnvironment` classes provide a 
-:code:`is_action_onehot` argument. If :code:`is_action_onehot=True`, then the action will be 
+3. **Action:** The action must be univariate. It should be either categorical or discrete numerical. 
+In either case, the actions should be coded as :math:`0, 1, 2, \dots, N_a`, where :math:`N_a` is the 
+total number of legit actions. In general, the action does not need to be manually one-hot encoded. 
+However, the constructors of the :code:`SequentialPreprocessor` and :code:`SimulatedEnvironment` classes 
+provide a :code:`is_action_onehot` argument. If :code:`is_action_onehot=True`, then the action will be 
 automatically one-hot encoded internally. 
 
 4. **Reward:** The reward must be univariate and numerical. As in most reinforcement learning settings, 
