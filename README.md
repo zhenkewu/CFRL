@@ -85,3 +85,8 @@ Then run
 ```bash 
 $ python -m pytest
 ```
+
+Note that this library relies heavily on machine learning and deep learning methods such as neural 
+networks. The outputs from these methods are not exactly predictable because of the stochasticity 
+involved. Therefore, most of the tests focus on testing the shape and data type of the outputs rather 
+than the value of the outputs.
