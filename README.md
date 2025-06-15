@@ -52,7 +52,7 @@ counterfactual fairness metric.
 | `fqe`          | Implements a fitted Q-evaluation (FQE) algorithm, which can be used to evaluate the value of a trained policy.                                                                                                                                                                                                 |
 | `evaluation`   | Implements functions that evaluate the value and fairness of a trained policy. Depending on the user's needs, the evaluation can be done either in a synthetic environment or in a simulated environment.                                                                                                      |
 
-![Workflow Chart](.docs/source/supps/workflow_chart_cropped.PNG)
+![Workflow Chart](./docs/source/supps/workflow_chart_cropped.PNG)
 
 A general package workflow is as follows: First, simulate a trajectory using `environment` or read in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` to remove the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to evaluate the value and fairness of the trained policy. See ... for more detailed workflow examples.
 
