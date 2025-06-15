@@ -30,8 +30,9 @@ the use cases of CFRL. We appreciate your patience and support!
    :maxdepth: 2
    :caption: Inputs and Outputs
 
-   inputs_and_outputs/tabular_trajectory_data
+   inputs_and_outputs/data_requirements
    inputs_and_outputs/trajectory_arrays
+   inputs_and_outputs/tabular_trajectory_data
 
 .. toctree::
    :maxdepth: 2

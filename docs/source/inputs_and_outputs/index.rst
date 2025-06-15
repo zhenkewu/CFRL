@@ -5,5 +5,6 @@ Inputs and Outpus
    :maxdepth: 2
    :caption: Contents
 
-   tabular_trajectory_data
+   data_requirements
    trajectory_arrays
+   tabular_trajectory_data
