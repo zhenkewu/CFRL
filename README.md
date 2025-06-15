@@ -6,7 +6,9 @@ Paper: To be updated.
 
 ## Installation
 
-<pre> ```bash $ pip install CFRL``` </pre>
+```bash 
+$ pip install CFRL
+```
 
 ## A Brief Introduction to Counterfactual Fairness
 
