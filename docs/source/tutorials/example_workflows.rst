@@ -14,7 +14,8 @@ offline trajectory. This workflow is appropriate when the user does not want to 
 CFRL. Instead, the user can take the preprocessed trajectory to train a counterfactually fair policy 
 using another reinforcement learning library or application that better fits their needs.
 
-A detailed code demonstration of this workflow can be found here (ADD LINK!).
+**Code:** A detailed code demonstration of this workflow can be found 
+`here <https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_only_workflow.ipynb>`_.
 
 Assessing Preprocessors Using Synthetic Data
 --------------------------
@@ -31,7 +32,7 @@ on the preprocessed data as well as its estimated value and counterfactual fairn
 workflow is appropriate when the user wants to examine the impact of some trajectory preprocessing 
 method on the value and counterfactual fairness of the trained policy.
 
-A detailed code demonstration of this workflow can be found here (ADD LINK!).
+**Code:**: A detailed code demonstration of this workflow can be found here (ADD LINK!).
 
 Assessing Policies Using Real Data
 --------------------------
@@ -48,4 +49,4 @@ as well as its estimated value and counterfactual fairness metric. This workflow
 user is interested in knowing the value and counterfactual fairness achieved by the trained policy when 
 interacting with the true underlying environment.
 
-A detailed code demonstration of this workflow can be found here (ADD LINK!).
+**Code:** A detailed code demonstration of this workflow can be found here (ADD LINK!).

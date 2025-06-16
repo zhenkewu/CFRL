@@ -249,7 +249,10 @@ class FQI(Agent):
             preprocess: bool = True
         ) -> None:  
         """
-        Train the FQI agent.
+        Train the FQI agent. 
+        
+        The observed sensitive attributes :code:`zs` are used only by the internal 
+        preprocessor; it is not directly used during policy learning.
 
         Args: 
             zs (list or np.ndarray): The observed sensitive attributes of each individual 
