@@ -447,7 +447,7 @@ def sample_trajectory(
             xtm1=None,
             atm1=None,
             uat=ua0,
-            is_return_prob=False,
+            #is_return_prob=False,
         ) # SHOULD DELETE LATER
     ur0 = f_ur(N=N)
     ux1 = f_ux(N=N, state_dim=state_dim)
@@ -476,7 +476,7 @@ def sample_trajectory(
                 xtm1=X_c[:, t - 1],
                 atm1=A_c[:, t - 1],
                 uat=uat,
-                is_return_prob=False,
+                #is_return_prob=False,
             ) # SHOULD DELETE LATER
         urtm1 = f_ur(N=N)
         uxt = f_ux(N=N, state_dim=state_dim)

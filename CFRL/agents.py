@@ -302,7 +302,7 @@ class FQI(Agent):
             atm1: list | np.ndarray | None = None, 
             uat: list | np.ndarray | None = None, 
             preprocess: bool = True, 
-            **kwargs
+            #**kwargs
         ) -> np.ndarray:
         """
         Make decisions using the `FQI` agent. 
