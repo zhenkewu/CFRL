@@ -60,13 +60,13 @@ A general CFRL workflow is as follows: First, simulate a trajectory using `envir
 
 We provide a few short code examples showcasing some key use cases of CFRL.
 
-1. **Trajectory Preprocessing Only:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_only_workflow.ipynb).
+**1. Trajectory Preprocessing Only:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_only_workflow.ipynb).
 
-2. **Policy Learning Only:** See here.
+**2. Policy Learning Only:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/policy_learning_only_workflow.ipynb).
 
-2. **Assessing Preprocessors using Synthetic Data:** See here.
+**3. Assessing Preprocessors using Synthetic Data:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/synthetic_data_workflow.ipynb).
 
-3. **Assessing Policies using Real Data:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/real_data_workflow.ipynb).
+**4. Assessing Policies using Real Data:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/real_data_workflow.ipynb).
 
 ## Testing
 We provide unit tests as well as integration tests for the main functions of the CFRL. The tests can be 
