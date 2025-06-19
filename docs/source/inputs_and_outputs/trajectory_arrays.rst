@@ -9,13 +9,13 @@ describing the sensitive attribute, state, action, and reward of each individual
 time step. Each :math:`t=0,\dots,T` is called a time step, and the observed tuple 
 :math:`(s_{it}, a_{it}, r_{it}, s_{i,t+1})` is called the transition for individual :math:`i` at time 
 step :math:`t`. Let :math:`N` be the total number of individuals and :math:`T` be the total number of 
-transitions in the trajectory.
+transitions of each individual.
 
 This section introduces Trajectory Arrays, which is how trajectories are represented in CFRL. 
 Any trajectory satisfying the :ref:`data requirements <data_requirements>` can be represented by 
 Trajectory Arrays. The trajectory inputs and outputs of CFRL functions and classes are all in the 
 form of Trajectory Arrays. To convert trajectory data from a tabular format to Trajectory Arrays or 
-from Trajectory Arrays to a tabular data, see :ref:`Tabular Trajectory Data <tabular_trajectory_data>`.
+from Trajectory Arrays to a tabular format, see :ref:`Tabular Trajectory Data <tabular_trajectory_data>`.
 
 The sensitive attributes, states, actions, and rewards in a trajectory are represented by 
 Trajectory Arrays of different formats, which are introduced below.
@@ -90,7 +90,7 @@ Full-trajectory States Format as
 Single-time Actions Format
 --------------------------------
 
-A Trajectory Array in the Single-time Actions Attribute Format is used to store the action 
+A Trajectory Array in the Single-time Actions Format is used to store the action 
 of each individual in the trajectory at a single time step. It is a 1D list or array with 
 shape :code:`(N,)`. The i-th entry of the list or array represents action of the i-th individual at 
 the given time step.
@@ -124,7 +124,7 @@ of this trajectory at all time steps can be represented in the Full-trajectory A
 Single-time Rewards Format
 --------------------------------
 
-A Trajectory Array in the Single-time Rewards Attribute Format is used to store the reward 
+A Trajectory Array in the Single-time Rewards Format is used to store the reward 
 of each individual in the trajectory at a single time step. It is a 1D list or array with 
 shape :code:`(N,)`. The i-th entry of the list or array represents reward of the i-th individual at 
 the given time step.
@@ -144,7 +144,7 @@ of each individual in the trajectory at all time steps. It is a 2D list or array
 shape :code:`(N, T)`. The (i, j)-th entry of the list or array represents the reward of the 
 i-th individual at the j-th time step. 
 
-For example, consider a trajectory dataset with 3 individuals and 3 transitions. Then the actions 
+For example, consider a trajectory dataset with 3 individuals and 3 transitions. Then the rewards 
 of this trajectory at all time steps can be represented in the Full-trajectory Rewards Format as
 
 +----------------+----------------+----------------+

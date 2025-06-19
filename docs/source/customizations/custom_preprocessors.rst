@@ -191,11 +191,11 @@ always returns only one array.
 
 If a preprocessor is a valid custom preprocessor, then it can be used wherever 
 a :code:`SequentialPreprocessor` can be used. For example, it can be passed into 
-a :code:`FQI` agent as an internal preprocessor.
+an :code:`FQI` agent as an internal preprocessor.
 
 .. code-block:: python
 
-    # Also suppose zs, states, actions is a trajectory from our MDP of interest.
+    # Suppose zs, states, actions, rewards is a trajectory from our MDP of interest.
     p = ConcatenatePreprocessor()
     agent = FQI(num_actions=3, model_type="nn", preprocessor=p)
     agent.train(zs=zs, xs=states, actions=actions, rewards=rewards)
