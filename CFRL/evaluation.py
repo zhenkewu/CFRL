@@ -1,26 +1,3 @@
-"""
-This module implements functions used for evaluating the value and fairness of policies.
-
-Functions: 
--f_ux_default(...): A function that generates exogenous variables for the states from a standard 
-normal distribution.
--f_ua_default(...): A function that generates exogenous variables for the actions from a uniform 
-distribution between 0 and 1.
--f_ur_default(...): A function that generates exogenous variables for the rewards from a standard 
-normal distribution.
--evaluate_reward_through_simulation(...): A function that estimates the value of a policy using 
-simulation in a synthetic environment. 
--evaluate_fairness_throigh_simulation(...): A function that estimates the counterfactual fairness 
-metric of a policy using simulation in a synthetic environment.
--evaluate_fairness_through_model(...): A function that estimates the counterfactual fairness 
-metric of a policy from an offline trajectory.
--evaluate_reward_through_fqe(...): A function that estimates the value of a policy using fitted 
-Q evaluation (FQE).
-
-Usage: 
-from CFRL import evaluation
-"""
-
 import numpy as np
 import pandas as pd
 import torch
@@ -40,12 +17,15 @@ def f_ux_default(N: int, state_dim: int) -> np.ndarray:
     Generate exogenous variables for the states from a standard normal distribution.
 
     Args: 
-        N (int): The total number of individuals for whom the exogenous variables will 
+        N (int): 
+            The total number of individuals for whom the exogenous variables will 
             be generated.
-        state_dim (int): The number of components in the state vector.
+        state_dim (int): 
+            The number of components in the state vector.
     
     Returns: 
-        ux (np.ndarray): The generated exogenous variables. It is a (N, state_dim) array 
+        ux (np.ndarray): 
+            The generated exogenous variables. It is a (N, state_dim) array 
             where each entry is sample from a standard normal distribution.
     """
 
@@ -56,11 +36,13 @@ def f_ua_default(N: int) -> np.ndarray:
     Generate exogenous variables for the actions from a uniform distribution between 0 and 1.
 
     Args: 
-        N (int): The total number of individuals for whom the exogenous variables will 
+        N (int): 
+            The total number of individuals for whom the exogenous variables will 
             be generated.
     
     Returns: 
-        ua (np.ndarray): The generated exogenous variables. It is a (N, 1) array 
+        ua (np.ndarray): 
+            The generated exogenous variables. It is a (N, 1) array 
             where each entry is sample from a uniform distribution between 0 and 1.
     """
 
@@ -71,11 +53,13 @@ def f_ur_default(N: int) -> np.ndarray:
     Generate exogenous variables for the rewards from a standard normal distribution.
 
     Args: 
-        N (int): The total number of individuals for whom the exogenous variables will 
+        N (int): 
+            The total number of individuals for whom the exogenous variables will 
             be generated.
     
     Returns: 
-        ur (np.ndarray): The generated exogenous variables. It is a (N, 1) array 
+        ur (np.ndarray): 
+            The generated exogenous variables. It is a (N, 1) array 
             where each entry is sample from a standard normal distribution.
     """
 
@@ -105,30 +89,43 @@ def evaluate_reward_through_simulation(
     if a larger value is specified for the argument `T`. 
 
     Args: 
-        env (SyntheticEnvironment): The synthetic environment in which the simulation in run.
-        z_eval_levels (list or np.ndarray): The values of sensitive attributes used in the simulation. 
+        env (SyntheticEnvironment): 
+            The synthetic environment in which the simulation in run.
+        z_eval_levels (list or np.ndarray): 
+            The values of sensitive attributes used in the simulation. 
             The individuals in the simulation will have sensitive attributes sampled from this set. 
-        state_dim (int): The number of components in the state vector. 
-        N (int): The total number of individuals in the trajectory sampled during the simulation.
-        T (int): The total number of transitions in the trajectory sampled during the simulation.
-        policy (Agent): The policy whose value is to be evaluated. 
-        f_ux (Callable, optional): A rule to generate exogenous variables for each individual's 
+        state_dim (int): 
+            The number of components in the state vector. 
+        N (int): 
+            The total number of individuals in the trajectory sampled during the simulation.
+        T (int): 
+            The total number of transitions in the trajectory sampled during the simulation.
+        policy (Agent): 
+            The policy whose value is to be evaluated. 
+        f_ux (Callable, optional): 
+            A rule to generate exogenous variables for each individual's 
             states. It should be a function whose argument list, argument names, and return 
             type exactly match those of `f_ux_default`.
-        f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
+        f_ua (Callable, optional): 
+            A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
             type exactly match those of `f_ua_default`. 
-        f_ur (Callable, optional): A rule to generate exogenous variables for each individual's 
+        f_ur (Callable, optional): 
+            A rule to generate exogenous variables for each individual's 
             rewards. It should be a function whose argument list, argument names, and return 
             type exactly match those of `f_ur_default`.
-        z_probs (list or np.ndarray, optional): The probability of an individual taking each of 
+        z_probs (list or np.ndarray, optional): 
+            The probability of an individual taking each of 
             the values in `z_eval_levels`. When set to `None`, a uniform distribution will be used. 
-        gamma (int or float, optional): The discount factor used for calculating the discounted 
+        gamma (int or float, optional): 
+            The discount factor used for calculating the discounted 
             cumulative rewards. 
-        seed (int, optional): The random seed used to run the simulation.
+        seed (int, optional): 
+            The random seed used to run the simulation.
 
     Returns: 
-        discounted_cumulative_reward (np.integer or no.floating): A estimation of the discounted 
+        discounted_cumulative_reward (np.integer or no.floating): 
+            An estimation of the discounted 
             cumulative reward achieved by the policy throughout the trajectory. 
     """
 
@@ -199,7 +196,8 @@ def evaluate_fairness_through_simulation(
     using `sample_counterfactual_trajectories()` in the `environment` module. Then it computes a 
     counterfactual fairness metric using the following formula given in Wang et al. (2025): 
 
-     ..math:: 
+     .. math:: 
+
         \max_{z', z \in eval(Z)} \frac{1}{NT} \sum_{i=1}^{N} \sum_{t=1}^{T} 
         \mathbb{I} \left( A_t^{Z \leftarrow z'}\left(\bar{U}_t(h_{it})\right) 
         \neq A_t^{Z \leftarrow z}\left(\bar{U}_t(h_{it})\right) \right).
@@ -217,31 +215,43 @@ def evaluate_fairness_through_simulation(
                Preprocessing. arXiv preprint arXiv:2501.06366.
 
     Args: 
-        env (SyntheticEnvironment): The synthetic environment in which the simulation in run.
-        z_eval_levels (list or np.ndarray): The values of sensitive attributes for which 
+        env (SyntheticEnvironment): 
+            The synthetic environment in which the simulation in run.
+        z_eval_levels (list or np.ndarray): 
+            The values of sensitive attributes for which 
             counterfactual trajectories are generated in the simulation. 
-        state_dim (int): The number of components in the state vector. 
-        N (int): The total number of individuals in the counterfactual trajectories sampled during the 
+        state_dim (int): 
+            The number of components in the state vector. 
+        N (int): 
+            The total number of individuals in the counterfactual trajectories sampled during the 
             simulation.
-        T (int): The total number of transitions in the counterfactual trajectories sampled during the 
+        T (int): 
+            The total number of transitions in the counterfactual trajectories sampled during the 
             simulation.
-        policy (Agent): The policy whose fairness is to be evaluated. 
-        f_ux (Callable, optional): A rule to generate exogenous variables for each individual's 
+        policy (Agent): 
+            The policy whose fairness is to be evaluated. 
+        f_ux (Callable, optional): 
+            A rule to generate exogenous variables for each individual's 
             states. It should be a function whose argument list, argument names, and return 
             type exactly match those of `f_ux_default`.
-        f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
+        f_ua (Callable, optional): 
+            A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
             type exactly match those of `f_ua_default`. 
-        f_ur (Callable, optional): A rule to generate exogenous variables for each individual's 
+        f_ur (Callable, optional): 
+            A rule to generate exogenous variables for each individual's 
             rewards. It should be a function whose argument list, argument names, and return 
             type exactly match those of `f_ur_default`.
-        z_probs (list or np.ndarray, optional): The probability of an individual taking each of 
+        z_probs (list or np.ndarray, optional): 
+            The probability of an individual taking each of 
             the values in `z_eval_levels` as the observed sensitive attribute. When set to `None`, 
             a uniform distribution will be used. 
-        seed (int, optional): The random seed used to run the simulation.
+        seed (int, optional): 
+            The random seed used to run the simulation.
 
     Returns: 
-        cf_metric (np.integer or np.floating): The counterfactual fairness metric of the policy. 
+        cf_metric (np.integer or np.floating): 
+            The counterfactual fairness metric of the policy. 
     """
     
     z_eval_levels = np.array(z_eval_levels)
@@ -286,7 +296,8 @@ def evaluate_fairness_through_model(
     computes a counterfactual fairness metric using the following formula given in Wang et al. 
     (2025): 
 
-     ..math:: 
+     .. math:: 
+        
         \max_{z', z \in eval(Z)} \frac{1}{NT} \sum_{i=1}^{N} \sum_{t=1}^{T} 
         \mathbb{I} \left( A_t^{Z \leftarrow z'}\left(\bar{U}_t(h_{it})\right) 
         \neq A_t^{Z \leftarrow z}\left(\bar{U}_t(h_{it})\right) \right).
@@ -304,22 +315,30 @@ def evaluate_fairness_through_model(
                Preprocessing. arXiv preprint arXiv:2501.06366.
     
     Args: 
-        env (SimulatedEnvironment): An environment that simulates the transition dynamics of the 
+        env (SimulatedEnvironment): 
+            An environment that simulates the transition dynamics of the 
             MDP underlying `zs`, `states`, `actions`, and `rewards`. 
-        zs (list or np.ndarray): The observed sensitive attributes of each individual in the 
+        zs (list or np.ndarray): 
+            The observed sensitive attributes of each individual in the 
             offline trajectory. It should be a list or array following the Sensitive Attributes 
             Format. 
-        states (list or np.ndarray): The state trajectory. It should be a list or array following 
+        states (list or np.ndarray): 
+            The state trajectory. It should be a list or array following 
             the Full-trajectory States Format.
-        actions (list or np.ndarray): The action trajectory. It should be a list or array following 
+        actions (list or np.ndarray): 
+            The action trajectory. It should be a list or array following 
             the Full-trajectory Actions Format.
-        policy (Agent): The policy whose fairness is to be evaluated. 
-        f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
+        policy (Agent): 
+            The policy whose fairness is to be evaluated. 
+        f_ua (Callable, optional): 
+            A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
             type exactly match those of `f_ua_default`. 
-        seed (int, optional): The seed used to estimate the counterfactual trajectories. 
+        seed (int, optional): 
+            The seed used to estimate the counterfactual trajectories. 
     Returns: 
-        cf_metric (np.integer or np.floating): The counterfactual fairness metric of the policy. 
+        cf_metric (np.integer or np.floating): 
+            The counterfactual fairness metric of the policy. 
     """
     
     zs = np.array(zs)
@@ -362,34 +381,48 @@ def evaluate_reward_through_fqe(
     a FQE algorithm to evaluate the value of the policy.
 
     Args: 
-        zs (list or np.ndarray): The observed sensitive attributes of each individual in the 
+        zs (list or np.ndarray): 
+            The observed sensitive attributes of each individual in the 
             offline trajectory. It should be a list or array following the Sensitive Attributes 
             Format. 
-        states (list or np.ndarray): The state trajectory. It should be a list or array following 
+        states (list or np.ndarray): 
+            The state trajectory. It should be a list or array following 
             the Full-trajectory States Format.
-        actions (list or np.ndarray): The action trajectory. It should be a list or array following 
+        actions (list or np.ndarray): 
+            The action trajectory. It should be a list or array following 
             the Full-trajectory Actions Format.
-        actions (list or np.ndarray): The reward trajectory. It should be a list or array following 
+        actions (list or np.ndarray): 
+            The reward trajectory. It should be a list or array following 
             the Full-trajectory Rewards Format.
-        policy (Agent): The policy whose value is to be evaluated.
-        model_type (str): The type of the model used for FQE. Can be "lm" (polynomial regression) or 
+        policy (Agent): 
+            The policy whose value is to be evaluated.
+        model_type (str): 
+            The type of the model used for FQE. Can be "lm" (polynomial regression) or 
             "nn" (neural network). 
-        f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
+        f_ua (Callable, optional): 
+            A rule to generate exogenous variables for each individual's 
             actions during training. It should be a function whose argument list, argument names, 
             and return type exactly match those of `f_ua_default`. 
-        hidden_dims (list[int], optional): The hidden dimensions of the neural network. This 
+        hidden_dims (list[int], optional): 
+            The hidden dimensions of the neural network. This 
             argument is not used if `model_type="lm"`. 
-        learning_rate (int or float, optional): The learning rate of the neural network. This 
+        learning_rate (int or float, optional): 
+            The learning rate of the neural network. This 
             argument is not used if `model_type="lm"`. 
-        epochs (int, optional): The number of training epochs for the neural network. This 
+        epochs (int, optional): 
+            The number of training epochs for the neural network. This 
             argument is not used if `model_type="lm"`. 
-        gamma (int or float, optional): The discount factor for the cumulative discounted reward 
+        gamma (int or float, optional): 
+            The discount factor for the cumulative discounted reward 
             in the objective function. 
-        max_iter (int, optional): The number of iterations for learning the Q function. 
-        seed (int, optional): The random seed used for FQE.
+        max_iter (int, optional): 
+            The number of iterations for learning the Q function. 
+        seed (int, optional): 
+            The random seed used for FQE.
 
     Returns: 
-        discounted_cumulative_reward (np.integer or no.floating): A estimation of the discounted 
+        discounted_cumulative_reward (np.integer or no.floating): 
+            A estimation of the discounted 
             cumulative reward achieved by the policy throughout the trajectory. 
     """
     

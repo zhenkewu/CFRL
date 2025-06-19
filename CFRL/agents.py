@@ -1,14 +1,3 @@
-"""
-This module implements the fitted Q-iteration algotithm for offline reinforcement learning.
-
-Classes: 
--Agent: A base class for reinforcement learning agents.
--DQI: An implementation of the fitted Q-iteration algorithm 
-
-Usage: 
-from CFRL import agents
-"""
-
 from abc import abstractmethod
 import numpy as np
 import torch
@@ -23,7 +12,7 @@ class Agent:
     """
     Base class for reinforcement learning agents.
 
-    Subclasses must implement the `act` method.
+    Subclasses must implement the :code:`act` method.
     """
 
     def __init__(self) -> None:
@@ -40,7 +29,36 @@ class Agent:
             **kwargs
     ) -> np.ndarray:
         """
-        An abstract prototype of methods to make decisions using the agent.
+        An abstract prototype of methods for making decisions using the agent.
+
+        Args: 
+            zs (list or np.ndarray): 
+                The observed sensitive attributes of each individual 
+                for whom the decisions are to be made. It should be a 2D list or array following 
+                the Sensitive Attributes Format.
+            xt (list or np.ndarray): 
+                The current states of each individual for whom the decisions 
+                are to be made. It should be a 2D list or array following the Single-time States 
+                Format.
+            xtm1 (list or np.ndarray, optional): 
+                The states at the previous time step of each individual  
+                for whom the decisions are to be made. It should be a 2D list or array following the 
+                Single-time States Format.
+            atm1 (list or np.ndarray, optional): 
+                The actions at the previous time step of each individual  
+                for whom the decisions are to be made. It should be a 1D list or array following the 
+                Full-trajectory Actions Format. When both `xtm1` and `atm1` are set to `None`, the agent 
+                will consider the input to be from the initial time step of a new trajectory, and the 
+                internal preprocessor be reset if it is an instance of `SequentialPreprocessor`.
+            uxt (list or np.ndarray, optional): 
+                The exogenous variables for each 
+                individual's action. It should be a 2D list or array with shape (N, 1) 
+                where N is the total number of individuals.
+
+        Returns: 
+            actions (np.ndarray): 
+                The decisions made for the individuals. It is a 1D array following the 
+                Single-time Actions Format.
         """
 
         pass
@@ -77,20 +95,27 @@ class FQI(Agent):
     ) -> None:
         """
         Args: 
-            num_actions (int): The total number of legit actions. 
-            model_type (str): The type of the model used for learning the Q function. Can 
+            num_actions (int): 
+                The total number of legit actions. 
+            model_type (str): 
+                The type of the model used for learning the Q function. Can 
                 be "lm" (polynomial regression) or "nn" (neural network). 
-            hidden_dims (list[int]): The hidden dimensions of the neural network. This 
+            hidden_dims (list[int]): 
+                The hidden dimensions of the neural network. This 
                 argument is not used if `model_type="lm"`. 
-            preprocessor (Preprocessor, optional): A preprocessor used for preprocessing input data 
+            preprocessor (Preprocessor, optional): 
+                A preprocessor used for preprocessing input data 
                 before using the data for training or decision-making. The preprocessor must have 
                 already been trained if it requires training. When set to `None`, `FQI` will directly 
                 use the input data for training or decision-making without preprocessing it.
-            gamma (int or float, optional): The discount factor for the cumulative discounted reward 
+            gamma (int or float, optional): 
+                The discount factor for the cumulative discounted reward 
                 in the objective function.
-            learning_rate (int or float, optional): The learning rate of the neural network. This 
+            learning_rate (int or float, optional): 
+                The learning rate of the neural network. This 
                 argument is not used if `model_type="lm"`. 
-            epochs (int, optional): The number of training epochs for the neural network. This 
+            epochs (int, optional): 
+                The number of training epochs for the neural network. This 
                 argument is not used if `model_type="lm"`. 
         """
         
@@ -255,17 +280,23 @@ class FQI(Agent):
         preprocessor; it is not directly used during policy learning.
 
         Args: 
-            zs (list or np.ndarray): The observed sensitive attributes of each individual 
+            zs (list or np.ndarray): 
+                The observed sensitive attributes of each individual 
                 in the training data. It should be a list or array following the Sensitive 
                 Attributes Format.
-            xs (list or np.ndarray): The state trajectory used for training. It should be 
+            xs (list or np.ndarray): 
+                The state trajectory used for training. It should be 
                 a list or array following the Full-trajectory States Format.
-            actions (list or np.ndarray): The action trajectory used for training. It should be 
+            actions (list or np.ndarray): 
+                The action trajectory used for training. It should be 
                 a list or array following the Full-trajectory Actions Format.
-            rewards (list or np.ndarray): The reward trajectory used for training. It should be 
+            rewards (list or np.ndarray): 
+                The reward trajectory used for training. It should be 
                 a list or array following the Full-trajectory Rewards Format.
-            max_iter (int, optional): The number of iterations for learning the Q function. 
-            preprocess (bool, optional): Whether to preprocess the training data before training. 
+            max_iter (int, optional): 
+                The number of iterations for learning the Q function. 
+            preprocess (bool, optional): 
+                Whether to preprocess the training data before training. 
                 When set to `False`, the training data will not be preprocessed even if 
                 `preprocessor` is not `None` in the constructor.
         """
@@ -320,26 +351,32 @@ class FQI(Agent):
         that relies on buffers. 
 
         Args: 
-            zs (list or np.ndarray): The observed sensitive attributes of each individual 
+            zs (list or np.ndarray): 
+                The observed sensitive attributes of each individual 
                 for whom the decisions are to be made. It should be a 2D list or array following 
                 the Sensitive Attributes Format.
-            xt (list or np.ndarray): The current states of each individual for whom the decisions 
+            xt (list or np.ndarray): 
+                The current states of each individual for whom the decisions 
                 are to be made. It should be a 2D list or array following the Single-time States 
                 Format.
-            xtm1 (list or np.ndarray, optional): The states at the previous time step of each individual  
+            xtm1 (list or np.ndarray, optional): 
+                The states at the previous time step of each individual  
                 for whom the decisions are to be made. It should be a 2D list or array following the 
                 Single-time States Format.
-            atm1 (list or np.ndarray, optional): The actions at the previous time step of each individual  
+            atm1 (list or np.ndarray, optional): 
+                The actions at the previous time step of each individual  
                 for whom the decisions are to be made. It should be a 1D list or array following the 
                 Full-trajectory Actions Format. When both `xtm1` and `atm1` are set to `None`, the agent 
                 will consider the input to be from the initial time step of a new trajectory, and the 
                 internal preprocessor be reset if it is an instance of `SequentialPreprocessor`.
-            uxt (list or np.ndarray, optional): The exogenous variables for each 
+            uxt (list or np.ndarray, optional): 
+                The exogenous variables for each 
                 individual's action. It should be a 2D list or array with shape (N, 1) 
                 where N is the total number of individuals.
 
         Returns: 
-            actions (np.ndarray): The decisions made for the individuals. It is a 1D array following the 
+            actions (np.ndarray): 
+                The decisions made for the individuals. It is a 1D array following the 
                 Single-time Actions Format.
         """
         

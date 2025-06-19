@@ -1,20 +1,3 @@
-"""
-This module implements functions to read or export trajectory data from external files. 
-
-Functions: 
--read_trajectory_from_csv(...): A function that reads tabular trajectory data from a `.csv` file into 
-the array formats usable by CFRL. 
--read_trajectory_from_dataframe(...): A function that reads tabular trajectory data from a 
-`pandas.DataFrame` into the array formats usable by CFRL. 
--convert_trajectory_to_dataframe(...): A function that converts trajectories from the array format into 
-a `pandas.DataFrame`.
--export_trajectory_to_csv(...): A function that exports trajectories from the array format to a `.csv` 
-file.
-
-Usage: 
-from CFRL import reader
-"""
-
 import pandas as pd
 import numpy as np
 
@@ -85,27 +68,39 @@ def read_trajectory_from_csv(
     the "Inputs and Outputs" section.
 
     Args: 
-        path (str): The path to the `.csv` file.
-        z_labels (list[str]): A list of strings representing the labels of columns in the `.csv` file 
+        path (str): 
+            The path to the `.csv` file.
+        z_labels (list[str]): 
+            A list of strings representing the labels of columns in the `.csv` file 
             that are sensitive attribute variables.
-        state_labels (list[str]): A list of strings representing the labels of columns in the `.csv` 
+        state_labels (list[str]): 
+            A list of strings representing the labels of columns in the `.csv` 
             file that are state variables. 
-        action_label (str): The label of the column in the `.csv` file that contains actions. 
-        reward_label (str): The label of the column in the `.csv` file that contains rewards. 
-        id_label (str): The label of the column in the `.csv` file that contains IDs. 
-        T: The total number of transitions to be read for each individual. 
+        action_label (str): 
+            The label of the column in the `.csv` file that contains actions. 
+        reward_label (str): 
+            The label of the column in the `.csv` file that contains rewards. 
+        id_label (str): 
+            The label of the column in the `.csv` file that contains IDs. 
+        T: 
+            The total number of transitions to be read for each individual. 
     
     Returns: 
-        zs (np.ndarray): The observed sensitive attributes of each individual in the 
+        zs (np.ndarray): 
+            The observed sensitive attributes of each individual in the 
             trajectory read from the `.csv` file. It is an array following the Sensitive 
             Attributes Format.
-        xs (np.ndarray): The state trajectory read from the `.csv` file. It is an array following 
+        xs (np.ndarray): 
+            The state trajectory read from the `.csv` file. It is an array following 
             the Full-trajectoriy States Format.
-        actions (np.ndarray): The action trajectory read from the `.csv` file. It is an array 
+        actions (np.ndarray): 
+            The action trajectory read from the `.csv` file. It is an array 
             following the Full-trajectory Actions Format.
-        rewards (np.ndarray): The reward trajectory read from the `.csv` file. It is an array 
+        rewards (np.ndarray): 
+            The reward trajectory read from the `.csv` file. It is an array 
             following the Full-trajectory Rewards Format. 
-        ids (np.ndarray): The ids of each individual in the trajectory read from the `.csv` file. 
+        ids (np.ndarray): 
+            The ids of each individual in the trajectory read from the `.csv` file. 
             It is an array with size (N, 1) where N is the number of individuals in the trajectory. 
             Specifically, the `ids[i, 0]` contains the ID of the i-th individual in the trajectory.
     """
@@ -136,27 +131,39 @@ def read_trajectory_from_dataframe(
     the "Inputs and Outputs" section.
 
     Args: 
-        data (pandas.DataFrame): The dataframe to read data from.
-        z_labels (list[str]): A list of strings representing the labels of columns in the `.csv` file 
+        data (pandas.DataFrame): 
+            The dataframe to read data from.
+        z_labels (list[str]): 
+            A list of strings representing the labels of columns in the `.csv` file 
             that are sensitive attribute variables.
-        state_labels (list[str]): A list of strings representing the labels of columns in the `.csv` 
+        state_labels (list[str]): 
+            A list of strings representing the labels of columns in the `.csv` 
             file that are state variables. 
-        action_label (str): The label of the column in the `.csv` file that contains actions. 
-        reward_label (str): The label of the column in the `.csv` file that contains rewards. 
-        id_label (str): The label of the column in the `.csv` file that contains IDs. 
-        T: The total number of transitions to be read for each individual. 
+        action_label (str): 
+            The label of the column in the `.csv` file that contains actions. 
+        reward_label (str): 
+            The label of the column in the `.csv` file that contains rewards. 
+        id_label (str): 
+            The label of the column in the `.csv` file that contains IDs. 
+        T: 
+            The total number of transitions to be read for each individual. 
     
     Returns: 
-        zs (np.ndarray): The observed sensitive attributes of each individual in the 
+        zs (np.ndarray): 
+            The observed sensitive attributes of each individual in the 
             trajectory read from the `.csv` file. It is an array following the Sensitive 
             Attributes Format.
-        xs (np.ndarray): The state trajectory read from the `.csv` file. It is an array following 
+        xs (np.ndarray): 
+            The state trajectory read from the `.csv` file. It is an array following 
             the Full-trajectoriy States Format.
-        actions (np.ndarray): The action trajectory read from the `.csv` file. It is an array 
+        actions (np.ndarray): 
+            The action trajectory read from the `.csv` file. It is an array 
             following the Full-trajectory Actions Format.
-        rewards (np.ndarray): The reward trajectory read from the `.csv` file. It is an array 
+        rewards (np.ndarray): 
+            The reward trajectory read from the `.csv` file. It is an array 
             following the Full-trajectory Rewards Format. 
-        ids (np.ndarray): The IDs of each individual in the trajectory read from the `.csv` file. 
+        ids (np.ndarray): 
+            The IDs of each individual in the trajectory read from the `.csv` file. 
             It is an array with size (N, 1) where N is the number of individuals in the trajectory. 
             Specifically, the `ids[i, 0]` contains the ID of the i-th individual in the trajectory.
     """
@@ -187,37 +194,49 @@ def convert_trajectory_to_dataframe(
     of the "Inputs and Outputs" section.
 
     Args: 
-        zs (list or np.ndarray): The observed sensitive attributes of each individual 
+        zs (list or np.ndarray): 
+            The observed sensitive attributes of each individual 
             in the trajectory. It should be a list or array following the Sensitive Attributes 
             Format.
-        states (list or np.ndarray): The state trajectory. It should be a list or array following 
+        states (list or np.ndarray): 
+            The state trajectory. It should be a list or array following 
             the Full-trajectory States Format.
-        actions (list or np.ndarray): The action trajectory. It should be a list or array following 
+        actions (list or np.ndarray): 
+            The action trajectory. It should be a list or array following 
             the Full-trajectory Actions Format.
-        rewards (list or np.ndarray): The reward trajectory. It should be a list or array following 
+        rewards (list or np.ndarray): 
+            The reward trajectory. It should be a list or array following 
             the Full-trajectory Actions Format. 
-        ids (list or np.ndarray): The IDs of each individual in the trajectory. It is an array with 
+        ids (list or np.ndarray): 
+            The IDs of each individual in the trajectory. It is an array with 
             size (N, 1) where N is the number of individuals in the trajectory. Specifically, the 
             `ids[i, 0]` contains the ID of the i-th individual in the trajectory. 
-        z_labels (list[str], optional): A list of strings representing the labels of columns in the  
+        z_labels (list[str], optional): 
+            A list of strings representing the labels of columns in the  
             output dataframe that are sensitive attribute variables. When set to `None`, the 
             function will use default names `z1, z2, ...` That is, the i-th component of the 
             sensitive attribute vector will be named `zi`.
-        state_labels (list[str]): A list of strings representing the labels of columns in the output 
+        state_labels (list[str]): 
+            A list of strings representing the labels of columns in the output 
             dataframe that are state variables. When set to `None`, the function will use default 
             names `state1, state2, ...` That is, the i-th component of the state vector will be named 
             `statei`.
-        action_label (str): The label of the column in the output dataframe that contains actions. 
+        action_label (str): 
+            The label of the column in the output dataframe that contains actions. 
             When set to `None`, the column that contains actions will be named `action` by default. 
-        reward_label (str): The label of the column in the output dataframe that contains rewards. 
+        reward_label (str): 
+            The label of the column in the output dataframe that contains rewards. 
             When set to `None`, the column that contains rewards will be named `reward` by default. 
-        id_label (str): The label of the column in output dataframe that contains IDs.  When set to 
+        id_label (str): 
+            The label of the column in output dataframe that contains IDs.  When set to 
             `None`, the column that contains IDs will be named `ID` by default. 
-        id_label (str): The label of the column in output dataframe that contains time steps.  When set 
+        id_label (str): 
+            The label of the column in output dataframe that contains time steps.  When set 
             to `None`, the column that contains time steps will be named `timestamp` by default. 
     
     Returns: 
-        data (pandas.DataFrame): A dataframe that contains the input trajectories in the format 
+        data (pandas.DataFrame): 
+            A dataframe that contains the input trajectories in the format 
             specified in the "Tabular Trajectory Data" document of the "Inputs and Outputs" section.
     """
     
@@ -307,36 +326,49 @@ def export_trajectory_to_csv(
     of the "Inputs and Outputs" section.
 
     Args: 
-        path: The path that specifies where the trajectory should be exported. 
-        zs (list or np.ndarray): The observed sensitive attributes of each individual 
+        path: 
+            The path that specifies where the trajectory should be exported. 
+        zs (list or np.ndarray): 
+            The observed sensitive attributes of each individual 
             in the trajectory. It should be a list or array following the Sensitive Attributes 
             Format.
-        states (list or np.ndarray): The state trajectory. It should be a list or array following 
+        states (list or np.ndarray): 
+            The state trajectory. It should be a list or array following 
             the Full-trajectory States Format.
-        actions (list or np.ndarray): The action trajectory. It should be a list or array following 
+        actions (list or np.ndarray): 
+            The action trajectory. It should be a list or array following 
             the Full-trajectory Actions Format.
-        rewards (list or np.ndarray): The reward trajectory. It should be a list or array following 
+        rewards (list or np.ndarray): 
+            The reward trajectory. It should be a list or array following 
             the Full-trajectory Actions Format. 
-        ids (list or np.ndarray): The IDs of each individual in the trajectory. It is an array with 
+        ids (list or np.ndarray): 
+            The IDs of each individual in the trajectory. It is an array with 
             size (N, 1) where N is the number of individuals in the trajectory. Specifically, the 
             `ids[i, 0]` contains the ID of the i-th individual in the trajectory. 
-        z_labels (list[str], optional): A list of strings representing the labels of columns in the  
+        z_labels (list[str], optional): 
+            A list of strings representing the labels of columns in the  
             output dataframe that are sensitive attribute variables. When set to `None`, the 
             function will use default names `z1, z2, ...` That is, the i-th component of the 
             sensitive attribute vector will be named `zi`.
-        state_labels (list[str]): A list of strings representing the labels of columns in the output 
+        state_labels (list[str]): 
+            A list of strings representing the labels of columns in the output 
             dataframe that are state variables. When set to `None`, the function will use default 
             names `state1, state2, ...` That is, the i-th component of the state vector will be named 
             `statei`.
-        action_label (str): The label of the column in the output dataframe that contains actions. 
+        action_label (str): 
+            The label of the column in the output dataframe that contains actions. 
             When set to `None`, the column that contains actions will be named `action` by default. 
-        reward_label (str): The label of the column in the output dataframe that contains rewards. 
+        reward_label (str): 
+            The label of the column in the output dataframe that contains rewards. 
             When set to `None`, the column that contains rewards will be named `reward` by default. 
-        id_label (str): The label of the column in output dataframe that contains IDs.  When set to 
+        id_label (str): 
+            The label of the column in output dataframe that contains IDs.  When set to 
             `None`, the column that contains IDs will be named `ID` by default. 
-        id_label (str): The label of the column in output dataframe that contains time steps.  When set 
+        id_label (str): 
+            The label of the column in output dataframe that contains time steps.  When set 
             to `None`, the column that contains time steps will be named `timestamp` by default. 
-        **to_csv_kwargs: Additional arguments that specifies details about the expored `.csv` file. 
+        **to_csv_kwargs: 
+            Additional arguments that specifies details about the expored `.csv` file. 
             These arguments can be any legit arguments to the `pandas.to_csv()` function, and they will 
             serve the same functionalities as they do for the `pandas.to_csv()` function. 
     """

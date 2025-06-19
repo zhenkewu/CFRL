@@ -1,17 +1,3 @@
-"""
-This module implements the fitted Q evaluation algorithm for offline policy evaluation.
-
-Functions:
--f_ua_default(...): A function that generates exogenous variables for the actions from a uniform 
-distribution between 0 and 1.
-
-Classes:
--FQE: An implementation of the fitted Q evaluation algorithm.
-
-Usage: 
-from CFRL import fqe
-"""
-
 import numpy as np
 import torch
 import copy
@@ -28,11 +14,13 @@ def f_ua_default(N: int) -> np.ndarray:
     Generate exogenous variables for the actions from a uniform distribution between 0 and 1.
 
     Args: 
-        N (int): The total number of individuals for whom the exogenous variables will 
+        N (int): 
+            The total number of individuals for whom the exogenous variables will 
             be generated.
     
     Returns: 
-        ua (np.ndarray): The generated exogenous variables. It is a (N, 1) array 
+        ua (np.ndarray): 
+            The generated exogenous variables. It is a (N, 1) array 
             where each entry is sample from a uniform distribution between 0 and 1.
     """
 
@@ -59,17 +47,24 @@ class FQE:
         ) -> None:
         """
         Args: 
-            num_actions (int): The total number of legit actions. 
-            policy (Agent): The policy to be evaluated. 
-            model_type (str): The type of the model used for learning the Q function. Can 
+            num_actions (int): 
+                The total number of legit actions. 
+            policy (Agent): 
+                The policy to be evaluated. 
+            model_type (str): 
+                The type of the model used for learning the Q function. Can 
                 be "lm" (polynomial regression) or "nn" (neural network). 
-            hidden_dims (list[int], optional): The hidden dimensions of the neural network. This 
+            hidden_dims (list[int], optional): 
+                The hidden dimensions of the neural network. This 
                 argument is not used if `model_type="lm"`. 
-            learning_rate (int or float, optional): The learning rate of the neural network. This 
+            learning_rate (int or float, optional): 
+                The learning rate of the neural network. This 
                 argument is not used if `model_type="lm"`. 
-            epochs (int, optional): The number of training epochs for the neural network. This 
+            epochs (int, optional): 
+                The number of training epochs for the neural network. This 
                 argument is not used if `model_type="lm"`. 
-            gamma (int or float, optional): The discount factor for the cumulative discounted reward 
+            gamma (int or float, optional): 
+                The discount factor for the cumulative discounted reward 
                 in the objective function. 
         """
         
@@ -133,17 +128,23 @@ class FQE:
         Fit the FQE. 
         
         Args:
-            zs (list or np.ndarray): The observed sensitive attributes of each individual 
+            zs (list or np.ndarray): 
+                The observed sensitive attributes of each individual 
                 in the training data. It should be a list or array following the Sensitive 
                 Attributes Format.
-            states (list or np.ndarray): The state trajectory used for training. It should be 
+            states (list or np.ndarray): 
+                The state trajectory used for training. It should be 
                 a list or array following the Full-trajectory States Format.
-            actions (list or np.ndarray): The action trajectory used for training. It should be 
+            actions (list or np.ndarray): 
+                The action trajectory used for training. It should be 
                 a list or array following the Full-trajectory Actions Format.
-            rewards (list or np.ndarray): The reward trajectory used for training. It should be 
+            rewards (list or np.ndarray): 
+                The reward trajectory used for training. It should be 
                 a list or array following the Full-trajectory Rewards Format.
-            max_iter (int, optional): The number of iterations for learning the Q function. 
-            f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
+            max_iter (int, optional): 
+                The number of iterations for learning the Q function. 
+            f_ua (Callable, optional): 
+                A rule to generate exogenous variables for each individual's 
                 actions during training. It should be a function whose argument list, argument names, 
                 and return type exactly match those of `f_ua_default`. 
         """
@@ -293,19 +294,24 @@ class FQE:
         interest.
 
         Args:
-            zs (list or np.ndarray): The observed sensitive attributes of each individual 
+            zs (list or np.ndarray): 
+                The observed sensitive attributes of each individual 
                 in the offline trajectory used for evaluation. It should be a list or array 
                 following the Sensitive Attributes Format.
-            states (list or np.ndarray): The state trajectory used for evaluation. It should be 
+            states (list or np.ndarray): 
+                The state trajectory used for evaluation. It should be 
                 a list or array following the Full-trajectory States Format.
-            actions (list or np.ndarray): The action trajectory used for evaluation. It should be 
+            actions (list or np.ndarray): 
+                The action trajectory used for evaluation. It should be 
                 a list or array following the Full-trajectory Actions Format. 
-            f_ua (Callable, optional): A rule to generate exogenous variables for each individual's 
+            f_ua (Callable, optional): 
+                A rule to generate exogenous variables for each individual's 
                 actions during evaluation. It should be a function whose argument list, argument 
                 names, and return type exactly match those of `f_ua_default`. 
         
         Returns: 
-            Y (np.ndarray): A vector containing multiple estimates of the value of the policy of 
+            Y (np.ndarray): 
+                A vector containing multiple estimates of the value of the policy of 
                 interest. It is an array with shape (N*T, ) where N is the number of individuals in 
                 the input offline trajectory and T is the total number of transitions in the input 
                 offline trajectory.
