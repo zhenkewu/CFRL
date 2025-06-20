@@ -26,7 +26,7 @@ def f_ux_default(N: int, state_dim: int) -> np.ndarray:
     Returns: 
         ux (np.ndarray): 
             The generated exogenous variables. It is a (N, state_dim) array 
-            where each entry is sample from a standard normal distribution.
+            where each entry is sampled from a standard normal distribution.
     """
 
     return np.random.normal(0, 1, size=[N, state_dim])
@@ -43,7 +43,7 @@ def f_ua_default(N: int) -> np.ndarray:
     Returns: 
         ua (np.ndarray): 
             The generated exogenous variables. It is a (N, 1) array 
-            where each entry is sample from a uniform distribution between 0 and 1.
+            where each entry is sampled from a uniform distribution between 0 and 1.
     """
 
     return np.random.uniform(0, 1, size=[N])
@@ -60,7 +60,7 @@ def f_ur_default(N: int) -> np.ndarray:
     Returns: 
         ur (np.ndarray): 
             The generated exogenous variables. It is a (N, 1) array 
-            where each entry is sample from a standard normal distribution.
+            where each entry is sampled from a standard normal distribution.
     """
 
     return np.random.normal(0, 1, size=[N, 1])
@@ -82,7 +82,7 @@ def evaluate_reward_through_simulation(
     """
     Estimate the value of a policy using simulation in a synthetic environment. 
 
-    The function first simulates a trajectory of a pre-specified length using the policy. Then 
+    The function first simulates a trajectory of a pre-specified length `T` using the policy. Then 
     it computes the cumulative discounted rewards achieved throughout the trajectory. 
 
     Since the discounted rewards are added across all time steps, it should generally be higher 
@@ -90,10 +90,11 @@ def evaluate_reward_through_simulation(
 
     Args: 
         env (SyntheticEnvironment): 
-            The synthetic environment in which the simulation in run.
+            The synthetic environment in which the simulation is run.
         z_eval_levels (list or np.ndarray): 
             The values of sensitive attributes used in the simulation. 
-            The individuals in the simulation will have sensitive attributes sampled from this set. 
+            The observed sensitive attributes of the individuals in the simulation will be sampled 
+            from this set. 
         state_dim (int): 
             The number of components in the state vector. 
         N (int): 
@@ -216,10 +217,12 @@ def evaluate_fairness_through_simulation(
 
     Args: 
         env (SyntheticEnvironment): 
-            The synthetic environment in which the simulation in run.
+            The synthetic environment in which the simulation is run.
         z_eval_levels (list or np.ndarray): 
             The values of sensitive attributes for which 
             counterfactual trajectories are generated in the simulation. 
+            The observed sensitive attributes of the individuals in the simulation will also be 
+            sampled from this set. 
         state_dim (int): 
             The number of components in the state vector. 
         N (int): 
@@ -422,7 +425,7 @@ def evaluate_reward_through_fqe(
 
     Returns: 
         discounted_cumulative_reward (np.integer or no.floating): 
-            A estimation of the discounted 
+            An estimation of the discounted 
             cumulative reward achieved by the policy throughout the trajectory. 
     """
     

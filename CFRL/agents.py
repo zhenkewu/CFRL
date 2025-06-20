@@ -37,7 +37,7 @@ class Agent:
                 for whom the decisions are to be made. It should be a 2D list or array following 
                 the Sensitive Attributes Format.
             xt (list or np.ndarray): 
-                The current states of each individual for whom the decisions 
+                The states at the current time step of each individual for whom the decisions 
                 are to be made. It should be a 2D list or array following the Single-time States 
                 Format.
             xtm1 (list or np.ndarray, optional): 
@@ -47,9 +47,10 @@ class Agent:
             atm1 (list or np.ndarray, optional): 
                 The actions at the previous time step of each individual  
                 for whom the decisions are to be made. It should be a 1D list or array following the 
-                Full-trajectory Actions Format. When both `xtm1` and `atm1` are set to `None`, the agent 
-                will consider the input to be from the initial time step of a new trajectory, and the 
-                internal preprocessor be reset if it is an instance of `SequentialPreprocessor`.
+                Single-time Actions Format. When both :code:`xtm1` and :code:`atm1` are set to 
+                :code:`None`, the agent will consider the input to be from the initial time step of a 
+                new trajectory, and the internal preprocessor be reset if it is an instance of 
+                :code:`SequentialPreprocessor`.
             uxt (list or np.ndarray, optional): 
                 The exogenous variables for each 
                 individual's action. It should be a 2D list or array with shape (N, 1) 
@@ -71,10 +72,10 @@ class FQI(Agent):
 
     FQI can be used to learn the optimal policy from offline data. 
 
-    In particular, for an `FQI` object, users can specify whether to add a preprocessor 
-    internally. If a preprocessor is added internally, then the `FQI` object will preprocess 
-    the input data before using the data for training (`train()` method) and decision-making 
-    (`act()` method). 
+    In particular, for an :code:`FQI` object, users can specify whether to add a preprocessor 
+    internally. If a preprocessor is added internally, then the :code:`FQI` object will preprocess 
+    the input data before using the data for training (:code:`train()` method) and decision-making 
+    (:code:`act()` method). 
 
     References:
         .. [1] Riedmiller, M. (2005). Neural fitted q iteration-first experiences with a 
@@ -100,23 +101,24 @@ class FQI(Agent):
             model_type (str): 
                 The type of the model used for learning the Q function. Can 
                 be "lm" (polynomial regression) or "nn" (neural network). 
-            hidden_dims (list[int]): 
+            hidden_dims (list[int], optional): 
                 The hidden dimensions of the neural network. This 
-                argument is not used if `model_type="lm"`. 
+                argument is not used if :code:`model_type="lm"`. 
             preprocessor (Preprocessor, optional): 
                 A preprocessor used for preprocessing input data 
                 before using the data for training or decision-making. The preprocessor must have 
-                already been trained if it requires training. When set to `None`, `FQI` will directly 
-                use the input data for training or decision-making without preprocessing it.
+                already been trained if it requires training. When set to :code:`None`, :code:`FQI` 
+                will directly use the input data for training or decision-making without 
+                preprocessing it.
             gamma (int or float, optional): 
                 The discount factor for the cumulative discounted reward 
                 in the objective function.
             learning_rate (int or float, optional): 
                 The learning rate of the neural network. This 
-                argument is not used if `model_type="lm"`. 
+                argument is not used if :code:`model_type="lm"`. 
             epochs (int, optional): 
                 The number of training epochs for the neural network. This 
-                argument is not used if `model_type="lm"`. 
+                argument is not used if :code:`model_type="lm"`. 
         """
         
         self.model_type = model_type
@@ -297,8 +299,8 @@ class FQI(Agent):
                 The number of iterations for learning the Q function. 
             preprocess (bool, optional): 
                 Whether to preprocess the training data before training. 
-                When set to `False`, the training data will not be preprocessed even if 
-                `preprocessor` is not `None` in the constructor.
+                When set to :code:`False`, the training data will not be preprocessed even if 
+                :code:`preprocessor` is not `None` in the constructor.
         """
         
         zs = np.array(zs)
@@ -339,13 +341,14 @@ class FQI(Agent):
         Make decisions using the `FQI` agent. 
 
         Important Note when the internal preprocessor is a `SequentialPreprocessor`: A 
-        `SequentialPreprocessor` object internally tracks the preprocessed counterfactual states from 
-        the previous time step using a states buffer. In this case, suppose `act()` is called on a 
-        set of transitions at time :math:`t` in some trajectory. Then, at the next call of `act()` 
-        for this instance of `FQI`, the transitions passed to the function must be from time 
-        :math:`t+1` of the same trajectory. To preprocess another trajectory, either use another 
-        instance of `FQI`, or pass the initial step of the trajectory to `act()` with `xtm1=None` and 
-        `atm1=None`. 
+        `SequentialPreprocessor` object internally stores the preprocessed counterfactual states from 
+        the previous function call using a states buffer, and the stored counterfactual states will be 
+        used to preprocess the inputs of the current function call. In this case, suppose `act()` is 
+        called on a set of transitions at time :math:`t` in some trajectory. Then, at the next call of 
+        `act()` for this instance of `FQI`, the transitions passed to the function must be from time 
+        :math:`t+1` of the same trajectory to ensure that the buffer works correctly. To preprocess 
+        another trajectory, either use another instance of `FQI`, or pass the initial step of the 
+        trajectory to `act()` with `xtm1=None` and `atm1=None` to reset the buffer. 
 
         Similar issues might also arise when the internal preprocessor is some custom preprocessor 
         that relies on buffers. 
@@ -356,7 +359,7 @@ class FQI(Agent):
                 for whom the decisions are to be made. It should be a 2D list or array following 
                 the Sensitive Attributes Format.
             xt (list or np.ndarray): 
-                The current states of each individual for whom the decisions 
+                The states at the current time step of each individual for whom the decisions 
                 are to be made. It should be a 2D list or array following the Single-time States 
                 Format.
             xtm1 (list or np.ndarray, optional): 
@@ -366,7 +369,7 @@ class FQI(Agent):
             atm1 (list or np.ndarray, optional): 
                 The actions at the previous time step of each individual  
                 for whom the decisions are to be made. It should be a 1D list or array following the 
-                Full-trajectory Actions Format. When both `xtm1` and `atm1` are set to `None`, the agent 
+                Single-time Actions Format. When both `xtm1` and `atm1` are set to `None`, the agent 
                 will consider the input to be from the initial time step of a new trajectory, and the 
                 internal preprocessor be reset if it is an instance of `SequentialPreprocessor`.
             uxt (list or np.ndarray, optional): 

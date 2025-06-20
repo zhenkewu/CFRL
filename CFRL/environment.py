@@ -73,7 +73,7 @@ def f_xt_default(
             States Format.
         atm1 (list or np.ndarray): 
             The actions of each individual in the trajectrory at time 
-            :math:`t - 1`. It should be a 1D list or array following the Full-trajectory 
+            :math:`t - 1`. It should be a 1D list or array following the Single-time 
             Actions Format.
         uxt (list or np.ndarray): 
             The exogenous variables (:math:`U_{X_t}`) for each 
@@ -135,7 +135,7 @@ def f_rt_default(
             States Format.
         at (list or np.ndarray): 
             The actions of each individual in the trajectrory at time 
-            :math:`t`. It should be a 1D list or array following the Full-trajectory 
+            :math:`t`. It should be a 1D list or array following the Single-time 
             Actions Format.
         urt (list or np.ndarray): 
             The exogenous variables (:math:`U_{R_t}`) for each 
@@ -172,12 +172,12 @@ class SyntheticEnvironment(gym.Env):
     Implementation of an environment that makes transitions following a pre-specified rule.
 
     `SyntheticEnvironment` inherits from `gymnasium.Env` and follows an interface similar to 
-    `gymnasium.Env`. Users can specify the transition rule in the constructor of 
+    `gymnasium.Env`. Users can also specify the transition rule in the constructor of 
     `Synthetic Environment`.
 
     If no transition rule is specified, `SyntheticEnvironment` will use a set of default transition 
     rules (`f_x0_default`, `f_xt_default`, and `f_rt_default`) that assumes the sensitive attribute 
-    vector and the state vector both have only one component. More precisely, the default transition 
+    vector and the state vector are both univariate. More precisely, the default transition 
     rule is 
 
     .. math::
@@ -187,9 +187,9 @@ class SyntheticEnvironment(gym.Env):
             &+ 0.3 X_{t-1} (A_{t-1} - 0.5) + 0.3 \delta X_{t-1} (Z - 0.5) 
             + 0.4 \delta (Z - 0.5) (A_{t-1} - 0.5) + U_{X_t} \\
         R_t =& -0.3 + 0.3 X_t + 0.5 \delta Z + 0.5 A_t + 0.2 \delta X_t Z 
-            + 0.7 S_t A_t - 1.0 \delta Z A_t
+            + 0.7 X_t A_t - 1.0 \delta Z A_t
 
-    Currently, `SyntheticEnvironment` assumes the environment is continuous. 
+    Currently, `SyntheticEnvironment` assumes the environment is continuing. 
     """
 
     def __init__(
@@ -298,28 +298,29 @@ class SyntheticEnvironment(gym.Env):
 
         Args:
             action (list or np.ndarray): 
-                The actions of each individual in the trajectrory. It 
-                should be a 1D list or array following the Full-trajectory Actions Format.
+                The actions (:math:`A_{t-1}`) of each individual in the trajectrory. It 
+                should be a 1D list or array following the Single-time Actions Format.
             uxt (list or np.ndarray): 
                 The exogenous variables (:math:`U_{X_t}`) for each 
                 individual in the trajectory. It should be a 2D list or array with shape (N, xdim) 
                 where N is the total number of individuals in the trajectory and xdim is the 
                 number of components of the state vector.
-            urt (list or np.ndarray): 
-                The exogenous variables (:math:`U_{R_t}`) for each 
+            urtm1 (list or np.ndarray): 
+                The exogenous variables (:math:`U_{R_{t-1}}`) for each 
                 individual in the trajectory. It should be a 2D list or array with shape (N, 1) 
                 where N is the total number of individuals in the trajectory.
         
         Returns: 
             observation (np.ndarray): 
                 The states transitioned to following the pre-specified 
-                transition rule. It is a 2D array following the Single-time States Format.
+                transition rule (:math:`X_t`). It is a 2D array following the Single-time States 
+                sFormat.
             reward (np.ndarray): 
                 The rewards generated following the pre-specified transition 
-                rule. It is a 1D array following the Sing-time Rewards Format.
+                rule (:math:`R_{t-1}`). It is a 1D array following the Single-time Rewards Format.
             terminated (`False`): 
                 Whether the environment reaches a terminal state. It is always 
-                `False` because `SyntheticEnvironment` assumes the environment is continuous.
+                `False` because `SyntheticEnvironment` assumes the environment is continuing.
             truncated (`False`): 
                 Whether some truncation condition is satisfied. It is always 
                 `False` because `SyntheticEnvironment` currenly does not support specifying 
@@ -362,7 +363,7 @@ def f_ux_default(N: int, state_dim: int) -> np.ndarray:
     Returns: 
         ux (np.ndarray): 
             The generated exogenous variables. It is a (N, state_dim) array 
-            where each entry is sample from a standard normal distribution.
+            where each entry is sampled from a standard normal distribution.
     """
 
     return np.random.normal(0, 1, size=[N, state_dim])
@@ -379,7 +380,7 @@ def f_ua_default(N: int) -> np.ndarray:
     Returns: 
         ua (np.ndarray): 
             The generated exogenous variables. It is a (N, 1) array 
-            where each entry is sample from a uniform distribution between 0 and 1.
+            where each entry is sampled from a uniform distribution between 0 and 1.
     """
 
     return np.random.uniform(0, 1, size=[N])
@@ -396,7 +397,7 @@ def f_ur_default(N: int) -> np.ndarray:
     Returns: 
         ur (np.ndarray): 
             The generated exogenous variables. It is a (N, 1) array 
-            where each entry is sample from a standard normal distribution.
+            where each entry is sampled from a standard normal distribution.
     """
 
     return np.random.normal(0, 1, size=[N, 1])
@@ -428,7 +429,7 @@ def sample_trajectory(
         T (int): 
             The total number of transitions in the trajectory that is to be sampled.
         policy (Agent): 
-            The policy used to generate the trajectory.
+            The policy used to generate actions for the trajectory.
         f_ux (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             states. It should be a function whose argument list, argument names, and return 
@@ -559,10 +560,9 @@ def sample_counterfactual_trajectories(
     Sample counterfactual trajectories from some synthetic environment.
 
     To sample counterfactual trajectories, for every individual, the function simulates 
-    transitions of under each of the senstive attribute values specified in `z_eval_levels` 
+    transitions under each of the senstive attribute values specified in `z_eval_levels` 
     while keeping the exogenous variables the same for all trajectories of the same 
-    individual. The detailed counterfactual trajectory generation procedure is outlined in 
-    the simulated data analysis workflow in the "Exampleb Workflows" section.
+    individual. 
 
     The counterfactual trajectories generated by a policy can be used to compute the  
     counterfactual fairness metric of the policy.
@@ -585,7 +585,7 @@ def sample_counterfactual_trajectories(
         T (int): 
             The total number of transitions in the trajectory that is to be sampled.
         policy (Agent): 
-            The policy used to generate the trajectory.
+            The policy used to generate actions for the trajectory.
         f_ux (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             states. It should be a function whose argument list, argument names, and return 
@@ -604,13 +604,16 @@ def sample_counterfactual_trajectories(
     Returns: 
         trajectories (dict): 
             The sampled counterfactual trajectories. It is a dictionary where 
-            the keys are the sensitive attribute values in `z_eval_levels`. The value of each key, 
+            the keys are the sensitive attribute values in `z_eval_levels` (the sensitive attribute 
+            values are each converted to a tuple in the keys). The value of each key, 
             denoted `z` is a dictionary with six keys: `"Z"` (value is an array whose elements are 
-            all `z`), `"X"` (value is an array of state trajectory for each individual under `z`), 
-            `"A"` (value is an array of action trajectory for each individual under `z`), `"R"` 
-            (value is an array of reward trajectory for each individual under `z`), `env_z` (value 
-            is a copy of `env` used to generate the trajectories under `z`), and `policy_z` (value 
-            is a copy of `policy` used to generate the trajectories under `z`).
+            all `z`), `"X"` (value is the state trajectory for each individual under `z`, organized 
+            in the Full-trajectory States Format), `"A"` (value is an array of action trajectory for 
+            each individual under `z`, organized in the Full-trajectory Actions Format), `"R"` 
+            (value is an array of reward trajectory for each individual under `z`, organized in the 
+            Full-trajectory Rewards Format), `env_z` (value is a copy of `env` used to generate the 
+            trajectories under `z`, with coresponding buffer memories), and `policy_z` (value is a copy 
+            of `policy` used to generate the trajectories under `z`, with corresponding buffer memories).
     """
 
     np.random.seed(seed)
@@ -750,7 +753,7 @@ class SimulatedEnvironment(gym.Env):
                 for learning the transition dynamics of the rewards. This argument is not used if 
                 `reward_model_type="lm"`.  
             is_action_onehot (bool, optional): 
-                When set to `True`, the actions will be one-hot encoded.
+                When set to `True`, the actions will be one-hot encoded internally.
             epochs (int, optional): 
                 The number of training epochs for the neural networks. Applies to  
                 both the network for states and the network for rewards, if applicable. This argument 
@@ -775,14 +778,14 @@ class SimulatedEnvironment(gym.Env):
                 argument is not used if `is_early_stopping=False` or if both `state_model_type` and 
                 `reward_model_type` are set to `"lm"`.
             early_stopping_patience (int, optional): 
-                The number of consequentive epochs with 
+                The number of consecutive epochs with 
                 barely-decreasing loss needed for training to be early stopped. Applies to both the network 
                 for states and the network for rewards, if applicable. This argument is not used if 
                 `is_early_stopping=False` or if both `state_model_type` and `reward_model_type` are set 
                 to `"lm"`.
             early_stopping_min_delta (int for float, optional): 
                 The minimum amount of decrease 
-                in the loss so that the rounded is not considered barely-decreasing by the early 
+                in the loss so that the round is not considered barely-decreasing by the early 
                 stopping mechanism. Applies to both the network for states and the network for rewards,  
                 if applicable. This argument is not used if `is_early_stopping=False` or if both 
                 `state_model_type` and `reward_model_type` are set to `"lm"`. 
@@ -1208,7 +1211,7 @@ class SimulatedEnvironment(gym.Env):
                 generate the exogenous variables following a multivariate standard normal 
                 distribution with xdim mutually independent components.
             errors_rewards (list or np.ndarray): 
-                The exogenous variables for rewards (:math:`U_{R_t}`) 
+                The exogenous variables for rewards (:math:`U_{R_{t-1}}`) 
                 for each individual in the trajectory. It should be a 2D list or array with shape 
                 (N, 1) where N is the total number of individuals in the trajectory. When set to `None`, 
                 the function will generate the exogenous variables following a standard normal 
@@ -1222,13 +1225,13 @@ class SimulatedEnvironment(gym.Env):
                 transition rule. It is a 2D array following the Single-time States Format.
             reward (np.ndarray): 
                 The rewards generated following the pre-specified transition 
-                rule. It is a 1D array following the Sing-time Rewards Format.
+                rule. It is a 1D array following the Single-time Rewards Format.
             terminated (`False`): 
                 Whether the environment reaches a terminal state. It is always 
-                `False` because `SyntheticEnvironment` assumes the environment is continuous.
+                `False` because `SimulatedEnvironment` assumes the environment is continuing.
             truncated (`False`): 
                 Whether some truncation condition is satisfied. It is always 
-                `False` because `SyntheticEnvironment` currenly does not support specifying 
+                `False` because `SimulatedEnvironment` currenly does not support specifying 
                 truncation conditions.
         """
 
@@ -1296,7 +1299,7 @@ def f_errors_states_default(N: int, state_dim: int) -> np.ndarray:
     Returns: 
         errors_states (np.ndarray): 
             The generated exogenous variables. It is a (N, state_dim) 
-            array where each entry is sample from a standard multivariate normal distribution 
+            array where each entry is sampled from a standard multivariate normal distribution 
             with mutually independent components.
     """
 
@@ -1318,7 +1321,7 @@ def f_errors_rewards_default(N: int) -> np.ndarray:
     Returns: 
         ua (np.ndarray): 
             The generated exogenous variables. It is a (N, 1) array 
-            where each entry is sample from a standard normal distribution.
+            where each entry is sampled from a standard normal distribution.
     """
 
     return np.random.normal(
@@ -1352,7 +1355,7 @@ def sample_simulated_env_trajectory(
         T (int): 
             The total number of transitions in the trajectory that is to be sampled.
         policy (Agent): 
-            The policy used to generate the trajectory.
+            The policy used to generate actions for the trajectory.
         f_ua (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
@@ -1479,7 +1482,7 @@ def estimate_counterfactual_trajectories_from_data(
 
     For each individual in the input trajectory, `estimate_counterfactual_trajectories_from_data()` 
     reconstructs that individual's counterfactual trajectories under different values of the sensitive 
-    attribute. The sensitive attribute values that are used here are those that appears in `zs`. 
+    attribute. The sensitive attribute values used here are those that appear in `zs`. 
 
     More precisely, the counterfactual states and rewards are first estimated following the data 
     preprocessing method proposed by Wang et al. (2025), which is referenced below. `policy` is then 
@@ -1518,14 +1521,17 @@ def estimate_counterfactual_trajectories_from_data(
     
     Returns: 
         trajectories (dict): 
-            The estimated counterfactual trajectories. It is a dictionary where 
-            the keys are the sensitive attribute values in `z_eval_levels`. The value of each key, 
+            The sampled counterfactual trajectories. It is a dictionary where 
+            the keys are the sensitive attribute values in `z_eval_levels` (the sensitive attribute 
+            values are each converted to a tuple in the keys). The value of each key, 
             denoted `z` is a dictionary with six keys: `"Z"` (value is an array whose elements are 
-            all `z`), `"X"` (value is an array of state trajectory for each individual under `z`), 
-            `"A"` (value is an array of action trajectory for each individual under `z`), `"R"` 
-            (value is an array of reward trajectory for each individual under `z`), `env_z` (value 
-            is a copy of `env` used to generate the trajectories under `z`), and `policy_z` (value 
-            is a copy of `policy` used to generate the trajectories under `z`).
+            all `z`), `"X"` (value is the state trajectory for each individual under `z`, organized 
+            in the Full-trajectory States Format), `"A"` (value is an array of action trajectory for 
+            each individual under `z`, organized in the Full-trajectory Actions Format), `"R"` 
+            (value is an array of reward trajectory for each individual under `z`, organized in the 
+            Full-trajectory Rewards Format), `env_z` (value is a copy of `env` used to generate the 
+            trajectories under `z`, with coresponding buffer memories), and `policy_z` (value is a copy 
+            of `policy` used to generate the trajectories under `z`, with corresponding buffer memories).
     """
     
     zs = np.array(zs)

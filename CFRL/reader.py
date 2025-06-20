@@ -62,7 +62,7 @@ def read_trajectory_from_csv(
         T: int
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
-    Read tabular trajectory data from a `.csv` file into the array formats usable by CFRL. 
+    Read tabular trajectory data from a `.csv` file into Trajectory Arrays. 
 
     The `.csv` file must be in the format specified in the "Tabular Trajectory Data" document of 
     the "Inputs and Outputs" section.
@@ -72,10 +72,10 @@ def read_trajectory_from_csv(
             The path to the `.csv` file.
         z_labels (list[str]): 
             A list of strings representing the labels of columns in the `.csv` file 
-            that are sensitive attribute variables.
+            that contain sensitive attribute variables.
         state_labels (list[str]): 
             A list of strings representing the labels of columns in the `.csv` 
-            file that are state variables. 
+            file that contain state variables. 
         action_label (str): 
             The label of the column in the `.csv` file that contains actions. 
         reward_label (str): 
@@ -125,7 +125,7 @@ def read_trajectory_from_dataframe(
         T: int
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
-    Read tabular trajectory data from a `pandas.DataFrame` into the array formats usable by CFRL. 
+    Read tabular trajectory data from a `pandas.DataFrame` into Trajectory Arrays. 
 
     The dataframe must be in the format specified in the "Tabular Trajectory Data" document of 
     the "Inputs and Outputs" section.
@@ -135,10 +135,10 @@ def read_trajectory_from_dataframe(
             The dataframe to read data from.
         z_labels (list[str]): 
             A list of strings representing the labels of columns in the `.csv` file 
-            that are sensitive attribute variables.
+            that contain sensitive attribute variables.
         state_labels (list[str]): 
             A list of strings representing the labels of columns in the `.csv` 
-            file that are state variables. 
+            file that contain state variables. 
         action_label (str): 
             The label of the column in the `.csv` file that contains actions. 
         reward_label (str): 
@@ -188,10 +188,11 @@ def convert_trajectory_to_dataframe(
         T_label: str | None = None
     ) -> pd.DataFrame:
     """
-    Convert trajectories from the array format into a `pandas.DataFrame`.
+    Convert trajectories from Trajectory Arrays into a `pandas.DataFrame`.
 
     The output dataframe follows the format specified in the "Tabular Trajectory Data" document 
-    of the "Inputs and Outputs" section.
+    of the "Inputs and Outputs" section. The output dataframe will also contain a column that 
+    records the time steps of each row, where the time steps start from 1.
 
     Args: 
         zs (list or np.ndarray): 
@@ -213,25 +214,25 @@ def convert_trajectory_to_dataframe(
             `ids[i, 0]` contains the ID of the i-th individual in the trajectory. 
         z_labels (list[str], optional): 
             A list of strings representing the labels of columns in the  
-            output dataframe that are sensitive attribute variables. When set to `None`, the 
-            function will use default names `z1, z2, ...` That is, the i-th component of the 
+            output dataframe that should contain sensitive attribute variables. When set to `None`, 
+            the function will use default names `z1, z2, ...` That is, the i-th component of the 
             sensitive attribute vector will be named `zi`.
         state_labels (list[str]): 
             A list of strings representing the labels of columns in the output 
-            dataframe that are state variables. When set to `None`, the function will use default 
-            names `state1, state2, ...` That is, the i-th component of the state vector will be named 
-            `statei`.
+            dataframe that should contain state variables. When set to `None`, the function will use 
+            default names `state1, state2, ...` That is, the i-th component of the state vector will be 
+            named `statei`.
         action_label (str): 
-            The label of the column in the output dataframe that contains actions. 
+            The label of the column in the output dataframe that should contain actions. 
             When set to `None`, the column that contains actions will be named `action` by default. 
         reward_label (str): 
-            The label of the column in the output dataframe that contains rewards. 
+            The label of the column in the output dataframe that should contain rewards. 
             When set to `None`, the column that contains rewards will be named `reward` by default. 
         id_label (str): 
-            The label of the column in output dataframe that contains IDs.  When set to 
+            The label of the column in output dataframe that should contain IDs.  When set to 
             `None`, the column that contains IDs will be named `ID` by default. 
-        id_label (str): 
-            The label of the column in output dataframe that contains time steps.  When set 
+        T_label (str): 
+            The label of the column in output dataframe that should contain time steps.  When set 
             to `None`, the column that contains time steps will be named `timestamp` by default. 
     
     Returns: 
@@ -323,7 +324,8 @@ def export_trajectory_to_csv(
     Convert trajectories from the array format into a `pandas.DataFrame`.
 
     The output dataframe follows the format specified in the "Tabular Trajectory Data" document 
-    of the "Inputs and Outputs" section.
+    of the "Inputs and Outputs" section. The output dataframe will also contain a column that 
+    records the time steps of each row, where the time steps start from 1.
 
     Args: 
         path: 
@@ -346,26 +348,26 @@ def export_trajectory_to_csv(
             size (N, 1) where N is the number of individuals in the trajectory. Specifically, the 
             `ids[i, 0]` contains the ID of the i-th individual in the trajectory. 
         z_labels (list[str], optional): 
-            A list of strings representing the labels of columns in the  
-            output dataframe that are sensitive attribute variables. When set to `None`, the 
+            A list of strings representing the labels of columns in the output dataframe that 
+            should contain sensitive attribute variables. When set to `None`, the 
             function will use default names `z1, z2, ...` That is, the i-th component of the 
             sensitive attribute vector will be named `zi`.
         state_labels (list[str]): 
-            A list of strings representing the labels of columns in the output 
-            dataframe that are state variables. When set to `None`, the function will use default 
+            A list of strings representing the labels of columns in the output dataframe 
+            that should contain state variables. When set to `None`, the function will use default 
             names `state1, state2, ...` That is, the i-th component of the state vector will be named 
             `statei`.
         action_label (str): 
-            The label of the column in the output dataframe that contains actions. 
+            The label of the column in the output dataframe that should contain actions. 
             When set to `None`, the column that contains actions will be named `action` by default. 
         reward_label (str): 
-            The label of the column in the output dataframe that contains rewards. 
+            The label of the column in the output dataframe that should contain rewards. 
             When set to `None`, the column that contains rewards will be named `reward` by default. 
         id_label (str): 
-            The label of the column in output dataframe that contains IDs.  When set to 
+            The label of the column in output dataframe that should contain IDs.  When set to 
             `None`, the column that contains IDs will be named `ID` by default. 
-        id_label (str): 
-            The label of the column in output dataframe that contains time steps.  When set 
+        T_label (str): 
+            The label of the column in output dataframe that should contain time steps.  When set 
             to `None`, the column that contains time steps will be named `timestamp` by default. 
         **to_csv_kwargs: 
             Additional arguments that specifies details about the expored `.csv` file. 

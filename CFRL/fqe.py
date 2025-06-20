@@ -21,7 +21,7 @@ def f_ua_default(N: int) -> np.ndarray:
     Returns: 
         ua (np.ndarray): 
             The generated exogenous variables. It is a (N, 1) array 
-            where each entry is sample from a uniform distribution between 0 and 1.
+            where each entry is sampled from a uniform distribution between 0 and 1.
     """
 
     return np.random.uniform(0, 1, size=[N])
@@ -136,8 +136,9 @@ class FQE:
                 The state trajectory used for training. It should be 
                 a list or array following the Full-trajectory States Format.
             actions (list or np.ndarray): 
-                The action trajectory used for training. It should be 
-                a list or array following the Full-trajectory Actions Format.
+                The action trajectory used for training, often generated using a behavior 
+                policy. It should be a list or array following the Full-trajectory Actions 
+                Format.
             rewards (list or np.ndarray): 
                 The reward trajectory used for training. It should be 
                 a list or array following the Full-trajectory Rewards Format.
@@ -302,8 +303,8 @@ class FQE:
                 The state trajectory used for evaluation. It should be 
                 a list or array following the Full-trajectory States Format.
             actions (list or np.ndarray): 
-                The action trajectory used for evaluation. It should be 
-                a list or array following the Full-trajectory Actions Format. 
+                The action trajectory used for evaluation, often generated using a behavior 
+                policy. It should be a list or array following the Full-trajectory Actions Format. 
             f_ua (Callable, optional): 
                 A rule to generate exogenous variables for each individual's 
                 actions during evaluation. It should be a function whose argument list, argument 
