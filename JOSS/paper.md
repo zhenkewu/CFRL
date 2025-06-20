@@ -1,5 +1,5 @@
 ---
-title: "ddtlcm: An R package for overcoming weak separation in Bayesian latent class analysis via tree-regularization"
+title: "CFRL: A Python package for counterfactually fair offline reinforcement learning using data preprocessing"
 tags:
   - counterfactual fairness
   - reinforcement learning
@@ -114,6 +114,14 @@ fair RL algorithms.
 
 The `CFRL` package is composed of 5 major modules. The functionalities
 of the modules are summarized in the table below.
+
++------------+--------------------------------------------------------------------------------------+
+|Module      |Functionalities                                                                       |
++============+======================================================================================+
+|`reader`    |Implements functions that read tabular trajectory data from either a `.csv` file or a |
+|            |`pandas.Dataframe`. Also implements functions that export trajectory                  |
+|            |data to either a `.csv` file or a `pandas.Dataframe`.                                 |
++------------+--------------------------------------------------------------------------------------+
 
 <table>
 <colgroup>
