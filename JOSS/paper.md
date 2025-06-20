@@ -115,13 +115,32 @@ fair RL algorithms.
 The `CFRL` package is composed of 5 major modules. The functionalities
 of the modules are summarized in the table below.
 
-+------------+--------------------------------------------------------------------------------------+
-|Module      |Functionalities                                                                       |
-+============+======================================================================================+
-|`reader`    |Implements functions that read tabular trajectory data from either a `.csv` file or a |
-|            |`pandas.Dataframe`. Also implements functions that export trajectory                  |
-|            |data to either a `.csv` file or a `pandas.Dataframe`.                                 |
-+------------+--------------------------------------------------------------------------------------+
++--------------+--------------------------------------------------------------------------------------+
+|Module        |Functionalities                                                                       |
++==============+======================================================================================+
+|`reader`      |Implements functions that read tabular trajectory data from either a `.csv` file or a |
+|              |`pandas.Dataframe`. Also implements functions that export trajectory                  |
+|              |data to either a `.csv` file or a `pandas.Dataframe`.                                 |
++--------------+--------------------------------------------------------------------------------------+
+|`preprocessor`|Implements the data preprocessing algorithm introduced in Wang et al. (2025).         |
++--------------+--------------------------------------------------------------------------------------+
+|`agents`      |Implements a fitted Q-iteration (FQI) algorithm, which learns RL policies and makes   |
+|              |decisions based on the learned policy. Users can also pass a preprocessor to the FQI; | 
+|              |in this case, the FQI will be able to take in unpreprocessed trajectories, internally | 
+|              |preprocess the input trajectories, and directly output counterfactually fair policies.|
++--------------+--------------------------------------------------------------------------------------+
+|`environment` |Implements a synthetic environment that produces synthetic data as well as a simulated|
+|              |environment that simulates the transition dynamics of the environment underlying some |
+|              |real-world RL trajectory data. Also implements functions for sampling trajectories    |
+|              |from the synthetic and simulated environments.                                        |
++--------------+--------------------------------------------------------------------------------------+
+|`fqe`         |Implements a fitted Q-evaluation (FQE) algorithm, which can be used to evaluate the   |
+|              |value of a policy.                                                                    |
++--------------+--------------------------------------------------------------------------------------+
+|`evaluation`  |Implements functions that evaluate the value and fairness of a policy. Depending on   |
+|              |the user's needs, the evaluation can be done either in a synthetic environment or in a| 
+|              |simulated environment.                                                                |
++==============+======================================================================================+
 
 <table>
 <colgroup>
