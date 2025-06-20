@@ -67,3 +67,6 @@ interacting with the true underlying environment.
 
 **Code:** A detailed code demonstration of this workflow can be found 
 `here <https://github.com/JianhanZhang/CFRL/blob/main/examples/real_data_workflow.ipynb>`_.
+
+**Conceptual Explanation:** A step-by-step conceptual explanation of this workflow can be found 
+`here <https://github.com/JianhanZhang/CFRL/blob/main/examples/real_data_workflow_description.pdf>`_.

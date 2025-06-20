@@ -4,6 +4,7 @@ build/
 examples/__pycache__/
 CFRL/__pycache__/
 CFRL/utils/__pycache__
+CFRL/requirements.txt
 tests/__pycache__/
 tests/.pytest_cache
 problems.txt

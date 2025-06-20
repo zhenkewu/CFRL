@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "CFRL"
+version = "0.0.0"
+dependencies = [
+  "gymnasium~=1.0.0", 
+  "numpy~=2.3.0", 
+  "pandas~=2.3.0", 
+  "scikit-learn~=1.7.0", 
+  "torch~=2.4.1", 
+  "tqdm~=4.66.2", 
+]
+requires-python = ">=3.10"
+authors = [
+  {name = "Jianhan Zhang", email = "jhzhang0621@gmail.com"}, 
+]
+maintainers = [
+  {name = "Jianhan Zhang", email = "jhzhang0621@gmail.com"}, 
+]
+description = "The CFRL package implements algorithms to ensure counterfactual fairness in reinforcement learning and provides tools for evaluating the value and counterfactual fairness of reinforcement learning policies."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E.*"]
+keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Documentation = "https://github.com/JianhanZhang/CFRL"
+Repository = "https://github.com/JianhanZhang/CFRL"
+
