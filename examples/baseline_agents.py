@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import copy
 from scipy.special import expit
-from CFRL.agents import Agent
+from cfrl.agents import Agent
 
 # A random policy
 class RandomAgent(Agent):

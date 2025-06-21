@@ -1,14 +1,14 @@
 import pandas as pd
 import numpy as np
-from CFRL.environment import SimulatedEnvironment, sample_simulated_env_trajectory
-from CFRL.reader import read_trajectory_from_csv, read_trajectory_from_dataframe
+from cfrl.environment import SimulatedEnvironment, sample_simulated_env_trajectory
+from cfrl.reader import read_trajectory_from_csv, read_trajectory_from_dataframe
 from sklearn.model_selection import train_test_split
-from CFRL.preprocessor import SequentialPreprocessor
+from cfrl.preprocessor import SequentialPreprocessor
 from .baseline_preprocessors import UnawarenessPreprocessor, ConcatenatePreprocessor
-from CFRL.agents import FQI
+from cfrl.agents import FQI
 from .baseline_agents import BehaviorAgent, RandomAgent
 #from policy_learning_add import RandomAgent
-from CFRL.evaluation import evaluate_fairness_through_model, evaluate_reward_through_fqe
+from cfrl.evaluation import evaluate_fairness_through_model, evaluate_reward_through_fqe
 import torch
 
 def run_exp_one(seed, z_label, methods):

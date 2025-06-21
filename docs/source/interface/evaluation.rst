@@ -4,7 +4,7 @@ This module implements functions used for evaluating the value and fairness of p
 
 .. code::
 
-   from CFRL import evaluation
+   from cfrl import evaluation
 
 .. automodule:: CFRL.evaluation
    :members:

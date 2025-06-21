@@ -1,5 +1,5 @@
-from CFRL.fqe import FQE
-from CFRL.environment import SyntheticEnvironment, sample_trajectory
+from cfrl.fqe import FQE
+from cfrl.environment import SyntheticEnvironment, sample_trajectory
 from examples.baseline_agents import RandomAgent
 import numpy as np
 

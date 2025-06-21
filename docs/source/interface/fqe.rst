@@ -4,7 +4,7 @@ This module implements the fitted Q evaluation algorithm for offline policy eval
 
 .. code::
 
-   from CFRL import fqe
+   from cfrl import fqe
 
 .. automodule:: CFRL.fqe
    :members:

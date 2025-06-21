@@ -4,7 +4,7 @@ This module implements the fitted Q-iteration algotithm for offline reinforcemen
 
 .. code::
 
-   from CFRL import agents
+   from cfrl import agents
 
 .. automodule:: CFRL.agents
    :members:

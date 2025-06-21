@@ -4,7 +4,7 @@ This module implements environments and sample functions that could be used to g
 
 .. code-block:: python
     
-    from CFRL import environment
+    from cfrl import environment
 
 .. automodule:: CFRL.environment
    :members:

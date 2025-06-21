@@ -1,7 +1,7 @@
-from CFRL.evaluation import evaluate_reward_through_simulation, evaluate_fairness_through_simulation
-from CFRL.evaluation import evaluate_reward_through_fqe, evaluate_fairness_through_model
-from CFRL.environment import SyntheticEnvironment, SimulatedEnvironment
-from CFRL.environment import sample_trajectory, sample_simulated_env_trajectory
+from cfrl.evaluation import evaluate_reward_through_simulation, evaluate_fairness_through_simulation
+from cfrl.evaluation import evaluate_reward_through_fqe, evaluate_fairness_through_model
+from cfrl.environment import SyntheticEnvironment, SimulatedEnvironment
+from cfrl.environment import sample_trajectory, sample_simulated_env_trajectory
 from examples.baseline_agents import RandomAgent
 import numpy as np
 
