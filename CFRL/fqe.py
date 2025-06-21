@@ -130,18 +130,18 @@ class FQE:
         Args:
             zs (list or np.ndarray): 
                 The observed sensitive attributes of each individual 
-                in the training data. It should be a list or array following the Sensitive 
+                in the training data. It should be a 2D list or array following the Sensitive 
                 Attributes Format.
             states (list or np.ndarray): 
                 The state trajectory used for training. It should be 
-                a list or array following the Full-trajectory States Format.
+                a 3D list or array following the Full-trajectory States Format.
             actions (list or np.ndarray): 
                 The action trajectory used for training, often generated using a behavior 
-                policy. It should be a list or array following the Full-trajectory Actions 
+                policy. It should be a 2D list or array following the Full-trajectory Actions 
                 Format.
             rewards (list or np.ndarray): 
                 The reward trajectory used for training. It should be 
-                a list or array following the Full-trajectory Rewards Format.
+                a 2D list or array following the Full-trajectory Rewards Format.
             max_iter (int, optional): 
                 The number of iterations for learning the Q function. 
             f_ua (Callable, optional): 
@@ -297,17 +297,17 @@ class FQE:
         Args:
             zs (list or np.ndarray): 
                 The observed sensitive attributes of each individual 
-                in the offline trajectory used for evaluation. It should be a list or array 
+                in the offline trajectory used for evaluation. It should be a 2D list or array 
                 following the Sensitive Attributes Format.
             states (list or np.ndarray): 
                 The state trajectory used for evaluation. It should be 
-                a list or array following the Full-trajectory States Format.
+                a 3D list or array following the Full-trajectory States Format.
             actions (list or np.ndarray): 
                 The action trajectory used for evaluation, often generated using a behavior 
-                policy. It should be a list or array following the Full-trajectory Actions Format. 
+                policy. It should be a 2D list or array following the Full-trajectory Actions Format. 
             f_ua (Callable, optional): 
                 A rule to generate exogenous variables for each individual's 
-                actions during evaluation. It should be a function whose argument list, argument 
+                actions during evaluation. It should be a 2D function whose argument list, argument 
                 names, and return type exactly match those of `f_ua_default`. 
         
         Returns: 

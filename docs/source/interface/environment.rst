@@ -6,7 +6,7 @@ This module implements environments and sample functions that could be used to g
     
     from cfrl import environment
 
-.. automodule:: CFRL.environment
+.. automodule:: cfrl.environment
    :members:
    :show-inheritance:
    :special-members: __init__

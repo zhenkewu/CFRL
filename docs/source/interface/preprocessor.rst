@@ -8,7 +8,7 @@ This module implements the sequential data preprocessing method proposed by Wang
     
     from cfrl import preprocessor
 
-.. automodule:: CFRL.preprocessor
+.. automodule:: cfrl.preprocessor
    :members:
    :show-inheritance:
    :special-members: __init__

@@ -6,7 +6,7 @@ This module implements functions to read or export trajectory data from external
 
    from cfrl import reader
 
-.. automodule:: CFRL.reader
+.. automodule:: cfrl.reader
    :members:
    :show-inheritance:
    :special-members: __init__
