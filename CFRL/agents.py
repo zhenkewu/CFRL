@@ -300,7 +300,7 @@ class FQI(Agent):
             preprocess (bool, optional): 
                 Whether to preprocess the training data before training. 
                 When set to :code:`False`, the training data will not be preprocessed even if 
-                :code:`preprocessor` is not `None` in the constructor.
+                :code:`preprocessor` is not :code:`None` in the constructor.
         """
         
         zs = np.array(zs)
@@ -340,15 +340,16 @@ class FQI(Agent):
         """
         Make decisions using the `FQI` agent. 
 
-        Important Note when the internal preprocessor is a `SequentialPreprocessor`: A 
-        `SequentialPreprocessor` object internally stores the preprocessed counterfactual states from 
-        the previous function call using a states buffer, and the stored counterfactual states will be 
-        used to preprocess the inputs of the current function call. In this case, suppose `act()` is 
-        called on a set of transitions at time :math:`t` in some trajectory. Then, at the next call of 
-        `act()` for this instance of `FQI`, the transitions passed to the function must be from time 
-        :math:`t+1` of the same trajectory to ensure that the buffer works correctly. To preprocess 
-        another trajectory, either use another instance of `FQI`, or pass the initial step of the 
-        trajectory to `act()` with `xtm1=None` and `atm1=None` to reset the buffer. 
+        Important Note when the internal preprocessor is a :code:`SequentialPreprocessor`: A 
+        :code:`SequentialPreprocessor` object internally stores the preprocessed counterfactual states 
+        from the previous function call using a states buffer, and the stored counterfactual states will 
+        be used to preprocess the inputs of the current function call. In this case, suppose :code:`act()` 
+        is called on a set of transitions at time :math:`t` in some trajectory. Then, at the next call 
+        of :code:`act()` for this instance of `FQI`, the transitions passed to the function must be 
+        from time :math:`t+1` of the same trajectory to ensure that the buffer works correctly. 
+        To preprocess another trajectory, either use another instance of :code:`FQI`, or pass the 
+        initial step of the trajectory to :code:`act()` with :code:`xtm1=None` and :code:`atm1=None` to 
+        reset the buffer. 
 
         Similar issues might also arise when the internal preprocessor is some custom preprocessor 
         that relies on buffers. 
@@ -369,9 +370,10 @@ class FQI(Agent):
             atm1 (list or np.ndarray, optional): 
                 The actions at the previous time step of each individual  
                 for whom the decisions are to be made. It should be a 1D list or array following the 
-                Single-time Actions Format. When both `xtm1` and `atm1` are set to `None`, the agent 
-                will consider the input to be from the initial time step of a new trajectory, and the 
-                internal preprocessor be reset if it is an instance of `SequentialPreprocessor`.
+                Single-time Actions Format. When both :code:`xtm1` and :code:`atm1` are set to 
+                :code:`None`, the agent will consider the input to be from the initial time step of 
+                a new trajectory, and the internal preprocessor be reset if it is an instance of 
+                :code:`SequentialPreprocessor`.
             uxt (list or np.ndarray, optional): 
                 The exogenous variables for each 
                 individual's action. It should be a 2D list or array with shape (N, 1) 

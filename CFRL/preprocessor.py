@@ -12,7 +12,7 @@ class Preprocessor:
     """
     Base class for preprocessors.
 
-    Subclasses must implement the `preprocess_single_step` and `preprocess_multiple_steps` 
+    Subclasses must implement the :code:`preprocess_single_step` and :code:`preprocess_multiple_steps` 
     methods.
     """
 
@@ -60,8 +60,8 @@ class Preprocessor:
                 the Single-time States Format.
             rt_tilde (np.ndarray, optional): 
                 The preprocessed rewards at the given time step. It should be a 1D array following 
-                the Single-time Rewards Format. `rt_tilde` is not returned if `rtm1=None` in the 
-                function input.  
+                the Single-time Rewards Format. :code:`rt_tilde` is not returned if :code:`rtm1=None` 
+                in the function input.  
         """
         
         pass
@@ -100,8 +100,8 @@ class Preprocessor:
                 the Full-trajectory States Format.
             rs_tilde (np.ndarray, optional): 
                 The preprocessed reward trajectory. It should be a 2D array following the 
-                Full-trajectory Rewards Format. `rs_tilde` is not returned if `rewards=None` in the 
-                function input.  
+                Full-trajectory Rewards Format. :code:`rs_tilde` is not returned if 
+                :code:`rewards=None` in the function input.  
         """
 
         pass
@@ -162,7 +162,7 @@ class SequentialPreprocessor(Preprocessor):
     reconstruct the counterfactual states and concatenates the reconstructed counterfactual 
     states into a new augmented state vector.
 
-    That is, let :math:`z_i` be the observed sensitive attribute. At t=0 (i.e. the initial 
+    That is, let :math:`z_i` be the observed sensitive attribute. At :math:`t=0` (i.e. the initial 
     time step), for each individual :math:`i` and sensitive attribute level :math:`z`, the 
     preprocessor calculates 
 
@@ -172,7 +172,7 @@ class SequentialPreprocessor(Preprocessor):
 
     and forms :math:`\tilde{x}_{i1} = [\hat{x}_{i1}^{z^{(1)}}, \dots, \hat{x}_{i1}^{z^{(K)}}]`.
 
-    At t>0, for each individual :math:`i` and sensitive attribute level :math:`z`, the 
+    At :math:`t>0`, for each individual :math:`i` and sensitive attribute level :math:`z`, the 
     preprocessor calculates
 
     .. math::
@@ -219,15 +219,15 @@ class SequentialPreprocessor(Preprocessor):
                 The total number of legit actions. 
             cross_folds (int, optional): 
                 The number of cross folds used during training. When 
-                `cross_folds=k`, the preprocessor will learn `k` models using different subset of 
-                the training data, and the final output of `preprocess_single_step` and 
-                `preprocess_multiple_steps` will be generally the average of the outputs from each 
-                of the `k` models.
+                :code:`cross_folds=k`, the preprocessor will learn :code:`k` models using different 
+                subset of the training data, and the final output of :code:`preprocess_single_step` and 
+                :code:`preprocess_multiple_steps` will be generally the average of the outputs from each 
+                of the :code:`k` models.
             mode (str, optional): 
-                Can either be "single" or "sensitive". When `mode="single"`, 
+                Can either be "single" or "sensitive". When :code:`mode="single"`, 
                 the preprocessor will learn a single model of the transition dynamics where the 
-                sensitive attribute is an input to the model. When `mode="sensitive"`, the preprocessor 
-                will learn one transition dynamics model for each level of the sensitive 
+                sensitive attribute is an input to the model. When :code:`mode="sensitive"`, the 
+                preprocessor will learn one transition dynamics model for each level of the sensitive 
                 attribute, and transitions under each sensitive attribute :math:`z` will 
                 be estimated using the model corresponding to :math:`z`.
             reg_model (str, optional): 
@@ -235,38 +235,39 @@ class SequentialPreprocessor(Preprocessor):
                 dynamics. Can be "lm" (polynomial regression) or "nn" (neural network).
             hidden_dims (list[int], optional): 
                 The hidden dimensions of the neural network. This 
-                argument is not used if `reg_model="lm"`.
+                argument is not used if :code:`reg_model="lm"`.
             epochs (int, optional): 
                 The number of training epochs for the neural network. This 
                 argument is not used if `reg_model="lm"`. 
             learning_rate (int or float, optional): 
                 The learning rate of the neural network. This 
-                argument is not used if `reg_model="lm"`. 
+                argument is not used if :code:`reg_model="lm"`. 
             batch_size (int, optional): 
                 The batch size of the neural network. This argument is 
-                not used if `reg_model="lm"`.
+                not used if :code:`reg_model="lm"`.
             is_action_onehot (bool, optional): 
-                When set to `True`, the actions will be one-hot 
+                When set to :code:`True`, the actions will be one-hot 
                 encoded. 
             is_normalized (bool, optional): 
-                When set to `True`, the states will be normalized 
-                following the formula `x_normalized = (x - mean(x)) / std(x)`.
+                When set to :code:`True`, the states will be normalized 
+                following the formula :code:`x_normalized = (x - mean(x)) / std(x)`.
             is_early_stopping (bool, optional): 
-                When set to `True`, will enforce early stopping 
-                during neural network training. This argument is not used if `reg_model="lm"`.
+                When set to :code:`True`, will enforce early stopping 
+                during neural network training. This argument is not used if :code:`reg_model="lm"`.
             test_size (int or float, optional): 
                 An int or float between 0 and 1 (inclusive) that 
                 specifies the proportion of the full data that is used as the test set for early 
-                stopping. This argument is not used if `reg_model="lm"` or `is_early_stopping=False`.
+                stopping. This argument is not used if :code:`reg_model="lm"` or 
+                :code:`is_early_stopping=False`.
             early_stopping_patience (int, optional): 
                 The number of consequentive epochs with 
                 barely-decreasing loss needed for training to be early stopped. This argument is 
-                not used if `reg_model="lm"` or `is_early_stopping=False`.
+                not used if :code:`reg_model="lm"` or :code:`is_early_stopping=False`.
             early_stopping_min_delta (int for float, optional): 
                 The minimum amount of decrease 
                 in the loss so that the rounded is not considered barely-decreasing by the early 
-                stopping mechanism. This argument is not used if `reg_model="lm"` or 
-                `is_early_stopping=False`.
+                stopping mechanism. This argument is not used if :code:`reg_model="lm"` or 
+                :code:`is_early_stopping=False`.
         """
 
         z_space = np.array(z_space)
@@ -733,19 +734,19 @@ class SequentialPreprocessor(Preprocessor):
         When some :math:`k>1` cross folds are specified, the final output will be the avearge of the 
         outputs of each of the :math:`k` transition models.
 
-        Important Note: A `SequentialPreprocessor` object internally stores the preprocessed 
+        Important Note: A :code:`SequentialPreprocessor` object internally stores the preprocessed 
         counterfactual states from the previous function call using a states buffer, and the 
         stored counterfactual states will be used to preprocess the inputs of the current function 
-        call. In this case, suppose `preprocess_single_step()` is called on a set of transitions at 
-        time :math:`t` in some trajectory. Then, at the next call of `preprocess_single_step()` for 
-        this instance of `SequentialPreprocessor`, the transitions passed to the function must be 
+        call. In this case, suppose :code:`preprocess_single_step()` is called on a set of transitions at 
+        time :math:`t` in some trajectory. Then, at the next call of :code:`preprocess_single_step()` for 
+        this instance of :code:`SequentialPreprocessor`, the transitions passed to the function must be 
         from time :math:`t+1` of the same trajectory to ensure that the buffer works correctly. 
-        To preprocess another trajectory, either use another instance of `SequentialPreprocessor`, 
-        or pass the initial step of the trajectory to `preprocess_single_step()` with `xtm1=None` 
-        and `atm1=None` to reset the buffer.
+        To preprocess another trajectory, either use another instance of :code:`SequentialPreprocessor`, 
+        or pass the initial step of the trajectory to :code:`preprocess_single_step()` with 
+        :code:`xtm1=None` and :code:`atm1=None` to reset the buffer.
 
         In general, unless step-wise preprocessing is necessary, we recommend using 
-        `preprocess_multiple_steps()` to preprocess a whole trajectory to avoid unintended bugs.
+        :code:`preprocess_multiple_steps()` to preprocess a whole trajectory to avoid unintended bugs.
 
         Args: 
            zs (list or np.ndarray): 
@@ -777,8 +778,8 @@ class SequentialPreprocessor(Preprocessor):
                 the Single-time States Format.
             rt_tilde (np.ndarray, optional): 
                 The preprocessed rewards at the given time step. It should be a 1D array following 
-                the Single-time Rewards Format. `rt_tilde` is not returned if `rtm1=None` in the function 
-                input.  
+                the Single-time Rewards Format. :code:`rt_tilde` is not returned if :code:`rtm1=None` 
+                in the function input.  
         """
 
         z = np.array(z)
@@ -877,8 +878,8 @@ class SequentialPreprocessor(Preprocessor):
                 the Full-trajectory States Format.
             rs_tilde (np.ndarray, optional): 
                 The preprocessed reward trajectory. It should be a 2D array following the 
-                Full-trajectory Rewards Format. `rs_tilde` is not returned if `rewards=None` in the 
-                function input.  
+                Full-trajectory Rewards Format. :code:`rs_tilde` is not returned if :code:`rewards=None` 
+                in the function input.  
         """
 
         zs = np.array(zs)

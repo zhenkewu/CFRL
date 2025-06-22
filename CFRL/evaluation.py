@@ -25,7 +25,7 @@ def f_ux_default(N: int, state_dim: int) -> np.ndarray:
     
     Returns: 
         ux (np.ndarray): 
-            The generated exogenous variables. It is a (N, state_dim) array 
+            The generated exogenous variables. It is a (N, :code:`state_dim`) array 
             where each entry is sampled from a standard normal distribution.
     """
 
@@ -82,11 +82,11 @@ def evaluate_reward_through_simulation(
     """
     Estimate the value of a policy using simulation in a synthetic environment. 
 
-    The function first simulates a trajectory of a pre-specified length `T` using the policy. Then 
-    it computes the cumulative discounted rewards achieved throughout the trajectory. 
+    The function first simulates a trajectory of a pre-specified length :code:`T` using the policy. 
+    Then it computes the cumulative discounted rewards achieved throughout the trajectory. 
 
     Since the discounted rewards are added across all time steps, it should generally be higher 
-    if a larger value is specified for the argument `T`. 
+    if a larger value is specified for the argument :code:`T`. 
 
     Args: 
         env (SyntheticEnvironment): 
@@ -106,18 +106,19 @@ def evaluate_reward_through_simulation(
         f_ux (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             states. It should be a function whose argument list, argument names, and return 
-            type exactly match those of `f_ux_default`.
+            type exactly match those of :code:`f_ux_default`.
         f_ua (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
-            type exactly match those of `f_ua_default`. 
+            type exactly match those of :code:`f_ua_default`. 
         f_ur (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             rewards. It should be a function whose argument list, argument names, and return 
-            type exactly match those of `f_ur_default`.
+            type exactly match those of :code:`f_ur_default`.
         z_probs (list or np.ndarray, optional): 
             The probability of an individual taking each of 
-            the values in `z_eval_levels`. When set to `None`, a uniform distribution will be used. 
+            the values in :code:`z_eval_levels`. When set to :code:`None`, a uniform distribution 
+            will be used. 
         gamma (int or float, optional): 
             The discount factor used for calculating the discounted 
             cumulative rewards. 
@@ -125,7 +126,7 @@ def evaluate_reward_through_simulation(
             The random seed used to run the simulation.
 
     Returns: 
-        discounted_cumulative_reward (np.integer or no.floating): 
+        discounted_cumulative_reward (np.integer or np.floating): 
             An estimation of the discounted 
             cumulative reward achieved by the policy throughout the trajectory. 
     """
@@ -194,8 +195,8 @@ def evaluate_fairness_through_simulation(
     Estimate the counterfactual fairness metric of a policy using simulation in a synthetic environment.
 
     The function first simulates a set of counterfactual trajectories with a pre-specified length 
-    using `sample_counterfactual_trajectories()` in the `environment` module. Then it computes a 
-    counterfactual fairness metric using the following formula given in Wang et al. (2025): 
+    using :code:`sample_counterfactual_trajectories()` in the `environment` module. Then it computes 
+    a counterfactual fairness metric using the following formula given in Wang et al. (2025): 
 
      .. math:: 
 
@@ -236,19 +237,19 @@ def evaluate_fairness_through_simulation(
         f_ux (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             states. It should be a function whose argument list, argument names, and return 
-            type exactly match those of `f_ux_default`.
+            type exactly match those of :code:`f_ux_default`.
         f_ua (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
-            type exactly match those of `f_ua_default`. 
+            type exactly match those of :code:`f_ua_default`. 
         f_ur (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             rewards. It should be a function whose argument list, argument names, and return 
-            type exactly match those of `f_ur_default`.
+            type exactly match those of :code:`f_ur_default`.
         z_probs (list or np.ndarray, optional): 
             The probability of an individual taking each of 
-            the values in `z_eval_levels` as the observed sensitive attribute. When set to `None`, 
-            a uniform distribution will be used. 
+            the values in :code:`z_eval_levels` as the observed sensitive attribute. When set to 
+            :code:`None`, a uniform distribution will be used. 
         seed (int, optional): 
             The random seed used to run the simulation.
 
@@ -295,8 +296,8 @@ def evaluate_fairness_through_model(
     Estimate the counterfactual fairness metric of a policy from an offline trajectory.
 
     The function first estimates a set of counterfactual trajectories from the offline trajectory 
-    using `estimate_counterfactual_trajectories_from_data()` in the `environment` module. Then it 
-    computes a counterfactual fairness metric using the following formula given in Wang et al. 
+    using :code:`estimate_counterfactual_trajectories_from_data()` in the :code:`environment` module. 
+    Then it computes a counterfactual fairness metric using the following formula given in Wang et al. 
     (2025): 
 
      .. math:: 
@@ -320,7 +321,7 @@ def evaluate_fairness_through_model(
     Args: 
         env (SimulatedEnvironment): 
             An environment that simulates the transition dynamics of the 
-            MDP underlying `zs`, `states`, `actions`, and `rewards`. 
+            MDP underlying :code:`zs`, :code:`states`, :code:`actions`, and :code:`rewards`. 
         zs (list or np.ndarray): 
             The observed sensitive attributes of each individual in the 
             offline trajectory. It should be a list or array following the Sensitive Attributes 
@@ -336,7 +337,7 @@ def evaluate_fairness_through_model(
         f_ua (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             actions. It should be a function whose argument list, argument names, and return 
-            type exactly match those of `f_ua_default`. 
+            type exactly match those of :code:`f_ua_default`. 
         seed (int, optional): 
             The seed used to estimate the counterfactual trajectories. 
     Returns: 
@@ -405,16 +406,16 @@ def evaluate_reward_through_fqe(
         f_ua (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             actions during training. It should be a function whose argument list, argument names, 
-            and return type exactly match those of `f_ua_default`. 
+            and return type exactly match those of :code:`f_ua_default`. 
         hidden_dims (list[int], optional): 
             The hidden dimensions of the neural network. This 
-            argument is not used if `model_type="lm"`. 
+            argument is not used if :code:`model_type="lm"`. 
         learning_rate (int or float, optional): 
             The learning rate of the neural network. This 
-            argument is not used if `model_type="lm"`. 
+            argument is not used if :code:`model_type="lm"`. 
         epochs (int, optional): 
             The number of training epochs for the neural network. This 
-            argument is not used if `model_type="lm"`. 
+            argument is not used if :code:`model_type="lm"`. 
         gamma (int or float, optional): 
             The discount factor for the cumulative discounted reward 
             in the objective function. 
@@ -424,7 +425,7 @@ def evaluate_reward_through_fqe(
             The random seed used for FQE.
 
     Returns: 
-        discounted_cumulative_reward (np.integer or no.floating): 
+        discounted_cumulative_reward (np.integer or np.floating): 
             An estimation of the discounted 
             cumulative reward achieved by the policy throughout the trajectory. 
     """

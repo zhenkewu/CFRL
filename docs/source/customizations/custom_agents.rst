@@ -70,7 +70,7 @@ compatibility even though it is not used in the function.
 
 If an agent is a valid custom agent, then it can be used wherever 
 a :code:`FQI` can be used. For example, we can use 
-:code:`evaluate_fairness_through_model` to calculate its counterfactual 
+:code:`evaluate_fairness_through_model()` to calculate its counterfactual 
 fairness metric.
 
 .. code-block:: python

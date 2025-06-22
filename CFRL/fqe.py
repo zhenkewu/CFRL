@@ -56,13 +56,13 @@ class FQE:
                 be "lm" (polynomial regression) or "nn" (neural network). 
             hidden_dims (list[int], optional): 
                 The hidden dimensions of the neural network. This 
-                argument is not used if `model_type="lm"`. 
+                argument is not used if :code:`model_type="lm"`. 
             learning_rate (int or float, optional): 
                 The learning rate of the neural network. This 
-                argument is not used if `model_type="lm"`. 
+                argument is not used if :code:`model_type="lm"`. 
             epochs (int, optional): 
                 The number of training epochs for the neural network. This 
-                argument is not used if `model_type="lm"`. 
+                argument is not used if :code:`model_type="lm"`. 
             gamma (int or float, optional): 
                 The discount factor for the cumulative discounted reward 
                 in the objective function. 
@@ -147,7 +147,7 @@ class FQE:
             f_ua (Callable, optional): 
                 A rule to generate exogenous variables for each individual's 
                 actions during training. It should be a function whose argument list, argument names, 
-                and return type exactly match those of `f_ua_default`. 
+                and return type exactly match those of :code:`f_ua_default`. 
         """
         
         torch.set_num_threads(1)
