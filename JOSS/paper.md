@@ -63,14 +63,23 @@ disadvantaged groups.
 To address this problem, Wang et al. (2025) extended the concept of
 single-stage counterfactual fairness (Kusner et al. 2017) to the
 multi-stage setting and proposed a data preprocessing algorithm that
-ensures counterfactual fairness in offline reinforcement learning. An RL
-policy is counterfactually fair if, at every time step, it would assign
-the same decisions with the same probability for an individual had the
-individual belong to a different subgroup defined by some sensitive
-attribute (such as race and gender). The `CFRL` package implements the
-data preprocessing algorithm introduced in Wang et al. (2025) and
-provides a set of tools to evaluate the value and fairness achieved by a
-given policy. In particular, it takes in an offline RL trajectory and
+ensures counterfactual fairness in offline reinforcement learning. 
+An RL policy is counterfactually fair if, at every 
+time step, it would assign the same decisions with the same probability 
+for an individual had the individual belong to a different subgroup 
+defined by some sensitive attribute (such as race and gender). At its 
+core, counterfactual fairness views the observed states and rewards as 
+biased proxies of the (unobserved) true underlying states and rewards, 
+where the bias is often a result of the observed sensitive attribute. 
+In this light, the sequential data preprocessing algorithm ensures 
+counterfactual fairness by removing this bias from the input offline 
+trajectories.
+
+The `CFRL` package is built upon this definition of RL counterfactual 
+fairness introduced in Wang et al. (2025). It implements the data 
+preprocessing algorithm proposed by Wang et al. (2025) and provides a 
+set of tools to evaluate the value and counterfactual fairness achieved by 
+a given policy. In particular, it takes in an offline RL trajectory and
 outputs a preprocessed, bias-free trajectory, which could be passed to
 any off-the-shelf offline RL algorithms to learn a counterfactually fair
 policy. Additionally, it could also take in an RL policy and return its
@@ -86,12 +95,12 @@ parity and equal opportunity (). However, they do not accommodate
 counterfactual fairness, which defines fairness from a causal
 perspective, and they cannot be easily extended to the reinforcement
 learning setting in general. Additionally, `ml-fairness-gym` provides
-tools to simulate unfairness in sequential decision-making, but it does
-not implement algorithms that reduce unfairness (). To our current
-knowledge, Wang et al. (2025) is the first work to study counterfactual
-fairness in reinforcement learning. Correspondingly, `CFRL` is also the
-first package to address counterfactual fairness in the reinforcement
-learning setting.
+tools to simulate unfairness in sequential decision-making, but it neither 
+implement algorithms that reduce unfairness nor address counterfactual 
+fairness (). To our current knowledge, Wang et al. (2025) is the first 
+work to study counterfactual fairness in reinforcement learning. 
+Correspondingly, `CFRL` is also the first package to address counterfactual 
+fairness in the reinforcement learning setting.
 
 The contribution of CFRL is two-fold. First, it implements a data
 preprocessing algorithm that removes bias from offline RL training data.
@@ -141,69 +150,6 @@ of the modules are summarized in the table below.
 |              |the user's needs, the evaluation can be done either in a synthetic environment or in a| 
 |              |simulated environment.                                                                |
 +==============+======================================================================================+
-
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 75%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Module</th>
-<th>Functionalities</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>reader</code></td>
-<td>Implements functions that read tabular trajectory data from either a
-<code>.csv</code> file or a <code>pandas.Dataframe</code>. Also
-implements functions that export trajectory data to either a
-<code>.csv</code> file or a <code>pandas.Dataframe</code>.</td>
-</tr>
-<tr class="even">
-<td><code>preprocessor</code></td>
-<td>Implements the data preprocessing algorithm introduced in Wang et
-al. (2025).</td>
-</tr>
-<tr class="odd">
-<td><code>agents</code></td>
-<td>Implements a fitted Q-iteration (FQI) algorithm, which learns RL
-policies and makes decisions based on the learned policy. Users can also
-pass a preprocessor to the FQI; in this case, the FQI will be able to
-take in unpreprocessed trajectories, internally preprocess the input
-trajectories, and directly output counterfactually fair policies.</td>
-</tr>
-<tr class="even">
-<td><code>environment</code></td>
-<td>Implements a synthetic environment that produces synthetic data as
-well as a simulated environment that simulates the transition dynamics
-of the environment underlying some real-world RL trajectory data. Also
-implements functions for sampling trajectories from the synthetic and
-simulated environments.</td>
-</tr>
-<tr class="odd">
-<td><code>fqe</code></td>
-<td>Implements a fitted Q-evaluation (FQE) algorithm, which can be used
-to evaluate the value of a policy.</td>
-</tr>
-<tr class="even">
-<td><code>evaluation</code></td>
-<td>Implements functions that evaluate the value and fairness of a
-policy. Depending on the user’s needs, the evaluation can be done either
-in a synthetic environment or in a simulated environment.</td>
-</tr>
-</tbody>
-</table>
-
-A general package workflow is as follows: First, simulate a trajectory
-using `environment` or read in a trajectory using `reader`. Then, use
-the sequential data preprocessing method implemented in `preprocessor`
-to remove the bias in the trajectory data. After that, pass the
-preprocessed trajectory into the FQI algorithm in `agents` to learn a
-counterfactually fair policy. Finally, use functions in `evaluation` to
-evaluate the value and fairness of the trained policy. See the CFRL
-documentation for more detailed workflow examples.
 
 # Data Example
 

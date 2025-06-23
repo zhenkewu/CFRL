@@ -1,3 +1,5 @@
+.. _example_workflows:
+
 Example Workflows
 ===============================
 
