@@ -18,7 +18,7 @@ fairness based on causal reasoning and enforces it at the individual level. In s
 with the same probabilities for an individual had the individual belong to a different subgroup 
 defined by some sensitive attribute (such as race and gender). At its core, counterfactual fairness 
 views the observed states and rewards as biased proxies of the (unobserved) true underlying states 
-and rewards, where the bias is associated (?) with the sensitive attribute. Thus, to ensure 
+and rewards, where the bias is often a result of the observed sensitive attribute. Thus, to ensure 
 counterfactual fairness, we want the policy to be based on the true underlying states and rewards 
 rather than their biased proxies. 
 
@@ -45,16 +45,16 @@ counterfactual fairness metric.
 ## High-level Design
 | Module         | Functionalities                                                                                                                                                                                                                                                                                                |
 |------------|------------------------------------------------------------|
-| `reader`       | Implements functions that read tabular trajectory data from either a `.csv` file or a `pandas.Dataframe`. Also implements functions that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.                                                                                               |
+| `reader`       | Implements functions that read tabular trajectory data from either a `.csv` file or a `pandas.Dataframe` into a format required by `CFRL`. Also implements functions that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.                                                                                               |
 | `preprocessor` | Implements the data preprocessing algorithm introduced in Wang et al. (2025).                                                                                                                                                                                                                                  |
 | `agents`       | Implements a fitted Q-iteration (FQI) algorithm, which learns RL policies and makes decisions based on the learned policy. Users can also pass a preprocessor to the FQI; in this case, the FQI will be able to take in unpreprocessed trajectories and directly output counterfactually fair policies.        |
 | `environment`  | Implements a synthetic environment that produces synthetic data as well as a simulated environment that simulates the transition dynamics of the environment underlying some real-world RL trajectory data. Also implements functions for sampling trajectories from the synthetic and simulated environments. |
 | `fqe`          | Implements a fitted Q-evaluation (FQE) algorithm, which can be used to evaluate the value of a trained policy.                                                                                                                                                                                                 |
-| `evaluation`   | Implements functions that evaluate the value and fairness of a trained policy. Depending on the user's needs, the evaluation can be done either in a synthetic environment or in a simulated environment.                                                                                                      |
+| `evaluation`   | Implements functions that evaluate the value and counterfactual fairness of a trained policy. Depending on the user's needs, the evaluation can be done either in a synthetic environment or in a simulated environment.                                                                                                      |
 
 ![Workflow Chart](./docs/source/supps/workflow_chart_cropped.PNG)
 
-A general CFRL workflow is as follows: First, simulate a trajectory using `environment` or read in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` to remove the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to evaluate the value and fairness of the trained policy. See ... for more detailed workflow examples.
+A general CFRL workflow is as follows: First, simulate a trajectory using `environment` or read in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` to remove the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to evaluate the value and counterfactual fairness of the trained policy. See ... for more detailed workflow examples.
 
 ## Examples
 

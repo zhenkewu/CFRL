@@ -6,27 +6,16 @@ tags:
   - CFRL
   - Python
 authors:
-  - name: Jitao Wang
+  - name: Several Different Contributors
     corresponding: true 
     affiliation: 1
-  - name: Jianhan Zhang
-    affiliation: 2
-  - name: Zhenke Wu
-    orcid: 0000-0001-7582-669X
-    affiliation: 1
-    corresponding: true 
-  - name: Maybe Someone Else
-    affiliation: 3
 
 affiliations:
- - name: 'Department of Biostatistics, University of Michigan'
+ - name: 'Several Different Departments, University of Michigan'
    index: 1
- - name: 'Department of Mathematics, University of Michigan'
-   index: 2
- - name: 'Department of Something Else, University of Something Else'
-   index: 3
-citation_author: Jitao Wang et. al.
-date: 20 June 2025
+
+citation_author: Somebody et. al.
+date: 26 June 2025
 year: 2025
 journal: JOSS
 preamble: >
@@ -52,7 +41,8 @@ decision-making rule, often referred to as a “policy”, that maximizes
 some pre-specified benefit in an environment across multiple or even
 infinite time steps. It has been widely applied to fields such as
 healthcare, banking, and autonomous driving. Despite their usefulness,
-the decisions made by RL algorithms might exhibit systematic bias. For
+the decisions made by RL algorithms might exhibit systematic bias due 
+to bias in the training data. For
 example, when using a RL algorithm to assign treatment to patients over
 time, the algorithm might consistently assign treatment resources to
 patients of some races at the expense of patients of other races.
@@ -71,7 +61,7 @@ defined by some sensitive attribute (such as race and gender). At its
 core, counterfactual fairness views the observed states and rewards as 
 biased proxies of the (unobserved) true underlying states and rewards, 
 where the bias is often a result of the observed sensitive attribute. 
-In this light, the sequential data preprocessing algorithm ensures 
+In this light, the data preprocessing algorithm ensures 
 counterfactual fairness by removing this bias from the input offline 
 trajectories.
 
@@ -99,7 +89,7 @@ tools to simulate unfairness in sequential decision-making, but it neither
 implement algorithms that reduce unfairness nor address counterfactual 
 fairness (). To our current knowledge, Wang et al. (2025) is the first 
 work to study counterfactual fairness in reinforcement learning. 
-Correspondingly, `CFRL` is also the first package to address counterfactual 
+Correspondingly, `CFRL` is also the first code package to address counterfactual 
 fairness in the reinforcement learning setting.
 
 The contribution of CFRL is two-fold. First, it implements a data
@@ -110,10 +100,10 @@ attribute values and concatenates all of the individual’s counterfactual
 states into a new state variable. The preprocessed data can then be
 directly used by existing RL algorithms for policy learning, and the
 learned policy should be approximately counterfactually fair. Second, it
-provides a platform to evaluate RL policies based on counterfactual
+provides a platform for evaluating RL policies based on counterfactual
 fairness. After passing in a policy and a trajectory dataset from the
 target environment, users can assess how well the policy performs in the
-target environment in terms of the discounted cumulative reward and
+target environment in terms of the discounted cumulative reward and a 
 counterfactual fairness metric. This not only allows stakeholders to
 test their fair RL policies before deployment but also offers RL
 researchers a hands-on tool to evaluate newly developed counterfactually
@@ -128,8 +118,8 @@ of the modules are summarized in the table below.
 |Module        |Functionalities                                                                       |
 +==============+======================================================================================+
 |`reader`      |Implements functions that read tabular trajectory data from either a `.csv` file or a |
-|              |`pandas.Dataframe`. Also implements functions that export trajectory                  |
-|              |data to either a `.csv` file or a `pandas.Dataframe`.                                 |
+|              |`pandas.Dataframe` into a format required by `CFRL`. Also implements functions that   |
+|              |export trajectory data to either a `.csv` file or a `pandas.Dataframe`.               |
 +--------------+--------------------------------------------------------------------------------------+
 |`preprocessor`|Implements the data preprocessing algorithm introduced in Wang et al. (2025).         |
 +--------------+--------------------------------------------------------------------------------------+
@@ -146,10 +136,17 @@ of the modules are summarized in the table below.
 |`fqe`         |Implements a fitted Q-evaluation (FQE) algorithm, which can be used to evaluate the   |
 |              |value of a policy.                                                                    |
 +--------------+--------------------------------------------------------------------------------------+
-|`evaluation`  |Implements functions that evaluate the value and fairness of a policy. Depending on   |
-|              |the user's needs, the evaluation can be done either in a synthetic environment or in a| 
-|              |simulated environment.                                                                |
+|`evaluation`  |Implements functions that evaluate the value and counterfactual fairness of a policy. |
+|              |Depending on the user's needs, the evaluation can be done either in a synthetic       | 
+|              |environment or in a simulated environment.                                            |
 +==============+======================================================================================+
+
+A general CFRL workflow is as follows: First, simulate a trajectory using `environment` or read 
+in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` to remove 
+the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in 
+`agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to 
+evaluate the value and counterfactual fairness of the trained policy. See the 
+"Example Workflows" section of the CFRL documentation for more detailed workflow examples.
 
 # Data Example
 
