@@ -194,7 +194,64 @@ def test_fqe_multivariate_zs_states_nn():
 
 
 
+def test_fqe_univariate_zs_states_lm():
+    env_true = SyntheticEnvironment(state_dim=1, 
+                                    z_coef=1, 
+                                    f_x0=f_x0_uni, 
+                                    f_xt=f_xt_uni, 
+                                    f_rt=f_rt_uni)
+    zs_in = np.array([[0], [0], [0], [1], [1], [1], [2], [2], [2]])
+    agent = RandomAgent(2)
+    zs_in, states_in, actions_in, rewards_in = sample_trajectory(env=env_true, 
+                                                                 zs=zs_in, 
+                                                                 state_dim=1, 
+                                                                 T=10, 
+                                                                 policy=agent)
+    
+    f = FQE(model_type='lm', num_actions=2, policy=agent, epochs=10)
+    f.fit(zs=zs_in, 
+          states=states_in, 
+          actions=actions_in, 
+          rewards=rewards_in, 
+          max_iter=10)
+    out = f.evaluate(zs=zs_in, states=states_in, actions=actions_in)
+    assert(out.shape == (90,))
+    assert(np.issubdtype(out.dtype, np.floating))
+
+def test_fqe_multivariate_zs_states_lm():
+    env = SyntheticEnvironment(state_dim=3, 
+                               z_coef=1, 
+                               f_x0=f_x0_multi, 
+                               f_xt=f_xt_multi, 
+                               f_rt=f_rt_multi)
+    zs_in = np.array([[0, 1], [0, 1], [1, 0], [1, 0], [0, 0], [0, 0], [1, 1], [1, 1]])
+    agent = RandomAgent(2)
+
+    def f_ux_multi(N, state_dim):
+        return np.random.multivariate_normal([0, 0, 0], np.diag([1, 1, 1]), size=N)
+
+    zs_in, states_in, actions_in, rewards_in = sample_trajectory(env=env, 
+                                                                 zs=zs_in, 
+                                                                 state_dim=3, 
+                                                                 T=10, 
+                                                                 policy=agent, 
+                                                                 f_ux=f_ux_multi)
+    
+    f = FQE(model_type='lm', num_actions=2, policy=agent, epochs=10)
+    f.fit(zs=zs_in, 
+          states=states_in, 
+          actions=actions_in, 
+          rewards=rewards_in, 
+          max_iter=10)
+    out = f.evaluate(zs=zs_in, states=states_in, actions=actions_in)
+    assert(out.shape == (80,))
+    assert(np.issubdtype(out.dtype, np.floating))
+
+
+
 # run the tests
 test_fqe_univariate_zs_states_nn()
 test_fqe_multivariate_zs_states_nn()
+test_fqe_univariate_zs_states_lm()
+test_fqe_multivariate_zs_states_lm()
 print('All fqe tests passed!')

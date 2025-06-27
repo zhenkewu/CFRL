@@ -21,7 +21,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
     N_eval = 10000
     eval_seed = seed * 10
     IS_CF_LOGITS = False
-    env = SyntheticEnvironment(z_coef=z_coef)
+    env = SyntheticEnvironment(z_coef=z_coef, state_dim=1)
     np.random.seed(seed)
     torch.manual_seed(seed)
     Z = np.random.binomial(1, 0.5, size=[N]).reshape(N, -1)
@@ -32,10 +32,12 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
     if method_policy == "FQI_LM":
         learning_algorithm = FQI
         fqi_model = "lm"
+        model_type = 'lm'
         max_iters = 100
     elif method_policy == "FQI_NN":
         learning_algorithm = FQI
         fqi_model = "nn"
+        model_type = 'nn'
         max_iters = 100 # ORIGINAL: 100
     else:
         raise ValueError("Method policy not found")
@@ -86,7 +88,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
             agent = learning_algorithm(
                 preprocessor=preprocessor,
                 model_type=fqi_model,
-                action_space=np.array([[0], [1]]),
+                num_actions=2,
                 #name="Full",
             )
             agent.train(
@@ -106,7 +108,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
             agent = learning_algorithm(
                 preprocessor=preprocessor,
                 model_type=fqi_model,
-                action_space=np.array([[0], [1]]),
+                num_actions=2,
                 #name="Unaware",
             )
             agent.train(
@@ -121,8 +123,8 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
         elif method == "ours":
             preprocessor = SequentialPreprocessor(
                 z_space=np.array([[0], [1]]), 
-                action_space=np.array([[0], [1]]), 
-                reg_model="nn",
+                num_actions=2, 
+                reg_model=model_type,
                 is_normalized=False,
             )
             preprocessor.train_preprocessor(xs=copy.deepcopy(xs),
@@ -133,7 +135,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
             agent = learning_algorithm(
                 preprocessor=preprocessor,
                 model_type=fqi_model,
-                action_space=np.array([[0], [1]]),
+                num_actions=2,
                 #name="ours",
             )
             agent.train(
@@ -148,8 +150,8 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
         elif method == "ours_cf2":
             preprocessor = SequentialPreprocessor(
                 z_space=np.array([[0], [1]]), 
-                action_space=np.array([[0], [1]]), 
-                reg_model="nn",
+                num_actions=2, 
+                reg_model=model_type,
                 is_normalized=False,
                 cross_folds=2,
             )
@@ -161,7 +163,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
             agent = learning_algorithm(
                 preprocessor=preprocessor,
                 model_type=fqi_model,
-                action_space=np.array([[0], [1]]),
+                num_actions=2,
                 #name="ours_cf2",
             )
             agent.train(
@@ -187,7 +189,7 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
             agent = learning_algorithm(
                 preprocessor=preprocessor,
                 model_type=fqi_model,
-                action_space=np.array([[0], [1]]),
+                num_actions=2,
                 #name="Oracle_reward",
             )
             agent.train(
@@ -497,7 +499,7 @@ def run_exp(export=False):
 
 # run the experiments
 s = int(input('Enter the seed that is to be used: '))
-df_n = run_exp1_one(methods=['behavior', 'random', 'full', 'unaware', 'oracle', 'ours'], 
-                          method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)
+df_n = run_exp1_one(methods=['ours'], 
+                          method_policy='FQI_LM', N=100, T=10, z_coef=1, seed=s)
 #df_n = run_exp(export=False)
 print(df_n)

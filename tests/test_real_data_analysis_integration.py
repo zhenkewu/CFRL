@@ -303,7 +303,163 @@ def test_real_data_analysis_multivariate_zs_states_nn():
 
 
 
+def test_real_data_analysis_univariate_zs_states_lm():
+    # simulate synthetic data tarjectories
+    env_true = SyntheticEnvironment(state_dim=1, 
+                                    z_coef=1, 
+                                    f_x0=f_x0_uni, 
+                                    f_xt=f_xt_uni, 
+                                    f_rt=f_rt_uni)
+    Z = [[0], [1], [2], [0], [1], [2], [0], [1], [2], [0], [1], [2], [0], [1], [2], 
+         [0], [1], [2], [0], [1], [2], [0], [1], [2], [0], [1], [2], [0], [1], [2]]
+    working_policy = RandomAgent(2)
+    zs, states, actions, rewards = sample_trajectory(env=env_true, 
+                                                     zs=Z, 
+                                                     state_dim=1, 
+                                                     T=10, 
+                                                     policy=working_policy)
+    assert(np.array_equal(zs, Z))
+    assert(states.shape == (30, 11, 1))
+    assert(np.issubdtype(states.dtype, np.floating))
+    assert(actions.shape == (30, 10))
+    assert(np.issubdtype(actions.dtype, np.integer))
+    assert(rewards.shape == (30, 10))
+    assert(np.issubdtype(rewards.dtype, np.floating))
+
+    # create training and testing sets
+    (zs_train, zs_test, 
+    xs_train, xs_test, 
+    actions_train, actions_test, 
+    rewards_train, rewards_test) = train_test_split(zs, states, actions, rewards, test_size=0.2)
+
+    # train the preprocessor and FQI
+    preprocessor = SequentialPreprocessor(z_space=np.unique(zs_train, axis=0), 
+                                          num_actions=2, 
+                                          cross_folds=3, 
+                                          reg_model='lm', 
+                                          batch_size=128, 
+                                          learning_rate=0.001, 
+                                          epochs=100,  
+                                          is_early_stopping=True, 
+                                          early_stopping_patience=10, 
+                                          early_stopping_min_delta=0.001)
+    xs_tilde, rs_tilde = preprocessor.train_preprocessor(zs=zs_train, 
+                                                         xs=xs_train, 
+                                                         actions=actions_train, 
+                                                         rewards=rewards_train)
+    assert(xs_tilde.shape == (24, 11, 3))
+    assert(np.issubdtype(xs_tilde.dtype, np.floating))
+    assert(rs_tilde.shape == (24, 10))
+    assert(np.issubdtype(rs_tilde.dtype, np.floating))
+    agent = FQI(model_type='lm', num_actions=2, preprocessor=preprocessor, epochs=10)
+    agent.train(zs=zs_train, xs=xs_tilde, actions=actions_train, rewards=rs_tilde, 
+                max_iter=10, preprocess=False)
+
+    env = SimulatedEnvironment(state_model_type='lm', 
+                               reward_model_type='lm', 
+                               z_factor=0, 
+                               num_actions=2)
+    env.fit(zs=zs_train, states=xs_train, actions=actions_train, rewards=rewards_train)
+
+    # evaluate the value and CF metric
+    value = evaluate_reward_through_fqe(zs=zs_test, 
+                                        states=xs_test, 
+                                        actions=actions_test, 
+                                        rewards=rewards_test, 
+                                        model_type='lm', 
+                                        policy=agent, 
+                                        epochs=10, 
+                                        max_iter=10)
+    cf_metric = evaluate_fairness_through_model(env=env, 
+                                                zs=zs_test, 
+                                                states=xs_test, 
+                                                actions=actions_test, 
+                                                policy=agent)
+    print('test_real_data_analysis_univariate_zs_states_lm():')
+    print('Value:', value)
+    print('CF metric:', cf_metric)
+
+def test_real_data_analysis_multivariate_zs_states_lm():
+    # simulate synthetic data tarjectories
+    env_true = SyntheticEnvironment(state_dim=3, 
+                                    z_coef=1, 
+                                    f_x0=f_x0_multi, 
+                                    f_xt=f_xt_multi, 
+                                    f_rt=f_rt_multi)
+    Z = [[0, 1], [1, 0], [0, 1], [1, 0], [0, 1], [1, 0], [0, 1], [1, 0], 
+         [0, 1], [1, 0], [0, 1], [1, 0], [0, 1], [1, 0], [0, 1], [1, 0], 
+         [0, 1], [1, 0], [0, 1], [1, 0], [0, 1], [1, 0], [0, 1], [1, 0]]
+    working_policy = RandomAgent(2)
+    zs, states, actions, rewards = sample_trajectory(env=env_true, 
+                                                     zs=Z, 
+                                                     state_dim=3, 
+                                                     T=10, 
+                                                     policy=working_policy)
+    assert(np.array_equal(zs, Z))
+    assert(states.shape == (24, 11, 3))
+    assert(np.issubdtype(states.dtype, np.floating))
+    assert(actions.shape == (24, 10))
+    assert(np.issubdtype(actions.dtype, np.integer))
+    assert(rewards.shape == (24, 10))
+    assert(np.issubdtype(rewards.dtype, np.floating))
+
+    # create training and testing sets
+    (zs_train, zs_test, 
+    xs_train, xs_test, 
+    actions_train, actions_test, 
+    rewards_train, rewards_test) = train_test_split(zs, states, actions, rewards, test_size=0.25)
+
+    # train the preprocessor and FQI
+    preprocessor = SequentialPreprocessor(z_space=np.unique(zs_train, axis=0), 
+                                          num_actions=2, 
+                                          cross_folds=3, 
+                                          reg_model='lm', 
+                                          batch_size=128, 
+                                          learning_rate=0.001, 
+                                          epochs=10, 
+                                          is_early_stopping=True, 
+                                          early_stopping_patience=10, 
+                                          early_stopping_min_delta=0.001)
+    xs_tilde, rs_tilde = preprocessor.train_preprocessor(zs=zs_train, 
+                                                         xs=xs_train, 
+                                                         actions=actions_train, 
+                                                         rewards=rewards_train)
+    assert(xs_tilde.shape == (18, 11, 6))
+    assert(np.issubdtype(xs_tilde.dtype, np.floating))
+    assert(rs_tilde.shape == (18, 10))
+    assert(np.issubdtype(rs_tilde.dtype, np.floating))
+    agent = FQI(model_type='lm', num_actions=2, preprocessor=preprocessor, epochs=10)
+    agent.train(zs=zs_train, xs=xs_tilde, actions=actions_train, rewards=rs_tilde, 
+                max_iter=10, preprocess=False)
+
+    env = SimulatedEnvironment(state_model_type='lm', 
+                               reward_model_type='lm', 
+                               z_factor=0, 
+                               num_actions=2)
+    env.fit(zs=zs_train, states=xs_train, actions=actions_train, rewards=rewards_train)
+
+    # evaluate the value and CF metric
+    value = evaluate_reward_through_fqe(zs=zs_test, 
+                                        states=xs_test, 
+                                        actions=actions_test, 
+                                        rewards=rewards_test, 
+                                        model_type='lm', 
+                                        policy=agent, 
+                                        epochs=10, 
+                                        max_iter=10)
+    cf_metric = evaluate_fairness_through_model(env=env, 
+                                                zs=zs_test, 
+                                                states=xs_test, 
+                                                actions=actions_test, 
+                                                policy=agent)
+    print('test_real_data_analysis_multivariate_zs_states_lm():')
+    print('Value:', value)
+    print('CF metric:', cf_metric)
+
+
 # run the tests
 test_real_data_analysis_univariate_zs_states_nn()
 test_real_data_analysis_multivariate_zs_states_nn()
+test_real_data_analysis_univariate_zs_states_lm()
+test_real_data_analysis_multivariate_zs_states_lm()
 print('All real data analysis integration tests passed!')

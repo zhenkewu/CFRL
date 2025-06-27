@@ -253,7 +253,58 @@ def test_evaluate_reward_through_fqe_multivariate_zs_states_nn():
                                       max_iter=10)
     assert(np.issubdtype(dcr.dtype, np.floating))
 
-def test_evaluate_fairness_through_model_univariate_zs_states():
+def test_evaluate_reward_through_fqe_univariate_zs_states_lm():
+    env_true = SyntheticEnvironment(state_dim=1, 
+                                    z_coef=1, 
+                                    f_x0=f_x0_uni, 
+                                    f_xt=f_xt_uni, 
+                                    f_rt=f_rt_uni)
+    zs_in = np.array([[0], [0], [0], [1], [1], [1], [2], [2], [2]])
+    agent = RandomAgent(2)
+    zs_in, states_in, actions_in, rewards_in = sample_trajectory(env=env_true, 
+                                                                 zs=zs_in, 
+                                                                 state_dim=1, 
+                                                                 T=10, 
+                                                                 policy=agent)
+    dcr = evaluate_reward_through_fqe(zs=zs_in, 
+                                      states=states_in, 
+                                      actions=actions_in, 
+                                      rewards=rewards_in, 
+                                      model_type='lm', 
+                                      policy=agent, 
+                                      epochs=10, 
+                                      max_iter=10)
+    assert(np.issubdtype(dcr.dtype, np.floating))
+
+def test_evaluate_reward_through_fqe_multivariate_zs_states_lm():
+    env = SyntheticEnvironment(state_dim=3, 
+                               z_coef=1, 
+                               f_x0=f_x0_multi, 
+                               f_xt=f_xt_multi, 
+                               f_rt=f_rt_multi)
+    zs_in = np.array([[0, 1], [0, 1], [1, 0], [1, 0], [0, 0], [0, 0], [1, 1], [1, 1]])
+    agent = RandomAgent(2)
+
+    def f_ux_multi(N, state_dim):
+        return np.random.multivariate_normal([0, 0, 0], np.diag([1, 1, 1]), size=N)
+
+    zs_in, states_in, actions_in, rewards_in = sample_trajectory(env=env, 
+                                                                 zs=zs_in, 
+                                                                 state_dim=3, 
+                                                                 T=10, 
+                                                                 policy=agent, 
+                                                                 f_ux=f_ux_multi)
+    dcr = evaluate_reward_through_fqe(zs=zs_in, 
+                                      states=states_in, 
+                                      actions=actions_in, 
+                                      rewards=rewards_in, 
+                                      model_type='lm', 
+                                      policy=agent, 
+                                      epochs=10, 
+                                      max_iter=10)
+    assert(np.issubdtype(dcr.dtype, np.floating))
+
+def test_evaluate_fairness_through_model_univariate_zs_states_nn():
     # generate trajectories from the true underlying environment
     env_true = SyntheticEnvironment(state_dim=1, 
                                     z_coef=1, 
@@ -282,7 +333,7 @@ def test_evaluate_fairness_through_model_univariate_zs_states():
                                                 policy=agent)
     assert(cf_metric == 0)
 
-def test_evaluate_fairness_through_model_multivariate_zs_states():
+def test_evaluate_fairness_through_model_multivariate_zs_states_nn():
     # generate trajectories from the true underlying environment
     env_true = SyntheticEnvironment(state_dim=3, 
                                     z_coef=1, 
@@ -311,6 +362,64 @@ def test_evaluate_fairness_through_model_multivariate_zs_states():
                                                 policy=agent)
     assert(cf_metric == 0)
 
+def test_evaluate_fairness_through_model_univariate_zs_states_lm():
+    # generate trajectories from the true underlying environment
+    env_true = SyntheticEnvironment(state_dim=1, 
+                                    z_coef=1, 
+                                    f_x0=f_x0_uni, 
+                                    f_xt=f_xt_uni, 
+                                    f_rt=f_rt_uni)
+    zs_in = np.array([[0], [0], [0], [1], [1], [1], [2], [2], [2]])
+    agent = RandomAgent(2)
+    zs_in, states_in, actions_in, rewards_in = sample_trajectory(env=env_true, 
+                                                                 zs=zs_in, 
+                                                                 state_dim=1, 
+                                                                 T=10, 
+                                                                 policy=agent)
+    env = SimulatedEnvironment(num_actions=2, epochs=10, state_model_type='lm', reward_model_type='lm')
+    env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
+    zs_test = np.array([[0], [0], [1], [1], [2], [2]])
+    zs, states, actions, rewards = sample_simulated_env_trajectory(env=env, 
+                                                                   zs=zs_test, 
+                                                                   state_dim=1, 
+                                                                   T=10, 
+                                                                   policy=agent) 
+    cf_metric = evaluate_fairness_through_model(env=env, 
+                                                zs=zs, 
+                                                states=states, 
+                                                actions=actions, 
+                                                policy=agent)
+    assert(cf_metric == 0)
+
+def test_evaluate_fairness_through_model_multivariate_zs_states_lm():
+    # generate trajectories from the true underlying environment
+    env_true = SyntheticEnvironment(state_dim=3, 
+                                    z_coef=1, 
+                                    f_x0=f_x0_multi, 
+                                    f_xt=f_xt_multi, 
+                                    f_rt=f_rt_multi)
+    zs_in = np.array([[0, 1], [0, 1], [1, 0], [1, 0], [0, 0], [0, 0], [1, 1], [1, 1]])
+    agent = RandomAgent(2)
+    zs_in, states_in, actions_in, rewards_in = sample_trajectory(env=env_true, 
+                                                                 zs=zs_in, 
+                                                                 state_dim=3, 
+                                                                 T=10, 
+                                                                 policy=agent)
+    env = SimulatedEnvironment(num_actions=2, epochs=10, state_model_type='lm', reward_model_type='lm')
+    env.fit(zs=zs_in, states=states_in, actions=actions_in, rewards=rewards_in)
+    zs_test = np.array([[0, 1], [0, 1], [1, 0], [1, 0], [0, 0], [1, 1]])
+    zs, states, actions, rewards = sample_simulated_env_trajectory(env=env, 
+                                                                   zs=zs_test, 
+                                                                   state_dim=3, 
+                                                                   T=10, 
+                                                                   policy=agent)
+    cf_metric = evaluate_fairness_through_model(env=env, 
+                                                zs=zs, 
+                                                states=states, 
+                                                actions=actions, 
+                                                policy=agent)
+    assert(cf_metric == 0)
+
 
 
 # run the tests
@@ -320,6 +429,10 @@ test_evaluate_fairness_through_simulation_univariate_zs_states()
 test_evaluate_fairness_through_simulation_multivariate_zs_states()
 test_evaluate_reward_through_fqe_univariate_zs_states_nn()
 test_evaluate_reward_through_fqe_multivariate_zs_states_nn()
-test_evaluate_fairness_through_model_univariate_zs_states()
-test_evaluate_fairness_through_model_multivariate_zs_states()
+test_evaluate_reward_through_fqe_univariate_zs_states_lm()
+test_evaluate_reward_through_fqe_multivariate_zs_states_lm()
+test_evaluate_fairness_through_model_univariate_zs_states_nn()
+test_evaluate_fairness_through_model_multivariate_zs_states_nn()
+test_evaluate_fairness_through_model_univariate_zs_states_lm()
+test_evaluate_fairness_through_model_multivariate_zs_states_lm()
 print('All evaluation tests passed!')

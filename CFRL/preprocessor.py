@@ -1,7 +1,7 @@
 from abc import abstractmethod
 import numpy as np
 from sklearn.linear_model import LinearRegression
-from .utils.base_models import NeuralNetRegressor
+from .utils.base_models import NeuralNetRegressor, LinearRegressor
 #from utils.utils import timer_func
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import OneHotEncoder
@@ -320,7 +320,7 @@ class SequentialPreprocessor(Preprocessor):
             zs: np.ndarray, 
             actions: np.ndarray, 
             rewards: np.ndarray
-        ) -> LinearRegression | NeuralNetRegressor:
+        ) -> LinearRegression | NeuralNetRegressor | dict[tuple[int | float, ...], LinearRegressor] | dict[tuple[int | float, ...], NeuralNetRegressor]:
         # learn model after time 0
         N, T, _ = xs.shape
         if self.is_normalized:
@@ -364,7 +364,25 @@ class SequentialPreprocessor(Preprocessor):
             zs: np.ndarray, 
             actions: np.ndarray, 
             T: int
-        ) -> LinearRegression:
+        ) -> LinearRegressor | dict[tuple[int | float, ...], LinearRegressor]:
+        if self.mode == "single":
+            return self._learn_single_linear_model(states, next_states, zs, actions, T)
+        elif self.mode == "sensitive":
+            return self._learn_sensitive_linear_model(
+                states, next_states, zs, actions, T
+            )
+        else: 
+            print("Model mode is undefined. Please specify either \"single\" or \"sensitive\".")
+            exit(1)
+
+    def _learn_single_linear_model(
+            self, 
+            states: np.ndarray, 
+            next_states: np.ndarray, 
+            zs: np.ndarray, 
+            actions: np.ndarray, 
+            T: int
+        ) -> LinearRegressor:
         X = np.concatenate(
             [
                 np.repeat(zs.reshape(-1, 1, self.zdim), repeats=T - 1, axis=1).reshape(
@@ -376,7 +394,36 @@ class SequentialPreprocessor(Preprocessor):
             axis=1,
         )
         Y = next_states
-        return LinearRegression().fit(X, Y)
+        #return LinearRegression().fit(X, Y) # JITAO'S ORIGINAL
+        lr = LinearRegressor(featurize_method='polynomial', degree=2)
+        lr.fit(X, Y)
+        return lr
+    
+    def _learn_sensitive_linear_model(
+            self, 
+            states: np.ndarray, 
+            next_states: np.ndarray, 
+            zs: np.ndarray, 
+            actions: np.ndarray, 
+            T: int
+        ) -> dict[tuple[int | float, ...], LinearRegressor]:
+        model = {}
+        zs = np.repeat(zs[:, np.newaxis, :], axis=1, repeats=T - 1).reshape(
+            -1, self.zdim
+        )
+        for z in np.unique(zs, axis=0):
+            idx_z = np.all(zs == z, axis=1)
+            states_z = states[idx_z].reshape(-1, self.xdim)
+            next_states_z = next_states[idx_z].reshape(-1, next_states.shape[-1])
+            actions_z = actions[:, : (T - 1)].reshape(-1, self.dim_a)[idx_z]
+            X = np.concatenate([actions_z, states_z], axis=1)
+            Y = next_states_z
+
+            #model[tuple(z)] = LinearRegression().fit(X, Y)
+            lr = LinearRegressor(featurize_method='polynomial', degree=2)
+            lr.fit(X, Y)
+            model[tuple(z)] = lr
+        return model
 
     def _learn_neural_model(
             self, 
@@ -385,7 +432,7 @@ class SequentialPreprocessor(Preprocessor):
             zs: np.ndarray, 
             actions: np.ndarray, 
             T: int
-        ) -> NeuralNetRegressor:
+        ) -> NeuralNetRegressor | dict[tuple[int | float, ...], NeuralNetRegressor]:
         if self.mode == "single":
             return self._learn_single_neural_model(states, next_states, zs, actions, T)
         elif self.mode == "sensitive":
@@ -439,7 +486,7 @@ class SequentialPreprocessor(Preprocessor):
             zs: np.ndarray, 
             actions: np.ndarray, 
             T: int
-        ) -> NeuralNetRegressor:
+        ) -> dict[tuple[int | float, ...], NeuralNetRegressor]:
         model = {}
         zs = np.repeat(zs[:, np.newaxis, :], axis=1, repeats=T - 1).reshape(
             -1, self.zdim
@@ -529,7 +576,8 @@ class SequentialPreprocessor(Preprocessor):
                 states_z = state[idx_z]
                 actions_z = at[idx_z].reshape(-1, dim_a)
                 X = np.concatenate([actions_z, states_z], axis=1)
-                m[idx_z] = model[tuple(z_)].predict(X)
+                if self.reg_model == "nn" or X.shape[0] > 0:
+                    m[idx_z] = model[tuple(z_)].predict(X)
         if self.is_normalized:
             m = self.destandardize(m, self.next_states_mean, self.next_states_std)
         return m

@@ -11,7 +11,7 @@ from .baseline_agents import BehaviorAgent, RandomAgent
 from cfrl.evaluation import evaluate_fairness_through_model, evaluate_reward_through_fqe
 import torch
 
-def run_exp_one(seed, z_label, methods):
+def run_exp_one(seed, model_type, z_label, methods):
     # Step 1
     # 1.2 read data
     impute_data = pd.read_csv('data/impute_data.csv')
@@ -69,10 +69,10 @@ def run_exp_one(seed, z_label, methods):
     for prepro_type in methods:
         if prepro_type == 'ours':
             sp = SequentialPreprocessor(z_space=np.unique(zs_train, axis=0), 
-                                        action_space=[[0], [1], [2]], 
+                                        num_actions=3, 
                                         #action_space=[[0], [1]], # TO BE DELETED
                                         cross_folds=10, 
-                                        reg_model='nn', 
+                                        reg_model=model_type, 
                                         batch_size=128, 
                                         learning_rate=0.001, # LR THAT JITAO USED
                                         #learning_rate=0.003, # LR THAT I FOUND BETTER WHEN USING JITAO'S NN
@@ -82,7 +82,7 @@ def run_exp_one(seed, z_label, methods):
             np.random.seed(seed+1)
             torch.manual_seed(seed+1) # NEWLY ADDED
             xs_tilde, rs_tilde = sp.train_preprocessor(zs_train, xs_train, actions_train, rewards_train)
-            agent = FQI(model_type='nn', action_space=[[0], [1], [2]], preprocessor=sp, learning_rate=0.1)
+            agent = FQI(model_type=model_type, num_actions=3, preprocessor=sp, learning_rate=0.1)
             #agent = FQI(model_type='nn', action_space=[[0], [1]], preprocessor=sp) # TO BE DELETED
             np.random.seed(seed+2)
             torch.manual_seed(seed+2) # NEWLY ADDED
@@ -92,7 +92,7 @@ def run_exp_one(seed, z_label, methods):
                             z_space=np.unique(zs_train, axis=0), 
                             action_space=np.array([[0], [1], [2]])
                         )
-            agent = FQI(model_type='nn', action_space=[[0], [1], [2]], preprocessor=up, learning_rate=0.1)
+            agent = FQI(model_type=model_type, num_actions=3, preprocessor=up, learning_rate=0.1)
             np.random.seed(seed+2)
             torch.manual_seed(seed+2) # NEWLY ADDED
             agent.train(zs_train, xs_train, actions_train, rewards_train, max_iter=200, preprocess=True)
@@ -101,7 +101,7 @@ def run_exp_one(seed, z_label, methods):
                             z_space=np.unique(zs_train, axis=0), 
                             action_space=np.array([[0], [1], [2]])
                         )
-            agent = FQI(model_type='nn', action_space=[[0], [1], [2]], preprocessor=fp, learning_rate=0.1)
+            agent = FQI(model_type=model_type, num_actions=3, preprocessor=fp, learning_rate=0.1)
             np.random.seed(seed+2)
             torch.manual_seed(seed+2) # NEWLY ADDED
             agent.train(zs_train, xs_train, actions_train, rewards_train, max_iter=200, preprocess=True)
@@ -120,10 +120,10 @@ def run_exp_one(seed, z_label, methods):
     # 3.2 train transition kernel
     np.random.seed(seed+3)
     torch.manual_seed(seed+3) # NEWLY ADDED
-    env = SimulatedEnvironment(state_model_type='nn', 
-                            reward_model_type='nn', 
+    env = SimulatedEnvironment(state_model_type=model_type, 
+                            reward_model_type=model_type, 
                             z_factor=0, 
-                            action_space=np.array([[0], [1], [2]]), 
+                            num_actions=3, 
                             is_action_onehot=True)
     env.fit(zs, xs, actions, rewards)
     #env.reset(zs)
@@ -178,12 +178,12 @@ def run_exp_one(seed, z_label, methods):
         # Step 5 FQE
         np.random.seed(seed+4)
         torch.manual_seed(seed+4) # NEWLY ADDED
-        value = evaluate_reward_through_fqe(zs_test, 
-                                            xs_test, 
-                                            actions_test, 
-                                            rewards_test, 
-                                            'nn', 
-                                            agents[i], 
+        value = evaluate_reward_through_fqe(zs=zs_test, 
+                                            states=xs_test, 
+                                            actions=actions_test, 
+                                            rewards=rewards_test, 
+                                            model_type=model_type, 
+                                            policy=agents[i], 
                                             seed=seed+4)
         
         #print('fairness:', cf_metric)
@@ -196,6 +196,7 @@ def run_exp_one(seed, z_label, methods):
                     #"mean_actions_z1gez0": [mean_actions_z1gez0],
                     #"mean_actions_z1lez0": [mean_actions_z1lez0],
                     #"mean_actions_z1eqz0": [mean_actions_z1eqz0],
+                    "model_type": [model_type], 
                     "seed": [seed],
                 }
             )
@@ -205,12 +206,12 @@ def run_exp_one(seed, z_label, methods):
 
 
 
-def run_exp(rep, z_labels, methods, print_res=True, export_res=False, 
+def run_exp(rep, model_type, z_labels, methods, print_res=True, export_res=False, 
             export_path='./res.csv'):
     res = None
     for i in range(rep):
         for z_label in z_labels: 
-            res_add = run_exp_one(seed=i+10, z_label=z_label, methods=methods)
+            res_add = run_exp_one(seed=i+10, model_type=model_type, z_label=z_label, methods=methods)
             #res_add = run_exp(seed=12, method='unaware')
             #res_add = run_exp(seed=i+50, method='unaware')
             res = pd.concat([res, res_add], axis=0, ignore_index=True)
@@ -225,5 +226,5 @@ def run_exp(rep, z_labels, methods, print_res=True, export_res=False,
 '''run_exp(rep=10, methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=True, 
         export_path='./result_rda_real_data_analysis_after.csv')'''
-run_exp(rep=1, methods=['ours'], z_labels=['sex_b'], 
+run_exp(rep=2, model_type='lm', methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=False)

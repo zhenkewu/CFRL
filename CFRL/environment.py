@@ -920,7 +920,7 @@ class SimulatedEnvironment(gym.Env):
         # fit the transition model
         #glogger.info("fitting transition model")
         if self.trans_model_type == "lm":
-            self.trans_models = LinearRegressor()
+            self.trans_models = LinearRegressor(featurize_method='polynomial', degree=2)
             # THE FOLLOWING 2 LINES ARE NEWLY ADDED; FIT() HAS ALSO BEEN MODIFIED
             X = np.concatenate([states, sensitives, actions.reshape(-1, dim_a)], axis=1)
             y = next_states
@@ -975,7 +975,7 @@ class SimulatedEnvironment(gym.Env):
         # output: r_t
         #glogger.info("fitting reward model")
         if self.reward_model_type == "lm":
-            self.reward_models = LinearRegressor()
+            self.reward_models = LinearRegressor(featurize_method='polynomial', degree=2)
             # THE FOLLOWING 2 LINES ARE NEWLY ADDED; FIT() HAS ALSO BEEN MODIFIED
             X = np.concatenate([states, sensitives, actions.reshape(-1, dim_a)], axis=1)
             y = rewards.reshape(-1, 1)

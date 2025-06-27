@@ -346,6 +346,8 @@ def test_agents_no_preprocessor_univariate_zs_states_nn():
     assert(a2.shape == (6,))
     assert(np.issubdtype(a2.dtype, np.integer))
 
+
+
 def test_agents_no_preprocessor_multivariate_zs_states_nn():
     # generate trajectory
     env = SyntheticEnvironment(state_dim=3, 
@@ -416,9 +418,289 @@ def test_agents_no_preprocessor_multivariate_zs_states_nn():
 
 
 
+def test_agents_with_preprocessor_univariate_zs_states_lm():
+    # generate trajectory
+    env = SyntheticEnvironment(state_dim=1, 
+                               z_coef=1, 
+                               f_x0=f_x0_uni, 
+                               f_xt=f_xt_uni, 
+                               f_rt=f_rt_uni)
+    zs_in = np.array([[0], [0], [0], [1], [1], [1], [2], [2], [2]])
+    agent = RandomAgent(2)
+    zs, states, actions, rewards = sample_trajectory(env=env, 
+                                                     zs=zs_in, 
+                                                     state_dim=1, 
+                                                     T=10, 
+                                                     policy=agent)
+    
+    # initialize a FQI object with preprocessor
+    preprocessor = ConcatenatePreprocessor(z_space=np.array([[0], [1]]), 
+                                           action_space=np.array([[0], [1]]))
+    fqi = FQI(model_type='lm', 
+              num_actions=2, 
+              preprocessor=preprocessor)
+    
+    # test training FQI
+    fqi.train(zs=zs, 
+              xs=states, 
+              actions=actions, 
+              rewards=rewards, 
+              max_iter=10)
+    
+    # test taking the first actions
+    zs_test = np.array([[0], [0], [1], [1], [2], [2]])
+    ux0 = np.zeros((6, 1))
+    x0 = f_x0_uni(zs=zs_test, ux0=ux0)
+    a0 = fqi.act(z=zs_test, xt=x0)
+    assert(a0.shape == (6,))
+    assert(np.issubdtype(a0.dtype, np.integer))
+
+    # test taking subsequent actions
+    ux1 = np.zeros((6, 1))
+    x1 = f_xt_uni(zs=zs_test, xtm1=x0, atm1=a0, uxt=ux1)
+    a1 = fqi.act(z=zs_test, xt=x1, xtm1=x0, atm1=a0)
+    assert(a1.shape == (6,))
+    assert(np.issubdtype(a1.dtype, np.integer))
+
+    ux2 = np.zeros((6, 1))
+    x2 = f_xt_uni(zs=zs_test, xtm1=x1, atm1=a1, uxt=ux2)
+    a2 = fqi.act(z=zs_test, xt=x2, xtm1=x1, atm1=a1)
+    assert(a2.shape == (6,))
+    assert(np.issubdtype(a2.dtype, np.integer))
+
+    # test restarting the action sequence
+    ux0 = np.zeros((6, 1))
+    x0 = f_x0_uni(zs=zs_test, ux0=ux0)
+    a0 = fqi.act(z=zs_test, xt=x0)
+    assert(a0.shape == (6,))
+    assert(np.issubdtype(a0.dtype, np.integer))
+
+    ux1 = np.zeros((6, 1))
+    x1 = f_xt_uni(zs=zs_test, xtm1=x0, atm1=a0, uxt=ux1)
+    a1 = fqi.act(z=zs_test, xt=x1, xtm1=x0, atm1=a0)
+    assert(a1.shape == (6,))
+    assert(np.issubdtype(a1.dtype, np.integer))
+
+    ux2 = np.zeros((6, 1))
+    x2 = f_xt_uni(zs=zs_test, xtm1=x1, atm1=a1, uxt=ux2)
+    a2 = fqi.act(z=zs_test, xt=x2, xtm1=x1, atm1=a1)
+    assert(a2.shape == (6,))
+    assert(np.issubdtype(a2.dtype, np.integer))
+
+def test_agents_with_preprocessor_multivariate_zs_states_lm():
+    # generate trajectory
+    env = SyntheticEnvironment(state_dim=3, 
+                               z_coef=1, 
+                               f_x0=f_x0_multi, 
+                               f_xt=f_xt_multi, 
+                               f_rt=f_rt_multi)
+    zs_in = np.array([[0, 1], [0, 1], [1, 0], [1, 0], [0, 0], [0, 0], [1, 1], [1, 1]])
+    agent = RandomAgent(2)
+    zs, states, actions, rewards = sample_trajectory(env=env, 
+                                                     zs=zs_in, 
+                                                     state_dim=3, 
+                                                     T=10, 
+                                                     policy=agent)
+    
+    # initialize a FQI object with preprocessor
+    preprocessor = ConcatenatePreprocessor(z_space=np.array([[0], [1]]), 
+                                           action_space=np.array([[0], [1]]))
+    fqi = FQI(model_type='lm', 
+              num_actions=2, 
+              preprocessor=preprocessor)
+    
+    # test training FQI
+    fqi.train(zs=zs, 
+              xs=states, 
+              actions=actions, 
+              rewards=rewards, 
+              max_iter=10)
+    
+    # test taking the first actions
+    zs_test = np.array([[0, 1], [1, 0], [0, 0], [1, 1], [1, 0], [1, 1]])
+    ux0 = np.zeros((6, 3))
+    x0 = f_x0_multi(zs=zs_test, ux0=ux0)
+    a0 = fqi.act(z=zs_test, xt=x0)
+    assert(a0.shape == (6,))
+    assert(np.issubdtype(a0.dtype, np.integer))
+
+    # test taking subsequent actions
+    ux1 = np.zeros((6, 3))
+    x1 = f_xt_multi(zs=zs_test, xtm1=x0, atm1=a0, uxt=ux1)
+    a1 = fqi.act(z=zs_test, xt=x1, xtm1=x0, atm1=a0)
+    assert(a1.shape == (6,))
+    assert(np.issubdtype(a1.dtype, np.integer))
+
+    ux2 = np.zeros((6, 3))
+    x2 = f_xt_multi(zs=zs_test, xtm1=x1, atm1=a1, uxt=ux2)
+    a2 = fqi.act(z=zs_test, xt=x2, xtm1=x1, atm1=a1)
+    assert(a2.shape == (6,))
+    assert(np.issubdtype(a2.dtype, np.integer))
+
+    # test restarting the action sequence
+    ux0 = np.zeros((6, 3))
+    x0 = f_x0_multi(zs=zs_test, ux0=ux0)
+    a0 = fqi.act(z=zs_test, xt=x0)
+    assert(a0.shape == (6,))
+    assert(np.issubdtype(a0.dtype, np.integer))
+
+    ux1 = np.zeros((6, 3))
+    x1 = f_xt_multi(zs=zs_test, xtm1=x0, atm1=a0, uxt=ux1)
+    a1 = fqi.act(z=zs_test, xt=x1, xtm1=x0, atm1=a0)
+    assert(a1.shape == (6,))
+    assert(np.issubdtype(a1.dtype, np.integer))
+
+    ux2 = np.zeros((6, 3))
+    x2 = f_xt_multi(zs=zs_test, xtm1=x1, atm1=a1, uxt=ux2)
+    a2 = fqi.act(z=zs_test, xt=x2, xtm1=x1, atm1=a1)
+    assert(a2.shape == (6,))
+    assert(np.issubdtype(a2.dtype, np.integer))
+
+def test_agents_no_preprocessor_univariate_zs_states_lm():
+    # generate trajectory
+    env = SyntheticEnvironment(state_dim=1, 
+                               z_coef=1, 
+                               f_x0=f_x0_uni, 
+                               f_xt=f_xt_uni, 
+                               f_rt=f_rt_uni)
+    zs_in = np.array([[0], [0], [0], [1], [1], [1], [2], [2], [2]])
+    agent = RandomAgent(2)
+    zs, states, actions, rewards = sample_trajectory(env=env, 
+                                                     zs=zs_in, 
+                                                     state_dim=1, 
+                                                     T=10, 
+                                                     policy=agent)
+    
+    # initialize a FQI object with preprocessor
+    preprocessor = None
+    fqi = FQI(model_type='lm', 
+              num_actions=2, 
+              preprocessor=preprocessor)
+    
+    # test training FQI
+    fqi.train(zs=zs, 
+              xs=states, 
+              actions=actions, 
+              rewards=rewards, 
+              max_iter=10)
+    
+    # test taking the first actions
+    zs_test = np.array([[0], [0], [1], [1], [2], [2]])
+    ux0 = np.zeros((6, 1))
+    x0 = f_x0_uni(zs=zs_test, ux0=ux0)
+    a0 = fqi.act(z=zs_test, xt=x0)
+    assert(a0.shape == (6,))
+    assert(np.issubdtype(a0.dtype, np.integer))
+
+    # test taking subsequent actions
+    ux1 = np.zeros((6, 1))
+    x1 = f_xt_uni(zs=zs_test, xtm1=x0, atm1=a0, uxt=ux1)
+    a1 = fqi.act(z=zs_test, xt=x1, xtm1=x0, atm1=a0)
+    assert(a1.shape == (6,))
+    assert(np.issubdtype(a1.dtype, np.integer))
+
+    ux2 = np.zeros((6, 1))
+    x2 = f_xt_uni(zs=zs_test, xtm1=x1, atm1=a1, uxt=ux2)
+    a2 = fqi.act(z=zs_test, xt=x2, xtm1=x1, atm1=a1)
+    assert(a2.shape == (6,))
+    assert(np.issubdtype(a2.dtype, np.integer))
+
+    # test restarting the action sequence
+    ux0 = np.zeros((6, 1))
+    x0 = f_x0_uni(zs=zs_test, ux0=ux0)
+    a0 = fqi.act(z=zs_test, xt=x0)
+    assert(a0.shape == (6,))
+    assert(np.issubdtype(a0.dtype, np.integer))
+
+    ux1 = np.zeros((6, 1))
+    x1 = f_xt_uni(zs=zs_test, xtm1=x0, atm1=a0, uxt=ux1)
+    a1 = fqi.act(z=zs_test, xt=x1, xtm1=x0, atm1=a0)
+    assert(a1.shape == (6,))
+    assert(np.issubdtype(a1.dtype, np.integer))
+
+    ux2 = np.zeros((6, 1))
+    x2 = f_xt_uni(zs=zs_test, xtm1=x1, atm1=a1, uxt=ux2)
+    a2 = fqi.act(z=zs_test, xt=x2, xtm1=x1, atm1=a1)
+    assert(a2.shape == (6,))
+    assert(np.issubdtype(a2.dtype, np.integer))
+
+def test_agents_no_preprocessor_multivariate_zs_states_lm():
+    # generate trajectory
+    env = SyntheticEnvironment(state_dim=3, 
+                               z_coef=1, 
+                               f_x0=f_x0_multi, 
+                               f_xt=f_xt_multi, 
+                               f_rt=f_rt_multi)
+    zs_in = np.array([[0, 1], [0, 1], [1, 0], [1, 0], [0, 0], [0, 0], [1, 1], [1, 1]])
+    agent = RandomAgent(2)
+    zs, states, actions, rewards = sample_trajectory(env=env, 
+                                                     zs=zs_in, 
+                                                     state_dim=3, 
+                                                     T=10, 
+                                                     policy=agent)
+    
+    # initialize a FQI object with preprocessor
+    preprocessor = None
+    fqi = FQI(model_type='lm', 
+              num_actions=2, 
+              preprocessor=preprocessor)
+    
+    # test training FQI
+    fqi.train(zs=zs, 
+              xs=states, 
+              actions=actions, 
+              rewards=rewards, 
+              max_iter=10)
+    
+    # test taking the first actions
+    zs_test = np.array([[0, 1], [1, 0], [0, 0], [1, 1], [1, 0], [1, 1]])
+    ux0 = np.zeros((6, 3))
+    x0 = f_x0_multi(zs=zs_test, ux0=ux0)
+    a0 = fqi.act(z=zs_test, xt=x0)
+    assert(a0.shape == (6,))
+    assert(np.issubdtype(a0.dtype, np.integer))
+
+    # test taking subsequent actions
+    ux1 = np.zeros((6, 3))
+    x1 = f_xt_multi(zs=zs_test, xtm1=x0, atm1=a0, uxt=ux1)
+    a1 = fqi.act(z=zs_test, xt=x1, xtm1=x0, atm1=a0)
+    assert(a1.shape == (6,))
+    assert(np.issubdtype(a1.dtype, np.integer))
+
+    ux2 = np.zeros((6, 3))
+    x2 = f_xt_multi(zs=zs_test, xtm1=x1, atm1=a1, uxt=ux2)
+    a2 = fqi.act(z=zs_test, xt=x2, xtm1=x1, atm1=a1)
+    assert(a2.shape == (6,))
+    assert(np.issubdtype(a2.dtype, np.integer))
+
+    # test restarting the action sequence
+    ux0 = np.zeros((6, 3))
+    x0 = f_x0_multi(zs=zs_test, ux0=ux0)
+    a0 = fqi.act(z=zs_test, xt=x0)
+    assert(a0.shape == (6,))
+    assert(np.issubdtype(a0.dtype, np.integer))
+
+    ux1 = np.zeros((6, 3))
+    x1 = f_xt_multi(zs=zs_test, xtm1=x0, atm1=a0, uxt=ux1)
+    a1 = fqi.act(z=zs_test, xt=x1, xtm1=x0, atm1=a0)
+    assert(a1.shape == (6,))
+    assert(np.issubdtype(a1.dtype, np.integer))
+
+    ux2 = np.zeros((6, 3))
+    x2 = f_xt_multi(zs=zs_test, xtm1=x1, atm1=a1, uxt=ux2)
+    a2 = fqi.act(z=zs_test, xt=x2, xtm1=x1, atm1=a1)
+    assert(a2.shape == (6,))
+    assert(np.issubdtype(a2.dtype, np.integer))
+
+
+
 # run the tests
 test_agents_with_preprocessor_univariate_zs_states_nn()
 test_agents_with_preprocessor_multivariate_zs_states_nn()
 test_agents_no_preprocessor_univariate_zs_states_nn()
 test_agents_no_preprocessor_multivariate_zs_states_nn()
+test_agents_with_preprocessor_univariate_zs_states_lm()
+test_agents_with_preprocessor_multivariate_zs_states_lm()
+test_agents_no_preprocessor_univariate_zs_states_lm()
+test_agents_no_preprocessor_multivariate_zs_states_lm()
 print('All agents tests passed!')

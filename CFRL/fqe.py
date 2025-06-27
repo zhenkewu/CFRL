@@ -194,7 +194,7 @@ class FQE:
                     uat = f_ua(N=N)
                     selected_actions = self._get_actions(zs_, xs_, actions_, uat).flatten()
                     Y = (
-                        rewards + self.gamma * tmp[np.arange(tmp.shape[0]), selected_actions]
+                        rewards + self.gamma * tmp[np.arange(tmp.shape[0]), selected_actions.astype(int)]
                     ).reshape(-1, 1)
 
                 # generate input
@@ -211,7 +211,7 @@ class FQE:
                     idx = actions == a
                     X_a = states[idx]
                     Y_a = Y[idx]
-                    new_model[a].train(X_a, Y_a)
+                    new_model[a].fit(X_a, Y_a)
                 #glogger.info(
                 #    "{}, fqe_lm mse:{}, mean_target:{}".format(
                 #        i, np.mean([m.mse for m in new_model]), np.mean(Y)
