@@ -150,7 +150,115 @@ evaluate the value and counterfactual fairness of the trained policy. See the
 
 # Data Example
 
-This is a data example.
+We provide a data example to demontrate how `CFRL` uses real data to learn a counterfactually fair 
+policy and evaluate the value and counterfactual fairness of the learned policy. This is only one 
+of the many workflows that `CFRL` can perform. We refer interested readers to the CFRL documentation 
+for more example workflows.
+
+At the very beginning, we first import the needed libraries.
+
+```python
+import pandas as pd
+import numpy as np
+import torch
+from sklearn.model_selection import train_test_split
+from cfrl.reader import read_trajectory_from_dataframe
+from cfrl.preprocessor import SequentialPreprocessor
+from cfrl.agents import FQI
+from cfrl.environment import SimulatedEnvironment
+from cfrl.evaluation import evaluate_reward_through_fqe, evaluate_fairness_through_model
+np.random.seed(10) # ensure reproducibility
+torch.manual_seed(10) # ensure reproducibility
+```
+
+#### Data Loading
+
+In this demonstration, we use an offline trajectory generated from a `SyntheticEnvironment` using some pre-specified transition rules. Although it is actually synthesized, we treat it as if it is from some unknown environment for pedagogical convenience in this demonstration.
+
+The trajectory contains 500 individuals (i.e. $N=500$) and 10 transitions (i.e. $T=10$). The actions are binary ($0$ or $1$) and were sampled using a random policy that selects $0$ or $1$ randomly with equal probability. It is stored in a tabular format in a `.csv` file. The sensitive attribute variable is univariate, stored in the column `z1`. The legit values of the sensitive attribute are $0$ and $1$. The state variable is also univariate, stored in the column `state1`. The actions are stored in the column `action` and rewards in the column `reward`. The tabular data also includes an extra irrelevant column `timestamp`. We load the trajectory from the tabular form into the array format required by `CFRL`.
+
+```python
+zs, states, actions, rewards, ids = read_trajectory_from_dataframe(
+                                                path='../data/sample_data_large_uni.csv', 
+                                                z_labels=['z1'], 
+                                                state_labels=['state1'], 
+                                                action_label='action', 
+                                                reward_label='reward', 
+                                                id_label='ID', 
+                                                T=10
+                                                )
+```
+
+We split the trajectory data into a training set (80%) and a testing set (20%). The training set is used to train the policy, while the testing set is used to evaluate the value and counterfactual fairness metric achieved by the policy.
+
+```python
+(
+    zs_train, zs_test, 
+    states_train, states_test, 
+    actions_train, actions_test, 
+    rewards_train, rewards_test
+) = train_test_split(zs, states, actions, rewards, test_size=0.2)
+```
+
+#### Preprocessor Training & Trajectory Preprocessing
+
+We now train the preprocessor and preprocess the trajectory. Note that if we train the preprocessor using only a subset of the data and preprocess the remaining subset of the data, then the resulting preprocessed trajectory might be too small to be useful for policy learning. We essentially want to preprocess as many individuals as possible. Fortunately, we can directly preprocess all individuals using the `train_preprocessor()` function when we set `cross_folds` to a relatively large number.
+
+When `cross_folds=K` where `K` is greater than 1, `train_preprocessor()` will internally divide the training data into `K` folds. For each $i=1,\dots,K$, it trains a transition dynamics model based on all the folds other than the $i$-th one, and this model is then used to preprocess data in the $i$-th fold. This results in `K` folds of preprocessed data, each of which is processed using a model that is trained on the other folds. These `K` folds of preprocessed data are then combined and returned by `train_preprocessor()`. This method allows us to preprocess all individuals in the trajectory while reducing overfitting.
+
+To use this functionality, we first initialize a `SequentialPreprocessor` with `cross_folds=5` greater than 1. We then simultaneously train the preprocessor and preprocess all individuals in the trajectory using the precedure described above.
+
+```python
+sp = SequentialPreprocessor(z_space=[[0], [1]], num_actions=2, cross_folds=5, mode='single', reg_model='nn')
+states_tilde, rewards_tilde = sp.train_preprocessor(zs=zs_train, xs=states_train, actions=actions_train, rewards=rewards_train)
+```
+
+#### Policy Learning
+
+Now we train a policy using `FQI` and the preprocessed data with `sp` as its internal preprocessor. Note that the training data `state_tilde` and `rewards_tilde` are already preprocessed. Thus, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e. `sp`).
+
+```python
+agent = FQI(num_actions=2, model_type='nn', preprocessor=sp)
+agent.train(zs=zs_train, xs=states_tilde, actions=actions_train, rewards=rewards_tilde, max_iter=100, preprocess=False)
+```
+
+#### `SimulatedEnvironment` Training
+
+Before moving on to the evaluation stage, there is one more thing to do: We need to train a `SimulatedEnvironment` that mimics the transition rules of the true environment that generated the training trajectory, which will be used by the evaluation functions to simulate the true data-generating environment. To do so, we initialize a `SimulatedEnvironment` and train it on the whole trajectory data (i.e. training set and testing set combined).
+
+```python
+env = SimulatedEnvironment(num_actions=2, 
+                           state_model_type='nn', 
+                           reward_model_type='nn')
+env.fit(zs=zs, states=states, actions=actions, rewards=rewards)
+```
+
+#### Value and Counterfactual Fairness Evaluation
+
+We now estimate the value achieved by the trained policy when interacting with the target environment using fitted Q evaluation (FQE), which is provided by `evaluate_value_through_fqe()`. We also estimate the counterfactual fairness acheived by the policy when interacting with the target environment using `evaluate_fairness_through_model()`. The counterfactual fairness is represented by a metric from 0 to 1, with 0 representing perfect fairness and 1 indicating complete unfairness. We use the testing set for evaluation.
+
+```python
+value = evaluate_reward_through_fqe(zs=zs_test, states=states_test, actions=actions_test, rewards=rewards_test, 
+                                    policy=agent, model_type='nn')
+cf_metric = evaluate_fairness_through_model(env=env, zs=zs_test, states=states_test, actions=actions_test, policy=agent)
+```
+
+The output `value` is `7.3576775` and `cf_metric` is `0.041818181818181824`. We can see that our policy achieves a low CF metric value, which indicates it is close to being perfectly counterfactually fair. Indeed, the CF metric should be exactly 0 if we know the true underlying environment; the reason why it is not exactly 0 here is because we need to estimate the true underlying environment during preprocessing, which introduces errors.
+
+#### Bonus: Assessing a Fairness-through-unawareness Policy
+
+Fairness-through-unawareness proposes to ensure fairness by excluding the sensitive attribute from the state variable (and thus from the agent's decision-making). Nevertheless, it has been argued that this method can still be unfair because the agent might learn the bias indirectly from the states and rewards, which are often biased. In this section, we train a policy following fairness-through-unawareness using the same training trajectory data and estimate its value and CF metric.
+
+```python
+agent_unaware = FQI(num_actions=2, model_type='nn', preprocessor=None)
+agent_unaware.train(zs=zs_train, xs=states_train, actions=actions_train, rewards=rewards_train, 
+                    max_iter=100, preprocess=False)
+value_unaware = evaluate_reward_through_fqe(zs=zs_test, states=states_test, actions=actions_test, rewards=rewards_test, 
+                                            policy=agent_unaware, model_type='nn')
+cf_metric_unaware = evaluate_fairness_through_model(env=env, zs=zs_test, states=states_test, actions=actions_test, 
+                                                    policy=agent_unaware)
+```
+The output `value` is `8.588442` and `cf_metric` is `0.44636363636363635`. We can see that the fairness-through-unawareness policy is much less fair than the policy learned using the preprocessed trajectory. This suggests that the preprocessing method likely reduced the bias in the training trajectory effectively. 
 
 # Conclusions
 
