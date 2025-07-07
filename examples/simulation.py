@@ -362,9 +362,9 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
 
 
 
-def run_exp(export=False):
+def run_exp(rep, start_seed=1, export=False):
     #set_env()
-    NREP = 5
+    NREP = rep
     #CORES = 20
     #Ns = [100, 200, 500, 1000, 2000]
     Ns = [100]
@@ -425,7 +425,7 @@ def run_exp(export=False):
             for z_coef in z_coefs:
                 for _ in range(NREP):
                     df_n_one = run_exp1_one(methods=methods, 
-                          method_policy=method_policy, N=N, T=T, z_coef=z_coef, seed=_+1)
+                          method_policy=method_policy, N=N, T=T, z_coef=z_coef, seed=_+start_seed)
                     df_n = pd.concat([df_n, df_n_one])
                     print(df_n)
 
@@ -434,7 +434,7 @@ def run_exp(export=False):
         #df_t = pd.concat([df_t, d[1]])'''
     
     if export:
-        df_n.to_csv('./results.csv')
+        df_n.to_csv('./examples/simulation_outputs/results.csv')
     
     return df_n
 
@@ -498,8 +498,8 @@ def run_exp(export=False):
 
 
 # run the experiments
-s = int(input('Enter the seed that is to be used: '))
+'''s = int(input('Enter the seed that is to be used: '))
 df_n = run_exp1_one(methods=['ours'], 
-                          method_policy='FQI_LM', N=100, T=10, z_coef=1, seed=s)
-#df_n = run_exp(export=False)
+                          method_policy='FQI_LM', N=100, T=10, z_coef=1, seed=s)'''
+df_n = run_exp(rep=10, start_seed=11, export=True)
 print(df_n)

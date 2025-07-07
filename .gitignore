@@ -2,8 +2,9 @@
 dist/
 build/
 examples/__pycache__/
+examples/simulation_outputs/
 CFRL/__pycache__/
-CFRL/utils/__pycache__
+CFRL/utils/__pycache__/
 CFRL/requirements.txt
 tests/__pycache__/
 tests/.pytest_cache
