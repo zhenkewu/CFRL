@@ -367,7 +367,7 @@ def run_exp(rep, start_seed=1, export=False):
     NREP = rep
     #CORES = 20
     #Ns = [100, 200, 500, 1000, 2000]
-    Ns = [500]
+    Ns = [1000]
     Ts = [10]
     # z_coefs = [0, 0.5, 1.0, 1.5, 2.0]
     z_coefs = [1]
@@ -501,5 +501,5 @@ def run_exp(rep, start_seed=1, export=False):
 '''s = int(input('Enter the seed that is to be used: '))
 df_n = run_exp1_one(methods=['ours'], 
                           method_policy='FQI_LM', N=100, T=10, z_coef=1, seed=s)'''
-df_n = run_exp(rep=10, start_seed=1, export=True)
+df_n = run_exp(rep=20, start_seed=1, export=True)
 print(df_n)
