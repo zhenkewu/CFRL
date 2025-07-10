@@ -501,5 +501,5 @@ def run_exp(rep, start_seed=1, export=False):
 '''s = int(input('Enter the seed that is to be used: '))
 df_n = run_exp1_one(methods=['ours'], 
                           method_policy='FQI_LM', N=100, T=10, z_coef=1, seed=s)'''
-df_n = run_exp(rep=20, start_seed=1, export=True)
+df_n = run_exp(rep=20, start_seed=31, export=True)
 print(df_n)
