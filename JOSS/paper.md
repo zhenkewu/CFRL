@@ -18,6 +18,7 @@ citation_author: Somebody et. al.
 date: 26 June 2025
 year: 2025
 journal: JOSS
+bibliography: references.bib
 preamble: >
   \usepackage{longtable}
   \usepackage{makecell}
