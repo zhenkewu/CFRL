@@ -36,22 +36,22 @@ preamble: >
 
 # Summary
 
-Reinforcement learning (RL) algorithms aim to learn a sequential
+Reinforcement learning (RL) aims to learn a sequential
 decision-making rule, often referred to as a “policy”, that maximizes
 some pre-specified benefit in an environment across multiple or even
-infinite time steps. It has been widely applied to fields such as
+infinitely many time steps. It has been widely applied to fields such as
 healthcare, banking, and autonomous driving. Despite their usefulness,
 the decisions made by RL algorithms might exhibit systematic bias due 
 to bias in the training data. For
 example, when using an RL algorithm to assign treatment to patients over
 time, the algorithm might consistently assign treatment resources to
-patients of some races at the expense of patients of other races.
+patients of some races while ignoring patients of other races.
 Concerns have been raised that the deployment of such biased algorithms
 could exacerbate the discrimination faced by socioeconomically
 disadvantaged groups.
 
-To address this problem, Wang et al. (2025) extended the concept of
-single-stage counterfactual fairness (Kusner et al. 2017) to the
+To address this problem, @wang2025cfrl extended the concept of
+single-stage counterfactual fairness [@kusner2018cf] to the
 multi-stage setting and proposed a data preprocessing algorithm that
 ensures counterfactual fairness in offline reinforcement learning. 
 An RL policy is counterfactually fair if, at every 
@@ -66,44 +66,45 @@ counterfactual fairness by removing this bias from the input offline
 trajectories.
 
 The `CFRL` library is built upon this definition of RL counterfactual 
-fairness introduced in Wang et al. (2025). It implements the data 
-preprocessing algorithm proposed by Wang et al. (2025) and provides a 
+fairness introduced in @wang2025cfrl. It implements the data 
+preprocessing algorithm proposed by @wang2025cfrl and provides a 
 set of tools to evaluate the value and counterfactual fairness achieved by 
 a given policy. In particular, it takes in an offline RL trajectory and
 outputs a preprocessed, bias-free trajectory, which could be passed to
 any off-the-shelf offline RL algorithms to learn a counterfactually fair
 policy. Additionally, it could also take in an RL policy and return its
-value and counterfactual fairness metric.
+value and level of counterfactual fairness.
 
 # Statement of Need
 
 Many existing Python libraries implement algorithms that ensure fairness
-in machine learning. For example, `Fairlearn` and `aif360` focus on
-mitigating bias in single-stage machine learning predictions under
+in machine learning. For example, `Fairlearn` [@weerts2023fairlearn] and 
+`aif360` [@aif360-oct-2018] provide tools 
+for mitigating bias in single-stage machine learning predictions under
 statistical assocoiation-based fairness criterion such as demographic
-parity and equal opportunity (). However, they do not accommodate
+parity and equal opportunity. However, they do not focus on 
 counterfactual fairness, which defines fairness from a causal
 perspective, and they cannot be easily extended to the reinforcement
-learning setting in general. Additionally, `ml-fairness-gym` provides
-tools to simulate unfairness in sequential decision-making, but it neither 
+learning setting in general. Additionally, `ml-fairness-gym` [@fairness_gym] allows users 
+to simulate unfairness in sequential decision-making, but it neither 
 implement algorithms that reduce unfairness nor address counterfactual 
-fairness (). To our current knowledge, Wang et al. (2025) is the first 
+fairness. To our current knowledge, @wang2025cfrl is the first 
 work to study counterfactual fairness in reinforcement learning. 
 Correspondingly, `CFRL` is also the first code library to address counterfactual 
 fairness in the reinforcement learning setting.
 
 The contribution of CFRL is two-fold. First, it implements a data
 preprocessing algorithm that removes bias from offline RL training data.
-For each individual in the data, the preprocessing
+For each individual (or sample) in the data, the preprocessing
 algorithm estimates the counterfactual states under different sensitive
 attribute values and concatenates all of the individual’s counterfactual
 states into a new state variable. The preprocessed data can then be
 directly used by existing RL algorithms for policy learning, and the
 learned policy should be approximately counterfactually fair. Second, it
-provides a platform for evaluating RL policies based on counterfactual
+provides a platform for assessing RL policies based on counterfactual
 fairness. After passing in a policy and a trajectory dataset from the
-target environment, users can assess how well the policy performs in the
-target environment in terms of the discounted cumulative reward and a 
+environment of interest, users can assess how well the policy performs in the
+environment of interest in terms of the discounted cumulative reward and a 
 counterfactual fairness metric. This not only allows stakeholders to
 test their fair RL policies before deployment but also offers RL
 researchers a hands-on tool to evaluate newly developed counterfactually
@@ -121,7 +122,7 @@ of the modules are summarized in the table below.
 |              |`pandas.Dataframe` into a format required by `CFRL`. Also implements functions that   |
 |              |export trajectory data to either a `.csv` file or a `pandas.Dataframe`.               |
 +--------------+--------------------------------------------------------------------------------------+
-|`preprocessor`|Implements the data preprocessing algorithm introduced in Wang et al. (2025).         |
+|`preprocessor`|Implements the data preprocessing algorithm introduced in @wang2025cfrl.              |
 +--------------+--------------------------------------------------------------------------------------+
 |`agents`      |Implements a fitted Q-iteration (FQI) algorithm, which learns RL policies and makes   |
 |              |decisions based on the learned policy. Users can also pass a preprocessor to the FQI; | 
@@ -158,7 +159,7 @@ section of the CFRL documentation for more workflow examples.
 
 In this demonstration, we use an offline trajectory generated from a `SyntheticEnvironment` using some pre-specified transition rules. Although it is actually synthesized, we treat it as if it is from some unknown environment for pedagogical convenience.
 
-The trajectory contains 500 individuals (i.e. $N=500$) and 10 transitions (i.e. $T=10$). The sensitive attribute variable and the state variable are both univariate. The actions are binary ($0$ or $1$) and were sampled using a random policy that selects $0$ or $1$ randomly with equal probability. The trajectory is stored in a tabular format in a `.csv` file. We load the trajectory from the tabular form into the array format required by `CFRL`.
+The trajectory contains 500 individuals (i.e. $N=500$) and 10 transitions (i.e. $T=10$). The sensitive attribute variable and the state variable are both univariate. The sensitive attributes are binary ($0$ or $1$). The actions are also binary ($0$ or $1$) and were sampled using a policy that selects $0$ or $1$ randomly with equal probability. The trajectory is stored in a tabular format in a `.csv` file. We first load the trajectory from the tabular form into the array format required by `CFRL`.
 
 ```python
 zs, states, actions, rewards, ids = read_trajectory_from_dataframe(
@@ -171,7 +172,7 @@ zs, states, actions, rewards, ids = read_trajectory_from_dataframe(
                                         T=10)
 ```
 
-We split the trajectory data into a training set (80%) and a testing set (20%). The training set is used to train the policy, while the testing set is used to evaluate the value and counterfactual fairness metric achieved by the policy.
+We then split the trajectory data into a training set (80%) and a testing set (20%). The training set is used to train the counterfactually fair policy, while the testing set is used to evaluate the value and counterfactual fairness metric achieved by the policy.
 
 ```python
 (
@@ -184,7 +185,7 @@ We split the trajectory data into a training set (80%) and a testing set (20%). 
 
 #### Preprocessor Training & Trajectory Preprocessing
 
-We now train the preprocessor and preprocess the trajectory. Instead of performing train-test split again, we set `cross_folds=5` to save data and avoid overfitting. In this case, `train_preprocessor()` will internally divide the training data into 5 folds, and each fold is preprocessed using a model that is trained on the other folds. We initialize the `SequentialPreprocessor`, and `train_preprocessor()` will take care of both preprocessor training and trajectory preprocessing.
+We now train the preprocessor and preprocess the trajectory. We set `cross_folds=5`, which reduces overfitting so that we do not need a separate dataset to train the preprocessor. In this case, `train_preprocessor()` will internally divide the training data into 5 folds, and each fold is preprocessed using a model that is trained on the other 4 folds. We initialize the `SequentialPreprocessor`, and `train_preprocessor()` will take care of both preprocessor training and trajectory preprocessing.
 
 ```python
 sp = SequentialPreprocessor(z_space=[[0], [1]], num_actions=2, cross_folds=5, 
@@ -216,7 +217,7 @@ env.fit(zs=zs, states=states, actions=actions, rewards=rewards)
 
 #### Value and Counterfactual Fairness Evaluation
 
-We now estimate the value and counterfactual fairness achieved by the trained policy when interacting with the target environment using `evaluate_value_through_fqe()` and `evaluate_fairness_through_model()`, respectively. The counterfactual fairness is represented by a metric from 0 to 1, with 0 representing perfect fairness and 1 indicating complete unfairness. We use the testing set for evaluation.
+We now estimate the value and counterfactual fairness achieved by the trained policy when interacting with the environment of interest using `evaluate_value_through_fqe()` and `evaluate_fairness_through_model()`, respectively. The counterfactual fairness is represented by a metric from 0 to 1, with 0 representing perfect fairness and 1 indicating complete unfairness. We use the testing set for evaluation.
 
 ```python
 value = evaluate_reward_through_fqe(zs=zs_test, states=states_test, 
@@ -226,11 +227,11 @@ cf_metric = evaluate_fairness_through_model(env=env, zs=zs_test, states=states_t
                                             actions=actions_test, policy=agent)
 ```
 
-The output `value` is `7.3576775` and `cf_metric` is `0.041818181818181824`, which indicates our policy is close to being perfectly counterfactually fair. Indeed, the CF metric should be exactly 0 if we know the true underlying environment; the reason why it is not exactly 0 here is because we need to estimate the true underlying environment during preprocessing, which can introduce errors.
+The output `value` is `7.3576775` and `cf_metric` is `0.041818181818181824`, which indicates our policy is close to being perfectly counterfactually fair. Indeed, the CF metric should be exactly 0 if we know the true dynamics of the environment of interest; the reason why it is not exactly 0 here is because we need to estimate the dynamics of the environment of interest during preprocessing, which can introduce errors.
 
 #### Bonus: Assessing a Fairness-through-unawareness Policy
 
-Fairness-through-unawareness proposes to ensure fairness by excluding the sensitive attribute from the agent's decision-making. However, it might still be unfair because of the indirect bias in the states and rewards. In this section, we use the same trajectory data train a policy following fairness-through-unawareness and estimate its value and counterfactual fairness.
+Fairness-through-unawareness proposes to ensure fairness by excluding the sensitive attribute from the agent's decision-making. However, it might still be unfair because of the indirect bias in the states and rewards. In this section, we use the same trajectory data to train a policy following fairness-through-unawareness and estimate its value and counterfactual fairness.
 
 ```python
 agent_unaware = FQI(num_actions=2, model_type='nn', preprocessor=None)
@@ -248,20 +249,22 @@ The output `value` is `8.588442` and `cf_metric` is `0.44636363636363635`. The f
 # Conclusions
 
 `CFRL` is a Python library that empowers counterfactually fair reinforcement
-learning using data preprocessing. It also provides tools to evaluate
+learning through data preprocessing. It also provides tools to evaluate
 the value and counterfactual fairness of a given policy. As far as we
 know, it is the first library to address counterfactual fairness
 problems in the context of reinforcement learning. Nevertheless, despite
 this, `CFRL` also admits a few limitations. For example, the current
-`CFRL` implementation requires every episode in the offline dataset to
+`CFRL` implementation requires every individual in the offline dataset to
 have the same number of time steps. Extending the library to accommodate
 variable-length episodes can improve its flexibility and usefulness.
 Besides, `CFRL` could also be made more well-rounded by integrating the
-preprocessor with established offline RL algorithm libraries such as
-`d3rlpy`, or connecting the evaluation functions with popular RL
-environment libraries such as `gym`. We leave these extensions to future
-updates.
+preprocessor with popular offline RL algorithm libraries such as
+`d3rlpy` [@d3rlpy], or connecting the evaluation functions with established RL
+environment libraries such as `gym` [@towers2024gymnasium]. We leave these extensions 
+to future updates.
 
 # Acknowledgements
 
 This is the acknowledgements.
+
+# References
