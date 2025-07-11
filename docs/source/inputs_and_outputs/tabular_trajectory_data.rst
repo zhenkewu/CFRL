@@ -45,7 +45,8 @@ data need to be in the following format:
    first :math:`T` transitions will be read for each individual, where the number :math:`T` can be 
    specified in the arguments to :code:`read_trajectory_from_csv()` and 
    :code:`read_trajectory_from_dataframe()`. Note that each transition refers to the quartet 
-   :math:`\{x_{it}, a_{it}, x_{i,t+1}, r_{it}\}`.
+   :math:`\{x_{it}, a_{it}, x_{i,t+1}, r_{it}\}`, and the components of a transition are not on the 
+   same row in the tabular data.
 
 For example, consider a trajectory dataset with three individuals where each individual has three time 
 steps (i.e. two transitions). Then the corresponding tabular data should be organized in the format in 

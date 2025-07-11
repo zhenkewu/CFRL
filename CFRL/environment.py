@@ -715,9 +715,6 @@ class SimulatedEnvironment(gym.Env):
     def __init__(
         self,
         num_actions: int, 
-        #reward_multiplication_factor: list | np.ndarray = [1.0, 1.0, 1.0],
-        state_variance_factor: int | float = 1.0,
-        z_factor: int | float = 0.0,
         state_model_type: Literal["lm", "nn"] = "nn",
         state_model_hidden_dims: list[int] = [32, 32],
         reward_model_type: Literal["lm", "nn"] = "nn",
@@ -736,10 +733,6 @@ class SimulatedEnvironment(gym.Env):
         Args: 
             num_actions (int): 
                 The total number of legit actions. 
-            state_variace_factor (int or float, optional): 
-                ???
-            z_factor (int or float, optional): 
-                ???
             state_model_type (str, optional): 
                 The type of the model used for learning the transition 
                 dynamics of the states. Can be "lm" (polynomial regression) or "nn" (neural network).
@@ -803,8 +796,8 @@ class SimulatedEnvironment(gym.Env):
         self.action_space = np.array([a for a in range(num_actions)]).reshape(-1, 1)
         self.num_actions = num_actions
         #self.reward_multiplication_factor = reward_multiplication_factor
-        self.state_variance_factor = state_variance_factor
-        self.z_factor = z_factor
+        #self.state_variance_factor = state_variance_factor
+        #self.z_factor = z_factor
         self.trans_model_type = state_model_type
         self.trans_model_hidden_dims = state_model_hidden_dims
         self.reward_model_type = reward_model_type

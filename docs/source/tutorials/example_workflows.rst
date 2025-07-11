@@ -31,7 +31,7 @@ workflow is appropriate if the user wants to train a policy using CFRL. The trai
 further evaluated on its value and counterfactual fairness, which is discussed in detail in the 
 "Assessing Policies Using Real Data" workflow later in this section.
 
-**Code:**: A detailed code demonstration of this workflow can be found 
+**Code:** A detailed code demonstration of this workflow can be found 
 `here <https://github.com/JianhanZhang/CFRL/blob/main/examples/policy_learning_only_workflow.ipynb>`_.
 
 Assessing Preprocessors Using Synthetic Data
@@ -49,7 +49,7 @@ on the preprocessed data as well as its estimated value and counterfactual fairn
 workflow is appropriate when the user wants to examine the impact of some trajectory preprocessing 
 method on the value and counterfactual fairness of the trained policy.
 
-**Code:**: A detailed code demonstration of this workflow can be found 
+**Code:** A detailed code demonstration of this workflow can be found 
 `here <https://github.com/JianhanZhang/CFRL/blob/main/examples/synthetic_data_workflow.ipynb>`_.
 
 Assessing Policies Using Real Data

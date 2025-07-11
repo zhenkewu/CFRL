@@ -23,7 +23,7 @@ counterfactual fairness, we want the policy to be based on the true underlying s
 rather than their biased proxies. 
 
 We refer interested readers to `Kusner et al. (2017) <https://arxiv.org/abs/1703.06856>`_ for a detailed 
-discussion of counterfactual fairness in the single-stage prediction setting, and to 
+discussion of counterfactual fairness in the single-stage predictions setting, and to 
 `Wang et al. (2025) <https://arxiv.org/abs/2501.06366>`_ for a detailed discussion of counterfactual 
 fairness in the reinforcement learning setting.
 
@@ -39,7 +39,7 @@ algorithm takes in an offline RL trajectory and outputs a preprocessed, bias-fre
 preprocessed trajectory can then be passed to any existing offline reinforcement learning algorithms 
 for training, and the learned policy should be approximately counterfactually fair. 
 
-2. Provides a platform to evaluate RL policies based on counterfactual fairness. After passing in 
+2. Provide a platform to evaluate RL policies based on counterfactual fairness. After passing in 
 their policy and a trajectory dataset from the target environment, users can assess how well their 
 policies perform in the target environment in terms of the discounted cumulative reward and 
 counterfactual fairness metric.
