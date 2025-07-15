@@ -7,7 +7,7 @@ Paper: To be updated.
 ## Installation
 
 ```bash 
-$ pip install CFRL
+$ pip install cfrl
 ```
 
 ## A Brief Introduction to Counterfactual Fairness

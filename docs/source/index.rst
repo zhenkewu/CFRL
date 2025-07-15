@@ -14,7 +14,7 @@ To install CFRL, run
 
 .. code-block:: bash
    
-   $ pip install CFRL
+   $ pip install cfrl
 
 This project is still being perfected. We will continue adding new functionalities and expanding 
 the use cases of CFRL. We appreciate your patience and support!
