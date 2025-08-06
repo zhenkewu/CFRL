@@ -797,6 +797,7 @@ class SimulatedEnvironment(gym.Env):
         self.num_actions = num_actions
         #self.reward_multiplication_factor = reward_multiplication_factor
         #self.state_variance_factor = state_variance_factor
+        self.state_variance_factor = 1.0
         #self.z_factor = z_factor
         self.trans_model_type = state_model_type
         self.trans_model_hidden_dims = state_model_hidden_dims
