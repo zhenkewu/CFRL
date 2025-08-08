@@ -151,15 +151,15 @@ evaluate the value and counterfactual fairness of the trained policy.
 
 # Data Example
 
-We provide a data example to demontrate how `CFRL` learns a counterfactually fair policy from real-world trajectory data with an unknown underlying markov decision process (MDP) and evaluates the value and counterfactual fairness of the learned policy. We note that this is only one of the many workflows that `CFRL` can perform. For example, `CFRL` can also generate synthetic trajectory data and use the generated data to evaluate the value and counterfactual fairness resulting from some custom data preprocessing methods. We refer interested readers to the "Example Workflows" section of the CFRL documentation for more workflow examples.
+We provide a data example to demontrate how `CFRL` learns a counterfactually fair policy from real-world trajectory data with unknown underlying transition rules. We also show how `CFRL` evaluates the value and counterfactual fairness of the learned policy. We note that this is only one of the many workflows that `CFRL` can perform. For example, `CFRL` can also generate synthetic trajectory data and use it to evaluate the value and counterfactual fairness resulting from some custom data preprocessing methods. We refer interested readers to the "Example Workflows" section of the CFRL documentation for more workflow examples.
 
 #### Data Loading
 
-In this demonstration, we use an offline trajectory generated from a `SyntheticEnvironment` using some pre-specified transition rules. Although it is actually synthesized, we treat it as if it is from some unknown environment for pedagogical convenience.
+In this demonstration, we use an offline trajectory generated from a `SyntheticEnvironment` following some pre-specified transition rules. Although it is actually synthesized, we treat it as if it is from some unknown environment for pedagogical convenience.
 
 The trajectory contains 500 individuals (i.e. $N=500$) and 10 transitions (i.e. $T=10$). The sensitive attribute variable and the state variable are both univariate. The sensitive attributes are binary ($0$ or $1$). The actions are also binary ($0$ or $1$) and were sampled using a policy that selects $0$ or $1$ randomly with equal probability. The trajectory is stored in a tabular format in a `.csv` file. We use `read_trajectory_from_csv()` to load the trajectory from the `.csv` format into the array format required by `CFRL`.
 ```python
-zs, states, actions, rewards, ids = read_trajectory_from_dataframe(
+zs, states, actions, rewards, ids = read_trajectory_from_csv(
     path='../data/sample_data_large_uni.csv', z_labels=['z1'], 
     state_labels=['state1'], action_label='action', reward_label='reward', 
     id_label='ID', T=10)
@@ -176,7 +176,7 @@ We then split the trajectory data into a training set (80%) and a testing set (2
 
 #### Preprocessor Training & Trajectory Preprocessing
 
-We now train a `SequentialPreprocessor` and preprocess the trajectory. The `SequentialPreprocessor` ensures the learned policy is counterfactually fair by removing the bias from the training trajectory data. Due to limited trajectory data, we use the same dataset for preprocessor training and preprocessing, so we set `cross_folds=5` to reduce overfitting. In this case, `train_preprocessor()` will internally divide the training data into 5 folds, and each fold is preprocessed using a model that is trained on the other 4 folds. We initialize the `SequentialPreprocessor`, and `train_preprocessor()` will take care of both preprocessor training and trajectory preprocessing.
+We now train a `SequentialPreprocessor` and preprocess the trajectory. The `SequentialPreprocessor` ensures the learned policy is counterfactually fair by removing the bias from the training trajectory data. Due to limited trajectory data, the data to be processed will also be the data used to train the preprocessor, so we set `cross_folds=5` to reduce overfitting. In this case, `train_preprocessor()` will internally divide the training data into 5 folds, and each fold is preprocessed using a model that is trained on the other 4 folds. We initialize the `SequentialPreprocessor`, and `train_preprocessor()` will take care of both preprocessor training and trajectory preprocessing.
 
 ```python
 sp = SequentialPreprocessor(z_space=[[0], [1]], num_actions=2, cross_folds=5, 
@@ -185,11 +185,11 @@ states_tilde, rewards_tilde = sp.train_preprocessor(
     zs=zs_train, xs=states_train, actions=actions_train, rewards=rewards_train)
 ```
 
-We remark that in the case where the trajectories to be preprocessed are separate from the trajectories used to train the preprocessor, we should typically set `cross_folds=1`. Then we use `train_preprocessor()` to train the preprocessor and use `preprocess_multiple_steps()` to preprocess the trajectories.
+As an aside, we remark that in the case where the trajectories to be preprocessed are separate from the trajectories used to train the preprocessor, we should typically set `cross_folds=1`. Then we use `train_preprocessor()` to train the preprocessor and use `preprocess_multiple_steps()` to preprocess the trajectories.
 
-#### Policy Learning
+#### Counterfactually Fair Policy Learning
 
-Now we train a policy using the preprocessed data and `FQI` with `sp` as its internal preprocessor. Note that the training data `state_tilde` and `rewards_tilde` are already preprocessed. Thus, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e. `sp`).
+Now we train a counterfactually fair policy using the preprocessed data and `FQI` with `sp` as its internal preprocessor. Note that the training data `state_tilde` and `rewards_tilde` are already preprocessed. Thus, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e. `sp`).
 
 ```python
 agent = FQI(num_actions=2, model_type='nn', preprocessor=sp)
@@ -234,7 +234,7 @@ value_unaware = evaluate_reward_through_fqe(zs=zs_test, states=states_test,
 cf_metric_unaware = evaluate_fairness_through_model(env=env, zs=zs_test, 
     states=states_test, actions=actions_test, policy=agent_unaware)
 ```
-The estimated value is $8.588$ and CF metric is $0.446$. The fairness-through-unawareness policy is much less fair than the policy learned using the preprocessed trajectory. This suggests that the preprocessing method likely reduced the bias in the training trajectory effectively. Indeed, we can evaluate the performance of more baselines using `CFRL`. The code implementations of such evaluations can be found in the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation.
+The estimated value is $8.588$ and CF metric is $0.446$. The fairness-through-unawareness policy is much less fair than the policy learned using the preprocessed trajectory. This suggests that the preprocessing method likely reduced the bias in the training trajectory effectively. Indeed, we can evaluate the performance of more baselines using `CFRL`. Some code examples of such evaluations can be found in the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation.
 
 # Conclusions
 
