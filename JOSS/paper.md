@@ -245,12 +245,7 @@ The estimated value is $7.358$ and CF metric is $0.042$, which indicates our pol
 
 #### Comparisons: Assessing a Fairness-through-unawareness Policy
 
-We can compare the sequential data preprocessing method in `CFRL` against a few baselines, which we introduce below:
-- Random: This method selects each action randomly with equal probability.
-- Full: This method includes the sensitive attribute as part of the state variable during policy learning. In theory, the policy trained using this method should achieve the highest value, but the fairness can be compromised as a trade-off.
-- Unaware: This method removes the direct bias in the training trajectory by exclusing the sensitive attribute from the state variable during policy learning. However, this method can still be unfair because the agent might learn the bias indirect from the states and rewards.
-
-We implemented these baselines and evaluated their values and CF metrics as part of the code example of the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example.
+We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and CF metrics as part of the code example of the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example.
 
 +---------+--------+-------+-------+
 |         |Random  |Full   |Unaware|                                                                   
