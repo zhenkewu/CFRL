@@ -245,7 +245,7 @@ The estimated value is $7.358$ and CF metric is $0.042$, which indicates our pol
 
 #### Comparisons Against Baseline Methods
 
-We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and CF metrics as part of the code example of the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example.
+We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; and Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and CF metrics as part of the code example of the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example.
 
 +---------+--------+-------+-------+
 |         |Random  |Full   |Unaware|                                                                   
