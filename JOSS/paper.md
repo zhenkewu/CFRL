@@ -6,16 +6,40 @@ tags:
   - CFRL
   - Python
 authors:
-  - name: Several Different Contributors
-    corresponding: true 
+  - name: Jianhan Zhang
+    corresponding: false 
     affiliation: 1
+  - name: Jitao Wang
+    corresponding: false 
+    affiliation: 2
+  - name: Chengchun Shi
+    corresponding: false 
+    affiliation: 3
+  - name: John D. Piette
+    corresponding: false 
+    affiliation: 4
+  - name: Joshua R. Loftus
+    corresponding: false 
+    affiliation: 3
+  - name: Donglin Zeng
+    corresponding: false 
+    affiliation: 2
+  - name: Zhenke Wu
+    corresponding: true 
+    affiliation: 2
 
 affiliations:
- - name: 'Several Different Departments, University of Michigan'
+ - name: 'Department of Statistics, University of Michigan, USA'
    index: 1
+ - name: 'Department of Biostatistics, University of Michigan, USA'
+   index: 2
+ - name: 'Department of Statistics, London School of Economics, UK'
+   index: 3
+ - name: 'Department of Health Behavior and Health Equity, School of Public Health, University of Michigan, USA'
+   index: 4
 
-citation_author: Somebody et. al.
-date: 26 June 2025
+citation_author: Zhang et. al.
+date: 9 August 2025
 year: 2025
 journal: JOSS
 bibliography: paper.bib
@@ -168,9 +192,8 @@ zs, states, actions, rewards, ids = read_trajectory_from_csv(
 We then split the trajectory data into a training set (80%) and a testing set (20%) using scikit-learn's `train_test_split()`. The training set is used to train the counterfactually fair policy, while the testing set is used to evaluate the value and counterfactual fairness metric achieved by the policy.
 
 ```python
-(
-    zs_train, zs_test, states_train, states_test, 
-    actions_train, actions_test, rewards_train, rewards_test
+(zs_train, zs_test, states_train, states_test, 
+ actions_train, actions_test, rewards_train, rewards_test
 ) = train_test_split(zs, states, actions, rewards, test_size=0.2)
 ```
 
@@ -222,19 +245,22 @@ The estimated value is $7.358$ and CF metric is $0.042$, which indicates our pol
 
 #### Comparisons: Assessing a Fairness-through-unawareness Policy
 
-Fairness-through-unawareness proposes to ensure fairness by excluding the sensitive attribute from the agent's decision-making. However, it might still be unfair because of the indirect bias in the states and rewards. In this section, we use the same trajectory data to train a policy following fairness-through-unawareness and estimate its value and counterfactual fairness.
+We can compare the sequential data preprocessing method in `CFRL` against a few baselines, which we introduce below:
+- Random: This method selects each action randomly with equal probability.
+- Full: This method includes the sensitive attribute as part of the state variable during policy learning. In theory, the policy trained using this method should achieve the highest value, but the fairness can be compromised as a trade-off.
+- Unaware: This method removes the direct bias in the training trajectory by exclusing the sensitive attribute from the state variable during policy learning. However, this method can still be unfair because the agent might learn the bias indirect from the states and rewards.
 
-```python
-agent_unaware = FQI(num_actions=2, model_type='nn', preprocessor=None)
-agent_unaware.train(zs=zs_train, xs=states_train, actions=actions_train, 
-                    rewards=rewards_train, max_iter=100, preprocess=False)
-value_unaware = evaluate_reward_through_fqe(zs=zs_test, states=states_test, 
-    actions=actions_test, rewards=rewards_test, policy=agent_unaware, 
-    model_type='nn')
-cf_metric_unaware = evaluate_fairness_through_model(env=env, zs=zs_test, 
-    states=states_test, actions=actions_test, policy=agent_unaware)
-```
-The estimated value is $8.588$ and CF metric is $0.446$. The fairness-through-unawareness policy is much less fair than the policy learned using the preprocessed trajectory. This suggests that the preprocessing method likely reduced the bias in the training trajectory effectively. Indeed, we can evaluate the performance of more baselines using `CFRL`. Some code examples of such evaluations can be found in the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation.
+We implemented these baselines and evaluated their values and CF metrics as part of the code example of the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example.
+
++---------+--------+-------+-------+
+|         |Random  |Full   |Unaware|                                                                   
++=========+========+=======+=======+
+|Value    |$-1.444$|$8.606$|$8.588$|
++---------+--------+-------+-------+
+|CF Metric|$0$     |$0.407$|$0.446$|
++=========+========+=======+=======+
+
+For any individual, we assume all of his or her counterfactual trajectories share the same randomness. Thus, the "random" baseline always selects the same action in all the counterfactual trajectories for the same individual, resulting in perfect fairness. On the other hand, the other two baselines both led to much less fair policies than our preprocessing method, which suggests that our preprocessing method likely reduced the bias in the training trajectory effectively
 
 # Conclusions
 
