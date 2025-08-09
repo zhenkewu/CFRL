@@ -243,7 +243,7 @@ cf_metric = evaluate_fairness_through_model(env=env, zs=zs_test, states=states_t
 
 The estimated value is $7.358$ and CF metric is $0.042$, which indicates our policy is close to being perfectly counterfactually fair. Indeed, the CF metric should be exactly 0 if we know the true dynamics of the environment of interest; the reason why it is not exactly 0 here is because we need to estimate the dynamics of the environment of interest during preprocessing, which can introduce errors.
 
-#### Comparisons: Assessing a Fairness-through-unawareness Policy
+#### Comparisons Against Baseline Methods
 
 We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and CF metrics as part of the code example of the "Assessing Policies Using Real Data" workflow in the "Example Workflows" section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example.
 
