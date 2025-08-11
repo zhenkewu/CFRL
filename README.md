@@ -87,4 +87,4 @@ networks. The outputs from these methods are not exactly predictable because of 
 involved. Therefore, most of the tests focus on testing the shape and data type of the outputs rather 
 than the value of the outputs.
 
-*Note: Currently, the 'lm' model type is not supported. Thus, `pytest` will skip the test cases that involves the 'lm' model type.*
+*Note: Currently, the 'lm' model type is not supported. Thus, `pytest` will skip the test cases that involve the 'lm' model type.*
