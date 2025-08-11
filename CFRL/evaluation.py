@@ -11,6 +11,7 @@ from .environment import estimate_counterfactual_trajectories_from_data
 from .fqe import FQE
 from .agents import Agent
 from typing import Union, Callable, Literal
+from .utils.custom_errors import InvalidModelError
 
 def f_ux_default(N: int, state_dim: int) -> np.ndarray:
     """
@@ -395,14 +396,14 @@ def evaluate_reward_through_fqe(
         actions (list or np.ndarray): 
             The action trajectory. It should be a list or array following 
             the Full-trajectory Actions Format.
-        actions (list or np.ndarray): 
+        rewards (list or np.ndarray): 
             The reward trajectory. It should be a list or array following 
             the Full-trajectory Rewards Format.
         policy (Agent): 
             The policy whose value is to be evaluated.
         model_type (str): 
             The type of the model used for FQE. Can be "lm" (polynomial regression) or 
-            "nn" (neural network). 
+            "nn" (neural network). *Currently, only 'nn' is supported.*
         f_ua (Callable, optional): 
             A rule to generate exogenous variables for each individual's 
             actions during training. It should be a function whose argument list, argument names, 
@@ -430,6 +431,8 @@ def evaluate_reward_through_fqe(
             cumulative reward achieved by the policy throughout the trajectory. 
     """
     
+    if model_type != 'nn':
+        raise InvalidModelError("Invalid model type. Only 'nn' is currently supported.")
     np.random.seed(seed)
     zs = np.array(zs)
     states = np.array(states)

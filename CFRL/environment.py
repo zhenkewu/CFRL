@@ -4,6 +4,7 @@ import copy
 import torch
 from sklearn.preprocessing import OneHotEncoder
 from .utils.base_models import NeuralNetRegressor, LinearRegressor
+from .utils.custom_errors import InvalidModelError
 from typing import Union, Callable, Literal, Dict
 from .agents import Agent
 
@@ -736,6 +737,7 @@ class SimulatedEnvironment(gym.Env):
             state_model_type (str, optional): 
                 The type of the model used for learning the transition 
                 dynamics of the states. Can be "lm" (polynomial regression) or "nn" (neural network).
+                *Currently, only 'nn' is supported.*
             state_model_hidden_dims (list[int], optional): 
                 The hidden dimensions of the neural network  
                 for learning the transition dynamics of the states. This argument is not used if 
@@ -743,6 +745,7 @@ class SimulatedEnvironment(gym.Env):
             reward_model_type (str, optional): 
                 The type of the model used for learning the transition 
                 dynamics of the rewards. Can be "lm" (polynomial regression) or "nn" (neural network).
+                *Currently, only 'nn' is supported.*
             reward_model_hidden_dims (list[int], optional): 
                 The hidden dimensions of the neural network  
                 for learning the transition dynamics of the rewards. This argument is not used if 
@@ -799,9 +802,15 @@ class SimulatedEnvironment(gym.Env):
         #self.state_variance_factor = state_variance_factor
         self.state_variance_factor = 1.0
         #self.z_factor = z_factor
-        self.trans_model_type = state_model_type
+        if state_model_type == 'nn':
+            self.trans_model_type = state_model_type
+        else:
+            raise InvalidModelError("Invalid model type. Only 'nn' is currently supported.")
         self.trans_model_hidden_dims = state_model_hidden_dims
-        self.reward_model_type = reward_model_type
+        if reward_model_type == 'nn':
+            self.reward_model_type = reward_model_type
+        else:
+            raise InvalidModelError("Invalid model type. Only 'nn' is currently supported.")
         self.reward_model_hidden_dims = reward_model_hidden_dims
         self.is_action_onehot = is_action_onehot
         self.epochs = epochs

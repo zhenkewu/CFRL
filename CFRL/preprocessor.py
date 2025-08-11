@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from .utils.base_models import NeuralNetRegressor, LinearRegressor
 #from utils.utils import timer_func
+from .utils.custom_errors import InvalidModelError
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import OneHotEncoder
 from typing import Union, Literal
@@ -232,7 +233,8 @@ class SequentialPreprocessor(Preprocessor):
                 be estimated using the model corresponding to :math:`z`.
             reg_model (str, optional): 
                 The type of the model used for learning the transition  
-                dynamics. Can be "lm" (polynomial regression) or "nn" (neural network).
+                dynamics. Can be "lm" (polynomial regression) or "nn" (neural network). 
+                *Currently, only 'nn' is supported.*
             hidden_dims (list[int], optional): 
                 The hidden dimensions of the neural network. This 
                 argument is not used if :code:`reg_model="lm"`.
@@ -276,7 +278,10 @@ class SequentialPreprocessor(Preprocessor):
         if (is_action_onehot) and (action_space is None):
             raise ValueError('One hot encoding of actions requires action_space to be not None.')'''
 
-        self.reg_model = reg_model
+        if reg_model == 'nn':
+            self.reg_model = reg_model
+        else:
+            raise InvalidModelError("Invalid model type. Only 'nn' is currently supported.")
         self.hidden_dims = hidden_dims
         self.epochs = epochs
         self.learning_rate = learning_rate

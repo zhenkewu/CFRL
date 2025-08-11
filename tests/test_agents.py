@@ -3,6 +3,7 @@ from examples.baseline_preprocessors import ConcatenatePreprocessor
 from cfrl.environment import SyntheticEnvironment, sample_trajectory
 from examples.baseline_agents import RandomAgent
 import numpy as np
+import pytest
 
 # an environment with univariate zs and states
 # x0 = 0.5 + zs + ux0 (assuming z_coef=1)
@@ -418,6 +419,7 @@ def test_agents_no_preprocessor_multivariate_zs_states_nn():
 
 
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_agents_with_preprocessor_univariate_zs_states_lm():
     # generate trajectory
     env = SyntheticEnvironment(state_dim=1, 
@@ -487,6 +489,7 @@ def test_agents_with_preprocessor_univariate_zs_states_lm():
     assert(a2.shape == (6,))
     assert(np.issubdtype(a2.dtype, np.integer))
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_agents_with_preprocessor_multivariate_zs_states_lm():
     # generate trajectory
     env = SyntheticEnvironment(state_dim=3, 
@@ -556,6 +559,7 @@ def test_agents_with_preprocessor_multivariate_zs_states_lm():
     assert(a2.shape == (6,))
     assert(np.issubdtype(a2.dtype, np.integer))
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_agents_no_preprocessor_univariate_zs_states_lm():
     # generate trajectory
     env = SyntheticEnvironment(state_dim=1, 
@@ -624,6 +628,7 @@ def test_agents_no_preprocessor_univariate_zs_states_lm():
     assert(a2.shape == (6,))
     assert(np.issubdtype(a2.dtype, np.integer))
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_agents_no_preprocessor_multivariate_zs_states_lm():
     # generate trajectory
     env = SyntheticEnvironment(state_dim=3, 
@@ -699,8 +704,8 @@ test_agents_with_preprocessor_univariate_zs_states_nn()
 test_agents_with_preprocessor_multivariate_zs_states_nn()
 test_agents_no_preprocessor_univariate_zs_states_nn()
 test_agents_no_preprocessor_multivariate_zs_states_nn()
-test_agents_with_preprocessor_univariate_zs_states_lm()
+'''test_agents_with_preprocessor_univariate_zs_states_lm()
 test_agents_with_preprocessor_multivariate_zs_states_lm()
 test_agents_no_preprocessor_univariate_zs_states_lm()
-test_agents_no_preprocessor_multivariate_zs_states_lm()
+test_agents_no_preprocessor_multivariate_zs_states_lm()'''
 print('All agents tests passed!')

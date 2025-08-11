@@ -4,6 +4,7 @@ import torch
 import copy
 #from utils.utils import glogger
 from .utils.base_models import LinearRegressor, NeuralNet
+from .utils.custom_errors import InvalidModelError
 from .preprocessor import Preprocessor, SequentialPreprocessor
 from typing import Literal
 from tqdm import tqdm
@@ -101,6 +102,7 @@ class FQI(Agent):
             model_type (str): 
                 The type of the model used for learning the Q function. Can 
                 be "lm" (polynomial regression) or "nn" (neural network). 
+                *Currently, only 'nn' is supported.*
             hidden_dims (list[int], optional): 
                 The hidden dimensions of the neural network. This 
                 argument is not used if :code:`model_type="lm"`. 
@@ -121,7 +123,10 @@ class FQI(Agent):
                 argument is not used if :code:`model_type="lm"`. 
         """
         
-        self.model_type = model_type
+        if model_type == 'nn':
+            self.model_type = model_type
+        else:
+            raise InvalidModelError("Invalid model type. Only 'nn' is currently supported.")
         self.action_space = np.array([a for a in range(num_actions)]).reshape(-1, 1)
         self.action_size = num_actions
         self.hidden_dims = hidden_dims

@@ -14,6 +14,7 @@ import os, copy
 import torch
 import multiprocessing as mp
 from tqdm import tqdm
+import pytest
 
 # an environment with univariate zs and states
 # x0 = 0.5 + zs + ux0 (assuming z_coef=1)
@@ -151,6 +152,7 @@ def f_rt_multi(
 
 
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_simulation_univariate_zs_states_lm():
     # simulate synthetic data tarjectories
     env = SyntheticEnvironment(state_dim=1, 
@@ -204,6 +206,7 @@ def test_simulation_univariate_zs_states_lm():
     print('Discounted cumulative reward:', dcr)
     print('CF metric:', cf_metric)
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_simulation_multivariate_zs_states_lm():
     # simulate synthetic data tarjectories
     env = SyntheticEnvironment(state_dim=3, 
@@ -368,8 +371,8 @@ def test_simulation_multivariate_zs_states_nn():
 
 
 # run the tests
-test_simulation_univariate_zs_states_lm()
-test_simulation_multivariate_zs_states_lm()
+#test_simulation_univariate_zs_states_lm()
+#test_simulation_multivariate_zs_states_lm()
 test_simulation_univariate_zs_states_nn()
 test_simulation_multivariate_zs_states_nn()
 print('All simulation integration tests passed!')

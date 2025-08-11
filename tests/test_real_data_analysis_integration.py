@@ -11,6 +11,7 @@ from examples.baseline_agents import BehaviorAgent, RandomAgent
 #from policy_learning_add import RandomAgent
 from cfrl.evaluation import evaluate_fairness_through_model, evaluate_reward_through_fqe
 import torch
+import pytest
 
 # an environment with univariate zs and states
 # x0 = 0.5 + zs + ux0 (assuming z_coef=1)
@@ -202,7 +203,6 @@ def test_real_data_analysis_univariate_zs_states_nn():
 
     env = SimulatedEnvironment(state_model_type='nn', 
                                reward_model_type='nn', 
-                               z_factor=0, 
                                num_actions=2)
     env.fit(zs=zs_train, states=xs_train, actions=actions_train, rewards=rewards_train)
 
@@ -279,7 +279,6 @@ def test_real_data_analysis_multivariate_zs_states_nn():
 
     env = SimulatedEnvironment(state_model_type='nn', 
                                reward_model_type='nn', 
-                               z_factor=0, 
                                num_actions=2)
     env.fit(zs=zs_train, states=xs_train, actions=actions_train, rewards=rewards_train)
 
@@ -303,6 +302,7 @@ def test_real_data_analysis_multivariate_zs_states_nn():
 
 
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_real_data_analysis_univariate_zs_states_lm():
     # simulate synthetic data tarjectories
     env_true = SyntheticEnvironment(state_dim=1, 
@@ -357,7 +357,6 @@ def test_real_data_analysis_univariate_zs_states_lm():
 
     env = SimulatedEnvironment(state_model_type='lm', 
                                reward_model_type='lm', 
-                               z_factor=0, 
                                num_actions=2)
     env.fit(zs=zs_train, states=xs_train, actions=actions_train, rewards=rewards_train)
 
@@ -379,6 +378,7 @@ def test_real_data_analysis_univariate_zs_states_lm():
     print('Value:', value)
     print('CF metric:', cf_metric)
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_real_data_analysis_multivariate_zs_states_lm():
     # simulate synthetic data tarjectories
     env_true = SyntheticEnvironment(state_dim=3, 
@@ -434,7 +434,6 @@ def test_real_data_analysis_multivariate_zs_states_lm():
 
     env = SimulatedEnvironment(state_model_type='lm', 
                                reward_model_type='lm', 
-                               z_factor=0, 
                                num_actions=2)
     env.fit(zs=zs_train, states=xs_train, actions=actions_train, rewards=rewards_train)
 
@@ -460,6 +459,6 @@ def test_real_data_analysis_multivariate_zs_states_lm():
 # run the tests
 test_real_data_analysis_univariate_zs_states_nn()
 test_real_data_analysis_multivariate_zs_states_nn()
-test_real_data_analysis_univariate_zs_states_lm()
-test_real_data_analysis_multivariate_zs_states_lm()
+#test_real_data_analysis_univariate_zs_states_lm()
+#test_real_data_analysis_multivariate_zs_states_lm()
 print('All real data analysis integration tests passed!')

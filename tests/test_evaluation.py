@@ -4,6 +4,7 @@ from cfrl.environment import SyntheticEnvironment, SimulatedEnvironment
 from cfrl.environment import sample_trajectory, sample_simulated_env_trajectory
 from examples.baseline_agents import RandomAgent
 import numpy as np
+import pytest
 
 # an environment with univariate zs and states
 # x0 = 0.5 + zs + ux0 (assuming z_coef=1)
@@ -253,6 +254,7 @@ def test_evaluate_reward_through_fqe_multivariate_zs_states_nn():
                                       max_iter=10)
     assert(np.issubdtype(dcr.dtype, np.floating))
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_evaluate_reward_through_fqe_univariate_zs_states_lm():
     env_true = SyntheticEnvironment(state_dim=1, 
                                     z_coef=1, 
@@ -276,6 +278,7 @@ def test_evaluate_reward_through_fqe_univariate_zs_states_lm():
                                       max_iter=10)
     assert(np.issubdtype(dcr.dtype, np.floating))
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_evaluate_reward_through_fqe_multivariate_zs_states_lm():
     env = SyntheticEnvironment(state_dim=3, 
                                z_coef=1, 
@@ -362,6 +365,7 @@ def test_evaluate_fairness_through_model_multivariate_zs_states_nn():
                                                 policy=agent)
     assert(cf_metric == 0)
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_evaluate_fairness_through_model_univariate_zs_states_lm():
     # generate trajectories from the true underlying environment
     env_true = SyntheticEnvironment(state_dim=1, 
@@ -391,6 +395,7 @@ def test_evaluate_fairness_through_model_univariate_zs_states_lm():
                                                 policy=agent)
     assert(cf_metric == 0)
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_evaluate_fairness_through_model_multivariate_zs_states_lm():
     # generate trajectories from the true underlying environment
     env_true = SyntheticEnvironment(state_dim=3, 
@@ -429,10 +434,10 @@ test_evaluate_fairness_through_simulation_univariate_zs_states()
 test_evaluate_fairness_through_simulation_multivariate_zs_states()
 test_evaluate_reward_through_fqe_univariate_zs_states_nn()
 test_evaluate_reward_through_fqe_multivariate_zs_states_nn()
-test_evaluate_reward_through_fqe_univariate_zs_states_lm()
-test_evaluate_reward_through_fqe_multivariate_zs_states_lm()
+#test_evaluate_reward_through_fqe_univariate_zs_states_lm()
+#test_evaluate_reward_through_fqe_multivariate_zs_states_lm()
 test_evaluate_fairness_through_model_univariate_zs_states_nn()
 test_evaluate_fairness_through_model_multivariate_zs_states_nn()
-test_evaluate_fairness_through_model_univariate_zs_states_lm()
-test_evaluate_fairness_through_model_multivariate_zs_states_lm()
+#test_evaluate_fairness_through_model_univariate_zs_states_lm()
+#test_evaluate_fairness_through_model_multivariate_zs_states_lm()
 print('All evaluation tests passed!')

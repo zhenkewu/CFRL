@@ -2,6 +2,7 @@ from cfrl.fqe import FQE
 from cfrl.environment import SyntheticEnvironment, sample_trajectory
 from examples.baseline_agents import RandomAgent
 import numpy as np
+import pytest
 
 # an environment with univariate zs and states
 # x0 = 0.5 + zs + ux0 (assuming z_coef=1)
@@ -194,6 +195,7 @@ def test_fqe_multivariate_zs_states_nn():
 
 
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_fqe_univariate_zs_states_lm():
     env_true = SyntheticEnvironment(state_dim=1, 
                                     z_coef=1, 
@@ -218,6 +220,7 @@ def test_fqe_univariate_zs_states_lm():
     assert(out.shape == (90,))
     assert(np.issubdtype(out.dtype, np.floating))
 
+@pytest.mark.skip(reason="Skipped because 'lm' is currently not supported.")
 def test_fqe_multivariate_zs_states_lm():
     env = SyntheticEnvironment(state_dim=3, 
                                z_coef=1, 
@@ -252,6 +255,6 @@ def test_fqe_multivariate_zs_states_lm():
 # run the tests
 test_fqe_univariate_zs_states_nn()
 test_fqe_multivariate_zs_states_nn()
-test_fqe_univariate_zs_states_lm()
-test_fqe_multivariate_zs_states_lm()
+#test_fqe_univariate_zs_states_lm()
+#test_fqe_multivariate_zs_states_lm()
 print('All fqe tests passed!')

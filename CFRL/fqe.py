@@ -2,6 +2,7 @@ import numpy as np
 import torch
 import copy
 from .utils.base_models import LinearRegressor, NeuralNet
+from .utils.custom_errors import InvalidModelError
 from .agents import Agent
 #from my_utils import glogger
 from typing import Literal, Callable
@@ -54,6 +55,7 @@ class FQE:
             model_type (str): 
                 The type of the model used for learning the Q function. Can 
                 be "lm" (polynomial regression) or "nn" (neural network). 
+                *Currently, only 'nn' is supported.*
             hidden_dims (list[int], optional): 
                 The hidden dimensions of the neural network. This 
                 argument is not used if :code:`model_type="lm"`. 
@@ -68,7 +70,10 @@ class FQE:
                 in the objective function. 
         """
         
-        self.model_type = model_type
+        if model_type == 'nn':
+            self.model_type = model_type
+        else:
+            raise InvalidModelError("Invalid model type. Only 'nn' is currently supported.")
         self.action_size = num_actions
         self.policy = policy
         self.hidden_dims = hidden_dims

@@ -5,6 +5,10 @@ from cfrl.environment import sample_counterfactual_trajectories
 from examples.baseline_agents import RandomAgent
 import numpy as np
 
+import pytest
+pytest.skip("Skipping this entire test file because 'lm' is currently not supported.", 
+            allow_module_level=True)
+
 # an environment with univariate zs and states
 # x0 = 0.5 + zs + ux0 (assuming z_coef=1)
 def f_x0_uni(
@@ -627,7 +631,7 @@ def test_estimated_counterfactual_trajectory_multivariate_zs_states_custom_ua_lm
 
 
 # run the experiments
-test_simulated_env_univariate_zs_states_lm()
+'''test_simulated_env_univariate_zs_states_lm()
 test_simulated_env_multivariate_zs_states_lm()
 test_sample_simulated_trajectory_univariate_zs_states_default_errors_lm()
 test_sample_simulated_trajectory_multivariate_zs_states_default_errors_lm()
@@ -637,4 +641,4 @@ test_estimate_counterfactual_trajectory_univariate_zs_states_default_ua_lm()
 test_estimated_counterfactual_trajectory_multivariate_zs_states_default_ua_lm()
 test_estimate_counterfactual_trajectory_univariate_zs_states_custom_ua_lm()
 test_estimated_counterfactual_trajectory_multivariate_zs_states_custom_ua_lm()
-print('All simulated environment tests passed!')
+print('All simulated environment tests passed!')'''

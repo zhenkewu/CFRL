@@ -3,6 +3,10 @@ from cfrl.environment import SyntheticEnvironment, sample_trajectory
 from examples.baseline_agents import RandomAgent
 import numpy as np
 
+import pytest
+pytest.skip("Skipping this entire test file because 'lm' is currently not supported.", 
+            allow_module_level=True)
+
 # an environment with univariate zs and states
 # x0 = 0.5 + zs + ux0 (assuming z_coef=1)
 def f_x0_uni(
@@ -938,7 +942,7 @@ def test_preprocess_multiple_steps_multivariate_zs_states_sensitive_lm():
 
 
 # run the tests
-test_train_preprocessor_univariate_zs_states_single_lm()
+'''test_train_preprocessor_univariate_zs_states_single_lm()
 test_train_preprocessor_multivariate_zs_states_single_lm()
 test_train_preprocessor_univariate_zs_states_sensitive_lm()
 test_train_preprocessor_multivariate_zs_states_sensitive_lm()
@@ -950,4 +954,4 @@ test_preprocess_multiple_steps_univariate_zs_states_single_lm()
 test_preprocess_multiple_steps_multivariate_zs_states_single_lm()
 test_preprocess_multiple_steps_univariate_zs_states_sensitive_lm()
 test_preprocess_multiple_steps_multivariate_zs_states_sensitive_lm()
-print('All preprocessor tests with 1 cross folds passed!')
+print('All preprocessor tests with 1 cross folds passed!')'''
