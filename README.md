@@ -1,6 +1,6 @@
 # CFRL: A Python Library for Counterfactually Fair Reinforcement Learning
 
-Documentation: To be updated.
+Documentation: [CFRL Documentation](https://cfrl-documentation.netlify.app/).
 
 Paper: To be updated. 
 
