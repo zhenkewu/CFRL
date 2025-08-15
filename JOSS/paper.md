@@ -69,9 +69,7 @@ To formally define and address the unfairness problem in sequential decision mak
 multi-stage setting and proposed a data preprocessing algorithm that
 ensures CF. A policy is CF if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute take a different value while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm constructs new state variables not impacted by the sensitive attribute(s) to ensure CF. The rewards in data is also preprocessed but not to ensure CF but to improve the value of the learned optimal policy. We refer the readers to @wang2025cfrl for technical details.
 
-The `CFRL` library implements the data 
-preprocessing algorithm proposed by @wang2025cfrl and provides a 
-suite of tools to evaluate the value and counterfactual fairness achieved by 
+The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides a suite of tools to evaluate the value and counterfactual fairness achieved by 
 any given policy. In particular, it reads in data trajectories and
 outputs preprocessed trajectories, which could then be passed to
 any off-the-shelf offline RL algorithms to learn an optimal CF
