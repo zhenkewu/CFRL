@@ -67,14 +67,14 @@ expected discounted cumulative rewards to achieve the highest population-level b
 
 To formally define and address the unfairness problem in sequential decision making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
 multi-stage setting and proposed a data preprocessing algorithm that
-ensures CF. A policy is CF if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute take a different value while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm constructs new state variables not impacted by the sensitive attribute(s) to ensure CF. The rewards in data is also preprocessed but not to ensure CF but to improve the value of the learned optimal policy. We refer the readers to @wang2025cfrl for technical details.
+ensures CF. A policy is CF if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute take a different value while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm constructs new state variables not impacted by the sensitive attribute(s) to ensure CF. The rewards in data are also preprocessed but not to ensure CF but to improve the value of the learned optimal policy. We refer the readers to @wang2025cfrl for more technical details.
 
 The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides a suite of tools to evaluate the value and counterfactual fairness achieved by 
 any given policy. In particular, it reads in data trajectories and
-outputs preprocessed trajectories, which could then be passed to
+produces preprocessed trajectories, which could then be passed to
 any off-the-shelf offline RL algorithms to learn an optimal CF
-policy. The library can also simply read in any policy according to the required format and return its
-value and level of CF based on the environment (pre-specified or learned from the data).
+policy. The library can also simply read in any policy according to the required format and returns its
+value and level of unfairness in the environment (pre-specified or learned from the data).
 
 # Statement of Need
 
