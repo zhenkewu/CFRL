@@ -63,15 +63,14 @@ preamble: >
 
 Reinforcement learning (RL) aims to learn a sequential
 decision-making rule, often referred to as a “policy”, that maximizes
-expected discounted cumulative rewards to achieve the highest population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity for its wide use in fields such as healthcare, banking, autonomous driving, and more recently large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race, ethnicity, gender, education level). The RL algorithm learns an optimal policy that makes decision based on observed state variables. However, if certain value of the sensitive attribute drives the state variables towards values based on which the policy tend to prevent an individual from receiving an action, unfairness will result. For example, Hispanics may under-report pain levels due to cultural factors, misleading the RL agent to assign less therapist time [@piette2023powerED]. More broadly, such concerns about fairness have been raised that the deployment of RL algorithms without careful fairness considerations could erode public trust.
+expected discounted cumulative rewards to achieve the highest population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity for its wide use in fields such as healthcare, banking, autonomous driving, and more recently large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race, ethnicity, gender, education level). The RL algorithm learns an optimal policy that makes decision based on observed state variables. However, if certain value of the sensitive attribute drives the state variables towards values based on which the policy tend to prevent an individual from receiving an action, unfairness will result. For example, Hispanics may under-report pain levels due to cultural factors, misleading the RL agent to assign less therapist time [@piette2023powerED]. Deployment of RL algorithms without careful fairness considerations can raise concerns and erode public trust.
 
 To formally define and address the unfairness problem in sequential decision making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
 multi-stage setting and proposed a data preprocessing algorithm that
 ensures CF. A policy is CF if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute take a different value while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm constructs new state variables not impacted by the sensitive attribute(s) to ensure CF. The rewards in data are also preprocessed but not to ensure CF but to improve the value of the learned optimal policy. We refer the readers to @wang2025cfrl for more technical details.
 
-The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides a suite of tools to evaluate the value and counterfactual fairness achieved by 
-any given policy. In particular, it reads in data trajectories and
-produces preprocessed trajectories, which could then be passed to
+The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides a suite of tools to evaluate the value and unfairness achieved by 
+any given policy. The library produces preprocessed trajectories to be used by
 any off-the-shelf offline RL algorithms to learn an optimal CF
 policy. The library can also simply read in any policy according to the required format and returns its
 value and level of unfairness in the environment (pre-specified or learned from the data).
@@ -116,7 +115,7 @@ of the modules are summarized in the table below.
 
 +--------------+--------------------------------------------------------------------------------------+
 |Module        |Functionalities                                                                       |
-+==============+======================================================================================+
++--------------+--------------------------------------------------------------------------------------+
 |`reader`      |Implements functions that read tabular trajectory data from either a `.csv` file or a |
 |              |`pandas.Dataframe` into an array format required by `CFRL`. Also implements functions |
 |              |that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.          |
@@ -133,9 +132,6 @@ of the modules are summarized in the table below.
 |              |unknown environment underlying some real-world RL trajectory data. Also implements    |
 |              |real-world RL trajectory data. Also implements functions for sampling trajectories    |
 |              |from the synthetic and simulated environments.                                        |
-+--------------+--------------------------------------------------------------------------------------+
-|`fqe`         |Implements a fitted Q-evaluation (FQE) algorithm, which can be used to evaluate the   |
-|              |value of a policy.                                                                    |
 +--------------+--------------------------------------------------------------------------------------+
 |`evaluation`  |Implements functions that evaluate the value and counterfactual fairness of a policy. |
 |              |Depending on the user's needs, the evaluation can be done either in a synthetic       | 
