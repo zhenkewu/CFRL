@@ -63,42 +63,20 @@ preamble: >
 
 Reinforcement learning (RL) aims to learn a sequential
 decision-making rule, often referred to as a “policy”, that maximizes
-some pre-specified benefit in an environment across multiple or even
-infinitely many time steps. It has been widely applied to fields such as
-healthcare, banking, and autonomous driving. Despite their usefulness,
-the decisions made by RL algorithms might exhibit systematic bias due 
-to bias in the training data. For
-example, when using an RL algorithm to assign treatment to patients over
-time, the algorithm might consistently assign treatment resources to
-patients of some races while ignoring patients of other races.
-Concerns have been raised that the deployment of such biased algorithms
-could exacerbate the discrimination faced by socioeconomically
-disadvantaged groups.
+expected discounted cumulative rewards to achieve the highest population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity for its wide use in fields such as healthcare, banking, autonomous driving, and more recently large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race, ethnicity, gender, education level). The RL algorithm learns an optimal policy that makes decision based on observed state variables. However, if certain value of the sensitive attribute drives the state variables towards values based on which the policy tend to prevent an individual from receiving an action, unfairness will result. For example, Hispanics may under-report pain levels due to cultural factors, misleading the RL agent to assign less therapist time [@piette2023powerED]. More broadly, such concerns about fairness have been raised that the deployment of RL algorithms without careful fairness considerations could erode public trust.
 
-To address this problem, @wang2025cfrl extended the concept of
-single-stage counterfactual fairness [@kusner2018cf] to the
+To formally define and address the unfairness problem in sequential decision making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
 multi-stage setting and proposed a data preprocessing algorithm that
-ensures counterfactual fairness in offline reinforcement learning. 
-An RL policy is counterfactually fair if, at every 
-time step, it would assign the same decisions with the same probability 
-for an individual had the individual belong to a different subgroup 
-defined by some sensitive attribute (such as race and gender) while the rest of the history remains unchanged. At its 
-core, counterfactual fairness views the observed states and rewards as 
-biased proxies of the (unobserved) true underlying states and rewards, 
-where the bias can often be seen as a result of the observed sensitive 
-attribute. In this light, the data preprocessing algorithm ensures 
-counterfactual fairness by removing this bias from the input offline 
-trajectories.
+ensures CF. A policy is CF if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute take a different value while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm constructs new state variables not impacted by the sensitive attribute(s) to ensure CF. The rewards in data is also preprocessed but not to ensure CF but to improve the value of the learned optimal policy. We refer the readers to @wang2025cfrl for technical details.
 
-The `CFRL` library is built upon this definition of RL counterfactual 
-fairness introduced in @wang2025cfrl. It implements the data 
+The `CFRL` library implements the data 
 preprocessing algorithm proposed by @wang2025cfrl and provides a 
-set of tools to evaluate the value and counterfactual fairness achieved by 
-a given policy. In particular, it takes in an offline RL trajectory and
-outputs a preprocessed, bias-free trajectory, which could be passed to
-any off-the-shelf offline RL algorithms to learn a counterfactually fair
-policy. Additionally, it could also take in an RL policy and return its
-value and level of counterfactual fairness.
+suite of tools to evaluate the value and counterfactual fairness achieved by 
+any given policy. In particular, it reads in data trajectories and
+outputs preprocessed trajectories, which could then be passed to
+any off-the-shelf offline RL algorithms to learn an optimal CF
+policy. The library can also simply read in any policy according to the required format and return its
+value and level of CF based on the environment (pre-specified or learned from the data).
 
 # Statement of Need
 
@@ -273,8 +251,8 @@ preprocessor with popular offline RL algorithm libraries such as
 environment libraries such as `gym` [@towers2024gymnasium]. We leave these extensions 
 to future updates.
 
-# Acknowledgements
+<!-- # Acknowledgements
 
-This is the acknowledgements.
+This is the acknowledgements. -->
 
 # References
