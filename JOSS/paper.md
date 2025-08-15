@@ -115,7 +115,7 @@ of the modules are summarized in the table below.
 
 +--------------+--------------------------------------------------------------------------------------+
 |Module        |Functionalities                                                                       |
-+--------------+--------------------------------------------------------------------------------------+
++==============+======================================================================================+
 |`reader`      |Implements functions that read tabular trajectory data from either a `.csv` file or a |
 |              |`pandas.Dataframe` into an array format required by `CFRL`. Also implements functions |
 |              |that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.          |
