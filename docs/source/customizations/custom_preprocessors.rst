@@ -10,7 +10,8 @@ To ensure a custom preprocessor is compatible with CFRL, it must inherit from th
 :code:`Preprocessor` class provided by the :code:`preprocessor` module. That is, 
 
 - The custom preprocessor should be a subclass of :code:`Preprocessor`.
-- The custom preprocessor should have a :code:`preprocess_single_step()` method whose signature is 
+- The custom preprocessor should have a :code:`preprocess_single_step()` method whose function name, 
+  parameter names, parameter data types, parameter default values, and return type are 
   exactly as that defined in the :code:`Preprocessor` class, except that it might have some additional 
   arguments. The input and output lists or arrays should also follow the same 
   :ref:`Trajectory Array format <trajectory_arrays>` as those defined in :code:`Preprocessor`.
