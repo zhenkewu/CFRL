@@ -1,5 +1,5 @@
 ---
-title: "CFRL: A Python library for counterfactually fair offline reinforcement learning using sequential data preprocessing"
+title: "CFRL: A Python library for counterfactually fair offline reinforcement learning using data preprocessing"
 tags:
   - counterfactual fairness
   - reinforcement learning
