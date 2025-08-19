@@ -7,6 +7,6 @@ FAQ
     reinforcement learning setting where a pre-collected offline trajectory is available. It 
     does not apply to the online setting in general. 
 
-    Indeed, to our current knowledge, there have yet been a method specifically designed for 
+    Indeed, to our current knowledge, there has yet been a method specifically designed for 
     ensuring counterfactual fairness in online reinforcement learning. Once such a method is 
     developed, we will try to incorporate it into CFRL.

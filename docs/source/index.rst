@@ -6,7 +6,8 @@
 CFRL documentation
 ==================
 
-Welcome to `CFRL <https://github.com/JianhanZhang/CFRL>`_, a Python library for counterfactually fair reinforcement learning! CFRL provides 
+Welcome to CFRL, a Python library for counterfactually fair reinforcement learning! 
+The acronym "CFRL" stands for "Counterfactual Fairness in Reinforcement Learning". CFRL provides 
 algorithms that ensure counterfactual fairness in reinforcement learning and builds tools for 
 evaluating the value and counterfactual fairness of reinforcement learning policies. 
 
@@ -18,6 +19,10 @@ To install CFRL, run
 
 This project is still being perfected. We will continue adding new functionalities and expanding 
 the use cases of CFRL. We appreciate your patience and support!
+
+`[CFRL Github repository] <https://github.com/JianhanZhang/CFRL>`_
+
+[CFRL software paper]
 
 .. toctree::
    :maxdepth: 2
@@ -52,3 +57,9 @@ the use cases of CFRL. We appreciate your patience and support!
 
    customizations/custom_preprocessors
    customizations/custom_agents
+
+.. toctree::
+   :maxdepth: 2
+   :caption: About CFRL
+
+   about_cfrl/the_cfrl_team

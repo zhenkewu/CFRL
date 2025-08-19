@@ -6,7 +6,7 @@ Installation
 
 .. code:: bash
 
-    $ pip install CFRL
+    $ pip install cfrl
 
 A Brief Introduction to Counterfactual Fairness
 -------------------------------------------------

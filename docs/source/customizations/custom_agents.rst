@@ -9,7 +9,8 @@ To ensure a custom agent is compatible with CFRL, it must inherit from the
 :code:`Agent` class provided by the :code:`agents` module. That is, 
 
 - The custom agent should be a subclass of :code:`Agent`.
-- The custom preprocessor should have an :code:`act()` method whose signature is 
+- The custom preprocessor should have an :code:`act()` method whose function name, 
+  parameter names, parameter data types, parameter default values, and return type are 
   exactly as that defined in the :code:`Agent` class, except that it might have some additional 
   arguments. The input and output lists or arrays should also follow the same 
   :ref:`Trajectory Array format <trajectory_arrays>` or have the same shape as those defined in 

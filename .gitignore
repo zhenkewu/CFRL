@@ -16,3 +16,5 @@ scratch_paper.ipynb
 data/impute_data.csv
 scratch_work/
 _build/
+run_baseline_exp.py
+results_m19_baselines.csv
