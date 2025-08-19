@@ -4,19 +4,20 @@ The CFRL Team
 Maintainer
 ---------------
 
-- Jianhan Zhang [jianhanz@umich.edu], *Department of Statistics, University of Michigan*
+- Jianhan Zhang [jianhanz@umich.edu], *Department of Statistics, University of Michigan, USA*
 
 Contributors
 ---------------
 
-- Jitao Wang [jitwang@umich.edu], *Department of Biostatistics, University of Michigan*
+- Jitao Wang [jitwang@umich.edu], *Department of Biostatistics, University of Michigan, USA*
 
-- Chengchun Shi
+- Chengchun Shi, *Department of Statistics, London School of Economics, UK*
 
-- John D. Piette
+- John D. Piette, *Department of Health Behavior and Health Equity, School of Public Health, 
+  University of Michigan, USA*
 
-- Joshua R. Loftus
+- Joshua R. Loftus, *Department of Statistics, London School of Economics, UK*
 
-- Donglin Zeng
+- Donglin Zeng, *Department of Biostatistics, University of Michigan, USA*
 
-- Zhenke Wu [zhenkewu@umich.edu], *Department of Biostatistics, University of Michigan*
+- Zhenke Wu [zhenkewu@umich.edu], *Department of Biostatistics, University of Michigan, USA*
