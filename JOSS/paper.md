@@ -1,5 +1,5 @@
 ---
-title: "CFRL: A Python library for counterfactually fair offline reinforcement learning using data preprocessing"
+title: "CFRL: A Python library for counterfactually fair offline reinforcement learning via data preprocessing"
 tags:
   - counterfactual fairness
   - reinforcement learning
@@ -61,12 +61,12 @@ preamble: >
 
 # Summary
 
-Reinforcement learning (RL) aims to learn a sequential
+Reinforcement learning (RL) aims to learn and evaluate a sequential
 decision-making rule, often referred to as a “policy”, that maximizes
-expected discounted cumulative rewards to achieve the highest population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity for its wide use in fields such as healthcare, banking, autonomous driving, and more recently large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race, ethnicity, gender, education level). This is because the RL algorithm learns an optimal policy that makes decisions based on observed state variables. If certain value of the sensitive attribute influences the state variables in a way that leads the policy to systematically withhold an action from an individual, unfairness will result. For example, Hispanics may under-report their pain levels due to cultural factors, misleading the RL agent to assign less therapist time to them [@piette2023powerED]. Deployment of RL algorithms without careful fairness considerations can raise concerns and erode public trust.
+expected discounted cumulative rewards to optimize population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity in fields such as healthcare, banking, autonomous driving, and more recently large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race, ethnicity, gender, education level). An RL algorithm learns an optimal policy that makes decisions based on observed state variables. If certain values of the sensitive attribute influence the state variables in a way that leads the policy to systematically withhold an action from an individual, unfairness will result. For example, Hispanics may under-report their pain levels due to cultural factors, misleading the RL agent to assign less therapist time to them [@piette2023powerED]. Deployment of RL algorithms without careful fairness considerations can raise concerns and erode public trust in high-stake settings.
 
 To formally define and address the unfairness problem in sequential decision making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
-multi-stage setting and proposed a data preprocessing algorithm that
+multi-stage setting and proposed a data preprocessing based algorithm that
 ensures CF. A policy is CF if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute taken a different value, while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm ensures CF by constructing new state variables that are not impacted by the sensitive attribute(s). The rewards in data are also preprocessed, but the purpose of preprocessing the rewards is to improve the value of the learned optimal policy rather than ensure CF. We refer interested readers to @wang2025cfrl for more technical details.
 
 The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides a suite of tools to evaluate the value and CF level achieved by 
@@ -96,7 +96,7 @@ preprocessing algorithm that ensures CF in offline RL.
 For each individual in the data, the preprocessing
 algorithm sequentially estimates the counterfactual states under different sensitive
 attribute values and concatenates all of the individual’s counterfactual
-states into a new state vector. The preprocessed data can then be
+states at each time point into a new state vector. The preprocessed data can then be
 directly used by existing RL algorithms for policy learning, and the
 learned policy should be counterfactually fair up to finite-sample estimation accuracy. Second, it
 provides a platform for assessing RL policies based on CF. After passing in any policy and a data trajectory from the
@@ -222,18 +222,18 @@ By definition, the "random" baseline always achieves perfect CF. On the other ha
 
 # Conclusions
 
-`CFRL` is a Python library that enables counterfactually fair reinforcement
-learning through data preprocessing. It also provides tools to evaluate
-the value and CF level of a given policy. To our knowledge, it is the first library to address CF
-problems in the context of RL. Nevertheless, despite
-this, `CFRL` also has a few limitations. For example, the current
+`CFRL` is a Python library that enables CF reinforcement
+learning through data preprocessing. It also provides tools to calculate
+the value and unfairness level of a given policy. To our knowledge, it is the first library to address CF
+problems in the context of RL. The practical utility of `CFRL` can be further improved via extensions. First, the current
 `CFRL` implementation requires every individual in the offline dataset to
 have the same number of time steps. Extending the library to accommodate
 variable-length episodes can improve its flexibility and usefulness.
-Besides, `CFRL` could also be made more well-rounded by integrating the
+Second, `CFRL` can further combine the
 preprocessor with popular offline RL algorithm libraries such as
-`d3rlpy` [@d3rlpy], or by connecting the evaluation functions with established RL
-environment libraries such as `gym` [@towers2024gymnasium]. We leave these extensions 
+`d3rlpy` [@d3rlpy], or connect the evaluation functions with established RL
+environment libraries such as `gym` [@towers2024gymnasium]. Third, generalization to
+non-additive counterfactual states reconstruction can make `CFRL` theoretically more versatile. We leave these extensions 
 to future updates.
 
 <!-- # Acknowledgements
