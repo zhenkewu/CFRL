@@ -27,5 +27,8 @@ jobs:
         with:
           message: '(auto) Paper PDF Draft'
           add: 'JOSS/paper.pdf' # 'paper/*.pdf' to commit all PDFs in the paper directory
+          author_name: 'github-actions'
+          author_email: 'github-actions@github.com'
+          push: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
