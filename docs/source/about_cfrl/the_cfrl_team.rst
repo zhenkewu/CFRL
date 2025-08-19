@@ -16,8 +16,6 @@ Contributors
 - John D. Piette, *Department of Health Behavior and Health Equity, School of Public Health, 
   University of Michigan, USA*
 
-- Joshua R. Loftus, *Department of Statistics, London School of Economics, UK*
-
 - Donglin Zeng, *Department of Biostatistics, University of Michigan, USA*
 
 - Zhenke Wu [zhenkewu@umich.edu], *Department of Biostatistics, University of Michigan, USA*

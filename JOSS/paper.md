@@ -18,9 +18,6 @@ authors:
   - name: John D. Piette
     corresponding: false 
     affiliation: 4
-  - name: Joshua R. Loftus
-    corresponding: false 
-    affiliation: 3
   - name: Donglin Zeng
     corresponding: false 
     affiliation: 2
