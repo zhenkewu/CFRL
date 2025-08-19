@@ -61,8 +61,6 @@ High-level Design
      - Implements a fitted Q-iteration (FQI) algorithm, which learns RL policies and makes decisions based on the learned policy. Users can also pass a preprocessor to the FQI; in this case, the FQI will be able to take in unpreprocessed trajectories, internally preprocess the input trajectories, and directly output counterfactually fair policies.
    * - :code:`environment`
      - Implements a synthetic environment that produces synthetic data as well as a simulated environment that simulates the transition dynamics of the environment underlying some real-world RL trajectory data. Also implements functions for sampling trajectories from the synthetic and simulated environments.
-   * - :code:`fqe`
-     - Implements a fitted Q-evaluation (FQE) algorithm, which can be used to evaluate the value of a policy.
    * - :code:`evaluation`
      - Implements functions that evaluate the value and counterfactual fairness of a policy. Depending on the user's needs, the evaluation can be done either in a synthetic environment or in a simulated environment.
 
