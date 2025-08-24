@@ -204,10 +204,11 @@ class SequentialPreprocessor(Preprocessor):
         batch_size: int = 512,
         is_action_onehot: bool = True,
         is_normalized: bool = False,
+        is_loss_monitored: bool = False, 
         is_early_stopping: bool = False,
         test_size: int | float = 0.2,
-        early_stopping_patience: int = 10,
-        early_stopping_min_delta: int | float = 0.01,
+        patience: int = 10,
+        min_delta: int | float = 0.01,
     ) -> None:
         """
         Args: 
@@ -253,23 +254,33 @@ class SequentialPreprocessor(Preprocessor):
             is_normalized (bool, optional): 
                 When set to :code:`True`, the states will be normalized 
                 following the formula :code:`x_normalized = (x - mean(x)) / std(x)`.
+            is_loss_monitored (bool, optional):
+                When set to :code:`True`, will split the training data into a training set and a 
+                validation set, and will monitor the validation loss during training. A warning 
+                will be raised if the decrease in the validation loss is greater than :code:`min_delta` for at 
+                least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
+                by the argument :code:`patience`. This argument is not used if :code:`reg_model="lm"`.
             is_early_stopping (bool, optional): 
-                When set to :code:`True`, will enforce early stopping 
-                during neural network training. This argument is not used if :code:`reg_model="lm"`.
+                When set to :code:`True`, will split the training data into a training set and a 
+                validation set, and will enforce early stopping based on the validation loss 
+                during neural network training. That is, neural network training will stop early 
+                if the decrease in the validation loss is no greater than :code:`min_delta` for :math:`p` consecutive training 
+                epochs, where :math:`p` is specified by the argument :code:`patience`. This argument is not used if 
+                :code:`reg_model="lm"`.
             test_size (int or float, optional): 
-                An int or float between 0 and 1 (inclusive) that 
-                specifies the proportion of the full data that is used as the test set for early 
-                stopping. This argument is not used if :code:`reg_model="lm"` or 
-                :code:`is_early_stopping=False`.
-            early_stopping_patience (int, optional): 
-                The number of consequentive epochs with 
-                barely-decreasing loss needed for training to be early stopped. This argument is 
-                not used if :code:`reg_model="lm"` or :code:`is_early_stopping=False`.
-            early_stopping_min_delta (int for float, optional): 
-                The minimum amount of decrease 
-                in the loss so that the rounded is not considered barely-decreasing by the early 
-                stopping mechanism. This argument is not used if :code:`reg_model="lm"` or 
-                :code:`is_early_stopping=False`.
+                An :code:`int` or :code:`float` between 0 and 1 (inclusive) that 
+                specifies the proportion of the full training data that is used as the validation set for loss 
+                monitoring and early stopping. This argument is not used if :code:`reg_model="lm"` or 
+                both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+            patience (int, optional): 
+                The number of consequentive epochs with barely-decreasing validation loss that is needed 
+                for loss monitoring and early stopping. This argument is not used if :code:`reg_model="lm"` 
+                or both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+            min_delta (int for float, optional): 
+                The maximum amount of decrease in the validation loss for it to be considered 
+                barely-decreasing by the loss monitoring and early stopping mechanisms. This argument is 
+                not used if :code:`reg_model="lm"` or both :code:`is_loss_monitored` and 
+                :code:`is_early_stopping` are :code:`False`.
         """
 
         z_space = np.array(z_space)
@@ -296,10 +307,11 @@ class SequentialPreprocessor(Preprocessor):
         self.__name__ = 'SequentialPreprocessor'
 
         # tunnable parameters
+        self.is_loss_monitored = is_loss_monitored
         self.is_early_stopping = is_early_stopping
         self.test_size = test_size
-        self.early_stopping_patience = early_stopping_patience
-        self.early_stopping_min_delta = early_stopping_min_delta
+        self.patience = patience
+        self.min_delta = min_delta
         self.cross_folds = cross_folds
         self.mode = mode
 
@@ -477,9 +489,10 @@ class SequentialPreprocessor(Preprocessor):
             epochs=self.epochs,
             learning_rate=self.learning_rate,
             batch_size=self.batch_size,
+            is_loss_monitored=self.is_loss_monitored, 
             is_early_stopping=self.is_early_stopping,
-            early_stopping_patience=self.early_stopping_patience,
-            early_stopping_min_delta=self.early_stopping_min_delta,
+            patience=self.patience,
+            min_delta=self.min_delta,
             test_size=self.test_size,
         )
         return model
@@ -513,9 +526,10 @@ class SequentialPreprocessor(Preprocessor):
                 epochs=self.epochs,
                 learning_rate=self.learning_rate,
                 batch_size=self.batch_size,
+                is_loss_monitored=self.is_loss_monitored,
                 is_early_stopping=self.is_early_stopping,
-                early_stopping_patience=self.early_stopping_patience,
-                early_stopping_min_delta=self.early_stopping_min_delta,
+                patience=self.patience,
+                min_delta=self.min_delta,
                 test_size=self.test_size,
             )
         return model

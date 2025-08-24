@@ -6,3 +6,4 @@ Tutorials
    :caption: Contents
 
    example_workflows
+   common_issues

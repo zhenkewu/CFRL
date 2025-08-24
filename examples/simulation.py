@@ -1,3 +1,6 @@
+import sys
+sys.path.append("E:/learning/university/MiSIL/CFRL Python Package/CFRL")
+
 from cfrl.preprocessor import SequentialPreprocessor
 from .baseline_preprocessors import SequentialPreprocessorOracle, UnawarenessPreprocessor
 from .baseline_preprocessors import ConcatenatePreprocessor
@@ -126,6 +129,8 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 num_actions=2, 
                 reg_model=model_type,
                 is_normalized=False,
+                #is_loss_monitored=False,
+                #is_early_stopping=False
             )
             preprocessor.train_preprocessor(xs=copy.deepcopy(xs),
                                             zs=copy.deepcopy(zs),
@@ -136,6 +141,8 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 preprocessor=preprocessor,
                 model_type=fqi_model,
                 num_actions=2,
+                is_loss_monitored=False,
+                is_early_stopping=True,
                 #name="ours",
             )
             agent.train(
@@ -498,8 +505,8 @@ def run_exp(rep, start_seed=1, export=False):
 
 
 # run the experiments
-'''s = int(input('Enter the seed that is to be used: '))
+s = int(input('Enter the seed that is to be used: '))
 df_n = run_exp1_one(methods=['ours'], 
-                          method_policy='FQI_LM', N=100, T=10, z_coef=1, seed=s)'''
-df_n = run_exp(rep=20, start_seed=31, export=True)
+                          method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)
+#df_n = run_exp(rep=20, start_seed=31, export=True)
 print(df_n)

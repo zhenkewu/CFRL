@@ -378,6 +378,11 @@ def evaluate_reward_through_fqe(
         gamma: int | float = 0.9, 
         max_iter: int = 200, 
         seed: int = 1, 
+        is_loss_monitored: bool = False,
+        is_early_stopping: bool = False,
+        test_size: int | float = 0.2,
+        patience: int = 10,
+        min_delta: int | float = 0.005
     ) -> np.integer | np.floating:
     """
     Estimate the value of a policy using fitted Q evaluation (FQE).
@@ -424,6 +429,35 @@ def evaluate_reward_through_fqe(
             The number of iterations for learning the Q function. 
         seed (int, optional): 
             The random seed used for FQE.
+        is_loss_monitored (bool, optional):
+            When set to :code:`True`, will split the training data into a training set and a 
+            validation set, and will monitor the validation loss when training the neural network 
+            approximator of the Q function in each iteration of the FQE. A warning 
+            will be raised if the decrease in the validation loss is greater than :code:`min_delta` for at 
+            least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
+            by the argument :code:`patience`. This argument is not used if :code:`model_type="lm"`.
+        is_early_stopping (bool, optional): 
+            When set to :code:`True`, will split the training data into a training set and a 
+            validation set, and will enforce early stopping based on the validation loss 
+            when training the neural network approximator of the Q function in each iteration of the FQE. That is, in each iteration, 
+            neural network training will stop early 
+            if the decrease in the validation loss is no greater than :code:`min_delta` for :math:`p` consecutive training 
+            epochs, where :math:`p` is specified by the argument :code:`patience`. This argument is not used if 
+            :code:`model_type="lm"`.
+        test_size (int or float, optional): 
+            An :code:`int` or :code:`float` between 0 and 1 (inclusive) that 
+            specifies the proportion of the full training data that is used as the validation set for loss 
+            monitoring and early stopping. This argument is not used if :code:`model_type="lm"` or 
+            both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+        patience (int, optional): 
+            The number of consequentive epochs with barely-decreasing validation loss that is needed 
+            for loss monitoring and early stopping. This argument is not used if :code:`model_type="lm"` 
+            or both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+        min_delta (int for float, optional): 
+            The maximum amount of decrease in the validation loss for it to be considered 
+            barely-decreasing by the loss monitoring and early stopping mechanisms. This argument is 
+            not used if :code:`model_type="lm"` or both :code:`is_loss_monitored` and 
+            :code:`is_early_stopping` are :code:`False`.
 
     Returns: 
         discounted_cumulative_reward (np.integer or np.floating): 
@@ -440,8 +474,19 @@ def evaluate_reward_through_fqe(
     rewards = np.array(rewards)
     action_size = len(np.unique(actions.flatten(), axis=0))
 
-    fqe = FQE(model_type=model_type, num_actions=action_size, policy=policy, 
-              hidden_dims=hidden_dims, learning_rate=learning_rate, epochs=epochs, gamma=gamma)
+    fqe = FQE(model_type=model_type, 
+              num_actions=action_size, 
+              policy=policy, 
+              hidden_dims=hidden_dims, 
+              learning_rate=learning_rate, 
+              epochs=epochs, 
+              gamma=gamma, 
+              is_loss_monitored=is_loss_monitored,
+              is_early_stopping=is_early_stopping,
+              test_size=test_size,
+              patience=patience,
+              min_delta=min_delta
+             )
     fqe.fit(
         states=states, zs=zs, actions=actions, rewards=rewards, 
         max_iter=max_iter, f_ua=f_ua

@@ -18,3 +18,6 @@ scratch_work/
 _build/
 run_baseline_exp.py
 results_m19_baselines.csv
+examples/workflow_computing_times/temporary_outputs.csv
+CFRL/utils/base_models_old.py
+CFRL/olds/

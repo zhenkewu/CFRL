@@ -76,9 +76,10 @@ def run_exp_one(seed, model_type, z_label, methods):
                                         batch_size=128, 
                                         learning_rate=0.001, # LR THAT JITAO USED
                                         #learning_rate=0.003, # LR THAT I FOUND BETTER WHEN USING JITAO'S NN
-                                        is_early_stopping=True, 
-                                        early_stopping_patience=10, 
-                                        early_stopping_min_delta=0.001)
+                                        is_loss_monitored=True, 
+                                        is_early_stopping=False, 
+                                        patience=10, 
+                                        min_delta=0.001)
             np.random.seed(seed+1)
             torch.manual_seed(seed+1) # NEWLY ADDED
             xs_tilde, rs_tilde = sp.train_preprocessor(zs_train, xs_train, actions_train, rewards_train)
@@ -122,9 +123,10 @@ def run_exp_one(seed, model_type, z_label, methods):
     torch.manual_seed(seed+3) # NEWLY ADDED
     env = SimulatedEnvironment(state_model_type=model_type, 
                             reward_model_type=model_type, 
-                            z_factor=0, 
                             num_actions=3, 
-                            is_action_onehot=True)
+                            is_action_onehot=True, 
+                            is_loss_monitored=False, 
+                            is_early_stopping=True)
     env.fit(zs, xs, actions, rewards)
     #env.reset(zs)
 
@@ -184,7 +186,10 @@ def run_exp_one(seed, model_type, z_label, methods):
                                             rewards=rewards_test, 
                                             model_type=model_type, 
                                             policy=agents[i], 
-                                            seed=seed+4)
+                                            seed=seed+4, 
+                                            is_loss_monitored=False,
+                                            is_early_stopping=True,
+                                           )
         
         #print('fairness:', cf_metric)
         tmp = pd.DataFrame(
@@ -226,5 +231,5 @@ def run_exp(rep, model_type, z_labels, methods, print_res=True, export_res=False
 '''run_exp(rep=10, methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=True, 
         export_path='./result_rda_real_data_analysis_after.csv')'''
-run_exp(rep=2, model_type='lm', methods=['ours'], z_labels=['sex_b'], 
+run_exp(rep=1, model_type='nn', methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=False)

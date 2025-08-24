@@ -3,11 +3,13 @@ import numpy as np
 import torch
 import copy
 #from utils.utils import glogger
-from .utils.base_models import LinearRegressor, NeuralNet
+from .utils.base_models import LinearRegressor, NeuralNet, ConvergenceChecker, DecreasingLossWarning
 from .utils.custom_errors import InvalidModelError
 from .preprocessor import Preprocessor, SequentialPreprocessor
+from sklearn.model_selection import train_test_split
 from typing import Literal
 from tqdm import tqdm
+import warnings
 
 class Agent:
     """
@@ -94,6 +96,11 @@ class FQI(Agent):
         gamma: int | float = 0.9,
         learning_rate: int | float = 0.1,
         epochs: int = 500,
+        is_loss_monitored: bool = False,
+        is_early_stopping: bool = False,
+        test_size: int | float = 0.2,
+        patience: int = 10,
+        min_delta: int | float = 0.005,
     ) -> None:
         """
         Args: 
@@ -121,6 +128,35 @@ class FQI(Agent):
             epochs (int, optional): 
                 The number of training epochs for the neural network. This 
                 argument is not used if :code:`model_type="lm"`. 
+            is_loss_monitored (bool, optional):
+                When set to :code:`True`, will split the training data into a training set and a 
+                validation set, and will monitor the validation loss when training the neural network 
+                approximator of the Q function in each iteration. A warning 
+                will be raised if the decrease in the validation loss is greater than :code:`min_delta` for at 
+                least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
+                by the argument :code:`patience`. This argument is not used if :code:`model_type="lm"`.
+            is_early_stopping (bool, optional): 
+                When set to :code:`True`, will split the training data into a training set and a 
+                validation set, and will enforce early stopping based on the validation loss 
+                when training the neural network approximator of the Q function in each iteration. That is, in each iteration, 
+                neural network training will stop early 
+                if the decrease in the validation loss is no greater than :code:`min_delta` for :math:`p` consecutive training 
+                epochs, where :math:`p` is specified by the argument :code:`patience`. This argument is not used if 
+                :code:`model_type="lm"`.
+            test_size (int or float, optional): 
+                An :code:`int` or :code:`float` between 0 and 1 (inclusive) that 
+                specifies the proportion of the full training data that is used as the validation set for loss 
+                monitoring and early stopping. This argument is not used if :code:`model_type="lm"` or 
+                both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+            patience (int, optional): 
+                The number of consequentive epochs with barely-decreasing validation loss that is needed 
+                for loss monitoring and early stopping. This argument is not used if :code:`model_type="lm"` 
+                or both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+            min_delta (int for float, optional): 
+                The maximum amount of decrease in the validation loss for it to be considered 
+                barely-decreasing by the loss monitoring and early stopping mechanisms. This argument is 
+                not used if :code:`model_type="lm"` or both :code:`is_loss_monitored` and 
+                :code:`is_early_stopping` are :code:`False`.
         """
         
         if model_type == 'nn':
@@ -134,6 +170,11 @@ class FQI(Agent):
         self.gamma = gamma
         self.learning_rate = learning_rate
         self.epochs = epochs
+        self.is_loss_monitored = is_loss_monitored
+        self.is_early_stopping = is_early_stopping
+        self.test_size = test_size
+        self.patience = patience
+        self.min_delta = min_delta
         self.__name__ = 'FQI'
         self._sanity_check()
 
@@ -205,20 +246,64 @@ class FQI(Agent):
             hidden_dims=self.hidden_dims,
         )
 
-        X = torch.FloatTensor(states)
-        Y = torch.FloatTensor(Y)
-        actions_tensor = torch.LongTensor(actions.reshape(-1, 1))
+        if self.is_loss_monitored or self.is_early_stopping:
+            convergence_checker = ConvergenceChecker(
+                patience=self.patience,
+                min_delta=self.min_delta,
+                mode="min",
+            )
+
+            idx_train, idx_test = train_test_split(
+                np.arange(states.shape[0]), test_size=self.test_size
+            )
+            X_train = states[idx_train]
+            y_train = Y[idx_train]
+            X_test = states[idx_test]
+            y_test = Y[idx_test]
+
+            X_test = torch.tensor(X_test, dtype=torch.float32)
+            y_test = torch.tensor(y_test, dtype=torch.float32)
+        else:
+            X_train, y_train = states, Y
+
+        X_train = torch.FloatTensor(X_train)
+        y_train = torch.FloatTensor(y_train)
+
+        if self.is_loss_monitored or self.is_early_stopping:
+            actions_tensor_train = torch.LongTensor(actions[idx_train].reshape(-1, 1))
+            actions_tensor_test = torch.LongTensor(actions[idx_test].reshape(-1, 1))
+        else:
+            actions_tensor_train = torch.LongTensor(actions.reshape(-1, 1))
 
         optimizer = torch.optim.Adam(new_model.parameters(), lr=self.learning_rate)
         criterion = torch.nn.MSELoss()
 
-        for _ in range(self.epochs):
+        train_losses = []
+        val_losses = []
+
+        for epoch in range(self.epochs):
             new_model.train()
             optimizer.zero_grad()
-            Y_pred = new_model(X).gather(1, actions_tensor)
-            loss = criterion(Y_pred, Y)
+            y_pred = new_model(X_train).gather(1, actions_tensor_train)
+            loss = criterion(y_pred, y_train)
             loss.backward()
             optimizer.step()
+
+            train_losses.append(loss.item())
+
+            if self.is_loss_monitored or self.is_early_stopping:
+                self.model.eval()
+                with torch.no_grad():
+                    val_outputs = self.model(X_test).gather(1, actions_tensor_test)
+                    val_loss = criterion(val_outputs, y_test)
+
+                val_losses.append(val_loss.item())
+
+                if self.is_early_stopping and convergence_checker(val_loss.item()):
+                    break
+
+            if self.is_loss_monitored and epoch == self.epochs - 1 and (not convergence_checker(val_loss.item())):
+                warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.patience) + ' epochs during neural network training', DecreasingLossWarning)
         '''glogger.info(
             f"{iteration}, fqi_nn mse:{loss.item()}, mean_target:{np.mean(Y.detach().numpy())}"
         )'''

@@ -44,6 +44,7 @@ the use cases of CFRL. We appreciate your patience and support!
    :caption: Tutorials
 
    tutorials/example_workflows
+   tutorials/common_issues
 
 .. toctree::
    :maxdepth: 2

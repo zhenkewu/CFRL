@@ -6,7 +6,7 @@ Maintainer
 
 - Jianhan Zhang [jianhanz@umich.edu], *Department of Statistics, University of Michigan, USA*
 
-Contributors *(the list is still being finalized)*
+Contributors
 ---------------
 
 - Jitao Wang [jitwang@umich.edu], *Department of Biostatistics, University of Michigan, USA*
@@ -16,6 +16,6 @@ Contributors *(the list is still being finalized)*
 - John D. Piette, *Department of Health Behavior and Health Equity, School of Public Health, 
   University of Michigan, USA*
 
-.. - Donglin Zeng, *Department of Biostatistics, University of Michigan, USA*
+- Donglin Zeng, *Department of Biostatistics, University of Michigan, USA*
 
 - Zhenke Wu [zhenkewu@umich.edu], *Department of Biostatistics, University of Michigan, USA*

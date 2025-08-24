@@ -724,10 +724,11 @@ class SimulatedEnvironment(gym.Env):
         epochs: int = 1000,
         batch_size: int = 128,
         learning_rate: int | float = 0.001,
+        is_loss_monitored: bool = False,
         is_early_stopping: bool = True,
         test_size: int | float = 0.2,
-        early_stopping_patience: int = 10,
-        early_stopping_min_delta: int | float = 0.01,
+        patience: int = 10,
+        min_delta: int | float = 0.01,
         enforce_min_max: bool = False,
     ) -> None:
         """
@@ -766,29 +767,39 @@ class SimulatedEnvironment(gym.Env):
                 both the network for states and the network for rewards, if applicable. This argument is 
                 not used if both :code:`state_model_type` and :code:`reward_model_type` are set to 
                 :code:`"lm"`.
+            is_loss_monitored (bool, optional):
+                When set to :code:`True`, will split the training data into a training set and a 
+                validation set, and will monitor the validation loss during training. A warning 
+                will be raised if the decrease in the validation loss is greater than :code:`min_delta` for at 
+                least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
+                by the argument :code:`patience`. Applies to both the network for states and the network for rewards, 
+                if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` 
+                are :code:`"lm"`.
             is_early_stopping (bool, optional): 
-                When set to :code:`True`, will enforce early stopping 
-                during neural network training. Applies to both the network for states and the network for 
-                rewards, if applicable. This argument is not used if both :code:`state_model_type` and 
-                :code:`reward_model_type` are set to :code:`"lm"`.
+                When set to :code:`True`, will split the training data into a training set and a 
+                validation set, and will enforce early stopping based on the validation loss 
+                during neural network training. That is, neural network training will stop early 
+                if the decrease in the validation loss is no greater than :code:`min_delta` for :math:`p` consecutive training 
+                epochs, where :math:`p` is specified by the argument :code:`patience`. Applies to 
+                both the network for states and the network for rewards, if applicable. This argument is not used if 
+                both :code:`state_model_type` and :code:`reward_model_type` are :code:`"lm"`.
             test_size (int or float, optional): 
-                An int or float between 0 and 1 (inclusive) that 
-                specifies the proportion of the full data that is used as the test set for early stopping. 
-                Applies to both the network for states and the network for rewards, if applicable. This 
-                argument is not used if :code:`is_early_stopping=False` or if both :code:`state_model_type` 
-                and :code:`reward_model_type` are set to :code:`"lm"`.
-            early_stopping_patience (int, optional): 
-                The number of consecutive epochs with 
-                barely-decreasing loss needed for training to be early stopped. Applies to both the network 
-                for states and the network for rewards, if applicable. This argument is not used if 
-                :code:`is_early_stopping=False` or if both :code:`state_model_type` and 
-                :code:`reward_model_type` are set to :code:`"lm"`.
-            early_stopping_min_delta (int for float, optional): 
-                The minimum amount of decrease 
-                in the loss so that the round is not considered barely-decreasing by the early 
-                stopping mechanism. Applies to both the network for states and the network for rewards,  
-                if applicable. This argument is not used if :code:`is_early_stopping=False` or if both 
-                :code:`state_model_type` and :code:`reward_model_type` are set to :code:`"lm"`. 
+                An :code:`int` or :code:`float` between 0 and 1 (inclusive) that 
+                specifies the proportion of the full training data that is used as the validation set for loss 
+                monitoring and early stopping. Applies to both the network for states and the network for rewards, 
+                if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` are 
+                :code:`"lm"`, or if both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+            patience (int, optional): 
+                The number of consequentive epochs with barely-decreasing validation loss that is needed 
+                for loss monitoring and early stopping. Applies to both the network for states and the network for rewards, 
+                if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` 
+                are :code:`"lm"`, or if both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+            min_delta (int for float, optional): 
+                The maximum amount of decrease in the validation loss for it to be considered 
+                barely-decreasing by the loss monitoring and early stopping mechanisms. Applies to 
+                both the network for states and the network for rewards, if applicable. This argument is 
+                not used if both :code:`state_model_type` and :code:`reward_model_type` are :code:`"lm"`, or if both 
+                :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
             enforce_min_max (bool, optional): 
                 When set to :code:`True`, each component of the output 
                 states will be clipped to the maximum and minimum value of the corresponding 
@@ -816,10 +827,11 @@ class SimulatedEnvironment(gym.Env):
         self.epochs = epochs
         self.batch_size = batch_size
         self.learning_rate = learning_rate
+        self.is_loss_monitored = is_loss_monitored
         self.is_early_stopping = is_early_stopping
         self.test_size = test_size
-        self.early_stopping_patience = early_stopping_patience
-        self.early_stopping_min_delta = early_stopping_min_delta
+        self.patience = patience
+        self.min_delta = min_delta
         self.enforce_min_max = enforce_min_max
         self.is_trained = False
     
@@ -960,10 +972,11 @@ class SimulatedEnvironment(gym.Env):
                     epochs=self.epochs,
                     batch_size=self.batch_size,
                     learning_rate=self.learning_rate,
+                    is_loss_monitored = self.is_loss_monitored,
                     is_early_stopping=self.is_early_stopping,
                     test_size=self.test_size,
-                    early_stopping_patience=self.early_stopping_patience,
-                    early_stopping_min_delta=self.early_stopping_min_delta,
+                    patience=self.patience,
+                    min_delta=self.min_delta,
                 )
             var_mean = 0 # CHANGED; NOT SURE ABOUT CORRECTNESS
             for z_ in np.unique(zs, axis=0):
@@ -1012,10 +1025,11 @@ class SimulatedEnvironment(gym.Env):
                     epochs=self.epochs,
                     learning_rate=self.learning_rate,
                     batch_size=self.batch_size,
+                    is_loss_monitored = self.is_loss_monitored,
                     is_early_stopping=self.is_early_stopping,
                     test_size=self.test_size,
-                    early_stopping_patience=self.early_stopping_patience,
-                    early_stopping_min_delta=self.early_stopping_min_delta,
+                    patience=self.patience,
+                    min_delta=self.min_delta,
                 )
             var_mean = 0 # CHANGED; NOT SURE ABOUT CORRECTNESS
             for z_ in np.unique(zs, axis=0):
