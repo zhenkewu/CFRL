@@ -60,42 +60,42 @@ preamble: >
 
 Reinforcement learning (RL) aims to learn and evaluate a sequential
 decision-making rule, often referred to as a “policy”, that maximizes
-expected discounted cumulative rewards to optimize population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity in fields such as healthcare, banking, autonomous driving, and more recently large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race, ethnicity, gender, education level). An RL algorithm learns an optimal policy that makes decisions based on observed state variables. If certain values of the sensitive attribute influence the state variables in a way that leads the policy to systematically withhold an action from an individual, unfairness will result. For example, Hispanics may under-report their pain levels due to cultural factors, misleading the RL agent to assign less therapist time to them [@piette2023powerED]. Deployment of RL algorithms without careful fairness considerations can raise concerns and erode public trust in high-stake settings.
+expected discounted cumulative rewards to optimize population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity in fields such as healthcare, banking, autonomous driving, and more recently large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race/ethnicity, income, gender, education level). An RL algorithm learns an optimal policy that makes decisions based on observed state variables. If certain values of the sensitive attribute influence the state variables in a way that influences the policy, such as by leading the policy to systematically withhold services from an individual, unfairness will result. For example, Hispanics may under-report their pain levels due to cultural factors, misleading a fairness-blind RL agent to assign less therapist time to them [@piette2023powerED]. Deployment of RL algorithms without careful fairness considerations can raise concerns and erode public trust in high-stake settings.
 
-To formally define and address the unfairness problem in sequential decision making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
-multi-stage setting and proposed a data preprocessing based algorithm that
-ensures CF. A policy is CF if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute taken a different value, while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm ensures CF by constructing new state variables that are not impacted by the sensitive attribute(s). The rewards in data are also preprocessed, but the purpose of preprocessing the rewards is to improve the value of the learned optimal policy rather than ensure CF. We refer interested readers to @wang2025cfrl for more technical details.
+To formally define and address the fairness problem in sequential decision making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
+multi-stage setting and proposed a data preprocessing algorithm that
+ensures CF. A policy is counterfactually fair if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute taken a different value, while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm ensures CF by constructing new state variables that are not impacted by the sensitive attribute(s). The reward values in the data are also preprocessed, but the purpose of preprocessing the rewards is to improve the value of the learned optimal policy rather than ensure CF. We refer interested readers to @wang2025cfrl for more technical details.
 
 The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides a suite of tools to evaluate the value and CF level achieved by 
-any given policy. The library produces preprocessed trajectories that can be used by
-any off-the-shelf offline RL algorithms, such as fitted Q-iteration (FQI) [@riedmiller2005fqi], to learn an optimal CF
+any given policy. Here, "CFRL" stands for "Counterfactual Fairness in Reinforcement Learning". The library produces preprocessed trajectories that can be used by
+an off-the-shelf offline RL algorithm, such as fitted Q-iteration (FQI) [@riedmiller2005fqi], to learn an optimal CF
 policy. The library can also simply read in any policy following a required format and return its
 value and CF level in the environment of interest, where the environment can be either pre-specified or learned from the data.
 
 # Statement of Need
 
-Many existing Python libraries implement algorithms that ensure fairness
+Many existing Python libraries implement algorithms designed to ensure fairness
 in machine learning. For example, `Fairlearn` [@weerts2023fairlearn] and 
 `aif360` [@aif360-oct-2018] provide tools 
 for mitigating bias in single-stage machine learning predictions under
-statistical assocoiation-based fairness criterion such as demographic
-parity and equal opportunity. However, they do not focus on 
+statistical association-based fairness criteria such as demographic
+parity and equal opportunity. However, existing libraries do not focus on 
 counterfactual fairness, which defines an individual-level fairness concept from a causal
-perspective, and they cannot be easily extended to the reinforcement
-learning setting in general. Additionally, `ml-fairness-gym` [@fairness_gym] allows users 
-to simulate unfairness in sequential decision-making, but it neither 
-implements algorithms that reduce unfairness nor addresses CF. To our knowledge, @wang2025cfrl is the first 
+perspective, and they cannot be easily extended to the generalized reinforcement
+learning setting. Scripts available from `ml-fairness-gym` [@fairness_gym] allow users 
+to simulate unfairness in sequential decision-making, but they neither 
+implement algorithms that reduce unfairness nor address CF. To our knowledge, @wang2025cfrl is the first 
 work to study CF in RL. 
 Correspondingly, `CFRL` is also the first code library to address CF in the RL setting.
 
-The contribution of CFRL is two-fold. First, it implements a data
+The contribution of CFRL is two-fold. First, `CFRL` implements a data
 preprocessing algorithm that ensures CF in offline RL.
 For each individual in the data, the preprocessing
 algorithm sequentially estimates the counterfactual states under different sensitive
 attribute values and concatenates all of the individual’s counterfactual
 states at each time point into a new state vector. The preprocessed data can then be
 directly used by existing RL algorithms for policy learning, and the
-learned policy should be counterfactually fair up to finite-sample estimation accuracy. Second, it
+learned policy should be counterfactually fair up to finite-sample estimation accuracy. Second, `CFRL`
 provides a platform for assessing RL policies based on CF. After passing in any policy and a data trajectory from the
 environment of interest, users can estimate the value and CF level achieved by the policy in the environment of interest. 
 
@@ -137,11 +137,11 @@ evaluate the value and CF level of the trained policy.
 
 # Data Example
 
-We provide a data example to demontrate how `CFRL` learns a counterfactually fair policy from real-world trajectory data with unknown underlying transition dynamics. We also show how `CFRL` evaluates the value and CF level of the learned policy. We note that this is only one of the many workflows that `CFRL` can perform. For example, `CFRL` can also generate synthetic trajectory data and use it to evaluate the value and CF level resulting from some custom data preprocessing methods. We refer interested readers to the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation for more workflow examples.
+We provide a data example to demonstrate how `CFRL` learns a counterfactually fair policy from real-world trajectory data with unknown underlying transition dynamics. We also show how `CFRL` evaluates the value and CF level of the learned policy. We note that this is only one of the many workflows that `CFRL` can perform. For example, `CFRL` can also generate synthetic trajectory data and use it to evaluate the value and CF level resulting from some custom data preprocessing methods. We refer interested readers to the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation for more workflow examples.
 
 #### Load Data
 
-In this demonstration, we use an offline trajectory generated from a `SyntheticEnvironment` following some pre-specified transition rules. Although it is actually synthesized, we treat it as if it is from some unknown environment for pedagogical convenience.
+In this demonstration, we use an offline trajectory generated from a `SyntheticEnvironment` following some pre-specified transition rules. Although the data is actually synthesized, we treat it as if it is from some unknown environment for pedagogical convenience.
 
 The trajectory contains 500 individuals (i.e. $N=500$) and 10 transitions (i.e. $T=10$). The sensitive attribute variable and the state variable are both univariate. The sensitive attribute is binary ($0$ or $1$). The actions are also binary ($0$ or $1$) and were sampled using a behavior policy that selects $0$ or $1$ randomly with equal probability. The trajectory is stored in a tabular format in a `.csv` file. We use `read_trajectory_from_csv()` to load the trajectory from the `.csv` format into the array format required by `CFRL`.
 ```python
@@ -172,7 +172,7 @@ states_tilde, rewards_tilde = sp.train_preprocessor(
 
 #### Counterfactually Fair Policy Learning
 
-Now we train a counterfactually fair policy using the preprocessed data and `FQI` with `sp` as its internal preprocessor. By default, the input data will first be preprocessed by `sp` before being used for policy learning. However, since the training data `state_tilde` and `rewards_tilde` are already preprocessed in our case, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e. `sp`).
+Next we train a counterfactually fair policy using the preprocessed data and `FQI` with `sp` as its internal preprocessor. By default, the input data will first be preprocessed by `sp` before being used for policy learning. However, since the training data `state_tilde` and `rewards_tilde` are already preprocessed in our case, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e. `sp`).
 
 ```python
 agent = FQI(num_actions=2, model_type='nn', preprocessor=sp)
@@ -182,7 +182,7 @@ agent.train(zs=zs_train, xs=states_tilde, actions=actions_train,
 
 #### `SimulatedEnvironment` Training
 
-Before moving on to the evaluation stage, there is one more thing to do: We need to train a `SimulatedEnvironment` that mimics the transition rules of the true environment that generated the training trajectory, which will be used by the evaluation functions to simulate the true data-generating environment. To do so, we initialize a `SimulatedEnvironment` and train it on the whole trajectory data (i.e. training set and testing set combined).
+Before moving on to the evaluation stage, there is one more step: We need to train a `SimulatedEnvironment` that mimics the transition rules of the true environment that generated the training trajectory, which will be used by the evaluation functions to simulate the true data-generating environment. To do so, we initialize a `SimulatedEnvironment` and train it on the whole trajectory data (i.e. training set and testing set combined).
 
 ```python
 env = SimulatedEnvironment(num_actions=2, state_model_type='nn', 
@@ -216,6 +216,10 @@ We can compare the sequential data preprocessing method in `CFRL` against a few 
 +=========+========+=======+=======+=======+
 
 By definition, the "random" baseline always achieves perfect CF. On the other hand, "ours" resulted in much fairer policies than "full" and "unaware", which suggests that the `SequentialPreprocessor` can effectively improve CF. Nevertheless, as a trade-off for higher CF, "ours" achieved a lower value than "full" and "unaware".
+
+# Non-convergence in `CFRL`
+
+We remark that non-convergence might arise in `CFRL` in `evaluate_reward_through_fqe()` and during the training of `SequentialPreprocessor`, `SimulatedEnvironment`, and `FQI`. In this case, `CFRL` provides a tool that can check for potential non-convergence using loss monitoring. More discussions about the sources, checks, and fixes of non-convergence in `CFRL` can be found in the "Common Issues" section of the CFRL documentation.
 
 # Conclusions
 

@@ -214,6 +214,6 @@ def run_exp(Ns, Ts, start_seed, nreps, export=True,
 
 
 # Run the computing time experiment
-df = run_exp(Ns=[100, 500, 1000], Ts=[10], start_seed=1, nreps=2, 
+df = run_exp(Ns=[1000], Ts=[10], start_seed=1, nreps=10, 
              export=True)
 print(df)
