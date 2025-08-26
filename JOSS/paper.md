@@ -66,11 +66,11 @@ To formally define and address the fairness problem in sequential decision makin
 multi-stage setting and proposed a data preprocessing algorithm that
 ensures CF. A policy is counterfactually fair if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute taken a different value, while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm ensures CF by constructing new state variables that are not impacted by the sensitive attribute(s). The reward values in the data are also preprocessed, but the purpose of preprocessing the rewards is to improve the value of the learned optimal policy rather than ensure CF. We refer interested readers to @wang2025cfrl for more technical details.
 
-The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides a suite of tools to evaluate the value and CF level achieved by 
+The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides a suite of tools to evaluate the value and counterfactual unfairness level achieved by 
 any given policy. Here, "CFRL" stands for "Counterfactual Fairness in Reinforcement Learning". The library produces preprocessed trajectories that can be used by
 an off-the-shelf offline RL algorithm, such as fitted Q-iteration (FQI) [@riedmiller2005fqi], to learn an optimal CF
 policy. The library can also simply read in any policy following a required format and return its
-value and CF level in the environment of interest, where the environment can be either pre-specified or learned from the data.
+value and counterfactual unfairness level in the environment of interest, where the environment can be either pre-specified or learned from the data.
 
 # Statement of Need
 
@@ -97,7 +97,7 @@ states at each time point into a new state vector. The preprocessed data can the
 directly used by existing RL algorithms for policy learning, and the
 learned policy should be counterfactually fair up to finite-sample estimation accuracy. Second, `CFRL`
 provides a platform for assessing RL policies based on CF. After passing in any policy and a data trajectory from the
-environment of interest, users can estimate the value and CF level achieved by the policy in the environment of interest. 
+environment of interest, users can estimate the value and counterfactual unfairness level achieved by the policy in the environment of interest. 
 
 # High-level Design
 
@@ -125,19 +125,19 @@ of the modules are summarized in the table below.
 |              |real-world RL trajectory data. Also implements functions for sampling trajectories    |
 |              |from the synthetic and simulated environments.                                        |
 +--------------+--------------------------------------------------------------------------------------+
-|`evaluation`  |Implements functions that evaluate the value and CF level of a policy.                |
-|              |Depending on the user's needs, the evaluation can be done either in a synthetic       | 
-|              |environment or in a simulated environment.                                            |
+|`evaluation`  |Implements functions that evaluate the value and counterfactual unfairness level of a |
+|              |policy. Depending on the user's needs, the evaluation can be done either in a         | 
+|              |synthetic environment or in a simulated environment.                                  |
 +==============+======================================================================================+
 
 A general CFRL workflow is as follows: First, simulate a trajectory using `environment` or read 
 in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` and preprocess the training trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in 
 `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to 
-evaluate the value and CF level of the trained policy. 
+evaluate the value and counterfactual unfairness level of the trained policy. 
 
 # Data Example
 
-We provide a data example to demonstrate how `CFRL` learns a counterfactually fair policy from real-world trajectory data with unknown underlying transition dynamics. We also show how `CFRL` evaluates the value and CF level of the learned policy. We note that this is only one of the many workflows that `CFRL` can perform. For example, `CFRL` can also generate synthetic trajectory data and use it to evaluate the value and CF level resulting from some custom data preprocessing methods. We refer interested readers to the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation for more workflow examples.
+We provide a data example to demonstrate how `CFRL` learns a counterfactually fair policy from real-world trajectory data with unknown underlying transition dynamics. We also show how `CFRL` evaluates the value and counterfactual unfairness level of the learned policy. We note that this is only one of the many workflows that `CFRL` can perform. For example, `CFRL` can also generate synthetic trajectory data and use it to evaluate the value and counterfactual unfairness level resulting from some custom data preprocessing methods. We refer interested readers to the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation for more workflow examples.
 
 #### Load Data
 
@@ -151,7 +151,7 @@ zs, states, actions, rewards, ids = read_trajectory_from_csv(
     id_label='ID', T=10)
 ```
 
-We then split the trajectory data into a training set (80%) and a testing set (20%) using scikit-learn's `train_test_split()`. The training set is used to train the counterfactually fair policy, while the testing set is used to evaluate the value and CF level achieved by the policy.
+We then split the trajectory data into a training set (80%) and a testing set (20%) using scikit-learn's `train_test_split()`. The training set is used to train the counterfactually fair policy, while the testing set is used to evaluate the value and counterfactual unfairness level achieved by the policy.
 
 ```python
 (zs_train, zs_test, states_train, states_test, 
@@ -190,9 +190,9 @@ env = SimulatedEnvironment(num_actions=2, state_model_type='nn',
 env.fit(zs=zs, states=states, actions=actions, rewards=rewards)
 ```
 
-#### Value and Counterfactual Fairness Evaluation
+#### Value and Counterfactual Unfairness Level Evaluation
 
-We now use `evaluate_value_through_fqe()` and `evaluate_fairness_through_model()` to estimate the value and CF level achieved by the trained policy when interacting with the environment of interest, respectively. The CF level is represented by a metric from 0 to 1, with 0 representing perfect fairness and 1 indicating complete unfairness. We use the testing set for evaluation.
+We now use `evaluate_value_through_fqe()` and `evaluate_fairness_through_model()` to estimate the value and counterfactual unfairness level achieved by the trained policy when interacting with the environment of interest, respectively. The counterfactual unfairness level is represented by a metric from 0 to 1, with 0 representing perfect fairness and 1 indicating complete unfairness. We use the testing set for evaluation.
 
 ```python
 value = evaluate_reward_through_fqe(zs=zs_test, states=states_test, 
@@ -205,15 +205,15 @@ The estimated value is $7.358$ and CF metric is $0.042$, which indicates our pol
 
 #### Comparisons Against Baseline Methods
 
-We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; and Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and CF levels as part of the code example of the "Assessing Policies Using Real Data" workflow in the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example, where "ours" stands for the `SequentialPreprocessor`.
+We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; and Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and counterfactual unfairness levels as part of the code example of the "Assessing Policies Using Real Data" workflow in the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example, where "ours" stands for the `SequentialPreprocessor`.
 
-+---------+--------+-------+-------+-------+
-|         |Random  |Full   |Unaware|Ours   |                                                                
-+=========+========+=======+=======+=======+
-|Value    |$-1.444$|$8.606$|$8.588$|$7.358$|
-+---------+--------+-------+-------+-------+
-|CF Metric|$0$     |$0.407$|$0.446$|$0.042$|
-+=========+========+=======+=======+=======+
++-------------------------------+--------+-------+-------+-------+
+|                               |Random  |Full   |Unaware|Ours   |                                                                
++===============================+========+=======+=======+=======+
+|Value                          |$-1.444$|$8.606$|$8.588$|$7.358$|
++-------------------------------+--------+-------+-------+-------+
+|Counterfactual Unfairness Level|$0$     |$0.407$|$0.446$|$0.042$|
++===============================+========+=======+=======+=======+
 
 By definition, the "random" baseline always achieves perfect CF. On the other hand, "ours" resulted in much fairer policies than "full" and "unaware", which suggests that the `SequentialPreprocessor` can effectively improve CF. Nevertheless, as a trade-off for higher CF, "ours" achieved a lower value than "full" and "unaware".
 
