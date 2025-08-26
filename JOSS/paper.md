@@ -70,7 +70,7 @@ The `CFRL` library implements the data preprocessing algorithm proposed by @wang
 any given policy. Here, "CFRL" stands for "Counterfactual Fairness in Reinforcement Learning". The library produces preprocessed trajectories that can be used by
 an off-the-shelf offline RL algorithm, such as fitted Q-iteration (FQI) [@riedmiller2005fqi], to learn an optimal CF
 policy. The library can also simply read in any policy following a required format and return its
-value and counterfactual unfairness level in the environment of interest, where the environment can be either pre-specified or learned from the data.
+value (i.e. expected discounted cumulative reward) and counterfactual unfairness level in the environment of interest, where the environment can be either pre-specified or learned from the data.
 
 # Statement of Need
 
