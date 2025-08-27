@@ -177,7 +177,8 @@ def run_exp_one(N, T, seed):
 
     end_time = time.time()
     df_nt = pd.DataFrame(
-                    {'N': [N], 
+                    {'workflow': ['preprocessing_only'], 
+                     'N': [N], 
                      'T': [T], 
                      'time': [end_time - start_time], 
                      'seed': [seed]
@@ -207,6 +208,6 @@ def run_exp(Ns, Ts, start_seed, nreps, export=True,
 
 
 # Run the computing time experiment
-df = run_exp(Ns=[100, 500, 1000], Ts=[10], start_seed=1, nreps=10, 
+df = run_exp(Ns=[1000], Ts=[20], start_seed=1, nreps=10, 
              export=True)
 print(df)

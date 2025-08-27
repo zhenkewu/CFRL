@@ -200,7 +200,8 @@ def run_exp_one(N, T, seed):
     
     end_time = time.time()
     df_nt = pd.DataFrame(
-                    {'N': [N], 
+                    {'workflow': ['real_data'], 
+                     'N': [N], 
                      'T': [T], 
                      'time': [end_time - start_time], 
                      'seed': [seed]
