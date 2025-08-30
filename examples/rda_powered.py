@@ -76,14 +76,17 @@ def run_exp_one(seed, model_type, z_label, methods):
                                         batch_size=128, 
                                         learning_rate=0.001, # LR THAT JITAO USED
                                         #learning_rate=0.003, # LR THAT I FOUND BETTER WHEN USING JITAO'S NN
-                                        is_loss_monitored=True, 
+                                        is_loss_monitored=False, 
                                         is_early_stopping=False, 
                                         patience=10, 
                                         min_delta=0.001)
             np.random.seed(seed+1)
             torch.manual_seed(seed+1) # NEWLY ADDED
             xs_tilde, rs_tilde = sp.train_preprocessor(zs_train, xs_train, actions_train, rewards_train)
-            agent = FQI(model_type=model_type, num_actions=3, preprocessor=sp, learning_rate=0.1)
+            agent = FQI(model_type=model_type, num_actions=3, preprocessor=sp, learning_rate=0.1, 
+                        is_loss_monitored=False, is_early_stopping_nn=False, 
+                        is_q_monitored=False, is_early_stopping_q=False
+                       )
             #agent = FQI(model_type='nn', action_space=[[0], [1]], preprocessor=sp) # TO BE DELETED
             np.random.seed(seed+2)
             torch.manual_seed(seed+2) # NEWLY ADDED
@@ -126,7 +129,7 @@ def run_exp_one(seed, model_type, z_label, methods):
                             num_actions=3, 
                             is_action_onehot=True, 
                             is_loss_monitored=False, 
-                            is_early_stopping=True)
+                            is_early_stopping=False)
     env.fit(zs, xs, actions, rewards)
     #env.reset(zs)
 
@@ -188,7 +191,9 @@ def run_exp_one(seed, model_type, z_label, methods):
                                             policy=agents[i], 
                                             seed=seed+4, 
                                             is_loss_monitored=False,
-                                            is_early_stopping=True,
+                                            is_early_stopping_nn=False,
+                                            is_q_monitored=False,
+                                            is_early_stopping_q=False
                                            )
         
         #print('fairness:', cf_metric)

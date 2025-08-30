@@ -724,7 +724,7 @@ class SimulatedEnvironment(gym.Env):
         epochs: int = 1000,
         batch_size: int = 128,
         learning_rate: int | float = 0.001,
-        is_loss_monitored: bool = False,
+        is_loss_monitored: bool = True,
         is_early_stopping: bool = True,
         test_size: int | float = 0.2,
         patience: int = 10,

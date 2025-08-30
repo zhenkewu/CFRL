@@ -379,10 +379,14 @@ def evaluate_reward_through_fqe(
         max_iter: int = 200, 
         seed: int = 1, 
         is_loss_monitored: bool = False,
-        is_early_stopping: bool = False,
-        test_size: int | float = 0.2,
-        patience: int = 10,
-        min_delta: int | float = 0.005
+        is_early_stopping_nn: bool = False,
+        test_size_nn: int | float = 0.2,
+        patience_nn: int = 10,
+        min_delta_nn: int | float = 0.005, 
+        is_q_monitored: bool = True,
+        is_early_stopping_q: bool = True,
+        patience_q: int = 5,
+        min_delta_q: int | float = 0.005
     ) -> np.integer | np.floating:
     """
     Estimate the value of a policy using fitted Q evaluation (FQE).
@@ -482,10 +486,14 @@ def evaluate_reward_through_fqe(
               epochs=epochs, 
               gamma=gamma, 
               is_loss_monitored=is_loss_monitored,
-              is_early_stopping=is_early_stopping,
-              test_size=test_size,
-              patience=patience,
-              min_delta=min_delta
+              is_early_stopping_nn=is_early_stopping_nn,
+              test_size_nn=test_size_nn,
+              patience_nn=patience_nn,
+              min_delta_nn=min_delta_nn, 
+              is_q_monitored=is_q_monitored,
+              is_early_stopping_q=is_early_stopping_q,
+              patience_q=patience_q,
+              min_delta_q=min_delta_q
              )
     fqe.fit(
         states=states, zs=zs, actions=actions, rewards=rewards, 

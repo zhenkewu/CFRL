@@ -19,5 +19,6 @@ _build/
 run_baseline_exp.py
 results_m19_baselines.csv
 examples/workflow_computing_times/temporary_outputs.csv
+examples/workflow_computing_times/old_data/
 CFRL/utils/base_models_old.py
 CFRL/olds/

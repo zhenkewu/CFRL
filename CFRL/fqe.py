@@ -1,7 +1,9 @@
 import numpy as np
 import torch
 import copy
-from .utils.base_models import LinearRegressor, NeuralNet, ConvergenceChecker, DecreasingLossWarning
+from .utils.base_models import LinearRegressor, NeuralNet
+from .utils.base_models import DecreasingLossWarning, FluctuatingQValueWarning
+from .utils.base_models import LossConvergenceChecker, QValueConvergenceChecker
 from .utils.custom_errors import InvalidModelError
 from .agents import Agent
 from sklearn.model_selection import train_test_split
@@ -47,11 +49,15 @@ class FQE:
             learning_rate: int | float = 0.1, 
             epochs: int = 500, 
             gamma: int | float = 0.9, 
-            is_loss_monitored: bool = False,
-            is_early_stopping: bool = False,
-            test_size: int | float = 0.2,
-            patience: int = 10,
-            min_delta: int | float = 0.005,
+            is_loss_monitored: bool = True,
+            is_early_stopping_nn: bool = True,
+            test_size_nn: int | float = 0.2,
+            patience_nn: int = 10,
+            min_delta_nn: int | float = 0.005,
+            is_q_monitored: bool = True,
+            is_early_stopping_q: bool = True,
+            patience_q: int = 5,
+            min_delta_q: int | float = 0.005
         ) -> None:
         """
         Args: 
@@ -117,10 +123,14 @@ class FQE:
         self.epochs = epochs
         self.gamma = gamma
         self.is_loss_monitored = is_loss_monitored
-        self.is_early_stopping = is_early_stopping
-        self.test_size = test_size
-        self.patience = patience
-        self.min_delta = min_delta
+        self.is_early_stopping_nn = is_early_stopping_nn
+        self.test_size_nn = test_size_nn
+        self.patience_nn = patience_nn
+        self.min_delta_nn = min_delta_nn
+        self.is_q_monitored = is_q_monitored
+        self.is_early_stopping_q = is_early_stopping_q
+        self.patience_q = patience_q
+        self.min_delta_q = min_delta_q
 
         # sanity check
         self._sanity_check()
@@ -272,6 +282,9 @@ class FQE:
                 in_dim=sdim, out_dim=self.action_size, hidden_dims=self.hidden_dims 
             )
 
+            q_checker = QValueConvergenceChecker(patience=self.patience_q, 
+                                             min_delta=self.min_delta_q)
+
             # training loop
             for i in tqdm(range(max_iter)):
                 # generate target
@@ -307,15 +320,15 @@ class FQE:
                 )
                 #Y = torch.tensor(Y, dtype=torch.float32)
 
-                if self.is_loss_monitored or self.is_early_stopping:
-                    convergence_checker = ConvergenceChecker(
-                        patience=self.patience,
-                        min_delta=self.min_delta,
+                if self.is_loss_monitored or self.is_early_stopping_nn:
+                    convergence_checker = LossConvergenceChecker(
+                        patience=self.patience_nn,
+                        min_delta=self.min_delta_nn,
                         mode="min",
                     )
 
                     idx_train, idx_test = train_test_split(
-                        np.arange(states.shape[0]), test_size=self.test_size
+                        np.arange(states.shape[0]), test_size=self.test_size_nn
                     )
                     X_train = states[idx_train]
                     y_train = Y[idx_train]
@@ -330,7 +343,7 @@ class FQE:
                 X_train = torch.FloatTensor(X_train)
                 y_train = torch.FloatTensor(y_train)
 
-                if self.is_loss_monitored or self.is_early_stopping:
+                if self.is_loss_monitored or self.is_early_stopping_nn:
                     actions_tensor_train = torch.LongTensor(actions[idx_train].reshape(-1, 1))
                     actions_tensor_test = torch.LongTensor(actions[idx_test].reshape(-1, 1))
                 else:
@@ -346,25 +359,26 @@ class FQE:
                     new_model.train()
                     Y_pred = new_model.forward(X_train).gather(1, actions_tensor_train)
                     optimizer.zero_grad()
-                    loss = criterion(y_train, Y_pred)
+                    loss = criterion(Y_pred, y_train)
                     loss.backward()
                     optimizer.step()
 
                     train_losses.append(loss.item())
 
-                    if self.is_loss_monitored or self.is_early_stopping:
+                    if self.is_loss_monitored or self.is_early_stopping_nn:
                         new_model.eval()
                         with torch.no_grad():
                             val_outputs = new_model(X_test).gather(1, actions_tensor_test)
                             val_loss = criterion(val_outputs, y_test)
 
                         val_losses.append(val_loss.item())
+                        converged_nn = convergence_checker(val_loss.item())
 
-                        if self.is_early_stopping and convergence_checker(val_loss.item()):
+                        if self.is_early_stopping_nn and converged_nn:
                             break
 
-                    if self.is_loss_monitored and epoch == self.epochs - 1 and (not convergence_checker(val_loss.item())):
-                        warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.patience) + ' epochs during neural network training', DecreasingLossWarning)
+                        if self.is_loss_monitored and epoch == self.epochs - 1 and (not converged_nn):
+                            warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.patience_nn) + ' epochs during neural network training', DecreasingLossWarning)
 
                 #glogger.info(
                 #    "{}, fqe_nn mse:{}, mean_target:{}".format(
@@ -373,7 +387,20 @@ class FQE:
                 #)
                 current_model = copy.deepcopy(new_model)
 
-        self.model = copy.deepcopy(new_model)
+                if self.is_early_stopping_q or self.is_q_monitored:
+                    current_model.eval()
+                    with torch.no_grad():
+                        q = current_model(torch.FloatTensor(states)).numpy()
+                    current_model.train()
+                    converged_q = q_checker(q=q)
+                    
+                    if self.is_early_stopping_q and converged_q:
+                        break
+                    
+                    if self.is_q_monitored and i == max_iter - 1 and (not converged_q):
+                        warnings.warn('\nThe fluctuation in the q values is not small enough in at least one of the final ' + str(self.patience_q) + ' iterations during FQI training', FluctuatingQValueWarning)
+
+        self.model = copy.deepcopy(current_model)
 
     def evaluate(
             self, 

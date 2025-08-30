@@ -22,7 +22,11 @@ class DecreasingLossWarning(Warning):
     pass
 
 
-class ConvergenceChecker:
+class FluctuatingQValueWarning(Warning):
+    pass
+
+
+class LossConvergenceChecker:
     def __init__(
             self, 
             patience: int = 5, 
@@ -42,12 +46,41 @@ class ConvergenceChecker:
             return False
 
         if self.mode == "min":
-            delta = val_loss - self.best_score
+            delta = (val_loss - self.best_score) / self.best_score
         elif self.mode == "max":
-            delta = self.best_score - val_loss
+            delta = (self.best_score - val_loss) / self.best_score
 
         if delta < -self.min_delta:
             self.best_score = val_loss
+            self.counter = 0
+        else:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.converged = True
+        return self.converged
+    
+
+class QValueConvergenceChecker:
+    def __init__(
+            self, 
+            patience: int = 5, 
+            min_delta: int | float = 0.001, 
+        ) -> None:
+        self.patience = patience
+        self.min_delta = min_delta
+        self.counter = 0
+        self.prev_q = None
+        self.converged = False
+
+    def __call__(self, q: np.ndarray) -> bool:
+        if self.prev_q is None:
+            self.prev_q = q
+            return False
+
+        delta = np.max(np.abs(q - self.prev_q)) / np.max(np.abs(self.prev_q))
+        self.prev_q = q.copy()
+
+        if delta >= self.min_delta:
             self.counter = 0
         else:
             self.counter += 1
@@ -138,7 +171,7 @@ class NeuralNetRegressor(nn.Module):
 
         # Train-test split
         if is_loss_monitored or is_early_stopping:
-            convergence_checker = ConvergenceChecker(
+            convergence_checker = LossConvergenceChecker(
                 patience=patience,
                 min_delta=min_delta,
                 mode="min",

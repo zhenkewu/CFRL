@@ -3,7 +3,9 @@ import numpy as np
 import torch
 import copy
 #from utils.utils import glogger
-from .utils.base_models import LinearRegressor, NeuralNet, ConvergenceChecker, DecreasingLossWarning
+from .utils.base_models import LinearRegressor, NeuralNet
+from .utils.base_models import DecreasingLossWarning, FluctuatingQValueWarning
+from .utils.base_models import LossConvergenceChecker, QValueConvergenceChecker
 from .utils.custom_errors import InvalidModelError
 from .preprocessor import Preprocessor, SequentialPreprocessor
 from sklearn.model_selection import train_test_split
@@ -96,11 +98,15 @@ class FQI(Agent):
         gamma: int | float = 0.9,
         learning_rate: int | float = 0.1,
         epochs: int = 500,
-        is_loss_monitored: bool = False,
-        is_early_stopping: bool = False,
-        test_size: int | float = 0.2,
-        patience: int = 10,
-        min_delta: int | float = 0.005,
+        is_loss_monitored: bool = True, 
+        is_early_stopping_nn: bool = True,
+        test_size_nn: int | float = 0.2,
+        patience_nn: int = 10,
+        min_delta_nn: int | float = 0.005,
+        is_q_monitored: bool = True, 
+        is_early_stopping_q: bool = True, 
+        patience_q: int = 5, 
+        min_delta_q: int|float = 0.005
     ) -> None:
         """
         Args: 
@@ -171,10 +177,14 @@ class FQI(Agent):
         self.learning_rate = learning_rate
         self.epochs = epochs
         self.is_loss_monitored = is_loss_monitored
-        self.is_early_stopping = is_early_stopping
-        self.test_size = test_size
-        self.patience = patience
-        self.min_delta = min_delta
+        self.is_early_stopping_nn = is_early_stopping_nn
+        self.test_size_nn = test_size_nn
+        self.patience_nn = patience_nn
+        self.min_delta_nn = min_delta_nn
+        self.is_q_monitored = is_q_monitored 
+        self.is_early_stopping_q = is_early_stopping_q
+        self.patience_q = patience_q
+        self.min_delta_q = min_delta_q
         self.__name__ = 'FQI'
         self._sanity_check()
 
@@ -214,11 +224,28 @@ class FQI(Agent):
         actions = actions.reshape(-1, 1)
         rewards = rewards.reshape(-1, 1)
 
+        q_checker = QValueConvergenceChecker(patience=self.patience_q, 
+                                             min_delta=self.min_delta_q)
+
         for iteration in tqdm(range(max_iter)):
             if self.model_type == "lm":
                 self._fit_lm(states, actions, rewards, next_states, iteration)
             elif self.model_type == "nn":
+                # add a line that computes the q value using the current (i.e. original) self.model
                 self._fit_nn(states, actions, rewards, next_states, iteration, state_dim)
+                # add a line that computes the q value using the current (i.e. updated) self.model
+                if self.is_early_stopping_q or self.is_q_monitored:
+                    self.model.eval()
+                    with torch.no_grad():
+                        q = self.model(torch.FloatTensor(states)).numpy()
+                    self.model.train()
+                    
+                    if self.is_early_stopping_q and q_checker(q=q):
+                        break
+                    
+                    if self.is_q_monitored and iteration == max_iter - 1 and (not q_checker(q=q)):
+                        warnings.warn('\nThe fluctuation in the q values is not small enough in at least one of the final ' + str(self.patience_q) + ' iterations during FQI training', FluctuatingQValueWarning)
+
 
     def _fit_nn(
             self, 
@@ -246,15 +273,15 @@ class FQI(Agent):
             hidden_dims=self.hidden_dims,
         )
 
-        if self.is_loss_monitored or self.is_early_stopping:
-            convergence_checker = ConvergenceChecker(
-                patience=self.patience,
-                min_delta=self.min_delta,
+        if self.is_loss_monitored or self.is_early_stopping_nn:
+            convergence_checker = LossConvergenceChecker(
+                patience=self.patience_nn,
+                min_delta=self.min_delta_nn,
                 mode="min",
             )
 
             idx_train, idx_test = train_test_split(
-                np.arange(states.shape[0]), test_size=self.test_size
+                np.arange(states.shape[0]), test_size=self.test_size_nn
             )
             X_train = states[idx_train]
             y_train = Y[idx_train]
@@ -269,7 +296,7 @@ class FQI(Agent):
         X_train = torch.FloatTensor(X_train)
         y_train = torch.FloatTensor(y_train)
 
-        if self.is_loss_monitored or self.is_early_stopping:
+        if self.is_loss_monitored or self.is_early_stopping_nn:
             actions_tensor_train = torch.LongTensor(actions[idx_train].reshape(-1, 1))
             actions_tensor_test = torch.LongTensor(actions[idx_test].reshape(-1, 1))
         else:
@@ -291,19 +318,19 @@ class FQI(Agent):
 
             train_losses.append(loss.item())
 
-            if self.is_loss_monitored or self.is_early_stopping:
-                self.model.eval()
+            if self.is_loss_monitored or self.is_early_stopping_nn:
+                new_model.eval()
                 with torch.no_grad():
-                    val_outputs = self.model(X_test).gather(1, actions_tensor_test)
+                    val_outputs = new_model(X_test).gather(1, actions_tensor_test)
                     val_loss = criterion(val_outputs, y_test)
 
                 val_losses.append(val_loss.item())
 
-                if self.is_early_stopping and convergence_checker(val_loss.item()):
+                if self.is_early_stopping_nn and convergence_checker(val_loss.item()):
                     break
 
-            if self.is_loss_monitored and epoch == self.epochs - 1 and (not convergence_checker(val_loss.item())):
-                warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.patience) + ' epochs during neural network training', DecreasingLossWarning)
+                if self.is_loss_monitored and epoch == self.epochs - 1 and (not convergence_checker(val_loss.item())):
+                    warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.patience_nn) + ' epochs during neural network training', DecreasingLossWarning)
         '''glogger.info(
             f"{iteration}, fqi_nn mse:{loss.item()}, mean_target:{np.mean(Y.detach().numpy())}"
         )'''

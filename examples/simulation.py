@@ -129,8 +129,8 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 num_actions=2, 
                 reg_model=model_type,
                 is_normalized=False,
-                #is_loss_monitored=False,
-                #is_early_stopping=False
+                is_loss_monitored=True,
+                is_early_stopping=True, 
             )
             preprocessor.train_preprocessor(xs=copy.deepcopy(xs),
                                             zs=copy.deepcopy(zs),
@@ -141,8 +141,11 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 preprocessor=preprocessor,
                 model_type=fqi_model,
                 num_actions=2,
-                is_loss_monitored=False,
-                is_early_stopping=True,
+                is_loss_monitored=True,
+                is_early_stopping_nn=True,
+                is_q_monitored=True,
+                is_early_stopping_q=True,
+                #min_delta_q=0.05
                 #name="ours",
             )
             agent.train(
@@ -374,7 +377,7 @@ def run_exp(rep, start_seed=1, export=False):
     NREP = rep
     #CORES = 20
     #Ns = [100, 200, 500, 1000, 2000]
-    Ns = [1000]
+    Ns = [100]
     Ts = [10]
     # z_coefs = [0, 0.5, 1.0, 1.5, 2.0]
     z_coefs = [1]
@@ -386,16 +389,16 @@ def run_exp(rep, start_seed=1, export=False):
     method_policy = "FQI_NN"
 
     methods = [
-        "random",
-        "behavior",
+        #"random",
+        #"behavior",
         # "sdp_nostate_yesreward",
         # "sdp_yesstate_noreward",
         # "sdp_yesstate_noreward_Oracle",
         # "sdp_nostate_yesreward_Oracle",
-        "full",
-        "unaware",
+        #"full",
+        #"unaware",
         "ours",
-        "oracle",
+        #"oracle",
     ]
 
     mp.set_start_method("spawn")
@@ -505,8 +508,8 @@ def run_exp(rep, start_seed=1, export=False):
 
 
 # run the experiments
-s = int(input('Enter the seed that is to be used: '))
+'''s = int(input('Enter the seed that is to be used: '))
 df_n = run_exp1_one(methods=['ours'], 
-                          method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)
-#df_n = run_exp(rep=20, start_seed=31, export=True)
+                          method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)'''
+df_n = run_exp(rep=3, start_seed=1, export=True)
 print(df_n)
