@@ -133,7 +133,7 @@ def run_exp_one(N, T, seed):
                              ids=ids)
 
     # Run the preprocessing only workflow; this section is timed
-    start_time = time.time()
+    start_time = time.process_time()
 
     trajectory = pd.read_csv('./temporary_sample_data.csv')
     zs, states, actions, rewards, ids = read_trajectory_from_dataframe(
@@ -166,13 +166,17 @@ def run_exp_one(N, T, seed):
                                 num_actions=2, 
                                 cross_folds=5, 
                                 mode='single', 
-                                reg_model='nn')
+                                reg_model='nn', 
+                                is_loss_monitored=False, 
+                                is_early_stopping=False)
     states_tilde, rewards_tilde = sp.train_preprocessor(zs=zs_train, 
                                                         xs=states_train, 
                                                         actions=actions_train, 
                                                         rewards=rewards_train)
     
-    agent = FQI(num_actions=2, model_type='nn', preprocessor=sp)
+    agent = FQI(num_actions=2, model_type='nn', preprocessor=sp, 
+                is_loss_monitored=False, is_early_stopping_nn=False, 
+                is_q_monitored=False, is_early_stopping_q=False)
     agent.train(zs=zs_train, 
                 xs=states_tilde, 
                 actions=actions_train, 
@@ -182,7 +186,9 @@ def run_exp_one(N, T, seed):
     
     env = SimulatedEnvironment(num_actions=2, 
                                state_model_type='nn', 
-                               reward_model_type='nn')
+                               reward_model_type='nn', 
+                               is_loss_monitored=False, 
+                               is_early_stopping=False)
     env.fit(zs=zs, states=states, actions=actions, rewards=rewards)
 
     value = evaluate_reward_through_fqe(zs=zs_test, 
@@ -191,14 +197,18 @@ def run_exp_one(N, T, seed):
                                         rewards=rewards_test, 
                                         policy=agent, 
                                         model_type='nn', 
-                                        gamma=0.9)
+                                        gamma=0.9, 
+                                        is_loss_monitored=False, 
+                                        is_early_stopping_nn=False, 
+                                        is_q_monitored=False, 
+                                        is_early_stopping_q=False)
     cf_metric = evaluate_fairness_through_model(env=env, 
                                                 zs=zs_test, 
                                                 states=states_test, 
                                                 actions=actions_test, 
                                                 policy=agent)
     
-    end_time = time.time()
+    end_time = time.process_time()
     df_nt = pd.DataFrame(
                     {'workflow': ['real_data'], 
                      'N': [N], 
@@ -231,6 +241,6 @@ def run_exp(Ns, Ts, start_seed, nreps, export=True,
 
 
 # Run the computing time experiment
-df = run_exp(Ns=[100], Ts=[20], start_seed=6, nreps=5, 
+df = run_exp(Ns=[100], Ts=[10], start_seed=6, nreps=1, 
              export=True)
 print(df)

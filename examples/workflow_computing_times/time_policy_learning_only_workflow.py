@@ -131,7 +131,7 @@ def run_exp_one(N, T, seed):
                              ids=ids)
 
     # Run the preprocessing only workflow; this section is timed
-    start_time = time.time()
+    start_time = time.process_time()
 
     trajectory = pd.read_csv('./temporary_sample_data.csv')
     zs, states, actions, rewards, ids = read_trajectory_from_dataframe(
@@ -157,13 +157,17 @@ def run_exp_one(N, T, seed):
                                     num_actions=2, 
                                     cross_folds=5, 
                                     mode='single', 
-                                    reg_model='nn')
+                                    reg_model='nn', 
+                                    is_loss_monitored=False, 
+                                    is_early_stopping=False)
     states_tilde_cf5, rewards_tilde_cf5 = sp_cf5.train_preprocessor(zs=zs, 
                                                                     xs=states, 
                                                                     actions=actions, 
                                                                     rewards=rewards)
     
-    agent_cf5 = FQI(num_actions=2, model_type='nn', preprocessor=sp_cf5)
+    agent_cf5 = FQI(num_actions=2, model_type='nn', preprocessor=sp_cf5, 
+                    is_loss_monitored=False, is_early_stopping_nn=False, 
+                    is_q_monitored=False, is_early_stopping_q=False)
     agent_cf5.train(zs=zs, 
                     xs=states_tilde_cf5, 
                     actions=actions, 
@@ -182,7 +186,7 @@ def run_exp_one(N, T, seed):
                    atm1=a0, 
                    preprocess=True)
     
-    end_time = time.time()
+    end_time = time.process_time()
     df_nt = pd.DataFrame(
                     {'workflow': ['policy_learning_only'], 
                      'N': [N], 
@@ -215,6 +219,6 @@ def run_exp(Ns, Ts, start_seed, nreps, export=True,
 
 
 # Run the computing time experiment
-df = run_exp(Ns=[1000], Ts=[20], start_seed=1, nreps=10, 
+df = run_exp(Ns=[500], Ts=[10], start_seed=1, nreps=5, 
              export=True)
 print(df)

@@ -129,8 +129,8 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 num_actions=2, 
                 reg_model=model_type,
                 is_normalized=False,
-                is_loss_monitored=True,
-                is_early_stopping=True, 
+                is_loss_monitored=False,
+                is_early_stopping=False, 
             )
             preprocessor.train_preprocessor(xs=copy.deepcopy(xs),
                                             zs=copy.deepcopy(zs),
@@ -141,10 +141,10 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 preprocessor=preprocessor,
                 model_type=fqi_model,
                 num_actions=2,
-                is_loss_monitored=True,
-                is_early_stopping_nn=True,
-                is_q_monitored=True,
-                is_early_stopping_q=True,
+                is_loss_monitored=False,
+                is_early_stopping_nn=False,
+                is_q_monitored=False,
+                is_early_stopping_q=False,
                 #min_delta_q=0.05
                 #name="ours",
             )
@@ -511,5 +511,5 @@ def run_exp(rep, start_seed=1, export=False):
 '''s = int(input('Enter the seed that is to be used: '))
 df_n = run_exp1_one(methods=['ours'], 
                           method_policy='FQI_NN', N=100, T=10, z_coef=1, seed=s)'''
-df_n = run_exp(rep=3, start_seed=1, export=True)
+df_n = run_exp(rep=5, start_seed=1, export=True)
 print(df_n)

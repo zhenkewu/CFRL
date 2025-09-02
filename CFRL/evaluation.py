@@ -434,34 +434,57 @@ def evaluate_reward_through_fqe(
         seed (int, optional): 
             The random seed used for FQE.
         is_loss_monitored (bool, optional):
-            When set to :code:`True`, will split the training data into a training set and a 
-            validation set, and will monitor the validation loss when training the neural network 
-            approximator of the Q function in each iteration of the FQE. A warning 
-            will be raised if the decrease in the validation loss is greater than :code:`min_delta` for at 
-            least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
-            by the argument :code:`patience`. This argument is not used if :code:`model_type="lm"`.
-        is_early_stopping (bool, optional): 
-            When set to :code:`True`, will split the training data into a training set and a 
-            validation set, and will enforce early stopping based on the validation loss 
-            when training the neural network approximator of the Q function in each iteration of the FQE. That is, in each iteration, 
-            neural network training will stop early 
-            if the decrease in the validation loss is no greater than :code:`min_delta` for :math:`p` consecutive training 
-            epochs, where :math:`p` is specified by the argument :code:`patience`. This argument is not used if 
-            :code:`model_type="lm"`.
-        test_size (int or float, optional): 
-            An :code:`int` or :code:`float` between 0 and 1 (inclusive) that 
-            specifies the proportion of the full training data that is used as the validation set for loss 
-            monitoring and early stopping. This argument is not used if :code:`model_type="lm"` or 
-            both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
-        patience (int, optional): 
-            The number of consequentive epochs with barely-decreasing validation loss that is needed 
-            for loss monitoring and early stopping. This argument is not used if :code:`model_type="lm"` 
-            or both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
-        min_delta (int for float, optional): 
-            The maximum amount of decrease in the validation loss for it to be considered 
-            barely-decreasing by the loss monitoring and early stopping mechanisms. This argument is 
-            not used if :code:`model_type="lm"` or both :code:`is_loss_monitored` and 
-            :code:`is_early_stopping` are :code:`False`.
+                When set to :code:`True`, will split the training data into a training set and a 
+                validation set, and will monitor the validation loss when training the neural network 
+                approximator of the Q function in each iteration. A warning 
+                will be raised if the percent decrease in the validation loss is greater than :code:`min_delta_nn` for at 
+                least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
+                by the argument :code:`patience_nn`. This argument is not used if :code:`model_type="lm"`.
+            is_early_stopping_nn (bool, optional): 
+                When set to :code:`True`, will split the training data into a training set and a 
+                validation set, and will enforce early stopping based on the validation loss 
+                when training the neural network approximator of the Q function in each iteration. That is, in each iteration, 
+                neural network training will stop early 
+                if the percent decrease in the validation loss is no greater than :code:`min_delta_nn` for :math:`p` consecutive training 
+                epochs, where :math:`p` is specified by the argument :code:`patience_nn`. This argument is not used if 
+                :code:`model_type="lm"`.
+            test_size_nn (int or float, optional): 
+                An :code:`int` or :code:`float` between 0 and 1 (inclusive) that 
+                specifies the proportion of the full training data that is used as the validation set for loss 
+                monitoring and early stopping. This argument is not used if :code:`model_type="lm"` or 
+                both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+            patience_nn (int, optional): 
+                The number of consequentive epochs with barely-decreasing validation loss that is needed 
+                for loss monitoring and early stopping. This argument is not used if :code:`model_type="lm"` 
+                or both :code:`is_loss_monitored` and :code:`is_early_stopping_nn` are :code:`False`.
+            min_delta_nn (int for float, optional): 
+                The maximum amount of decrease in the validation loss for it to be considered 
+                barely-decreasing by the loss monitoring and early stopping mechanisms. This argument is 
+                not used if :code:`model_type="lm"` or both :code:`is_loss_monitored` and 
+                :code:`is_early_stopping` are :code:`False`.
+            is_q_monitored (bool, optional):
+                When set to :code:`True`, will monitor the Q values estimated by the neural network 
+                approximator of the Q function in each iteration. A warning 
+                will be raised if the percent change in some Q value is greater than :code:`min_delta_q` for at 
+                least one of the final :math:`r` epochs during neural network training, where :math:`r` is specified 
+                by the argument :code:`patience_q`. This argument is not used if :code:`model_type="lm"`.
+            is_early_stopping_q (bool, optional): 
+                When set to :code:`True`, will monitor the Q values estimated by the neural network 
+                approximator of the Q function in each iteration, and will enforce early stopping based on the estimated Q values 
+                when training the neural network approximator of the Q function in each iteration. That is, 
+                FQE training will stop early 
+                if the percent changes in all the predicted Q values are no greater than :code:`min_delta_q` for :math:`r` consecutive 
+                iterations, where :math:`r` is specified by the argument :code:`patience_q`. This argument is not used if 
+                :code:`model_type="lm"`.
+            patience_q (int, optional): 
+                The number of consequentive epochs with barely-changing estimated Q values that is needed 
+                for Q value monitoring and early stopping. This argument is not used if :code:`model_type="lm"` 
+                or both :code:`is_q_monitored` and :code:`is_early_stopping_q` are :code:`False`.
+            min_delta_q (int for float, optional): 
+                The maximum amount of change in the validation loss for it to be considered 
+                barely-changing by the Q value monitoring and early stopping mechanisms. This argument is 
+                not used if :code:`model_type="lm"` or both :code:`is_q_monitored` and 
+                :code:`is_early_stopping_q` are :code:`False`.
 
     Returns: 
         discounted_cumulative_reward (np.integer or np.floating): 

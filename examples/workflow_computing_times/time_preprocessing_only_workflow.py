@@ -130,7 +130,7 @@ def run_exp_one(N, T, seed):
                              ids=ids)
 
     # Run the preprocessing only workflow; this section is timed
-    start_time = time.time()
+    start_time = time.process_time()
 
     trajectory = pd.read_csv('./temporary_sample_data.csv')
     zs, states, actions, rewards, ids = read_trajectory_from_dataframe(
@@ -156,7 +156,9 @@ def run_exp_one(N, T, seed):
                                     num_actions=2, 
                                     cross_folds=5, 
                                     mode='single', 
-                                    reg_model='nn')
+                                    reg_model='nn', 
+                                    is_loss_monitored=False, 
+                                    is_early_stopping=False)
     states_tilde_cf5, rewards_tilde_cf5 = sp_cf5.train_preprocessor(zs=zs, 
                                                                     xs=states, 
                                                                     actions=actions, 
@@ -175,7 +177,7 @@ def run_exp_one(N, T, seed):
                                             T_label='time_step'
                                             )
 
-    end_time = time.time()
+    end_time = time.process_time()
     df_nt = pd.DataFrame(
                     {'workflow': ['preprocessing_only'], 
                      'N': [N], 
@@ -208,6 +210,6 @@ def run_exp(Ns, Ts, start_seed, nreps, export=True,
 
 
 # Run the computing time experiment
-df = run_exp(Ns=[1000], Ts=[20], start_seed=1, nreps=10, 
+df = run_exp(Ns=[100], Ts=[10], start_seed=1, nreps=1, 
              export=True)
 print(df)

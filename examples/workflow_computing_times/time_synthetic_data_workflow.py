@@ -19,7 +19,7 @@ def run_exp_one(N, T, seed):
     np.random.seed(seed) # ensure reproducibility
     torch.manual_seed(seed) # ensure reproducibility
 
-    start_time = time.time()
+    start_time = time.process_time()
 
     class ConcatenatePreprocessor(Preprocessor):
             def __init__(self) -> None:
@@ -195,7 +195,9 @@ def run_exp_one(N, T, seed):
                                                     policy=behavior_agent)
 
     cp = ConcatenatePreprocessor()
-    agent = FQI(num_actions=2, model_type='nn', preprocessor=cp)
+    agent = FQI(num_actions=2, model_type='nn', preprocessor=cp, 
+                is_loss_monitored=False, is_early_stopping_nn=False, 
+                is_q_monitored=False, is_early_stopping_q=False)
     agent.train(zs=zs, 
                 xs=states, 
                 actions=actions, 
@@ -217,7 +219,7 @@ def run_exp_one(N, T, seed):
                                                      T=T, 
                                                      policy=agent)
     
-    end_time = time.time()
+    end_time = time.process_time()
     df_nt = pd.DataFrame(
                     {'workflow': ['synthetic_data'], 
                      'N': [N], 
@@ -250,6 +252,6 @@ def run_exp(Ns, Ts, start_seed, nreps, export=True,
 
 
 # Run the computing time experiment
-df = run_exp(Ns=[1000], Ts=[20], start_seed=1, nreps=10, 
+df = run_exp(Ns=[100], Ts=[10], start_seed=1, nreps=10, 
              export=True)
 print(df)

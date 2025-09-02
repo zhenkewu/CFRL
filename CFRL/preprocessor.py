@@ -257,7 +257,7 @@ class SequentialPreprocessor(Preprocessor):
             is_loss_monitored (bool, optional):
                 When set to :code:`True`, will split the training data into a training set and a 
                 validation set, and will monitor the validation loss during training. A warning 
-                will be raised if the decrease in the validation loss is greater than :code:`min_delta` for at 
+                will be raised if the percent decrease in the validation loss is greater than :code:`min_delta` for at 
                 least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
                 by the argument :code:`patience`. This argument is not used if :code:`reg_model="lm"`.
             is_early_stopping (bool, optional): 

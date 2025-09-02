@@ -1,0 +1,16 @@
+,workflow,N,T,time,seed
+0,policy_learning_only,100,10,102.8125,1
+0,policy_learning_only,100,10,112.640625,2
+0,policy_learning_only,100,10,122.109375,3
+0,policy_learning_only,100,10,121.140625,4
+0,policy_learning_only,100,10,85.484375,5
+0,policy_learning_only,100,10,92.84375,6
+0,policy_learning_only,100,10,76.90625,7
+0,policy_learning_only,100,10,81.953125,8
+0,policy_learning_only,100,10,86.65625,9
+0,policy_learning_only,100,10,89.3125,10
+0,policy_learning_only,500,10,305.90625,1
+0,policy_learning_only,500,10,293.984375,2
+0,policy_learning_only,500,10,273.5,3
+0,policy_learning_only,500,10,266.125,4
+0,policy_learning_only,500,10,244.40625,5
