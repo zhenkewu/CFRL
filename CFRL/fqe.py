@@ -113,7 +113,7 @@ class FQE:
             is_q_monitored (bool, optional):
                 When set to :code:`True`, will monitor the Q values estimated by the neural network 
                 approximator of the Q function in each iteration. A warning 
-                will be raised if the percent change in some Q value is greater than :code:`min_delta_q` for at 
+                will be raised if the percent absolute change in some Q value is greater than :code:`min_delta_q` for at 
                 least one of the final :math:`r` epochs during neural network training, where :math:`r` is specified 
                 by the argument :code:`patience_q`. This argument is not used if :code:`model_type="lm"`.
             is_early_stopping_q (bool, optional): 
@@ -121,7 +121,7 @@ class FQE:
                 approximator of the Q function in each iteration, and will enforce early stopping based on the estimated Q values 
                 when training the neural network approximator of the Q function in each iteration. That is, 
                 FQE training will stop early 
-                if the percent changes in all the predicted Q values are no greater than :code:`min_delta_q` for :math:`r` consecutive 
+                if the percent absolute changes in all the predicted Q values are no greater than :code:`min_delta_q` for :math:`r` consecutive 
                 iterations, where :math:`r` is specified by the argument :code:`patience_q`. This argument is not used if 
                 :code:`model_type="lm"`.
             patience_q (int, optional): 

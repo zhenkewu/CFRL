@@ -22,3 +22,4 @@ examples/workflow_computing_times/temporary_outputs.csv
 examples/workflow_computing_times/old_data/
 CFRL/utils/base_models_old.py
 CFRL/olds/
+examples/workflow_computing_times/time_workflows.sbatch
