@@ -211,8 +211,7 @@ The estimated value is $7.358$ and CF metric is $0.042$, which indicates our pol
 
 We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; and Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and counterfactual unfairness levels as part of the code example of the "Assessing Policies Using Real Data" workflow in the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example, where "ours" stands for the `SequentialPreprocessor`.
 
-|                               |        |       |       |       |
-|                               |Random  |Full   |Unaware Ours   |                                                                
+|                               |Random  |Full   |Unaware|Ours   |                                                    
 |-------------------------------|--------|-------|-------|-------|
 |Value                          |$-1.444$|$8.606$|$8.588$|$7.358$
 |Counterfactual Unfairness Level|$0$     |$0.407$|$0.446$|$0.042$|
