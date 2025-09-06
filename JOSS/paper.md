@@ -111,7 +111,6 @@ of the modules are summarized in the table below.
 |`agents`      |Implements a fitted Q-iteration (FQI) algorithm [@riedmiller2005fqi], which learns RL policies and makes decisions based on the learned policy. Users can also pass a preprocessor to the FQI; in this case, the FQI will be able to take in unpreprocessed trajectories, internally preprocess the input trajectories, and directly output counterfactually fair policies.|
 |`environment` |Implements a synthetic environment that produces synthetic data as well as a simulated environment that estimates and simulates the transition dynamics of the unknown environment underlying some real-world RL trajectory data. Also implements functions for sampling trajectories from the synthetic and simulated environments.                                        |
 |`evaluation`  |Implements functions that evaluate the value and counterfactual unfairness level of a policy. Depending on the user's needs, the evaluation can be done either in a synthetic environment or in a simulated environment.                                  |
-+--------------+--------------------------------------------------------------------------------------+
 
 A general CFRL workflow is as follows: First, simulate a trajectory using `environment` or read 
 in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` and preprocess the training trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in 
