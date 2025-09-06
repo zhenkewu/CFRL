@@ -104,31 +104,26 @@ environment of interest, users can estimate the value and counterfactual unfairn
 The `CFRL` library is composed of 5 major modules. The functionalities
 of the modules are summarized in the table below.
 
-+--------------+--------------------------------------------------------------------------------------+
 |Module        |Functionalities                                                                       |
-+==============+======================================================================================+
+|--------------|--------------------------------------------------------------------------------------|
 |`reader`      |Implements functions that read tabular trajectory data from either a `.csv` file or a |
 |              |`pandas.Dataframe` into an array format required by `CFRL`. Also implements functions |
 |              |that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.          |
-+--------------+--------------------------------------------------------------------------------------+
 |`preprocessor`|Implements the data preprocessing algorithm introduced in @wang2025cfrl.              |
-+--------------+--------------------------------------------------------------------------------------+
 |`agents`      |Implements a fitted Q-iteration (FQI) algorithm [@riedmiller2005fqi], which learns RL |
 |              |policies and makes                                                                    |
 |              |decisions based on the learned policy. Users can also pass a preprocessor to the FQI; | 
 |              |in this case, the FQI will be able to take in unpreprocessed trajectories, internally | 
 |              |preprocess the input trajectories, and directly output counterfactually fair policies.|
-+--------------+--------------------------------------------------------------------------------------+
 |`environment` |Implements a synthetic environment that produces synthetic data as well as a simulated|
 |              |environment that estimates and simulates the transition dynamics of the unknown       | 
 |              |environment underlying some                                                           |
 |              |real-world RL trajectory data. Also implements functions for sampling trajectories    |
 |              |from the synthetic and simulated environments.                                        |
-+--------------+--------------------------------------------------------------------------------------+
 |`evaluation`  |Implements functions that evaluate the value and counterfactual unfairness level of a |
 |              |policy. Depending on the user's needs, the evaluation can be done either in a         | 
 |              |synthetic environment or in a simulated environment.                                  |
-+==============+======================================================================================+
++--------------+--------------------------------------------------------------------------------------+
 
 A general CFRL workflow is as follows: First, simulate a trajectory using `environment` or read 
 in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` and preprocess the training trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in 
@@ -215,12 +210,6 @@ We can compare the sequential data preprocessing method in `CFRL` against a few 
 |-------------------------------|--------|-------|-------|-------|
 |Value                          |$-1.444$|$8.606$|$8.588$|$7.358$
 |Counterfactual Unfairness Level|$0$     |$0.407$|$0.446$|$0.042$|
-
-| Left Align | Center Align | Right Align |
-|:-----------|:------------:|------------:|
-| L1         | C1           | R1          |
-| L2         | C2           | R2          |
-
 
 By definition, the "random" baseline always achieves perfect CF. On the other hand, "ours" resulted in much fairer policies than "full" and "unaware", which suggests that the `SequentialPreprocessor` can effectively improve CF. Nevertheless, as a trade-off for higher CF, "ours" achieved a lower value than "full" and "unaware".
 
