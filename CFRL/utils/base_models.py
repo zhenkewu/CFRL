@@ -26,7 +26,7 @@ class FluctuatingQValueWarning(Warning):
     pass
 
 
-class LossConvergenceChecker:
+class EarlyStoppingChecker:
     def __init__(
             self, 
             patience: int = 5, 
@@ -59,8 +59,7 @@ class LossConvergenceChecker:
                 self.converged = True
         return self.converged
     
-
-class QValueConvergenceChecker:
+class LossMonitor:
     def __init__(
             self, 
             patience: int = 5, 
@@ -69,25 +68,73 @@ class QValueConvergenceChecker:
         self.patience = patience
         self.min_delta = min_delta
         self.counter = 0
-        self.prev_q = None
+        self.prev_score = None
         self.converged = False
 
-    def __call__(self, q: np.ndarray) -> bool:
-        if self.prev_q is None:
-            self.prev_q = q
+    def __call__(self, val_loss: int | float) -> bool:
+        if self.prev_score is None:
+            self.prev_score = val_loss
             return False
 
-        pct_changes = np.abs(q - self.prev_q) / np.abs(self.prev_q)
-        delta = np.max(pct_changes)
-        self.prev_q = q.copy()
+        delta = abs(val_loss - self.prev_score) / (abs(self.prev_score) + 1e-8) # add 1e-8 to prevent division by zero
+        self.prev_score = val_loss
 
         if delta > self.min_delta:
             self.counter = 0
+            self.converged = False
         else:
             self.counter += 1
             if self.counter >= self.patience:
                 self.converged = True
         return self.converged
+    
+
+class QValueConvergenceChecker:
+    def __init__(
+            self, 
+            q_monitoring_patience: int = 5, 
+            q_monitoring_min_delta: int | float = 0.001, 
+            early_stopping_patience: int = 5, 
+            early_stopping_min_delta: int | float = 0.001, 
+        ) -> None:
+        self.q_monitoring_patience = q_monitoring_patience
+        self.q_monitoring_min_delta = q_monitoring_min_delta
+        self.early_stopping_patience = early_stopping_patience
+        self.early_stopping_min_delta = early_stopping_min_delta
+        self.q_monitoring_counter = 0
+        self.early_stopping_counter = 0
+        self.prev_q = None
+        self.converged = False
+        self.early_stop = False
+
+    def __call__(self, q: np.ndarray) -> tuple[bool, bool]:
+        if self.prev_q is None:
+            self.prev_q = q
+            return False, False
+
+        pct_changes = np.abs(q - self.prev_q) / (0.01 + np.abs(self.prev_q))
+        delta = np.max(pct_changes)
+        self.prev_q = q.copy()
+
+        # q monitoring
+        if delta > self.q_monitoring_min_delta:
+            self.q_monitoring_counter = 0
+            self.converged = False
+        else:
+            self.q_monitoring_counter += 1
+            if self.q_monitoring_counter >= self.q_monitoring_patience:
+                self.converged = True
+
+        # early stopping checking
+        if delta > self.early_stopping_min_delta:
+            self.early_stopping_counter = 0
+            self.early_stop = False
+        else:
+            self.early_stopping_counter += 1
+            if self.early_stopping_counter >= self.early_stopping_patience:
+                self.early_stop = True
+
+        return self.converged, self.early_stop
 
 
 class NeuralNet(nn.Module):
@@ -161,8 +208,10 @@ class NeuralNetRegressor(nn.Module):
         is_loss_monitored: bool = False, 
         is_early_stopping: bool = False,
         test_size: int | float = 0.2,
-        patience: int = 10,
-        min_delta: int | float = 0.005,
+        loss_monitoring_patience: int = 10,
+        loss_monitoring_min_delta: int | float = 0.005,
+        early_stopping_patience: int = 10,
+        early_stopping_min_delta: int | float = 0.005,
         log_interval: int = 10,
     ) -> None:
         torch.set_num_threads(1)
@@ -172,11 +221,6 @@ class NeuralNetRegressor(nn.Module):
 
         # Train-test split
         if is_loss_monitored or is_early_stopping:
-            convergence_checker = LossConvergenceChecker(
-                patience=patience,
-                min_delta=min_delta,
-                mode="min",
-            )
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=test_size
             )
@@ -185,6 +229,19 @@ class NeuralNetRegressor(nn.Module):
             y_test = torch.tensor(y_test, dtype=torch.float32)
         else:
             X_train, y_train = X, y
+
+        if is_early_stopping:
+            early_stopping_checker = EarlyStoppingChecker(
+                patience=early_stopping_patience,
+                min_delta=early_stopping_min_delta,
+                mode="min",
+            )
+        
+        if is_loss_monitored:
+            loss_monitor = LossMonitor(
+                patience=loss_monitoring_patience,
+                min_delta=loss_monitoring_min_delta,
+            )
 
         # Convert data to PyTorch tensors
         train_data = TensorDataset(
@@ -202,6 +259,7 @@ class NeuralNetRegressor(nn.Module):
         val_losses = []
 
         # self.model.train() # ORGINAL, LIKELY CAUSING BUGS
+        converged = False
         for epoch in tqdm(range(epochs)):
             self.model.train() # NEWLY ADDED
             for inputs, labels in train_loader:
@@ -221,15 +279,17 @@ class NeuralNetRegressor(nn.Module):
                     val_loss = criterion(val_outputs, y_test)
 
                 val_losses.append(val_loss.item())
+                if is_loss_monitored:
+                    converged = loss_monitor(val_loss.item())
 
-                if is_early_stopping and convergence_checker(val_loss.item()):
+                if is_early_stopping and early_stopping_checker(val_loss.item()):
                     '''glogger.info(
                         "Early stopping! Converged at epoch {}".format(epoch + 1)
                     )'''
                     break
 
             # Logging the training progress
-            if (epoch + 1) % log_interval == 0:
+            '''if (epoch + 1) % log_interval == 0:
                 s = "Epoch [{}/{}], Train Loss: {:.4f}".format(
                     epoch + 1, epochs, loss.item()
                 )
@@ -237,12 +297,12 @@ class NeuralNetRegressor(nn.Module):
                     s + ", Val Loss: {:.4f}".format(val_loss.item())
                     if is_early_stopping
                     else s
-                )
+                )'''
                 #glogger.info(s)
             
-            # Raise a warning when the maximum number of epochs is reached
-            if is_loss_monitored and epoch == epochs - 1 and (not convergence_checker(val_loss.item())):
-                warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(patience) + ' epochs during neural network training', DecreasingLossWarning)
+        # Raise a warning if the validation loss has not stabilized at the end of training
+        if is_loss_monitored and (not converged):
+            warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(loss_monitoring_patience) + ' epochs during neural network training', DecreasingLossWarning)
 
         with torch.no_grad():
             self.model.eval()

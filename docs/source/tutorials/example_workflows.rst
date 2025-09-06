@@ -19,10 +19,10 @@ using another reinforcement learning library or application that better fits the
 **Code:** A detailed code demonstration of this workflow can be found 
 `here <https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_only_workflow.ipynb>`_.
 
-Policy Learning Only
+Preprocessing + Policy Learning
 --------------------------
 
-.. image:: ../supps/policy_learning_only_workflow.png
+.. image:: ../supps/preprocessing_policy_learning_workflow.png
 
 In this workflow, CFRL takes in an offline trajectory and then preprocesses the offline trajectory 
 using :code:`SequentialPreprocessor`. After that, the preprocessed trajectory is passed into 
@@ -32,7 +32,7 @@ further evaluated on its value and counterfactual fairness, which is discussed i
 "Assessing Policies Using Real Data" workflow later in this section.
 
 **Code:** A detailed code demonstration of this workflow can be found 
-`here <https://github.com/JianhanZhang/CFRL/blob/main/examples/policy_learning_only_workflow.ipynb>`_.
+`here <https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_policy_learning_workflow.ipynb>`_.
 
 Assessing Preprocessors Using Synthetic Data
 --------------------------

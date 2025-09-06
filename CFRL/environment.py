@@ -727,8 +727,10 @@ class SimulatedEnvironment(gym.Env):
         is_loss_monitored: bool = True,
         is_early_stopping: bool = True,
         test_size: int | float = 0.2,
-        patience: int = 10,
-        min_delta: int | float = 0.01,
+        loss_monitoring_patience: int = 10,
+        loss_monitoring_min_delta: int | float = 0.01,
+        early_stopping_patience: int = 10,
+        early_stopping_min_delta: int | float = 0.01,
         enforce_min_max: bool = False,
     ) -> None:
         """
@@ -770,17 +772,17 @@ class SimulatedEnvironment(gym.Env):
             is_loss_monitored (bool, optional):
                 When set to :code:`True`, will split the training data into a training set and a 
                 validation set, and will monitor the validation loss during training. A warning 
-                will be raised if the decrease in the validation loss is greater than :code:`min_delta` for at 
+                will be raised if the percent absolute change in the validation loss is greater than :code:`loss_monitoring_min_delta` for at 
                 least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
-                by the argument :code:`patience`. Applies to both the network for states and the network for rewards, 
+                by the argument :code:`loss_monitoring_patience`. Applies to both the network for states and the network for rewards, 
                 if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` 
                 are :code:`"lm"`.
             is_early_stopping (bool, optional): 
                 When set to :code:`True`, will split the training data into a training set and a 
                 validation set, and will enforce early stopping based on the validation loss 
                 during neural network training. That is, neural network training will stop early 
-                if the decrease in the validation loss is no greater than :code:`min_delta` for :math:`p` consecutive training 
-                epochs, where :math:`p` is specified by the argument :code:`patience`. Applies to 
+                if the percent decrease in the validation loss is no greater than :code:`early_stopping_min_delta` for :math:`q` consecutive training 
+                epochs, where :math:`q` is specified by the argument :code:`early_stopping_patience`. Applies to 
                 both the network for states and the network for rewards, if applicable. This argument is not used if 
                 both :code:`state_model_type` and :code:`reward_model_type` are :code:`"lm"`.
             test_size (int or float, optional): 
@@ -789,17 +791,28 @@ class SimulatedEnvironment(gym.Env):
                 monitoring and early stopping. Applies to both the network for states and the network for rewards, 
                 if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` are 
                 :code:`"lm"`, or if both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
-            patience (int, optional): 
-                The number of consequentive epochs with barely-decreasing validation loss that is needed 
-                for loss monitoring and early stopping. Applies to both the network for states and the network for rewards, 
+            loss_monitoring_patience (int, optional): 
+                The number of consecutive epochs with barely-decreasing validation loss at the end of training that is needed 
+                for loss monitoring to not raise warnings. Applies to both the network for states and the network for rewards, 
                 if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` 
-                are :code:`"lm"`, or if both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
-            min_delta (int for float, optional): 
+                are :code:`"lm"`, or if :code:`is_loss_monitored=False`.
+            loss_monitoring_min_delta (int for float, optional): 
                 The maximum amount of decrease in the validation loss for it to be considered 
-                barely-decreasing by the loss monitoring and early stopping mechanisms. Applies to 
+                barely-decreasing by the loss monitoring mechanism. Applies to 
                 both the network for states and the network for rewards, if applicable. This argument is 
-                not used if both :code:`state_model_type` and :code:`reward_model_type` are :code:`"lm"`, or if both 
-                :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
+                not used if both :code:`state_model_type` and :code:`reward_model_type` are :code:`"lm"`, or if 
+                :code:`is_loss_monitored=False`.
+            early_stopping_patience (int, optional): 
+                The number of consecutive epochs with barely-decreasing validation loss during training that is needed 
+                for early stopping to be triggered. Applies to both the network for states and the network for rewards, 
+                if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` 
+                are :code:`"lm"`, or if :code:`is_early_stopping=False`.
+            early_stopping_min_delta (int for float, optional): 
+                The maximum amount of decrease in the validation loss for it to be considered 
+                barely-decreasing by the early stopping mechanism. Applies to 
+                both the network for states and the network for rewards, if applicable. This argument is 
+                not used if both :code:`state_model_type` and :code:`reward_model_type` are :code:`"lm"`, or if 
+                :code:`is_early_stopping=False`.
             enforce_min_max (bool, optional): 
                 When set to :code:`True`, each component of the output 
                 states will be clipped to the maximum and minimum value of the corresponding 
@@ -830,8 +843,10 @@ class SimulatedEnvironment(gym.Env):
         self.is_loss_monitored = is_loss_monitored
         self.is_early_stopping = is_early_stopping
         self.test_size = test_size
-        self.patience = patience
-        self.min_delta = min_delta
+        self.loss_monitoring_patience=loss_monitoring_patience
+        self.loss_monitoring_min_delta=loss_monitoring_min_delta
+        self.early_stopping_patience=early_stopping_patience
+        self.early_stopping_min_delta=early_stopping_min_delta
         self.enforce_min_max = enforce_min_max
         self.is_trained = False
     
@@ -975,8 +990,10 @@ class SimulatedEnvironment(gym.Env):
                     is_loss_monitored = self.is_loss_monitored,
                     is_early_stopping=self.is_early_stopping,
                     test_size=self.test_size,
-                    patience=self.patience,
-                    min_delta=self.min_delta,
+                    loss_monitoring_patience=self.loss_monitoring_patience,
+                    loss_monitoring_min_delta=self.loss_monitoring_min_delta,
+                    early_stopping_patience=self.early_stopping_patience,
+                    early_stopping_min_delta=self.early_stopping_min_delta,
                 )
             var_mean = 0 # CHANGED; NOT SURE ABOUT CORRECTNESS
             for z_ in np.unique(zs, axis=0):
@@ -1028,8 +1045,10 @@ class SimulatedEnvironment(gym.Env):
                     is_loss_monitored = self.is_loss_monitored,
                     is_early_stopping=self.is_early_stopping,
                     test_size=self.test_size,
-                    patience=self.patience,
-                    min_delta=self.min_delta,
+                    loss_monitoring_patience=self.loss_monitoring_patience,
+                    loss_monitoring_min_delta=self.loss_monitoring_min_delta,
+                    early_stopping_patience=self.early_stopping_patience,
+                    early_stopping_min_delta=self.early_stopping_min_delta,
                 )
             var_mean = 0 # CHANGED; NOT SURE ABOUT CORRECTNESS
             for z_ in np.unique(zs, axis=0):

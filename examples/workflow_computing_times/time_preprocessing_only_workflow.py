@@ -157,8 +157,8 @@ def run_exp_one(N, T, seed):
                                     cross_folds=5, 
                                     mode='single', 
                                     reg_model='nn', 
-                                    is_loss_monitored=False, 
-                                    is_early_stopping=False)
+                                    is_loss_monitored=True, 
+                                    is_early_stopping=True)
     states_tilde_cf5, rewards_tilde_cf5 = sp_cf5.train_preprocessor(zs=zs, 
                                                                     xs=states, 
                                                                     actions=actions, 

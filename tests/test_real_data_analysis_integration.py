@@ -187,8 +187,8 @@ def test_real_data_analysis_univariate_zs_states_nn():
                                           learning_rate=0.001, 
                                           epochs=100,  
                                           is_early_stopping=True, 
-                                          patience=10, 
-                                          min_delta=0.001)
+                                          early_stopping_patience=10, 
+                                          early_stopping_min_delta=0.001)
     xs_tilde, rs_tilde = preprocessor.train_preprocessor(zs=zs_train, 
                                                          xs=xs_train, 
                                                          actions=actions_train, 
@@ -263,8 +263,8 @@ def test_real_data_analysis_multivariate_zs_states_nn():
                                           learning_rate=0.001, 
                                           epochs=10, 
                                           is_early_stopping=True, 
-                                          patience=10, 
-                                          min_delta=0.001)
+                                          early_stopping_patience=10, 
+                                          early_stopping_min_delta=0.001)
     xs_tilde, rs_tilde = preprocessor.train_preprocessor(zs=zs_train, 
                                                          xs=xs_train, 
                                                          actions=actions_train, 

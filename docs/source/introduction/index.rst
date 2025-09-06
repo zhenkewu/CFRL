@@ -6,4 +6,5 @@ Introduction
    :caption: Contents
 
    getting_started
+   computing_times
    faq

@@ -3,7 +3,7 @@ import torch
 import copy
 from .utils.base_models import LinearRegressor, NeuralNet
 from .utils.base_models import DecreasingLossWarning, FluctuatingQValueWarning
-from .utils.base_models import LossConvergenceChecker, QValueConvergenceChecker
+from .utils.base_models import EarlyStoppingChecker, LossMonitor, QValueConvergenceChecker
 from .utils.custom_errors import InvalidModelError
 from .agents import Agent
 from sklearn.model_selection import train_test_split
@@ -52,12 +52,16 @@ class FQE:
             is_loss_monitored: bool = True,
             is_early_stopping_nn: bool = True,
             test_size_nn: int | float = 0.2,
-            patience_nn: int = 10,
-            min_delta_nn: int | float = 0.005,
+            loss_monitoring_patience: int = 10,
+            loss_monitoring_min_delta: int | float = 0.005,
+            early_stopping_patience_nn: int = 10,
+            early_stopping_min_delta_nn: int | float = 0.005,
             is_q_monitored: bool = True,
             is_early_stopping_q: bool = True,
-            patience_q: int = 5,
-            min_delta_q: int | float = 0.005
+            q_monitoring_patience: int = 5, 
+            q_monitoring_min_delta: int | float = 0.005, 
+            early_stopping_patience_q: int = 5, 
+            early_stopping_min_delta_q: int | float = 0.005
         ) -> None:
         """
         Args: 
@@ -85,54 +89,68 @@ class FQE:
                 When set to :code:`True`, will split the training data into a training set and a 
                 validation set, and will monitor the validation loss when training the neural network 
                 approximator of the Q function in each iteration. A warning 
-                will be raised if the percent decrease in the validation loss is greater than :code:`min_delta_nn` for at 
+                will be raised if the percent change in the validation loss is greater than :code:`loss_monitoring_min_delta` for at 
                 least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
-                by the argument :code:`patience_nn`. This argument is not used if :code:`model_type="lm"`.
+                by the argument :code:`loss_monitoring_patience`. This argument is not used if :code:`model_type="lm"`.
             is_early_stopping_nn (bool, optional): 
                 When set to :code:`True`, will split the training data into a training set and a 
                 validation set, and will enforce early stopping based on the validation loss 
                 when training the neural network approximator of the Q function in each iteration. That is, in each iteration, 
                 neural network training will stop early 
-                if the percent decrease in the validation loss is no greater than :code:`min_delta_nn` for :math:`p` consecutive training 
-                epochs, where :math:`p` is specified by the argument :code:`patience_nn`. This argument is not used if 
+                if the percent decrease in the validation loss is no greater than :code:`early_stopping_min_delta_nn` for :math:`q` consecutive training 
+                epochs, where :math:`q` is specified by the argument :code:`early_stopping_patience_nn`. This argument is not used if 
                 :code:`model_type="lm"`.
             test_size_nn (int or float, optional): 
                 An :code:`int` or :code:`float` between 0 and 1 (inclusive) that 
                 specifies the proportion of the full training data that is used as the validation set for loss 
                 monitoring and early stopping. This argument is not used if :code:`model_type="lm"` or 
                 both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
-            patience_nn (int, optional): 
-                The number of consequentive epochs with barely-decreasing validation loss that is needed 
-                for loss monitoring and early stopping. This argument is not used if :code:`model_type="lm"` 
-                or both :code:`is_loss_monitored` and :code:`is_early_stopping_nn` are :code:`False`.
-            min_delta_nn (int for float, optional): 
+            loss_monitoring_patience (int, optional): 
+                The number of consecutive epochs with barely-decreasing validation loss at the end of neural network training that is needed 
+                for loss monitoring to not raise warnings. This argument is not used if :code:`model_type="lm"` 
+                or :code:`is_loss_monitored=False`.
+            loss_monitoring_min_delta (int for float, optional): 
                 The maximum amount of decrease in the validation loss for it to be considered 
-                barely-decreasing by the loss monitoring and early stopping mechanisms. This argument is 
-                not used if :code:`model_type="lm"` or both :code:`is_loss_monitored` and 
-                :code:`is_early_stopping` are :code:`False`.
+                barely-decreasing by the loss monitoring mechanism. This argument is 
+                not used if :code:`model_type="lm"` or :code:`is_loss_monitored=False`.
+            early_stopping_patience_nn (int, optional): 
+                The number of consecutive epochs with barely-decreasing validation loss during neural network training that is needed 
+                for early stopping to be triggered. This argument is not used if :code:`model_type="lm"` 
+                or :code:`is_early_stopping_nn=False`.
+            early_stopping_min_delta_nn (int for float, optional): 
+                The maximum amount of decrease in the validation loss for it to be considered 
+                barely-decreasing by the early stopping mechanism. This argument is 
+                not used if :code:`model_type="lm"` or :code:`is_early_stopping_nn=False`.
             is_q_monitored (bool, optional):
                 When set to :code:`True`, will monitor the Q values estimated by the neural network 
                 approximator of the Q function in each iteration. A warning 
-                will be raised if the percent absolute change in some Q value is greater than :code:`min_delta_q` for at 
-                least one of the final :math:`r` epochs during neural network training, where :math:`r` is specified 
-                by the argument :code:`patience_q`. This argument is not used if :code:`model_type="lm"`.
+                will be raised if the percent absolute change in some Q value is greater than :code:`q_monitoring_min_delta` for at 
+                least one of the final :math:`r` iterations of model updates, where :math:`r` is specified 
+                by the argument :code:`q_monitoring_patience`. This argument is not used if :code:`model_type="lm"`.
             is_early_stopping_q (bool, optional): 
                 When set to :code:`True`, will monitor the Q values estimated by the neural network 
-                approximator of the Q function in each iteration, and will enforce early stopping based on the estimated Q values 
-                when training the neural network approximator of the Q function in each iteration. That is, 
+                approximator of the Q function, and will enforce early stopping based on the estimated Q values 
+                when training the approximated Q function. That is, 
                 FQE training will stop early 
-                if the percent absolute changes in all the predicted Q values are no greater than :code:`min_delta_q` for :math:`r` consecutive 
-                iterations, where :math:`r` is specified by the argument :code:`patience_q`. This argument is not used if 
+                if the percent absolute changes in all the predicted Q values are no greater than :code:`early_stopping_min_delta_q` for :math:`s` consecutive 
+                iterations of model updates, where :math:`s` is specified by the argument :code:`early_stopping_patience_q`. This argument is not used if 
                 :code:`model_type="lm"`.
-            patience_q (int, optional): 
-                The number of consequentive epochs with barely-changing estimated Q values that is needed 
-                for Q value monitoring and early stopping. This argument is not used if :code:`model_type="lm"` 
-                or both :code:`is_q_monitored` and :code:`is_early_stopping_q` are :code:`False`.
-            min_delta_q (int for float, optional): 
-                The maximum amount of change in the validation loss for it to be considered 
-                barely-changing by the Q value monitoring and early stopping mechanisms. This argument is 
-                not used if :code:`model_type="lm"` or both :code:`is_q_monitored` and 
-                :code:`is_early_stopping_q` are :code:`False`.
+            q_monitoring_patience (int, optional): 
+                The number of consecutive iterations with barely-changing estimated Q values at the end of the iterative updates that is needed 
+                for Q value monitoring to not raise warnings. This argument is not used if :code:`model_type="lm"` 
+                or :code:`is_q_monitored=False`.
+            q_monitoring_min_delta (int for float, optional): 
+                The maximum amount of change in the estimated Q values for them to be considered 
+                barely-changing by the Q value monitoring mechanism. This argument is 
+                not used if :code:`model_type="lm"` or :code:`is_q_monitored=False`.
+            early_stopping_patience_q (int, optional): 
+                The number of consecutive iterations with barely-changing estimated Q values that is needed 
+                for early stopping to be triggered. This argument is not used if :code:`model_type="lm"` 
+                or :code:`is_early_stopping_q=False`.
+            early_stopping_min_delta_q (int for float, optional): 
+                The maximum amount of change in the estimated Q values for them to be considered 
+                barely-changing by the early stopping mechanism. This argument is 
+                not used if :code:`model_type="lm"` or :code:`is_early_stopping_q=False`.
         """
         
         if model_type == 'nn':
@@ -148,12 +166,16 @@ class FQE:
         self.is_loss_monitored = is_loss_monitored
         self.is_early_stopping_nn = is_early_stopping_nn
         self.test_size_nn = test_size_nn
-        self.patience_nn = patience_nn
-        self.min_delta_nn = min_delta_nn
+        self.loss_monitoring_patience = loss_monitoring_patience
+        self.loss_monitoring_min_delta = loss_monitoring_min_delta
+        self.early_stopping_patience_nn = early_stopping_patience_nn
+        self.early_stopping_min_delta_nn = early_stopping_min_delta_nn
         self.is_q_monitored = is_q_monitored
         self.is_early_stopping_q = is_early_stopping_q
-        self.patience_q = patience_q
-        self.min_delta_q = min_delta_q
+        self.q_monitoring_patience = q_monitoring_patience
+        self.q_monitoring_min_delta = q_monitoring_min_delta
+        self.early_stopping_patience_q = early_stopping_patience_q
+        self.early_stopping_min_delta_q = early_stopping_min_delta_q
 
         # sanity check
         self._sanity_check()
@@ -305,10 +327,13 @@ class FQE:
                 in_dim=sdim, out_dim=self.action_size, hidden_dims=self.hidden_dims 
             )
 
-            q_checker = QValueConvergenceChecker(patience=self.patience_q, 
-                                             min_delta=self.min_delta_q)
+            q_checker = QValueConvergenceChecker(q_monitoring_patience=self.q_monitoring_patience,
+                                                 q_monitoring_min_delta=self.q_monitoring_min_delta,
+                                                 early_stopping_patience=self.early_stopping_patience_q,
+                                                 early_stopping_min_delta=self.early_stopping_min_delta_q)
 
             # training loop
+            converged_q = False
             for i in tqdm(range(max_iter)):
                 # generate target
                 if i == 0:
@@ -344,12 +369,6 @@ class FQE:
                 #Y = torch.tensor(Y, dtype=torch.float32)
 
                 if self.is_loss_monitored or self.is_early_stopping_nn:
-                    convergence_checker = LossConvergenceChecker(
-                        patience=self.patience_nn,
-                        min_delta=self.min_delta_nn,
-                        mode="min",
-                    )
-
                     idx_train, idx_test = train_test_split(
                         np.arange(states.shape[0]), test_size=self.test_size_nn
                     )
@@ -362,6 +381,19 @@ class FQE:
                     y_test = torch.tensor(y_test, dtype=torch.float32)
                 else:
                     X_train, y_train = states, Y
+
+                if self.is_early_stopping_nn:
+                    early_stopping_checker = EarlyStoppingChecker(
+                        patience=self.early_stopping_patience_nn,
+                        min_delta=self.early_stopping_min_delta_nn,
+                        mode="min",
+                    )
+
+                if self.is_loss_monitored:
+                    loss_monitor = LossMonitor(
+                        patience=self.loss_monitoring_patience,
+                        min_delta=self.loss_monitoring_min_delta,
+                    )
 
                 X_train = torch.FloatTensor(X_train)
                 y_train = torch.FloatTensor(y_train)
@@ -378,6 +410,7 @@ class FQE:
                 train_losses = []
                 val_losses = []
 
+                converged = False
                 for epoch in range(self.epochs):
                     new_model.train()
                     Y_pred = new_model.forward(X_train).gather(1, actions_tensor_train)
@@ -395,13 +428,13 @@ class FQE:
                             val_loss = criterion(val_outputs, y_test)
 
                         val_losses.append(val_loss.item())
-                        converged_nn = convergence_checker(val_loss.item())
+                        converged = loss_monitor(val_loss.item())
 
-                        if self.is_early_stopping_nn and converged_nn:
+                        if self.is_early_stopping_nn and early_stopping_checker(val_loss.item()):
                             break
 
-                        if self.is_loss_monitored and epoch == self.epochs - 1 and (not converged_nn):
-                            warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.patience_nn) + ' epochs during neural network training', DecreasingLossWarning)
+                if self.is_loss_monitored and (not converged):
+                    warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.loss_monitoring_patience) + ' epochs during neural network training', DecreasingLossWarning)
 
                 #glogger.info(
                 #    "{}, fqe_nn mse:{}, mean_target:{}".format(
@@ -415,13 +448,14 @@ class FQE:
                     with torch.no_grad():
                         q = current_model(torch.FloatTensor(states)).numpy()
                     current_model.train()
-                    converged_q = q_checker(q=q)
+
+                    converged_q, early_stop_q = q_checker(q=q)
                     
-                    if self.is_early_stopping_q and converged_q:
+                    if self.is_early_stopping_q and early_stop_q:
                         break
                     
-                    if self.is_q_monitored and i == max_iter - 1 and (not converged_q):
-                        warnings.warn('\nThe fluctuation in the q values is not small enough in at least one of the final ' + str(self.patience_q) + ' iterations during FQI training', FluctuatingQValueWarning)
+            if self.is_q_monitored and self.model_type == 'nn' and (not converged_q):
+                warnings.warn('\nThe fluctuation in the q values is not small enough in at least one of the final ' + str(self.q_monitoring_patience) + ' iterations during FQI training', FluctuatingQValueWarning)
 
         self.model = copy.deepcopy(current_model)
 

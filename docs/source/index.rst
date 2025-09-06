@@ -29,6 +29,7 @@ the use cases of CFRL. We appreciate your patience and support!
    :caption: Introduction
 
    introduction/getting_started
+   introduction/computing_times
    introduction/faq
 
 .. toctree::

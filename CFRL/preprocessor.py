@@ -207,8 +207,10 @@ class SequentialPreprocessor(Preprocessor):
         is_loss_monitored: bool = True, 
         is_early_stopping: bool = True,
         test_size: int | float = 0.2,
-        patience: int = 10,
-        min_delta: int | float = 0.01,
+        loss_monitoring_patience: int = 10,
+        loss_monitoring_min_delta: int | float = 0.01,
+        early_stopping_patience: int = 10,
+        early_stopping_min_delta: int | float = 0.01,
     ) -> None:
         """
         Args: 
@@ -257,30 +259,37 @@ class SequentialPreprocessor(Preprocessor):
             is_loss_monitored (bool, optional):
                 When set to :code:`True`, will split the training data into a training set and a 
                 validation set, and will monitor the validation loss during training. A warning 
-                will be raised if the percent decrease in the validation loss is greater than :code:`min_delta` for at 
+                will be raised if the percent absolute change in the validation loss is greater than :code:`loss_monitoring_min_delta` for at 
                 least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
-                by the argument :code:`patience`. This argument is not used if :code:`reg_model="lm"`.
+                by the argument :code:`loss_monitoring_patience`. This argument is not used if :code:`reg_model="lm"`.
             is_early_stopping (bool, optional): 
                 When set to :code:`True`, will split the training data into a training set and a 
                 validation set, and will enforce early stopping based on the validation loss 
                 during neural network training. That is, neural network training will stop early 
-                if the decrease in the validation loss is no greater than :code:`min_delta` for :math:`p` consecutive training 
-                epochs, where :math:`p` is specified by the argument :code:`patience`. This argument is not used if 
+                if the percent decrease in the validation loss is no greater than :code:`early_stopping_min_delta` for :math:`q` consecutive training 
+                epochs, where :math:`q` is specified by the argument :code:`early_stopping_patience`. This argument is not used if 
                 :code:`reg_model="lm"`.
             test_size (int or float, optional): 
                 An :code:`int` or :code:`float` between 0 and 1 (inclusive) that 
                 specifies the proportion of the full training data that is used as the validation set for loss 
                 monitoring and early stopping. This argument is not used if :code:`reg_model="lm"` or 
                 both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
-            patience (int, optional): 
-                The number of consequentive epochs with barely-decreasing validation loss that is needed 
-                for loss monitoring and early stopping. This argument is not used if :code:`reg_model="lm"` 
-                or both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
-            min_delta (int for float, optional): 
+            loss_monitoring_patience (int, optional): 
+                The number of consecutive epochs with barely-decreasing validation loss at the end of training 
+                that is needed for loss monitoring to not raise warnings. This argument is not used if 
+                :code:`reg_model="lm"` or :code:`is_loss_monitored=False`.
+            loss_monitoring_min_delta (int for float, optional): 
                 The maximum amount of decrease in the validation loss for it to be considered 
-                barely-decreasing by the loss monitoring and early stopping mechanisms. This argument is 
-                not used if :code:`reg_model="lm"` or both :code:`is_loss_monitored` and 
-                :code:`is_early_stopping` are :code:`False`.
+                barely-decreasing by the loss monitoring mechanism. This argument is 
+                not used if :code:`reg_model="lm"` or :code:`is_loss_monitored=False`.
+            early_stopping_patience (int, optional): 
+                The number of consecutive epochs with barely-decreasing validation loss during training 
+                that is needed for early stopping to be triggered. This argument is not used if 
+                :code:`reg_model="lm"` or :code:`is_early_stopping=False`.
+            early_stopping_min_delta (int for float, optional): 
+                The maximum amount of decrease in the validation loss for it to be considered 
+                barely-decreasing by the early stopping mechanism. This argument is 
+                not used if :code:`reg_model="lm"` or :code:`is_early_stopping=False`.
         """
 
         z_space = np.array(z_space)
@@ -310,8 +319,10 @@ class SequentialPreprocessor(Preprocessor):
         self.is_loss_monitored = is_loss_monitored
         self.is_early_stopping = is_early_stopping
         self.test_size = test_size
-        self.patience = patience
-        self.min_delta = min_delta
+        self.loss_monitoring_patience = loss_monitoring_patience
+        self.loss_monitoring_min_delta = loss_monitoring_min_delta
+        self.early_stopping_patience = early_stopping_patience
+        self.early_stopping_min_delta = early_stopping_min_delta
         self.cross_folds = cross_folds
         self.mode = mode
 
@@ -491,8 +502,10 @@ class SequentialPreprocessor(Preprocessor):
             batch_size=self.batch_size,
             is_loss_monitored=self.is_loss_monitored, 
             is_early_stopping=self.is_early_stopping,
-            patience=self.patience,
-            min_delta=self.min_delta,
+            loss_monitoring_patience=self.loss_monitoring_patience,
+            loss_monitoring_min_delta=self.loss_monitoring_min_delta,
+            early_stopping_patience=self.early_stopping_patience,
+            early_stopping_min_delta=self.early_stopping_min_delta,
             test_size=self.test_size,
         )
         return model
@@ -528,8 +541,10 @@ class SequentialPreprocessor(Preprocessor):
                 batch_size=self.batch_size,
                 is_loss_monitored=self.is_loss_monitored,
                 is_early_stopping=self.is_early_stopping,
-                patience=self.patience,
-                min_delta=self.min_delta,
+                loss_monitoring_patience=self.loss_monitoring_patience,
+                loss_monitoring_min_delta=self.loss_monitoring_min_delta,
+                early_stopping_patience=self.early_stopping_patience,
+                early_stopping_min_delta=self.early_stopping_min_delta,
                 test_size=self.test_size,
             )
         return model

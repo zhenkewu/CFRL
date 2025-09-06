@@ -61,7 +61,7 @@ We provide a few short code examples showcasing some key use cases of CFRL.
 
 **1. Trajectory Preprocessing Only:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_only_workflow.ipynb).
 
-**2. Policy Learning Only:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/policy_learning_only_workflow.ipynb).
+**2. Preprocessing + Policy Learning:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_policy_learning_workflow.ipynb).
 
 **3. Assessing Preprocessors using Synthetic Data:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/synthetic_data_workflow.ipynb).
 

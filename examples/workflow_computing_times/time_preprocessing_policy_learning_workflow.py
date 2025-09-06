@@ -166,8 +166,8 @@ def run_exp_one(N, T, seed):
                                                                     rewards=rewards)
     
     agent_cf5 = FQI(num_actions=2, model_type='nn', preprocessor=sp_cf5, 
-                    is_loss_monitored=False, is_early_stopping_nn=False, 
-                    is_q_monitored=False, is_early_stopping_q=False)
+                    is_loss_monitored=True, is_early_stopping_nn=True, 
+                    is_q_monitored=True, is_early_stopping_q=True)
     agent_cf5.train(zs=zs, 
                     xs=states_tilde_cf5, 
                     actions=actions, 
@@ -219,6 +219,6 @@ def run_exp(Ns, Ts, start_seed, nreps, export=True,
 
 
 # Run the computing time experiment
-df = run_exp(Ns=[500], Ts=[10], start_seed=1, nreps=5, 
+df = run_exp(Ns=[100], Ts=[10], start_seed=1, nreps=1, 
              export=True)
 print(df)

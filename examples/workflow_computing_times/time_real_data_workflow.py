@@ -167,16 +167,16 @@ def run_exp_one(N, T, seed):
                                 cross_folds=5, 
                                 mode='single', 
                                 reg_model='nn', 
-                                is_loss_monitored=False, 
-                                is_early_stopping=False)
+                                is_loss_monitored=True, 
+                                is_early_stopping=True)
     states_tilde, rewards_tilde = sp.train_preprocessor(zs=zs_train, 
                                                         xs=states_train, 
                                                         actions=actions_train, 
                                                         rewards=rewards_train)
     
     agent = FQI(num_actions=2, model_type='nn', preprocessor=sp, 
-                is_loss_monitored=False, is_early_stopping_nn=False, 
-                is_q_monitored=False, is_early_stopping_q=False)
+                is_loss_monitored=True, is_early_stopping_nn=True, 
+                is_q_monitored=True, is_early_stopping_q=True)
     agent.train(zs=zs_train, 
                 xs=states_tilde, 
                 actions=actions_train, 
@@ -187,8 +187,8 @@ def run_exp_one(N, T, seed):
     env = SimulatedEnvironment(num_actions=2, 
                                state_model_type='nn', 
                                reward_model_type='nn', 
-                               is_loss_monitored=False, 
-                               is_early_stopping=False)
+                               is_loss_monitored=True, 
+                               is_early_stopping=True)
     env.fit(zs=zs, states=states, actions=actions, rewards=rewards)
 
     value = evaluate_reward_through_fqe(zs=zs_test, 
@@ -198,10 +198,10 @@ def run_exp_one(N, T, seed):
                                         policy=agent, 
                                         model_type='nn', 
                                         gamma=0.9, 
-                                        is_loss_monitored=False, 
-                                        is_early_stopping_nn=False, 
-                                        is_q_monitored=False, 
-                                        is_early_stopping_q=False)
+                                        is_loss_monitored=True, 
+                                        is_early_stopping_nn=True, 
+                                        is_q_monitored=True, 
+                                        is_early_stopping_q=True)
     cf_metric = evaluate_fairness_through_model(env=env, 
                                                 zs=zs_test, 
                                                 states=states_test, 
@@ -241,6 +241,6 @@ def run_exp(Ns, Ts, start_seed, nreps, export=True,
 
 
 # Run the computing time experiment
-df = run_exp(Ns=[100], Ts=[10], start_seed=1, nreps=2, 
+df = run_exp(Ns=[100], Ts=[10], start_seed=1, nreps=1, 
              export=True)
 print(df)

@@ -135,9 +135,13 @@ in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` 
 `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to 
 evaluate the value and counterfactual unfairness level of the trained policy. 
 
+In addition, `CFRL` also provides tools to check for potential non-convergence that arise in neural network training, FQI, and FQE. More discussions about the sources, checks, and fixes of non-convergence in `CFRL` can be found in the "Common Issues" section of the CFRL documentation.
+
 # Data Example
 
 We provide a data example to demonstrate how `CFRL` learns a counterfactually fair policy from real-world trajectory data with unknown underlying transition dynamics. We also show how `CFRL` evaluates the value and counterfactual unfairness level of the learned policy. We note that this is only one of the many workflows that `CFRL` can perform. For example, `CFRL` can also generate synthetic trajectory data and use it to evaluate the value and counterfactual unfairness level resulting from some custom data preprocessing methods. We refer interested readers to the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation for more workflow examples.
+
+We also recorded the computing times of different workflows under different combinations of the number of individuals ($N$) and the number of transitions ($T$) in the "Computing Times" section of the CFRL documentation. For example, under $N=500$ and $T=10$, the workflow presented in this data example (which is also the "real data workflow" in the documentation) ran for $378.62$ seconds on average in our computing environment.
 
 #### Load Data
 
@@ -209,17 +213,13 @@ We can compare the sequential data preprocessing method in `CFRL` against a few 
 
 +-------------------------------+--------+-------+-------+-------+
 |                               |Random  |Full   |Unaware|Ours   |                                                                
-+===============================+========+=======+=======+=======+
++-------------------------------+--------+-------+-------+-------+
 |Value                          |$-1.444$|$8.606$|$8.588$|$7.358$|
 +-------------------------------+--------+-------+-------+-------+
 |Counterfactual Unfairness Level|$0$     |$0.407$|$0.446$|$0.042$|
 +===============================+========+=======+=======+=======+
 
 By definition, the "random" baseline always achieves perfect CF. On the other hand, "ours" resulted in much fairer policies than "full" and "unaware", which suggests that the `SequentialPreprocessor` can effectively improve CF. Nevertheless, as a trade-off for higher CF, "ours" achieved a lower value than "full" and "unaware".
-
-# Non-convergence in `CFRL`
-
-We remark that non-convergence might arise in `CFRL` in `evaluate_reward_through_fqe()` and during the training of `SequentialPreprocessor`, `SimulatedEnvironment`, and `FQI`. In this case, `CFRL` provides a tool that can check for potential non-convergence using loss monitoring. More discussions about the sources, checks, and fixes of non-convergence in `CFRL` can be found in the "Common Issues" section of the CFRL documentation.
 
 # Conclusions
 
