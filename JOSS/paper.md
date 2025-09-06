@@ -219,6 +219,12 @@ We can compare the sequential data preprocessing method in `CFRL` against a few 
 |Counterfactual Unfairness Level|$0$     |$0.407$|$0.446$|$0.042$|
 +===============================+========+=======+=======+=======+
 
+| Left Align | Center Align | Right Align |
+|:-----------|:------------:|------------:|
+| L1         | C1           | R1          |
+| L2         | C2           | R2          |
+
+
 By definition, the "random" baseline always achieves perfect CF. On the other hand, "ours" resulted in much fairer policies than "full" and "unaware", which suggests that the `SequentialPreprocessor` can effectively improve CF. Nevertheless, as a trade-off for higher CF, "ours" achieved a lower value than "full" and "unaware".
 
 # Conclusions
