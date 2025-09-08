@@ -2,7 +2,7 @@
 
 Documentation: [CFRL Documentation](https://cfrl-documentation.netlify.app/).
 
-Paper: To be updated. 
+Software paper: To be updated. 
 
 ## Installation
 

@@ -89,7 +89,7 @@ class FQE:
                 When set to :code:`True`, will split the training data into a training set and a 
                 validation set, and will monitor the validation loss when training the neural network 
                 approximator of the Q function in each iteration. A warning 
-                will be raised if the percent change in the validation loss is greater than :code:`loss_monitoring_min_delta` for at 
+                will be raised if the percent absolute change in the validation loss is greater than :code:`loss_monitoring_min_delta` for at 
                 least one of the final :math:`p` epochs during neural network training, where :math:`p` is specified 
                 by the argument :code:`loss_monitoring_patience`. This argument is not used if :code:`model_type="lm"`.
             is_early_stopping_nn (bool, optional): 
@@ -106,12 +106,12 @@ class FQE:
                 monitoring and early stopping. This argument is not used if :code:`model_type="lm"` or 
                 both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
             loss_monitoring_patience (int, optional): 
-                The number of consecutive epochs with barely-decreasing validation loss at the end of neural network training that is needed 
+                The number of consecutive epochs with barely-changing validation loss at the end of neural network training that is needed 
                 for loss monitoring to not raise warnings. This argument is not used if :code:`model_type="lm"` 
                 or :code:`is_loss_monitored=False`.
             loss_monitoring_min_delta (int for float, optional): 
-                The maximum amount of decrease in the validation loss for it to be considered 
-                barely-decreasing by the loss monitoring mechanism. This argument is 
+                The maximum amount of percent absolute change in the validation loss for it to be considered 
+                barely-changing by the loss monitoring mechanism. This argument is 
                 not used if :code:`model_type="lm"` or :code:`is_loss_monitored=False`.
             early_stopping_patience_nn (int, optional): 
                 The number of consecutive epochs with barely-decreasing validation loss during neural network training that is needed 
@@ -123,13 +123,14 @@ class FQE:
                 not used if :code:`model_type="lm"` or :code:`is_early_stopping_nn=False`.
             is_q_monitored (bool, optional):
                 When set to :code:`True`, will monitor the Q values estimated by the neural network 
-                approximator of the Q function in each iteration. A warning 
+                approximator of the Q function in each iteration at all the state-action pairs present in the training trajectory. A warning 
                 will be raised if the percent absolute change in some Q value is greater than :code:`q_monitoring_min_delta` for at 
                 least one of the final :math:`r` iterations of model updates, where :math:`r` is specified 
                 by the argument :code:`q_monitoring_patience`. This argument is not used if :code:`model_type="lm"`.
             is_early_stopping_q (bool, optional): 
                 When set to :code:`True`, will monitor the Q values estimated by the neural network 
-                approximator of the Q function, and will enforce early stopping based on the estimated Q values 
+                approximator of the Q function at all the state-action pairs present in the training trajectory, 
+                and will enforce early stopping based on the estimated Q values 
                 when training the approximated Q function. That is, 
                 FQE training will stop early 
                 if the percent absolute changes in all the predicted Q values are no greater than :code:`early_stopping_min_delta_q` for :math:`s` consecutive 
@@ -140,7 +141,7 @@ class FQE:
                 for Q value monitoring to not raise warnings. This argument is not used if :code:`model_type="lm"` 
                 or :code:`is_q_monitored=False`.
             q_monitoring_min_delta (int for float, optional): 
-                The maximum amount of change in the estimated Q values for them to be considered 
+                The maximum amount of percent absolute change in the estimated Q values for them to be considered 
                 barely-changing by the Q value monitoring mechanism. This argument is 
                 not used if :code:`model_type="lm"` or :code:`is_q_monitored=False`.
             early_stopping_patience_q (int, optional): 
@@ -148,7 +149,7 @@ class FQE:
                 for early stopping to be triggered. This argument is not used if :code:`model_type="lm"` 
                 or :code:`is_early_stopping_q=False`.
             early_stopping_min_delta_q (int for float, optional): 
-                The maximum amount of change in the estimated Q values for them to be considered 
+                The maximum amount of percent absolute change in the estimated Q values for them to be considered 
                 barely-changing by the early stopping mechanism. This argument is 
                 not used if :code:`model_type="lm"` or :code:`is_early_stopping_q=False`.
         """

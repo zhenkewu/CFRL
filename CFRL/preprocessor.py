@@ -275,12 +275,12 @@ class SequentialPreprocessor(Preprocessor):
                 monitoring and early stopping. This argument is not used if :code:`reg_model="lm"` or 
                 both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
             loss_monitoring_patience (int, optional): 
-                The number of consecutive epochs with barely-decreasing validation loss at the end of training 
+                The number of consecutive epochs with barely-changing validation loss at the end of training 
                 that is needed for loss monitoring to not raise warnings. This argument is not used if 
                 :code:`reg_model="lm"` or :code:`is_loss_monitored=False`.
             loss_monitoring_min_delta (int for float, optional): 
-                The maximum amount of decrease in the validation loss for it to be considered 
-                barely-decreasing by the loss monitoring mechanism. This argument is 
+                The maximum amount of percent absolute change in the validation loss for it to be considered 
+                barely-changing by the loss monitoring mechanism. This argument is 
                 not used if :code:`reg_model="lm"` or :code:`is_loss_monitored=False`.
             early_stopping_patience (int, optional): 
                 The number of consecutive epochs with barely-decreasing validation loss during training 

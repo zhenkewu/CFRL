@@ -112,7 +112,7 @@ class QValueConvergenceChecker:
             self.prev_q = q
             return False, False
 
-        pct_changes = np.abs(q - self.prev_q) / (0.01 + np.abs(self.prev_q))
+        pct_changes = np.abs(q - self.prev_q) / (1e-8 + np.abs(self.prev_q))
         delta = np.max(pct_changes)
         self.prev_q = q.copy()
 

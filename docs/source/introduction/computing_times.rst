@@ -11,7 +11,7 @@ learning only workflow, and the real data workflow. Each workflow was run for
 deviation (in parenthesis) of the computing times are recorded in the tables 
 below. The unit of the computing times here is second (s).
 
-The timing experiments were run on an internal cluster equipped with two 20-core 
+The timing experiments were run on an internal cluster equipped with two 36-core 
 Intel Xeon Gold 6154 CPUs clocked at 3.0 GHz and 187 GB of RAM. Each job was 
 executed via SLURM on a single node using 1 CPU core and 1 GB of memory. Please 
 note that the computing times in this section are for reference only. The 
@@ -32,14 +32,14 @@ The Preprocessing Only Workflow
      - :math:`T=10`
      - :math:`T=20`
    * - :math:`N=100`
-     - :math:`32.06 \text{ } (0.15)`
-     - :math:`64.29 \text{ } (0.29)`
+     - :math:`32.1 \text{ } (0.15)`
+     - :math:`64.3 \text{ } (0.29)`
    * - :math:`N=500`
-     - :math:`154.27 \text{ } (0.69)`
-     - :math:`309.87 \text{ } (1.75)`
+     - :math:`154.3 \text{ } (0.69)`
+     - :math:`309.9 \text{ } (1.75)`
    * - :math:`N=1000`
-     - :math:`311.23 \text{ } (1.65)`
-     - :math:`615.28 \text{ } (1.91)`
+     - :math:`311.2 \text{ } (1.65)`
+     - :math:`615.3 \text{ } (1.91)`
 
 Code used for timing: See `here <https://github.com/JianhanZhang/CFRL/blob/main/examples/workflow_computing_times/time_preprocessing_only_workflow.py>`_.
 
@@ -54,16 +54,16 @@ The Preprocessing + Policy Learning Workflow
      - :math:`T=10`
      - :math:`T=20`
    * - :math:`N=100`
-     - :math:`58.15 \text{ } (0.58)`
-     - :math:`92.82 \text{ } (1.61)`
+     - :math:`58.2 \text{ } (0.58)`
+     - :math:`92.8 \text{ } (1.61)`
    * - :math:`N=500`
-     - :math:`172.09 \text{ } (3.59)`
-     - :math:`333.89 \text{ } (13.00)`
+     - :math:`172.1 \text{ } (3.59)`
+     - :math:`333.9 \text{ } (13.00)`
    * - :math:`N=1000`
-     - :math:`326.54 \text{ } (4.17)`
-     - :math:`637.20 \text{ } (9.51)`
+     - :math:`326.5 \text{ } (4.17)`
+     - :math:`637.2 \text{ } (9.51)`
 
-Code used for timing: See `here <https://github.com/JianhanZhang/CFRL/blob/main/examples/workflow_computing_times/time_policy_learning_only_workflow.py>`_.
+Code used for timing: See `here <https://github.com/JianhanZhang/CFRL/blob/main/examples/workflow_computing_times/time_preprocessing_policy_learning_workflow.py>`_.
 
 The Real Data Workflow
 ------------------------
@@ -76,13 +76,13 @@ The Real Data Workflow
      - :math:`T=10`
      - :math:`T=20`
    * - :math:`N=100`
-     - :math:`176.64 \text{ } (0.87)`
-     - :math:`265.44 \text{ } (2.91)`
+     - :math:`176.6 \text{ } (0.87)`
+     - :math:`265.4 \text{ } (2.91)`
    * - :math:`N=500`
-     - :math:`378.62 \text{ } (48.33)`
-     - :math:`703.11 \text{ } (98.49)`
+     - :math:`378.6 \text{ } (48.33)`
+     - :math:`703.1 \text{ } (98.49)`
    * - :math:`N=1000`
-     - :math:`591.93 \text{ } (31.84)`
-     - :math:`1213.55 \text{ } (96.13)`
+     - :math:`591.9 \text{ } (31.84)`
+     - :math:`1213.6 \text{ } (96.13)`
 
 Code used for timing: See `here <https://github.com/JianhanZhang/CFRL/blob/main/examples/workflow_computing_times/time_real_data_workflow.py>`_.

@@ -70,9 +70,10 @@ a training set and a validation set and then monitors the validation loss in
 each epoch of neural network training. At each epoch of neural network 
 training, it monitors the percent absolute change in the validation loss. It raises 
 a warning if the percent absolute change in the validation loss is greater than some 
-threshold in at least one of the final :math:`p` epochs of training, where 
-the threshold and :math:`p` are user-specified parameters. The threshold is 
-defaulted to :math:`0.005` and :math:`r` is defaulted to :math:`10`.
+threshold in at least one of the final :math:`p` epochs before training stops 
+(or is early stopped), where the threshold and :math:`p` are user-specified 
+parameters. The threshold is defaulted to :math:`0.005` and :math:`p` is 
+defaulted to :math:`10`.
 
 We note that while loss monitoring might flag potential non-convergence, it is 
 neither necessary nor sufficient for non-convergence. For example, when the 
@@ -98,12 +99,12 @@ pairs that are present in the training trajectory. For each component
 :math:`Q_t^{(i)}` of :math:`Q_t`, it then calculates the percent change
 
 .. math::
-    d_i = \frac{|Q_t^{(i)} - Q_{t-1}^{(i)}|}{0.01 + |Q_{t-1}^{(i)}|},
+    d_i = \frac{|Q_t^{(i)} - Q_{t-1}^{(i)}|}{10^{-8} + |Q_{t-1}^{(i)}|},
 
-where the constant :math:`0.01` is added in the denominator to avoid division by zero 
-and to stabilize the ratio when the Q values are small. It raises 
+where the constant :math:`10^{-8}` is added in the denominator to avoid division by zero. It raises 
 a warning if :math:`\max_{i}d_i` is greater than some 
-threshold in at least one of the final :math:`r` epochs of training, where 
+threshold in at least one of the final :math:`r` iterations before the iterative 
+model updates stop (or are early stopped), where 
 the threshold and :math:`r` are user-specified parameters. The threshold is 
 defaulted to :math:`0.005` and :math:`r` is defaulted to :math:`5`.
 

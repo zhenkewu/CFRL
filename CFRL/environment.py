@@ -792,13 +792,13 @@ class SimulatedEnvironment(gym.Env):
                 if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` are 
                 :code:`"lm"`, or if both :code:`is_loss_monitored` and :code:`is_early_stopping` are :code:`False`.
             loss_monitoring_patience (int, optional): 
-                The number of consecutive epochs with barely-decreasing validation loss at the end of training that is needed 
+                The number of consecutive epochs with barely-changing validation loss at the end of training that is needed 
                 for loss monitoring to not raise warnings. Applies to both the network for states and the network for rewards, 
                 if applicable. This argument is not used if both :code:`state_model_type` and :code:`reward_model_type` 
                 are :code:`"lm"`, or if :code:`is_loss_monitored=False`.
             loss_monitoring_min_delta (int for float, optional): 
-                The maximum amount of decrease in the validation loss for it to be considered 
-                barely-decreasing by the loss monitoring mechanism. Applies to 
+                The maximum amount of percent absolute change in the validation loss for it to be considered 
+                barely-changing by the loss monitoring mechanism. Applies to 
                 both the network for states and the network for rewards, if applicable. This argument is 
                 not used if both :code:`state_model_type` and :code:`reward_model_type` are :code:`"lm"`, or if 
                 :code:`is_loss_monitored=False`.

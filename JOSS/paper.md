@@ -117,13 +117,13 @@ in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` 
 `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to 
 evaluate the value and counterfactual unfairness level of the trained policy. 
 
-In addition, `CFRL` also provides tools to check for potential non-convergence that arise in neural network training, FQI, and FQE. More discussions about the sources, checks, and fixes of non-convergence in `CFRL` can be found in the "Common Issues" section of the CFRL documentation.
+In addition, `CFRL` also provides tools to check for potential non-convergence that arises in the training of neural networks, FQI, and FQE. More discussions about the sources, checks, and fixes of non-convergence in `CFRL` can be found in the ["Common Issues"](https://cfrl-documentation.netlify.app/tutorials/common_issues) section of the CFRL documentation.
 
 # Data Example
 
 We provide a data example to demonstrate how `CFRL` learns a counterfactually fair policy from real-world trajectory data with unknown underlying transition dynamics. We also show how `CFRL` evaluates the value and counterfactual unfairness level of the learned policy. We note that this is only one of the many workflows that `CFRL` can perform. For example, `CFRL` can also generate synthetic trajectory data and use it to evaluate the value and counterfactual unfairness level resulting from some custom data preprocessing methods. We refer interested readers to the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation for more workflow examples.
 
-We also recorded the computing times of different workflows under different combinations of the number of individuals ($N$) and the number of transitions ($T$) in the "Computing Times" section of the CFRL documentation. For example, under $N=500$ and $T=10$, the workflow presented in this data example (which is also the "real data workflow" in the documentation) ran for $378.62$ seconds on average in our computing environment.
+We also recorded the computing times of different workflows under different combinations of the number of individuals ($N$) and the number of transitions ($T$) in the ["Computing Times"](https://cfrl-documentation.netlify.app/introduction/computing_times) section of the CFRL documentation. For example, under $N=500$ and $T=10$, the workflow presented in this data example (which is the "real data workflow" in the documentation) ran for $378.6$ seconds on average in our computing environment.
 
 #### Load Data
 
@@ -191,7 +191,7 @@ The estimated value is $7.358$ and CF metric is $0.042$, which indicates our pol
 
 #### Comparisons Against Baseline Methods
 
-We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; and Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and counterfactual unfairness levels as part of the code example of the "Assessing Policies Using Real Data" workflow in the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example, where "ours" stands for the `SequentialPreprocessor`.
+We can compare the sequential data preprocessing method in `CFRL` against a few baselines: Random, which selects each action randomly with equal probability; Full, which uses all variables, including the sensitive attribute, for policy learning; and Unaware, which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and counterfactual unfairness levels as part of the code example of the "Assessing Policies Using Real Data" workflow in the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example, where "ours" stands for outputs from the `SequentialPreprocessor`.
 
 |                               |Random  |Full   |Unaware|Ours   |                                                    
 |-------------------------------|--------|-------|-------|-------|
