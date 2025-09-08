@@ -6,10 +6,10 @@ tags:
   - CFRL
   - Python
 authors:
-  - name: Jianhan Zhang
+  - name: Jianhan Zhang [^1]
     corresponding: false 
     affiliation: 1
-  - name: Jitao Wang
+  - name: Jitao Wang [^1]
     corresponding: false 
     affiliation: 2
   - name: Chengchun Shi
@@ -56,13 +56,15 @@ preamble: >
   \floatsetup[figure]{capposition=top}
 ---
 
+[^1] JZ and JW contributed equally to this work.
+
 # Summary
 
 Reinforcement learning (RL) aims to learn and evaluate a sequential
 decision-making rule, often referred to as a “policy”, that maximizes
-expected discounted cumulative rewards to optimize population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity in fields such as healthcare, banking, autonomous driving, and more recently large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race/ethnicity, income, gender, education level). An RL algorithm learns an optimal policy that makes decisions based on observed state variables. If certain values of the sensitive attribute influence the state variables in a way that influences the policy, such as by leading the policy to systematically withhold services from an individual, unfairness will result. For example, Hispanics may under-report their pain levels due to cultural factors, misleading a fairness-blind RL agent to assign less therapist time to them [@piette2023powerED]. Deployment of RL algorithms without careful fairness considerations can raise concerns and erode public trust in high-stake settings.
+expected discounted cumulative rewards to optimize population-level benefit in an environment across possibly infinitely many time steps. RL has gained popularity in fields such as healthcare, banking, autonomous driving, and, more recently, large language model pre-training. However, the sequential decisions made by an RL algorithm may disadvantage individuals with certain values of a sensitive attribute (e.g., race/ethnicity, income, gender, education level). An RL algorithm learns an optimal policy that makes decisions based on observed state variables. If certain values of the sensitive attribute influence the state variables in a way that influences the policy, such as by leading the policy to systematically withhold services from an individual, unfairness will result. For example, Hispanics may under-report their pain levels due to cultural factors, misleading a fairness-blind RL agent to assign less therapist time to them [@piette2023powerED]. Deployment of RL algorithms without careful fairness considerations can raise concerns and erode public trust in high-stakes settings.
 
-To formally define and address the fairness problem in sequential decision making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
+To formally define and address the fairness problem in sequential decision-making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
 multi-stage setting and proposed a data preprocessing algorithm that
 ensures CF. A policy is counterfactually fair if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute taken a different value, while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm ensures CF by constructing new state variables that are not impacted by the sensitive attribute(s). The reward values in the data are also preprocessed, but the purpose of preprocessing the rewards is to improve the value of the learned optimal policy rather than ensure CF. We refer interested readers to @wang2025cfrl for more technical details.
 
@@ -158,7 +160,7 @@ states_tilde, rewards_tilde = sp.train_preprocessor(
 
 #### Counterfactually Fair Policy Learning
 
-Next we train a counterfactually fair policy using the preprocessed data and `FQI` with `sp` as its internal preprocessor. By default, the input data will first be preprocessed by `sp` before being used for policy learning. However, since the training data `state_tilde` and `rewards_tilde` are already preprocessed in our case, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e. `sp`).
+Next, we train a counterfactually fair policy using the preprocessed data and `FQI` with `sp` as its internal preprocessor. By default, the input data will first be preprocessed by `sp` before being used for policy learning. However, since the training data `state_tilde` and `rewards_tilde` are already preprocessed in our case, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e. `sp`).
 
 ```python
 agent = FQI(num_actions=2, model_type='nn', preprocessor=sp)
@@ -187,7 +189,7 @@ cf_metric = evaluate_fairness_through_model(env=env, zs=zs_test, states=states_t
                                             actions=actions_test, policy=agent)
 ```
 
-The estimated value is $7.358$ and CF metric is $0.042$, which indicates our policy is close to being perfectly counterfactually fair. Indeed, the CF metric should be exactly 0 if we know the true dynamics of the environment of interest; the reason why it is not exactly 0 here is because we need to estimate the dynamics of the environment of interest during preprocessing, which can introduce finite-sample errors.
+The estimated value is $7.358$ and the CF metric is $0.042$, which indicates our policy is close to being perfectly counterfactually fair. Indeed, the CF metric should be exactly 0 if we know the true dynamics of the environment of interest; the reason why it is not exactly 0 here is that we need to estimate the dynamics of the environment of interest during preprocessing, which can introduce finite-sample errors.
 
 #### Comparisons Against Baseline Methods
 
