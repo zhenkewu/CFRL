@@ -6,10 +6,10 @@ tags:
   - CFRL
   - Python
 authors:
-  - name: Jianhan Zhang [^1]
+  - name: Jianhan Zhang
     corresponding: false 
     affiliation: 1
-  - name: Jitao Wang [^1]
+  - name: Jitao Wang
     corresponding: false 
     affiliation: 2
   - name: Chengchun Shi
@@ -55,8 +55,6 @@ preamble: >
   \floatsetup[table]{capposition=top}
   \floatsetup[figure]{capposition=top}
 ---
-
-[^1] JZ and JW contributed equally to this work.
 
 # Summary
 

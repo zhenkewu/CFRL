@@ -129,8 +129,8 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 num_actions=2, 
                 reg_model=model_type,
                 is_normalized=False,
-                is_loss_monitored=False,
-                is_early_stopping=False, 
+                is_loss_monitored=True,
+                is_early_stopping=True, 
             )
             preprocessor.train_preprocessor(xs=copy.deepcopy(xs),
                                             zs=copy.deepcopy(zs),
@@ -141,10 +141,10 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 preprocessor=preprocessor,
                 model_type=fqi_model,
                 num_actions=2,
-                is_loss_monitored=False,
-                is_early_stopping_nn=False,
-                is_q_monitored=False,
-                is_early_stopping_q=False,
+                is_loss_monitored=True,
+                is_early_stopping_nn=True,
+                is_q_monitored=True,
+                is_early_stopping_q=True,
                 #min_delta_q=0.05
                 #name="ours",
             )
