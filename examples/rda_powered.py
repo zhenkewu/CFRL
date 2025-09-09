@@ -193,8 +193,10 @@ def run_exp_one(seed, model_type, z_label, methods):
                                             seed=seed+4, 
                                             is_loss_monitored=True,
                                             is_early_stopping_nn=True,
+                                            early_stopping_patience_nn=10,
                                             is_q_monitored=True,
-                                            is_early_stopping_q=True
+                                            is_early_stopping_q=True,
+                                            #max_iter=1000
                                            )
         
         #print('fairness:', cf_metric)
@@ -237,5 +239,5 @@ def run_exp(rep, model_type, z_labels, methods, print_res=True, export_res=False
 '''run_exp(rep=10, methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=True, 
         export_path='./result_rda_real_data_analysis_after.csv')'''
-run_exp(rep=3, model_type='nn', methods=['ours'], z_labels=['sex_b'], 
+run_exp(rep=1, model_type='nn', methods=['ours'], z_labels=['sex_b'], 
         print_res=True, export_res=False)

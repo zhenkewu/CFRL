@@ -205,7 +205,7 @@ class SequentialPreprocessor(Preprocessor):
         is_action_onehot: bool = True,
         is_normalized: bool = False,
         is_loss_monitored: bool = True, 
-        is_early_stopping: bool = True,
+        is_early_stopping: bool = False,
         test_size: int | float = 0.2,
         loss_monitoring_patience: int = 10,
         loss_monitoring_min_delta: int | float = 0.01,

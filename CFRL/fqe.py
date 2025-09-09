@@ -50,14 +50,14 @@ class FQE:
             epochs: int = 500, 
             gamma: int | float = 0.9, 
             is_loss_monitored: bool = True,
-            is_early_stopping_nn: bool = True,
+            is_early_stopping_nn: bool = False,
             test_size_nn: int | float = 0.2,
             loss_monitoring_patience: int = 10,
             loss_monitoring_min_delta: int | float = 0.005,
             early_stopping_patience_nn: int = 10,
             early_stopping_min_delta_nn: int | float = 0.005,
             is_q_monitored: bool = True,
-            is_early_stopping_q: bool = True,
+            is_early_stopping_q: bool = False,
             q_monitoring_patience: int = 5, 
             q_monitoring_min_delta: int | float = 0.005, 
             early_stopping_patience_q: int = 5, 
@@ -430,6 +430,7 @@ class FQE:
 
                         val_losses.append(val_loss.item())
                         converged = loss_monitor(val_loss.item())
+                        print('iteration:', i, 'epoch:', epoch, 'loss:', val_loss)
 
                         if self.is_early_stopping_nn and early_stopping_checker(val_loss.item()):
                             break
@@ -456,7 +457,7 @@ class FQE:
                         break
                     
             if self.is_q_monitored and self.model_type == 'nn' and (not converged_q):
-                warnings.warn('\nThe fluctuation in the q values is not small enough in at least one of the final ' + str(self.q_monitoring_patience) + ' iterations during FQI training', FluctuatingQValueWarning)
+                warnings.warn('\nThe fluctuation in the q values is not small enough in at least one of the final ' + str(self.q_monitoring_patience) + ' iterations during FQE training', FluctuatingQValueWarning)
 
         self.model = copy.deepcopy(current_model)
 

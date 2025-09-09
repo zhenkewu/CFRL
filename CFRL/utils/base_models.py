@@ -26,7 +26,7 @@ class FluctuatingQValueWarning(Warning):
     pass
 
 
-class EarlyStoppingChecker:
+'''class EarlyStoppingChecker:
     def __init__(
             self, 
             patience: int = 5, 
@@ -57,7 +57,73 @@ class EarlyStoppingChecker:
             self.counter += 1
             if self.counter >= self.patience:
                 self.converged = True
+        return self.converged'''
+
+# checks the signed change with respect to the loss in the previous epoch
+class EarlyStoppingChecker:
+    def __init__(
+            self, 
+            patience: int = 5, 
+            min_delta: int | float = 0.001, 
+            mode: str = "min"
+        ) -> None:
+        self.patience = patience
+        self.min_delta = min_delta
+        self.mode = mode
+        self.counter = 0
+        self.prev_score = None
+        self.converged = False
+
+    def __call__(self, val_loss: int | float) -> bool:
+        if self.prev_score is None:
+            self.prev_score = val_loss
+            return False
+
+        if self.mode == "min":
+            delta = (val_loss - self.prev_score) / (1e-8 + self.prev_score)
+        elif self.mode == "max":
+            delta = (self.prev_score - val_loss) / (1e-8 + self.prev_score)
+
+        self.prev_score = val_loss
+        if delta < -self.min_delta:
+            self.counter = 0
+        else:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.converged = True
         return self.converged
+
+# check percent absolute change relative to a best score
+'''class EarlyStoppingChecker:
+    def __init__(
+            self, 
+            patience: int = 5, 
+            min_delta: int | float = 0.001, 
+            mode: str = "min"
+        ) -> None:
+        self.patience = patience
+        self.min_delta = min_delta
+        self.mode = mode
+        self.counter = 0
+        self.best_score = None
+        self.converged = False
+
+    def __call__(self, val_loss: int | float) -> bool:
+        if self.best_score is None:
+            self.best_score = val_loss
+            return False
+
+        delta = abs(val_loss - self.best_score) / (abs(self.best_score) + 1e-8) # add 1e-8 to prevent division by zero
+        self.best_score = val_loss
+
+        if delta > self.min_delta:
+            self.counter = 0
+            self.converged = False
+        else:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.converged = True
+        return self.converged'''
     
 class LossMonitor:
     def __init__(

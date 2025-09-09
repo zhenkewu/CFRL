@@ -23,3 +23,6 @@ examples/workflow_computing_times/old_data/
 CFRL/utils/base_models_old.py
 CFRL/olds/
 examples/workflow_computing_times/time_workflows.sbatch
+out_best_score_signed_10.txt
+out_best_score_signed_30.txt
+out_prev_score_signed_10.txt

@@ -9,7 +9,8 @@ number of transitions (:math:`T`): the preprocessing only workflow, the policy
 learning only workflow, and the real data workflow. Each workflow was run for 
 10 repetitions under each :math:`N` and :math:`T`, and the mean and standard 
 deviation (in parenthesis) of the computing times are recorded in the tables 
-below. The unit of the computing times here is second (s).
+below. Early stopping and non-convergence checking were not enabled during these 
+experiments. The unit of the computing times here is second (s).
 
 The timing experiments were run on an internal cluster equipped with two 36-core 
 Intel Xeon Gold 6154 CPUs clocked at 3.0 GHz and 187 GB of RAM. Each job was 
