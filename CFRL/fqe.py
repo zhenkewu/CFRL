@@ -430,13 +430,13 @@ class FQE:
 
                         val_losses.append(val_loss.item())
                         converged = loss_monitor(val_loss.item())
-                        print('iteration:', i, 'epoch:', epoch, 'loss:', val_loss)
+                        #print('iteration:', i, 'epoch:', epoch, 'loss:', val_loss)
 
                         if self.is_early_stopping_nn and early_stopping_checker(val_loss.item()):
                             break
 
                 if self.is_loss_monitored and (not converged):
-                    warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.loss_monitoring_patience) + ' epochs during neural network training', DecreasingLossWarning)
+                    warnings.warn('\nThe fluctuation in the loss is not small enough in at least one of the final ' + str(self.loss_monitoring_patience) + ' epochs during neural network training', DecreasingLossWarning)
 
                 #glogger.info(
                 #    "{}, fqe_nn mse:{}, mean_target:{}".format(
@@ -457,7 +457,7 @@ class FQE:
                         break
                     
             if self.is_q_monitored and self.model_type == 'nn' and (not converged_q):
-                warnings.warn('\nThe fluctuation in the q values is not small enough in at least one of the final ' + str(self.q_monitoring_patience) + ' iterations during FQE training', FluctuatingQValueWarning)
+                warnings.warn('\nThe fluctuation in the Q values is not small enough in at least one of the final ' + str(self.q_monitoring_patience) + ' iterations during FQE training', FluctuatingQValueWarning)
 
         self.model = copy.deepcopy(current_model)
 

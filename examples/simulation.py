@@ -130,7 +130,9 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 reg_model=model_type,
                 is_normalized=False,
                 is_loss_monitored=True,
-                is_early_stopping=True, 
+                is_early_stopping=False,
+                loss_monitoring_min_delta=0.01,
+                loss_monitoring_patience=3 
             )
             preprocessor.train_preprocessor(xs=copy.deepcopy(xs),
                                             zs=copy.deepcopy(zs),
@@ -143,8 +145,10 @@ def run_exp1_one(methods, method_policy, N, T, z_coef, seed):
                 num_actions=2,
                 is_loss_monitored=True,
                 is_early_stopping_nn=True,
+                loss_monitoring_patience=3,
                 is_q_monitored=True,
-                is_early_stopping_q=True,
+                is_early_stopping_q=False,
+                q_monitoring_patience=3,
                 #min_delta_q=0.05
                 #name="ours",
             )

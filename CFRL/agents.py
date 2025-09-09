@@ -290,12 +290,13 @@ class FQI(Agent):
                     self.model.train()
 
                     converged, early_stop = q_checker(q=q)
+                    #print('iter:', iteration, 'q:', q[:5], "converged:", converged)
                     
                     if self.is_early_stopping_q and early_stop:
                         break
                     
         if self.is_q_monitored and self.model_type == 'nn' and (not converged):
-            warnings.warn('\nThe fluctuation in the q values is not small enough in at least one of the final ' + str(self.q_monitoring_patience) + ' iterations during FQI training', FluctuatingQValueWarning)
+            warnings.warn('\nThe fluctuation in the Q values is not small enough in at least one of the final ' + str(self.q_monitoring_patience) + ' iterations during FQI training', FluctuatingQValueWarning)
 
 
     def _fit_nn(
@@ -391,7 +392,7 @@ class FQI(Agent):
                     break
 
         if self.is_loss_monitored and (not converged):
-            warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(self.loss_monitoring_patience) + ' epochs during neural network training', DecreasingLossWarning)
+            warnings.warn('\nThe fluctuation in the loss is not small enough in at least one of the final ' + str(self.loss_monitoring_patience) + ' epochs during neural network training', DecreasingLossWarning)
         '''glogger.info(
             f"{iteration}, fqi_nn mse:{loss.item()}, mean_target:{np.mean(Y.detach().numpy())}"
         )'''

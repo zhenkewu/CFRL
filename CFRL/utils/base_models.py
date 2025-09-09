@@ -347,6 +347,8 @@ class NeuralNetRegressor(nn.Module):
                 val_losses.append(val_loss.item())
                 if is_loss_monitored:
                     converged = loss_monitor(val_loss.item())
+                #if epoch == epochs - 1:
+                    #print('epoch:', epoch, 'loss:', val_loss, "converged:", converged)
 
                 if is_early_stopping and early_stopping_checker(val_loss.item()):
                     '''glogger.info(
@@ -368,7 +370,7 @@ class NeuralNetRegressor(nn.Module):
             
         # Raise a warning if the validation loss has not stabilized at the end of training
         if is_loss_monitored and (not converged):
-            warnings.warn('\nThe decrease in the loss is not small enough in at least one of the final ' + str(loss_monitoring_patience) + ' epochs during neural network training', DecreasingLossWarning)
+            warnings.warn('\nThe fluctuation in the loss is not small enough in at least one of the final ' + str(loss_monitoring_patience) + ' epochs during neural network training', DecreasingLossWarning)
 
         with torch.no_grad():
             self.model.eval()
