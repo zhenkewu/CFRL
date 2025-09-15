@@ -22,10 +22,34 @@ and rewards, where the bias is often a result of the observed sensitive attribut
 counterfactual fairness, we want the policy to be based on the true underlying states and rewards 
 rather than their biased proxies. 
 
-We refer interested readers to `Kusner et al. (2017) <https://arxiv.org/abs/1703.06856>`_ for a detailed 
+Below, we provide an example to illustrate the intuition behind counterfactual fairness in the 
+single-stage seting. We refer interested readers to 
+`Kusner et al. (2017) <https://arxiv.org/abs/1703.06856>`_ for a detailed 
 discussion of counterfactual fairness in the single-stage predictions setting, and to 
 `Wang et al. (2025) <https://arxiv.org/abs/2501.06366>`_ for a detailed discussion of counterfactual 
 fairness in the reinforcement learning setting.
+
+Example: College Admissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: ../supps/cf_example.png
+
+Two candidates, A (male) and B (female), are applying for admission to a college. 
+As shown in the table, A and B have the 
+same level of talent and would have achieved the same SAT score had they been both female or 
+both male. However, in reality, B achieved a lower SAT score than A due to structural 
+discrimination faced by female students in her community. 
+
+Suppose the college wants to select candidates with the highest talent. 
+Since talent is unobserved, the college can only make decisions using observed 
+metrics (i.e. the SAT score and pre-college school level). If the decision-making is 
+fairness-blind, then it will prefer A over B because A has a higher SAT score. However, 
+one can argue that this is unfair because B's lower score is a result of discrimination 
+rather than her lack of talent. On the other hand, counterfactual fairness would require 
+the college to estimate A's SAT score had he been a female and B's SAT score had 
+she been a male. If these estimates are accurate, then the college would see 
+that both candidates should be equally talented because their SAT scores would be the same 
+had both of them been female or both of them been male.
 
 Key Functionalities
 -------------------------
