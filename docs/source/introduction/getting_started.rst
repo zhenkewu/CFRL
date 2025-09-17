@@ -34,19 +34,19 @@ Example: College Admissions
 
 .. image:: ../supps/cf_example.png
 
-Two candidates, A (male) and B (female), are applying for admission to a college. 
+Two candidates, A (female) and B (male), are applying for admission to a college. 
 As shown in the table, A and B have the 
 same level of talent and would have achieved the same SAT score had they been both female or 
-both male. However, in reality, B achieved a lower SAT score than A due to structural 
+both male. However, in reality, A achieved a lower SAT score than B due to structural 
 discrimination faced by female students in her community. 
 
 Suppose the college wants to select candidates with the highest talent. 
 Since talent is unobserved, the college can only make decisions using observed 
 metrics (i.e. the SAT score and pre-college school level). If the decision-making is 
-fairness-blind, then it will prefer A over B because A has a higher SAT score. However, 
-one can argue that this is unfair because B's lower score is a result of discrimination 
+fairness-blind, then it will prefer B over A because B has a higher SAT score. However, 
+one can argue that this is unfair because A's lower score is a result of discrimination 
 rather than her lack of talent. On the other hand, counterfactual fairness would require 
-the college to estimate A's SAT score had he been a female and B's SAT score had 
+the college to estimate B's SAT score had he been a female and A's SAT score had 
 she been a male. If these estimates are accurate, then the college would see 
 that both candidates should be equally talented because their SAT scores would be the same 
 had both of them been female or both of them been male.
