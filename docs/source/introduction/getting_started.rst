@@ -38,18 +38,28 @@ Two candidates, A (female) and B (male), are applying for admission to a college
 As shown in the table, A and B have the 
 same level of talent and would have achieved the same SAT score had they been both female or 
 both male. However, in reality, A achieved a lower SAT score than B due to structural 
-discrimination faced by female students in her community. 
+discrimination faced by women in her community. 
 
 Suppose the college wants to select candidates with the highest talent. 
 Since talent is unobserved, the college can only make decisions using observed 
 metrics (i.e. the SAT score and pre-college school level). If the decision-making is 
 fairness-blind, then it will prefer B over A because B has a higher SAT score. However, 
 one can argue that this is unfair because A's lower score is a result of discrimination 
-rather than her lack of talent. On the other hand, counterfactual fairness would require 
+rather than her lack of talent. Indeed, this does not satisfy counterfactual fairness 
+because, for example, had A been a male, then her SAT score would have been the same 
+as B's, and the college will see A and B as equally talented. On the other hand, 
+the algorithm in Wang et al. (2025) requires 
 the college to estimate B's SAT score had he been a female and A's SAT score had 
-she been a male. If these estimates are accurate, then the college would see 
+she been a male. If these estimates are accurate, then for both A and B we would 
+observe a vector :math:`[1500, 1550]` of counterfactual SAT scores, and then the college would see 
 that both candidates should be equally talented because their SAT scores would be the same 
-had both of them been female or both of them been male.
+had both of them been female or both of them been male. This is counterfactually fair.
+
+This example also highlights two key differences between counterfactual fairness and 
+equal opportunity (or demographic parity): First, the former defines fairness at the 
+individual-level, while the latter defines fairness at the group-level. Second, the former 
+defines fairness using causal reasoning, while the latter defines fairness by checking 
+statistical associations and parities. 
 
 Key Functionalities
 -------------------------
