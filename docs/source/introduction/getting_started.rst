@@ -33,9 +33,20 @@ Example: College Admissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: ../supps/cf_example.png
+   :scale: 50
+   :align: center
+
+.. raw:: html
+
+   <div style="margin-bottom: 25px;"></div>
+
+.. raw:: latex
+
+   \vspace{20pt}
 
 Two candidates, A (female) and B (male), are applying for admission to a college. 
-As shown in the table, A and B have the 
+The table above shows the two candidates' observed qualifications (boldened) and 
+counterfactual qualifications (not boldened). As shown in the table, A and B have the 
 same level of talent and would have achieved the same SAT score had they been both female or 
 both male. However, in reality, A achieved a lower SAT score than B due to structural 
 discrimination faced by women in her community. 
