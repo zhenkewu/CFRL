@@ -972,8 +972,8 @@ class SimulatedEnvironment(gym.Env):
                 actions_z_ = actions[idxs]
 
                 next_states_z_ = next_states[idxs]
-                torch.manual_seed(1) # NEWLY ADDED
-                np.random.seed(1) # NEWLY ADDED
+                #torch.manual_seed(1) # NEWLY ADDED
+                #np.random.seed(1) # NEWLY ADDED
                 self.trans_models[tuple(z_)] = NeuralNetRegressor(
                     in_dim=states_z_.shape[1] + dim_a,
                     out_dim=next_states_z_.shape[1],
@@ -1027,8 +1027,8 @@ class SimulatedEnvironment(gym.Env):
                 states_z_ = states[idxs]
                 actions_z_ = actions[idxs]
                 rewards_z_ = rewards[idxs]
-                torch.manual_seed(1) # NEWLY ADDED
-                np.random.seed(1) # NEWLY ADDED
+                #torch.manual_seed(1) # NEWLY ADDED
+                #np.random.seed(1) # NEWLY ADDED
                 self.reward_models[tuple(z_)] = NeuralNetRegressor(
                     in_dim=states_z_.shape[1] + dim_a,
                     out_dim=1,
@@ -1189,8 +1189,8 @@ class SimulatedEnvironment(gym.Env):
                     [states_z_, actions_z_.reshape(-1, dim_a)], axis=1
                 )
 
-                torch.manual_seed(1) # NEWLY ADDED
-                np.random.seed(1) # NEWLY ADDED
+                #torch.manual_seed(1) # NEWLY ADDED
+                #np.random.seed(1) # NEWLY ADDED
                 next_states_z_mean = self.trans_models[tuple(z_)].predict(X)
                 # MAY NEED TO UNCOMMENT BACK
                 #if z_ == 1:
@@ -1216,8 +1216,8 @@ class SimulatedEnvironment(gym.Env):
                 X = np.concatenate(
                     [states_z_, actions_z_.reshape(-1, dim_a)], axis=1
                 )
-                torch.manual_seed(1) # NEWLY ADDED
-                np.random.seed(1) # NEWLY ADDED
+                #torch.manual_seed(1) # NEWLY ADDED
+                #np.random.seed(1) # NEWLY ADDED
                 rewards_z_ = self.reward_models[tuple(z_)].predict(X).flatten()
                 rewards[idx] = rewards_z_
 
