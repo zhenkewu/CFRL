@@ -215,6 +215,10 @@ environment libraries such as `gym` [@towers2024gymnasium]. Third, generalizatio
 non-additive counterfactual states reconstruction can make `CFRL` more versatile. We leave these extensions 
 to future updates.
 
+# Acknowledgements
+
+Jianhan Zhang and Jitao Wang contributed equally to this work.
+
 <!-- # Acknowledgements
 
 This is the acknowledgements. -->
