@@ -64,7 +64,7 @@ expected discounted cumulative rewards to optimize the population-level benefit 
 
 To formally define and address the fairness problem in the novel sequential decision-making settings, @wang2025cfrl extended the concept of single-stage counterfactual fairness (CF) in a structural causal framework [@kusner2018cf] to the
 multi-stage setting and proposed a data preprocessing algorithm that
-ensures CF. A policy is counterfactually fair if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute taken a different value, while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm ensures CF by constructing new state variables that are not impacted by the sensitive attribute(s). Reward preprocessing is also conducted but with a different purpose to improve the value of the learned optimal policy rather than to ensure CF. We refer interested readers to @wang2025cfrl for more technical details.
+ensures CF. A policy is counterfactually fair if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute taken a different value, while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm ensures CF by constructing new state variables that are not impacted by the sensitive attribute(s). Reward preprocessing is also conducted, but with a different purpose to improve the value of the learned optimal policy rather than to ensure CF. We refer interested readers to @wang2025cfrl for more technical details.
 
 The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides functionalities to evaluate the value (expected discounted cumulative reward) and counterfactual unfairness level achieved by 
 any given policy. Here, "CFRL" stands for "Counterfactual Fairness in Reinforcement Learning". The library produces preprocessed trajectories that can be used by
@@ -128,7 +128,7 @@ We record the computing times of different workflows under different combination
 
 In this demonstration, we use an offline trajectory generated from a `SyntheticEnvironment` following some pre-specified transition rules. Although the data is actually synthesized, we treat it as if it is from some unknown environment for pedagogical convenience.
 
-The trajectory contains 500 individuals (i.e. $N=500$) and 10 transitions (i.e. $T=10$). The sensitive attribute variable and the state variable are both univariate. The sensitive attribute is binary ($0$ or $1$). The actions are also binary ($0$ or $1$) and are sampled using a behavior policy that selects $0$ or $1$ randomly with equal probability. The trajectory is stored in a tabular format in a `.csv` file. We use `read_trajectory_from_csv()` to load the trajectory from the `.csv` format into the array format required by `CFRL`.
+The trajectory contains 500 individuals (i.e., $N=500$) and 10 transitions (i.e., $T=10$). The sensitive attribute variable and the state variable are both univariate. The sensitive attribute is binary ($0$ or $1$). The actions are also binary ($0$ or $1$) and are sampled using a behavior policy that selects $0$ or $1$ randomly with equal probability. The trajectory is stored in a tabular format in a `.csv` file. We use `read_trajectory_from_csv()` to load the trajectory from the `.csv` format into the array format required by `CFRL`.
 ```python
 zs, states, actions, rewards, ids = read_trajectory_from_csv(
     path='../data/sample_data_large_uni.csv', z_labels=['z1'], 
@@ -157,7 +157,7 @@ states_tilde, rewards_tilde = sp.train_preprocessor(
 
 #### Counterfactually Fair Policy Learning
 
-Next, we train a counterfactually fair policy using the preprocessed data and `FQI` with `sp` as its internal preprocessor. By default, the input data will first be preprocessed by `sp` before being used for policy learning. However, since the training data `state_tilde` and `rewards_tilde` are already preprocessed in our case, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e. `sp`).
+Next, we train a counterfactually fair policy using the preprocessed data and `FQI` with `sp` as its internal preprocessor. By default, the input data will first be preprocessed by `sp` before being used for policy learning. However, since the training data `state_tilde` and `rewards_tilde` are already preprocessed in our case, we set `preprocess=False` during training so that the input trajectory will not be preprocessed again by the internal preprocessor (i.e., `sp`).
 
 ```python
 agent = FQI(num_actions=2, model_type='nn', preprocessor=sp)
@@ -167,7 +167,7 @@ agent.train(zs=zs_train, xs=states_tilde, actions=actions_train,
 
 #### `SimulatedEnvironment` Training
 
-Before moving on to the evaluation stage, there is one more step: We need to train a `SimulatedEnvironment` that mimics the transition rules of the true environment that generated the training trajectory, which will be used by the evaluation functions via Monte Carlo. To do so, we initialize a `SimulatedEnvironment` and train it on the whole trajectory data (i.e. training set and testing set combined).
+Before moving on to the evaluation stage, there is one more step: We need to train a `SimulatedEnvironment` that mimics the transition rules of the true environment that generated the training trajectory, which will be used by the evaluation functions via Monte Carlo. To do so, we initialize a `SimulatedEnvironment` and train it on the whole trajectory data (i.e., training set and testing set combined).
 
 ```python
 env = SimulatedEnvironment(num_actions=2, state_model_type='nn', 
@@ -218,9 +218,5 @@ to future updates.
 # Acknowledgements
 
 Jianhan Zhang and Jitao Wang contributed equally to this work.
-
-<!-- # Acknowledgements
-
-This is the acknowledgements. -->
 
 # References
