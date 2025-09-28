@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "CFRL"
-version = "0.1.6"
+name = "pycfrl"
+version = "0.1.1"
 description = "The CFRL package implements algorithms to ensure counterfactual fairness in reinforcement learning and provides tools for evaluating the value and counterfactual fairness of reinforcement learning policies."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -35,7 +35,7 @@ classifiers = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/JianhanZhang/CFRL"
+Documentation = "https://cfrl-documentation.netlify.app/"
 Repository = "https://github.com/JianhanZhang/CFRL"
 
 [tool.hatch.build.targets.wheel]

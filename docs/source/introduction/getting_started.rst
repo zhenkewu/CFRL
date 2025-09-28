@@ -6,7 +6,12 @@ Installation
 
 .. code:: bash
 
-    $ pip install cfrl
+    $ pip install pycfrl
+
+Please note that :code:`CFRL` should be installed as :code:`pycfrl` 
+instead of :code:`cfrl`. Running :code:`pip install cfrl` will likely 
+install a library that is different from the :code:`CFRL` library 
+described in this documentation.
 
 A Brief Introduction to Counterfactual Fairness
 -------------------------------------------------

@@ -7,8 +7,13 @@ Software paper: To be updated.
 ## Installation
 
 ```bash 
-$ pip install cfrl
+$ pip install pycfrl
 ```
+
+*Please note that `CFRL` should be installed as `pycfrl` 
+instead of `cfrl`. Running `pip install cfrl` will likely 
+install a library that is different from the `CFRL` library 
+described in this documentation.*
 
 ## A Brief Introduction to Counterfactual Fairness
 

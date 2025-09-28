@@ -6,3 +6,4 @@ About CFRL
    :caption: Contents
 
    the_cfrl_team
+   release_notes

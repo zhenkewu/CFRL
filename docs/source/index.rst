@@ -25,7 +25,7 @@ the use cases of CFRL. We appreciate your patience and support!
 [CFRL software paper]
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Introduction
 
    introduction/getting_started
@@ -33,7 +33,7 @@ the use cases of CFRL. We appreciate your patience and support!
    introduction/faq
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Inputs and Outputs
 
    inputs_and_outputs/data_requirements
@@ -61,7 +61,8 @@ the use cases of CFRL. We appreciate your patience and support!
    customizations/custom_agents
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: About CFRL
 
    about_cfrl/the_cfrl_team
+   about_cfrl/release_notes
