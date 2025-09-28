@@ -217,6 +217,6 @@ to future updates.
 
 # Acknowledgements
 
-Jianhan Zhang and Jitao Wang contributed equally to this work.
+Jianhan Zhang and Jitao Wang contributed equally to this work. The authors declare no conflicts of interest.
 
 # References
