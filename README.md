@@ -4,6 +4,8 @@ Documentation: [PyCFRL Documentation](https://cfrl-documentation.netlify.app/).
 
 Software paper: To be updated. 
 
+*Note: This library was originally named CFRL. We changed the name to PyCFRL to avoid naming conflict with an existing library.*
+
 ## Installation
 
 ```bash 
