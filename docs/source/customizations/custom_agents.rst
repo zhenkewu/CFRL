@@ -2,10 +2,10 @@ Custom Agents
 =========================
 
 In addition to :code:`FQI`, users can also define custom decision-making agents and use them 
-in CFRL. A custom decision-agent often represents a pre-specified decision rule (e.g. making 
-decisions randomly) or implements another reinforcement learning algorithm not provided by CFRL.
+in PyCFRL. A custom decision-agent often represents a pre-specified decision rule (e.g. making 
+decisions randomly) or implements another reinforcement learning algorithm not provided by PyCFRL.
 
-To ensure a custom agent is compatible with CFRL, it must inherit from the 
+To ensure a custom agent is compatible with PyCFRL, it must inherit from the 
 :code:`Agent` class provided by the :code:`agents` module. That is, 
 
 - The custom agent should be a subclass of :code:`Agent`.
@@ -17,7 +17,7 @@ To ensure a custom agent is compatible with CFRL, it must inherit from the
   :code:`Preprocessor`.
 
 For example, though simple, the following :code:`RandomAgent` is a valid custom 
-agent that will be compatible with CFRL.
+agent that will be compatible with PyCFRL.
 
 .. code-block:: python
 
@@ -42,7 +42,7 @@ agent that will be compatible with CFRL.
             return actions
 
 
-On the other hand, the following agent will not be compatible with CFRL 
+On the other hand, the following agent will not be compatible with PyCFRL 
 because its :code:`act()` does not have :code:`uat` in its argument list. 
 :code:`uat` should be included in the argument list here to ensure 
 compatibility even though it is not used in the function.

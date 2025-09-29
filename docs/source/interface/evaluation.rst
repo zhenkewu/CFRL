@@ -2,11 +2,11 @@ Evaluation
 ======================
 This module implements functions used for evaluating the value and fairness of policies.
 
-.. code::
+.. code:: python
 
-   from cfrl import evaluation
+   from pycfrl import evaluation
 
-.. automodule:: cfrl.evaluation
+.. automodule:: pycfrl.evaluation
    :members:
    :show-inheritance:
    :special-members: __init__

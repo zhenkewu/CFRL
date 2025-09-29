@@ -1,7 +1,7 @@
 Computing Times
 ========================
 
-To provide a reference of the approximated computing time required by CFRL, we 
+To provide a reference of the approximated computing time required by PyCFRL, we 
 timed three of the four workflows introduced in the 
 :ref:`"Example Workflows" <example_workflows>` section 
 under various combinations of the number of training samples (:math:`N`) and the 

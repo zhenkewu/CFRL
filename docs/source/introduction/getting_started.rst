@@ -8,11 +8,6 @@ Installation
 
     $ pip install pycfrl
 
-Please note that :code:`CFRL` should be installed as :code:`pycfrl` 
-instead of :code:`cfrl`. Running :code:`pip install cfrl` will likely 
-install a library that is different from the :code:`CFRL` library 
-described in this documentation.
-
 A Brief Introduction to Counterfactual Fairness
 -------------------------------------------------
 
@@ -80,10 +75,10 @@ statistical associations and parities.
 Key Functionalities
 -------------------------
 
-CFRL is designed with two main functionalities: 
+PyCFRL is designed with two main functionalities: 
 
 1. Provide algorithms that enforce counterfactual fairness for reinforcement learning policies. 
-The current version of CFRL implements the sequential data preprocessing algorithm proposed by
+The current version of PyCFRL implements the sequential data preprocessing algorithm proposed by
 `Wang et al. (2025) <https://arxiv.org/abs/2501.06366>`_ for offline reinforcement learning. The 
 algorithm takes in an offline RL trajectory and outputs a preprocessed, bias-free trajectory. The 
 preprocessed trajectory can then be passed to any existing offline reinforcement learning algorithms 
@@ -104,7 +99,7 @@ High-level Design
    * - Module
      - Functionalities
    * - :code:`reader`
-     - Implements functions that read tabular trajectory data from either a :code:`.csv` file or a :code:`pandas.DataFrame` into a format required by :code:`CFRL` (:ref:`Trajectory Arrays <trajectory_arrays>`). Also implements functions that export trajectory data to either a :code:`.csv` file or a :code:`pandas.DataFrame`.
+     - Implements functions that read tabular trajectory data from either a :code:`.csv` file or a :code:`pandas.DataFrame` into a format required by :code:`PyCFRL` (:ref:`Trajectory Arrays <trajectory_arrays>`). Also implements functions that export trajectory data to either a :code:`.csv` file or a :code:`pandas.DataFrame`.
    * - :code:`preprocessor`
      - Implements the data preprocessing algorithm introduced in Wang et al. (2025).
    * - :code:`agents`
@@ -116,7 +111,7 @@ High-level Design
 
 .. image:: ../supps/workflow_chart_cropped.png
 
-A general CFRL workflow is as follows: First, simulate a trajectory using :code:`environment` or read 
+A general PyCFRL workflow is as follows: First, simulate a trajectory using :code:`environment` or read 
 in a trajectory using :code:`reader`. Then, train a preprocessor using :code:`preprocessor` to remove 
 the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in 
 :code:`agents` to learn a counterfactually fair policy. Finally, use functions in :code:`evaluation` to 

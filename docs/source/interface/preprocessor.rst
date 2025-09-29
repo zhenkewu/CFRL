@@ -6,9 +6,9 @@ This module implements the sequential data preprocessing method proposed by Wang
 
 .. code-block:: python
     
-    from cfrl import preprocessor
+    from pycfrl import preprocessor
 
-.. automodule:: cfrl.preprocessor
+.. automodule:: pycfrl.preprocessor
    :members:
    :show-inheritance:
    :special-members: __init__

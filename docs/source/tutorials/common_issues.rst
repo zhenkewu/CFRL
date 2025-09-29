@@ -1,22 +1,22 @@
 Common Issues
 =======================
 
-This section introduces some common issues in CFRL and discusses how 
+This section introduces some common issues in PyCFRL and discusses how 
 users might deal with these issues.
 
 Non-convergence
 -----------------------
 
 Non-convergence happens when the model fails to converge 
-at the end of model training. In CFRL, non-convergence can arise when
+at the end of model training. In PyCFRL, non-convergence can arise when
 
 1. Training the :code:`SequentialPreprocessor`.
 2. Training the :code:`SimulatedEnvironment`.
 3. Training the :code:`FQI`.
 4. Training the :code:`FQE` in :code:`evaluate_reward_through_fqe()`.
 
-In theory, non-convergence might lead the models in CFRL to produce 
-inaccurate outputs. In simulation studies, the models in CFRL often perform 
+In theory, non-convergence might lead the models in PyCFRL to produce 
+inaccurate outputs. In simulation studies, the models in PyCFRL often perform 
 well despite potential non-convergence, though occasionally non-convergence 
 does result in notably suboptimal outputs.
 
@@ -59,7 +59,7 @@ converge.
 Checking for Neural Network Non-convergence Using Loss Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-CFRL provides a simple loss monitoring tool that can check for potential non-convergence 
+PyCFRL provides a simple loss monitoring tool that can check for potential non-convergence 
 in the training of neural networks in :code:`SequentialPreprocessor`, 
 :code:`SimulatedEnvironment`, :code:`FQI`, and :code:`FQE`. This tool can 
 be enabled by setting :code:`is_loss_monitored=True` in 
@@ -88,7 +88,7 @@ rather than potential non-convergence in the update of the Q function approximat
 Checking for Approximated Q Function Non-convergence Using Q Value Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-CFRL also provides a simple Q value monitoring tool that can check for potential non-convergence 
+PyCFRL also provides a simple Q value monitoring tool that can check for potential non-convergence 
 in the training of the approximated Q function in :code:`FQI` and :code:`FQE`. 
 This tool can be enabled by setting :code:`is_q_monitored=True` in 
 :code:`evaluate_reward_through_fqe()` and in the constructors of :code:`FQI` 

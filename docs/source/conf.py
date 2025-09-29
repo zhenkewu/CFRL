@@ -11,9 +11,9 @@ sys.path.insert(0, "E:/learning/university/MiSIL/CFRL Python Package/CFRL")
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'CFRL'
-copyright = '2025, The CFRL Team'
-author = 'The CFRL Team'
+project = 'PyCFRL'
+copyright = '2025, The PyCFRL Team'
+author = 'The PyCFRL Team'
 release = '0.1'
 
 # -- General configuration ---------------------------------------------------

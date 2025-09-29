@@ -3,7 +3,7 @@
 Trajectory Arrays
 ===============================
 
-In CFRL, a trajectory refers to the set of collected observed tuples 
+In PyCFRL, a trajectory refers to the set of collected observed tuples 
 :math:`\{(z_i, s_{i0}, a_{i0}, r_{i0}, s_{i1}, \dots, s_{i,T-1}, a_{i,T-1}, r_{i,T-1}, s_{iT}): i=1,\dots,N\}` 
 describing the sensitive attribute, state, action, and reward of each individual (or subject) at each 
 time step. Each :math:`t=0,\dots,T` is called a time step, and the observed tuple 
@@ -11,9 +11,9 @@ time step. Each :math:`t=0,\dots,T` is called a time step, and the observed tupl
 step :math:`t`. Let :math:`N` be the total number of individuals and :math:`T` be the total number of 
 transitions of each individual.
 
-This section introduces Trajectory Arrays, which is how trajectories are represented in CFRL. 
+This section introduces Trajectory Arrays, which is how trajectories are represented in PyCFRL. 
 Any trajectory satisfying the :ref:`data requirements <data_requirements>` can be represented by 
-Trajectory Arrays. The trajectory inputs and outputs of CFRL functions and classes are all in the 
+Trajectory Arrays. The trajectory inputs and outputs of PyCFRL functions and classes are all in the 
 form of Trajectory Arrays. To convert trajectory data from a tabular format to Trajectory Arrays or 
 from Trajectory Arrays to a tabular format, see :ref:`Tabular Trajectory Data <tabular_trajectory_data>`.
 

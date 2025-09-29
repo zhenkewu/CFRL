@@ -3,31 +3,31 @@
 Example Workflows
 ===============================
 
-This section demonstrates some major workflows that can be performed by CFRL.
+This section demonstrates some major workflows that can be performed by PyCFRL.
 
 Preprocessing Only
 --------------------------
 
 .. image:: ../supps/preprocessing_only_workflow.png
 
-In this workflow, CFRL takes in an offline trajectory and then preprocesses the offline trajectory 
+In this workflow, PyCFRL takes in an offline trajectory and then preprocesses the offline trajectory 
 using :code:`SyntheticPreprocessor`. The final output of the workflow is the preprocessed (debiased) 
 offline trajectory. This workflow is appropriate when the user does not want to train policies using 
-CFRL. Instead, the user can take the preprocessed trajectory to train a counterfactually fair policy 
+PyCFRL. Instead, the user can take the preprocessed trajectory to train a counterfactually fair policy 
 using another reinforcement learning library or application that better fits their needs.
 
 **Code:** A detailed code demonstration of this workflow can be found 
-`here <https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_only_workflow.ipynb>`_.
+`here <https://github.com/JianhanZhang/PyCFRL/blob/main/examples/preprocessing_only_workflow.ipynb>`_.
 
 Preprocessing + Policy Learning
 --------------------------
 
 .. image:: ../supps/preprocessing_policy_learning_workflow.png
 
-In this workflow, CFRL takes in an offline trajectory and then preprocesses the offline trajectory 
+In this workflow, PyCFRL takes in an offline trajectory and then preprocesses the offline trajectory 
 using :code:`SequentialPreprocessor`. After that, the preprocessed trajectory is passed into 
 :code:`FQI` to train a counterfactually fair policy, which is the final output of the workflow. This 
-workflow is appropriate if the user wants to train a policy using CFRL. The trained policy can be 
+workflow is appropriate if the user wants to train a policy using PyCFRL. The trained policy can be 
 further evaluated on its value and counterfactual fairness, which is discussed in detail in the 
 "Assessing Policies Using Real Data" workflow later in this section.
 
@@ -39,7 +39,7 @@ Assessing Preprocessors Using Synthetic Data
 
 .. image:: ../supps/synthetic_data_workflow.png
 
-In this workflow, CFRL first uses :code:`sample_trajectory()` to sample a trajectory from a 
+In this workflow, PyCFRL first uses :code:`sample_trajectory()` to sample a trajectory from a 
 :code:`SyntheticEnvironment` whose transition rules are pre-specified. It then preprocesses the 
 sampled trajectory using some :ref:`custom preprocessor <custom_preprocessors>` defined by the user. 
 After that, the preprocessed trajectory is passed into :code:`FQI` to train a policy, which is then 
@@ -57,7 +57,7 @@ Assessing Policies Using Real Data
 
 .. image:: ../supps/real_data_workflow.png
 
-In this workflow, CFRL takes in an offline trajectory and then preprocesses the offline trajectory 
+In this workflow, PyCFRL takes in an offline trajectory and then preprocesses the offline trajectory 
 using :code:`SequentialPreprocessor`. After that, the preprocessed trajectory is passed into 
 :code:`FQI` to train a counterfactually fair policy, which is then assessed using 
 :code:`evaluate_reward_through_fqe()` and :code:`evaluate_fairness_through_model()` based on a 

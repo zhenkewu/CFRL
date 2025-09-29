@@ -4,9 +4,9 @@ Custom Preprocessors
 ==========================
 
 In addition to :code:`SequentialPreprocessor`, users can also define custom preprocessors and use them 
-in CFRL. 
+in PyCFRL. 
 
-To ensure a custom preprocessor is compatible with CFRL, it must inherit from the 
+To ensure a custom preprocessor is compatible with PyCFRL, it must inherit from the 
 :code:`Preprocessor` class provided by the :code:`preprocessor` module. That is, 
 
 - The custom preprocessor should be a subclass of :code:`Preprocessor`.
@@ -25,7 +25,7 @@ To ensure a custom preprocessor is compatible with CFRL, it must inherit from th
   and two arrays otherwise.
 
 For example, though simple, the following :code:`ConcatenatePreprocessor` is a valid custom 
-preprocessor that will be compatible with CFRL.
+preprocessor that will be compatible with PyCFRL.
 
 .. code-block:: python
 
@@ -115,7 +115,7 @@ preprocessor that will be compatible with CFRL.
                                                                     )
                 return xs_tilde
 
-On the other hand, the following preprocessor will not be compatible with CFRL 
+On the other hand, the following preprocessor will not be compatible with PyCFRL 
 because its :code:`preprocess_single_step()` does not have :code:`xtm1` and 
 :code:`atm1` in its argument list and its :code:`preprocess_multiple_steps()` 
 always returns only one array.

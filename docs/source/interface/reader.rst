@@ -2,11 +2,11 @@ Reader
 ======================
 This module implements functions to read or export trajectory data from external files. 
 
-.. code::
+.. code:: python
 
-   from cfrl import reader
+   from pycfrl import reader
 
-.. automodule:: cfrl.reader
+.. automodule:: pycfrl.reader
    :members:
    :show-inheritance:
    :special-members: __init__

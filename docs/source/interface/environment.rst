@@ -4,9 +4,9 @@ This module implements environments and sample functions that could be used to g
 
 .. code-block:: python
     
-    from cfrl import environment
+    from pycfrl import environment
 
-.. automodule:: cfrl.environment
+.. automodule:: pycfrl.environment
    :members:
    :show-inheritance:
    :special-members: __init__

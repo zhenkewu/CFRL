@@ -3,7 +3,7 @@
 Data Requirements
 =============================
 
-For CFRL to work properly, the offline trajectory data should satisfy some requirements, which are 
+For PyCFRL to work properly, the offline trajectory data should satisfy some requirements, which are 
 summarized below: 
 
 1. **Sensitive Attribute:** The sensitive attribute can be either univariate or multivariate. Each 
@@ -12,7 +12,7 @@ of the sensitive attribute is categorical, it should either be reparametrized as
 levels (e.g. 0="Race A", 1="Race B") or one-hot encoded manually.
 
 2. **State Variable:** The state variable can either be univariate or multivariate. Each component of 
-the state vector must be numerical because CFRL involves taking means and standard deviations of the 
+the state vector must be numerical because PyCFRL involves taking means and standard deviations of the 
 state variable.
 
 3. **Action:** The action must be univariate. It should be either categorical or discrete numerical. 

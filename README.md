@@ -53,7 +53,7 @@ counterfactual fairness metric.
 | `environment`  | Implements a synthetic environment that produces synthetic data as well as a simulated environment that simulates the transition dynamics of the environment underlying some real-world RL trajectory data. Also implements functions for sampling trajectories from the synthetic and simulated environments. |                                                                                                                                                                                  |
 | `evaluation`   | Implements functions that evaluate the value and counterfactual fairness of a trained policy. Depending on the user's needs, the evaluation can be done either in a synthetic environment or in a simulated environment.                                                                                                      |
 
-![Workflow Chart](./docs/source/supps/workflow_chart_cropped.PNG)
+![Workflow Chart](https://raw.githubusercontent.com/JianhanZhang/CFRL/main/docs/source/supps/workflow_chart_cropped.PNG)
 
 A general PyCFRL workflow is as follows: First, simulate a trajectory using `environment` or read in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` to remove the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to evaluate the value and counterfactual fairness of the trained policy. See ... for more detailed workflow examples.
 

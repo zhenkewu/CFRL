@@ -4,7 +4,7 @@ Tabular Trajectory Data
 ================================
 
 As long as the offline trajectory data satisfies the :ref:`data requirements <data_requirements>`, it 
-can be passed into CFRL. The trajectory inputs and outputs of CFRL functions and classes are in the 
+can be passed into PyCFRL. The trajectory inputs and outputs of PyCFRL functions and classes are in the 
 format of :ref:`Trajectory Arrays <trajectory_arrays>`. However, in the real world, the trajectory 
 data is often stored in a tabular format rather than in Trajectory Arrays. To address this, the 
 :code:`reader` module provides the :code:`read_trajectory_from_csv()` and 

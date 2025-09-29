@@ -1,33 +1,30 @@
-.. CFRL documentation master file, created by
+.. PyCFRL documentation master file, created by
    sphinx-quickstart on Sat Jun 14 15:17:14 2025.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-CFRL documentation
+PyCFRL documentation
 ==================
 
-Welcome to CFRL, a Python library for counterfactually fair reinforcement learning! 
-The acronym "CFRL" stands for "Counterfactual Fairness in Reinforcement Learning". CFRL provides 
+Welcome to PyCFRL, a Python library for counterfactually fair reinforcement learning! 
+The acronym "CFRL" stands for "Counterfactual Fairness in Reinforcement Learning". PyCFRL provides 
 algorithms that ensure counterfactual fairness in reinforcement learning and builds tools for 
 evaluating the value and counterfactual fairness of reinforcement learning policies. 
 
-To install CFRL, run 
+*Note: This library was originally named CFRL, but we later changed the name to PyCFRL.*
+
+To install PyCFRL, run 
 
 .. code-block:: bash
    
    $ pip install pycfrl
 
-Please note that CFRL should be installed as :code:`pycfrl` 
-instead of :code:`cfrl`. Running :code:`pip install cfrl` will likely 
-install a library that is different from the CFRL library 
-described in this documentation.
-
 This project is still being perfected. We will continue adding new functionalities and expanding 
-the use cases of CFRL. We appreciate your patience and support!
+the use cases of PyCFRL. We appreciate your patience and support!
 
-`[CFRL Github repository] <https://github.com/JianhanZhang/CFRL>`_
+`[PyCFRL Github repository] <https://github.com/JianhanZhang/CFRL>`_
 
-[CFRL software paper]
+[PyCFRL software paper]
 
 .. toctree::
    :maxdepth: 1
@@ -67,7 +64,7 @@ the use cases of CFRL. We appreciate your patience and support!
 
 .. toctree::
    :maxdepth: 1
-   :caption: About CFRL
+   :caption: About PyCFRL
 
-   about_cfrl/the_cfrl_team
-   about_cfrl/release_notes
+   about_pycfrl/the_pycfrl_team
+   about_pycfrl/release_notes

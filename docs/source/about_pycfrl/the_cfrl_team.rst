@@ -1,4 +1,4 @@
-The CFRL Team
+The PyCFRL Team
 ===============
 
 Maintainer
