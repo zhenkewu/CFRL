@@ -15,7 +15,12 @@ To install CFRL, run
 
 .. code-block:: bash
    
-   $ pip install cfrl
+   $ pip install pycfrl
+
+Please note that CFRL should be installed as :code:`pycfrl` 
+instead of :code:`cfrl`. Running :code:`pip install cfrl` will likely 
+install a library that is different from the CFRL library 
+described in this documentation.
 
 This project is still being perfected. We will continue adding new functionalities and expanding 
 the use cases of CFRL. We appreciate your patience and support!
