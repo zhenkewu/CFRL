@@ -2,9 +2,9 @@
 title: "CFRL: A Python library for counterfactually fair offline reinforcement learning via sequential data preprocessing"
 tags:
   - counterfactual fairness
+  - algorithmic fairness
   - reinforcement learning
-  - CFRL
-  - Python
+  - causal inference
 authors:
   - name: Jianhan Zhang
     corresponding: false 
