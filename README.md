@@ -1,6 +1,6 @@
-# CFRL: A Python Library for Counterfactually Fair Reinforcement Learning
+# PyCFRL: A Python Library for Counterfactually Fair Reinforcement Learning
 
-Documentation: [CFRL Documentation](https://cfrl-documentation.netlify.app/).
+Documentation: [PyCFRL Documentation](https://cfrl-documentation.netlify.app/).
 
 Software paper: To be updated. 
 
@@ -9,11 +9,6 @@ Software paper: To be updated.
 ```bash 
 $ pip install pycfrl
 ```
-
-*Please note that `CFRL` should be installed as `pycfrl` 
-instead of `cfrl`. Running `pip install cfrl` will likely 
-install a library that is different from the `CFRL` library 
-described in this documentation.*
 
 ## A Brief Introduction to Counterfactual Fairness
 
@@ -33,10 +28,10 @@ fairness in the reinforcement learning setting.
 
 ## Key Functionalities
 
-CFRL is designed with two main functionalities: 
+PyCFRL is designed with two main functionalities: 
 
 1. Provide algorithms that enforce counterfactual fairness for reinforcement learning policies. 
-The current version of CFRL implements the sequential data preprocessing algorithm proposed by
+The current version of PyCFRL implements the sequential data preprocessing algorithm proposed by
 [Wang et al. (2025)](https://arxiv.org/abs/2501.06366) for offline reinforcement learning. The 
 algorithm takes in an offline RL trajectory and outputs a preprocessed, bias-free trajectory. The 
 preprocessed trajectory can then be passed to any existing offline reinforcement learning algorithms 
@@ -50,7 +45,7 @@ counterfactual fairness metric.
 ## High-level Design
 | Module         | Functionalities                                                                                                                                                                                                                                                                                                |
 |------------|------------------------------------------------------------|
-| `reader`       | Implements functions that read tabular trajectory data from either a `.csv` file or a `pandas.Dataframe` into a format required by `CFRL`. Also implements functions that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.                                                                                               |
+| `reader`       | Implements functions that read tabular trajectory data from either a `.csv` file or a `pandas.Dataframe` into a format required by `PyCFRL`. Also implements functions that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.                                                                                               |
 | `preprocessor` | Implements the data preprocessing algorithm introduced in Wang et al. (2025).                                                                                                                                                                                                                                  |
 | `agents`       | Implements a fitted Q-iteration (FQI) algorithm, which learns RL policies and makes decisions based on the learned policy. Users can also pass a preprocessor to the FQI; in this case, the FQI will be able to take in unpreprocessed trajectories and directly output counterfactually fair policies.        |
 | `environment`  | Implements a synthetic environment that produces synthetic data as well as a simulated environment that simulates the transition dynamics of the environment underlying some real-world RL trajectory data. Also implements functions for sampling trajectories from the synthetic and simulated environments. |                                                                                                                                                                                  |
@@ -58,11 +53,11 @@ counterfactual fairness metric.
 
 ![Workflow Chart](./docs/source/supps/workflow_chart_cropped.PNG)
 
-A general CFRL workflow is as follows: First, simulate a trajectory using `environment` or read in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` to remove the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to evaluate the value and counterfactual fairness of the trained policy. See ... for more detailed workflow examples.
+A general PyCFRL workflow is as follows: First, simulate a trajectory using `environment` or read in a trajectory using `reader`. Then, train a preprocessor using `preprocessor` to remove the bias in the trajectory data. After that, pass the preprocessed trajectory into the FQI algorithm in `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to evaluate the value and counterfactual fairness of the trained policy. See ... for more detailed workflow examples.
 
 ## Examples
 
-We provide a few short code examples showcasing some key use cases of CFRL.
+We provide a few short code examples showcasing some key use cases of PyCFRL.
 
 **1. Trajectory Preprocessing Only:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/preprocessing_only_workflow.ipynb).
 
@@ -73,8 +68,8 @@ We provide a few short code examples showcasing some key use cases of CFRL.
 **4. Assessing Policies using Real Data:** See [here](https://github.com/JianhanZhang/CFRL/blob/main/examples/real_data_workflow.ipynb).
 
 ## Testing
-We provide unit tests as well as integration tests for the main functions of the CFRL. The tests can be 
-found in the `tests` folder of the `CFRL` repository. To run the test, first install `pytest`: 
+We provide unit tests as well as integration tests for the main functions of the PyCFRL. The tests can be 
+found in the `tests` folder of the `PyCFRL` repository. To run the test, first install `pytest`: 
 
 ```bash 
 $ pip install pytest

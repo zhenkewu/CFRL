@@ -1,11 +1,11 @@
-from cfrl.preprocessor import SequentialPreprocessor
+from pycfrl.preprocessor import SequentialPreprocessor
 from examples.baseline_preprocessors import SequentialPreprocessorOracle, UnawarenessPreprocessor
 from examples.baseline_preprocessors import ConcatenatePreprocessor
-from cfrl.agents import FQI
+from pycfrl.agents import FQI
 from examples.baseline_agents import RandomAgent, BehaviorAgent
-from cfrl.environment import SyntheticEnvironment, sample_trajectory
-from cfrl.evaluation import evaluate_reward_through_simulation
-from cfrl.evaluation import evaluate_fairness_through_simulation
+from pycfrl.environment import SyntheticEnvironment, sample_trajectory
+from pycfrl.evaluation import evaluate_reward_through_simulation
+from pycfrl.evaluation import evaluate_fairness_through_simulation
 import pandas as pd
 import numpy as np
 import numpy as np

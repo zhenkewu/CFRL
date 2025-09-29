@@ -6,13 +6,13 @@ import pandas as pd
 import numpy as np
 import torch
 from sklearn.model_selection import train_test_split
-from cfrl.reader import read_trajectory_from_dataframe, convert_trajectory_to_dataframe
-from cfrl.reader import export_trajectory_to_csv
-from cfrl.preprocessor import SequentialPreprocessor
-from cfrl.agents import FQI
-from cfrl.environment import SyntheticEnvironment, sample_trajectory
-from cfrl.environment import SimulatedEnvironment
-from cfrl.evaluation import evaluate_reward_through_fqe, evaluate_fairness_through_model
+from pycfrl.reader import read_trajectory_from_dataframe, convert_trajectory_to_dataframe
+from pycfrl.reader import export_trajectory_to_csv
+from pycfrl.preprocessor import SequentialPreprocessor
+from pycfrl.agents import FQI
+from pycfrl.environment import SyntheticEnvironment, sample_trajectory
+from pycfrl.environment import SimulatedEnvironment
+from pycfrl.evaluation import evaluate_reward_through_fqe, evaluate_fairness_through_model
 from examples.baseline_agents import RandomAgent
 import time
 

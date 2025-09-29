@@ -5,11 +5,11 @@ sys.path.append("E:/learning/university/MiSIL/CFRL Python Package/CFRL")
 import pandas as pd
 import numpy as np
 import torch
-from cfrl.preprocessor import Preprocessor
-from cfrl.agents import FQI
-from cfrl.environment import SyntheticEnvironment, sample_trajectory
-from cfrl.evaluation import evaluate_reward_through_simulation
-from cfrl.evaluation import evaluate_fairness_through_simulation
+from pycfrl.preprocessor import Preprocessor
+from pycfrl.agents import FQI
+from pycfrl.environment import SyntheticEnvironment, sample_trajectory
+from pycfrl.evaluation import evaluate_reward_through_simulation
+from pycfrl.evaluation import evaluate_fairness_through_simulation
 from examples.baseline_agents import RandomAgent
 import time
 

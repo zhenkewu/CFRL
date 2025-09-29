@@ -1,5 +1,5 @@
-from cfrl.environment import SyntheticEnvironment
-from cfrl.environment import sample_trajectory, sample_counterfactual_trajectories
+from pycfrl.environment import SyntheticEnvironment
+from pycfrl.environment import sample_trajectory, sample_counterfactual_trajectories
 import numpy as np
 from examples.baseline_agents import RandomAgent
 

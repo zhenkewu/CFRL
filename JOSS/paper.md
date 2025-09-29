@@ -1,5 +1,5 @@
 ---
-title: "CFRL: A Python library for counterfactually fair offline reinforcement learning via sequential data preprocessing"
+title: "PyCFRL: A Python library for counterfactually fair offline reinforcement learning via sequential data preprocessing"
 tags:
   - counterfactual fairness
   - algorithmic fairness
@@ -66,7 +66,7 @@ To formally define and address the fairness problem in the novel sequential deci
 multi-stage setting and proposed a data preprocessing algorithm that
 ensures CF. A policy is counterfactually fair if, at every time step, the probability of assigning any action does not change had the individual's sensitive attribute taken a different value, while holding constant other historical exogenous variables and actions. In this light, the data preprocessing algorithm ensures CF by constructing new state variables that are not impacted by the sensitive attribute(s). Reward preprocessing is also conducted, but with a different purpose to improve the value of the learned optimal policy rather than to ensure CF. We refer interested readers to @wang2025cfrl for more technical details.
 
-The `CFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides functionalities to evaluate the value (expected discounted cumulative reward) and counterfactual unfairness level achieved by 
+The `PyCFRL` library implements the data preprocessing algorithm proposed by @wang2025cfrl and provides functionalities to evaluate the value (expected discounted cumulative reward) and counterfactual unfairness level achieved by 
 any given policy. Here, "CFRL" stands for "Counterfactual Fairness in Reinforcement Learning". The library produces preprocessed trajectories that can be used by
 an off-the-shelf offline RL algorithm, such as fitted Q-iteration (FQI) [@riedmiller2005fqi], to learn an optimal CF
 policy. The library can also simply read in any policy following a required format and return its
@@ -85,50 +85,50 @@ perspective, and they cannot be easily extended to the general RL setting. Scrip
 to simulate unfairness in sequential decision-making, but they neither 
 implement algorithms that reduce unfairness nor address CF. To our knowledge, @wang2025cfrl is the first 
 work to study CF in RL. 
-Correspondingly, `CFRL` is also the first code library to address CF in the RL setting.
+Correspondingly, `PyCFRL` is also the first code library to address CF in the RL setting.
 
-The contribution of `CFRL` is two-fold. First, `CFRL` implements a data
+The contribution of `PyCFRL` is two-fold. First, `PyCFRL` implements a data
 preprocessing algorithm that ensures CF in offline RL.
 For each individual in the data, the preprocessing
 algorithm sequentially estimates and concatenates the counterfactual states under different sensitive
 attribute values with the observed state at each time point into a new state vector. The preprocessed data can then be
 directly used by existing RL algorithms for policy learning, and the
-learned policy will be counterfactually fair up to finite-sample estimation accuracy. Second, `CFRL`
+learned policy will be counterfactually fair up to finite-sample estimation accuracy. Second, `PyCFRL`
 provides a platform for assessing RL policies based on CF. After passing in any policy and a data trajectory from the
 environment of interest, users can estimate the value and counterfactual unfairness level achieved by the policy in the environment of interest. 
 
 # High-level Design
 
-The `CFRL` library is composed of 5 major modules. The functionalities
+The `PyCFRL` library is composed of 5 major modules. The functionalities
 of the modules are summarized in the table below.
 
 |Module        |Functionalities                                                                       |
 |--------------|--------------------------------------------------------------------------------------|
-|`reader`      |Implements functions that read tabular trajectory data from either a `.csv` file or a `pandas.Dataframe` into an array format required by `CFRL`. Also implements functions that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.          |
+|`reader`      |Implements functions that read tabular trajectory data from either a `.csv` file or a `pandas.Dataframe` into an array format required by `PyCFRL`. Also implements functions that export trajectory data to either a `.csv` file or a `pandas.Dataframe`.          |
 |`preprocessor`|Implements the data preprocessing algorithm introduced in @wang2025cfrl.              |
 |`agents`      |Implements an FQI algorithm [@riedmiller2005fqi], which learns RL policies and makes decisions based on the learned policy. Users can also pass a preprocessor to the FQI; in this case, the FQI will be able to take in unpreprocessed trajectories, internally preprocess the input trajectories, and directly output counterfactually fair policies.|
 |`environment` |Implements a synthetic environment that produces synthetic data as well as a simulated environment that estimates and simulates the transition dynamics of the unknown environment underlying some real-world RL trajectory data. Also implements functions for sampling trajectories from the synthetic and simulated environments.                                        |
 |`evaluation`  |Implements functions that evaluate the value and counterfactual unfairness level of a policy. Depending on the user's needs, the evaluation can be done either in a synthetic environment or in a simulated environment.                                  |
 
-A general CFRL workflow is as follows: First, simulate trajectories using `environment` or read 
+A general PyCFRL workflow is as follows: First, simulate trajectories using `environment` or read 
 in trajectories using `reader`. Then, train a preprocessor using `preprocessor` and preprocess the training trajectory data. After that, pass the preprocessed trajectories into the FQI algorithm in 
 `agents` to learn a counterfactually fair policy. Finally, use functions in `evaluation` to 
 evaluate the value and counterfactual unfairness level of the trained policy. 
 
-In addition, `CFRL` also provides tools to check for potential non-convergence that may arise during the training of neural networks, FQI, or fitted-Q evaluation (FQE). More discussions about the sources, checks, and fixes of non-convergence in `CFRL` can be found in the ["Common Issues"](https://cfrl-documentation.netlify.app/tutorials/common_issues) section of the documentation.
+In addition, `PyCFRL` also provides tools to check for potential non-convergence that may arise during the training of neural networks, FQI, or fitted-Q evaluation (FQE). More discussions about the sources, checks, and fixes of non-convergence in `PyCFRL` can be found in the ["Common Issues"](https://cfrl-documentation.netlify.app/tutorials/common_issues) section of the documentation.
 
 # Data Example
 
-We provide a data example showing how `CFRL` learns counterfactually fair policies from real-world trajectory data with unknown underlying transition dynamics. The example demonstrates policy learning and evaluation of both value and unfairness levels. This represents just one of many possible workflows. `CFRL` can also generate synthetic trajectory data and evaluate custom preprocessing methods. See the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) documentation for more examples.
+We provide a data example showing how `PyCFRL` learns counterfactually fair policies from real-world trajectory data with unknown underlying transition dynamics. The example demonstrates policy learning and evaluation of both value and unfairness levels. This represents just one of many possible workflows. `PyCFRL` can also generate synthetic trajectory data and evaluate custom preprocessing methods. See the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) documentation for more examples.
 
-We record the computing times of different workflows under different combinations of the number of individuals ($N$) and the length of horizons ($T$) in the ["Computing Times"](https://cfrl-documentation.netlify.app/introduction/computing_times) section of the CFRL documentation. For example, under $N=500$ and $T=10$, the workflow presented in this data example ("real data workflow" in the documentation) ran for $378.6$ seconds on average in our computing environment.
+We record the computing times of different workflows under different combinations of the number of individuals ($N$) and the length of horizons ($T$) in the ["Computing Times"](https://cfrl-documentation.netlify.app/introduction/computing_times) section of the PyCFRL documentation. For example, under $N=500$ and $T=10$, the workflow presented in this data example ("real data workflow" in the documentation) ran for $378.6$ seconds on average in our computing environment.
 
 
 #### Load Data
 
 In this demonstration, we use an offline trajectory generated from a `SyntheticEnvironment` following some pre-specified transition rules. Although the data is actually synthesized, we treat it as if it is from some unknown environment for pedagogical convenience.
 
-The trajectory contains 500 individuals (i.e., $N=500$) and 10 transitions (i.e., $T=10$). The sensitive attribute variable and the state variable are both univariate. The sensitive attribute is binary ($0$ or $1$). The actions are also binary ($0$ or $1$) and are sampled using a behavior policy that selects $0$ or $1$ randomly with equal probability. The trajectory is stored in a tabular format in a `.csv` file. We use `read_trajectory_from_csv()` to load the trajectory from the `.csv` format into the array format required by `CFRL`.
+The trajectory contains 500 individuals (i.e., $N=500$) and 10 transitions (i.e., $T=10$). The sensitive attribute variable and the state variable are both univariate. The sensitive attribute is binary ($0$ or $1$). The actions are also binary ($0$ or $1$) and are sampled using a behavior policy that selects $0$ or $1$ randomly with equal probability. The trajectory is stored in a tabular format in a `.csv` file. We use `read_trajectory_from_csv()` to load the trajectory from the `.csv` format into the array format required by `PyCFRL`.
 ```python
 zs, states, actions, rewards, ids = read_trajectory_from_csv(
     path='../data/sample_data_large_uni.csv', z_labels=['z1'], 
@@ -190,7 +190,7 @@ The estimated value is $7.358$ and the CF metric is $0.042$, which indicates our
 
 #### Comparisons against Baseline Methods
 
-We can compare the sequential data preprocessing method in `CFRL` against a few baselines: "Random", which selects each action randomly with equal probability; "Full", which uses all variables, including the sensitive attribute, for policy learning; and "Unaware", which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and counterfactual unfairness levels as part of the code example of the "Assessing Policies Using Real Data" workflow in the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the CFRL documentation. We summarize below the values and CF metrics calculated in this code example, where "Ours" stands for outputs from the `SequentialPreprocessor`.
+We can compare the sequential data preprocessing method in `PyCFRL` against a few baselines: "Random", which selects each action randomly with equal probability; "Full", which uses all variables, including the sensitive attribute, for policy learning; and "Unaware", which uses all variables except the sensitive attribute for policy learning. We implemented these baselines and evaluated their values and counterfactual unfairness levels as part of the code example of the "Assessing Policies Using Real Data" workflow in the ["Example Workflows"](https://cfrl-documentation.netlify.app/tutorials/example_workflows) section of the PyCFRL documentation. We summarize below the values and CF metrics calculated in this code example, where "Ours" stands for outputs from the `SequentialPreprocessor`.
 
 |                               |Random  |Full   |Unaware|Ours   |                                                    
 |-------------------------------|--------|-------|-------|-------|
@@ -201,18 +201,18 @@ By definition, the "Random" baseline always achieves perfect CF. On the other ha
 
 # Conclusions
 
-`CFRL` is a `Python` library that enables counterfactually fair reinforcement
+`PyCFRL` is a `Python` library that enables counterfactually fair reinforcement
 learning through data preprocessing. It also provides tools to calculate
 the value and unfairness level of a given policy. To our knowledge, it is the first library to address CF
-problems in the context of RL. The practical utility of `CFRL` can be further improved via extensions. First, the current
-`CFRL` implementation requires every individual in the offline dataset to
+problems in the context of RL. The practical utility of `PyCFRL` can be further improved via extensions. First, the current
+`PyCFRL` implementation requires every individual in the offline dataset to
 have the same number of time steps. Extending the library to accommodate
 variable-length episodes can improve its flexibility and usefulness.
-Second, `CFRL` can further combine the
+Second, `PyCFRL` can further combine the
 preprocessor with popular offline RL algorithm libraries such as
 `d3rlpy` [@d3rlpy], or connect the evaluation functions with established RL
 environment libraries such as `gym` [@towers2024gymnasium]. Third, generalization to
-non-additive counterfactual states reconstruction can make `CFRL` more versatile. We leave these extensions 
+non-additive counterfactual states reconstruction can make `PyCFRL` more versatile. We leave these extensions 
 to future updates.
 
 # Acknowledgements
